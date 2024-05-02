@@ -47,8 +47,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rmf5r"]
 size = Vector2(10, 32)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "interaction_area")]
 script = ExtResource("1_8kpki")
+sprite = NodePath("AnimatedSprite2D")
+interaction_area = NodePath("InteractionArea2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_glcxg")
@@ -56,4 +58,9 @@ animation = &"idle"
 frame_progress = 0.40496
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rmf5r")
+
+[node name="InteractionArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D"]
 shape = SubResource("RectangleShape2D_rmf5r")

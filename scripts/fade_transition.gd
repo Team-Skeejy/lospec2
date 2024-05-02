@@ -1,26 +1,50 @@
 extends Node
 class_name FadeTransition
 
-static var SPLASH_SCREEN: StringName = "res://scenes/splash_screen/splash_screen.tscn"
-static var MAIN_MENU: StringName = "res://scenes/main_menu/main_menu.tscn"
-static var GAME: StringName = "res://scenes/game/game.tscn"
-
+static var SPLASH_SCREEN: PackedScene
+static var MAIN_MENU: PackedScene
+static var GAME: PackedScene
 
 static var instance: FadeTransition
 
 @export var animationPlayer: AnimationPlayer
+
+@export_category("scenes")
+@export var splash_screen: PackedScene
+@export var main_menu: PackedScene
+@export var game: PackedScene
+
 @onready var starting_volume: float = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SPLASH_SCREEN = splash_screen
+	MAIN_MENU = main_menu
+	GAME = game
+
 	FadeTransition.instance = self
 	animationPlayer.play("fade_in")
 
-var nextScene: StringName
-func transition_to(scene: StringName) -> void:
-	nextScene = scene;
+var next_scene: PackedScene
+var next_scene_name: StringName
+
+func transition_to(scene: PackedScene) -> void:
+	next_scene = scene
+	next_scene_name = ""
+	animationPlayer.play("fade_out")
+
+func transition_to_name(scene: StringName) -> void:
+	next_scene_name = scene
+	next_scene = null
 	animationPlayer.play("fade_out")
 
 func _change_scene() -> void:
-	get_tree().change_scene_to_file(nextScene)
+	if next_scene:
+		get_tree().change_scene_to_packed(next_scene)
+	elif next_scene_name:
+		get_tree().change_scene_to_file(next_scene_name)
+
+	next_scene = null
+	next_scene_name = ""
+
 	animationPlayer.play("fade_in")

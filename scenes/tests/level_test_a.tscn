@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://44s0usucn360"]
+
+[ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_5k867"]
+[ext_resource type="Texture2D" uid="uid://4hn2os6mami0" path="res://icon.svg" id="2_y3f5p"]
+[ext_resource type="PackedScene" uid="uid://cecdbwt1q0fns" path="res://scenes/door.tscn" id="3_t1apt"]
+[ext_resource type="PackedScene" uid="uid://qwhffhmi5oo7" path="res://scenes/tests/level_test_b.tscn" id="4_dwgr5"]
+[ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="4_sa8h2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vofqa"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_5k867")
+format = 2
+layer_0/tile_data = PackedInt32Array(917502, 262144, 0, 917503, 65536, 0, 851968, 131072, 0, 851969, 196608, 0, 851970, 196608, 0, 851971, 196608, 0, 851972, 65536, 0, 851973, 196608, 0, 851974, 65536, 0, 851975, 131072, 0, 851976, 262144, 0, 851977, 196608, 0, 851978, 262144, 0, 851979, 65536, 0, 851980, 0, 0, 851981, 196608, 0, 851982, 262144, 0, 851983, 196608, 0, 589834, 131072, 4, 524298, 65536, 1, 458762, 131072, 2, 393226, 65536, 1, 327691, 0, 1, 327692, 65536, 2, 327690, 0, 2, 393228, 65536, 1, 458764, 196608, 3, 524300, 65536, 1, 589836, 131072, 4, 458763, 0, 1, 327694, 196608, 4, 393230, 0, 3, 393231, 196608, 2, 393232, 65536, 3, 327696, 196608, 4, 458767, 65536, 1, 524303, 65536, 1, 589839, 131072, 4, 327698, 196608, 4, 393234, 0, 3, 393235, 196608, 2, 393236, 65536, 3, 327700, 196608, 4, 458771, 65536, 1, 524307, 65536, 1, 589843, 131072, 4)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(113, -14)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(-0.500001, -2.26498e-06)
+scale = Vector2(0.195313, 0.203125)
+texture = ExtResource("2_y3f5p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_vofqa")
+
+[node name="Door" parent="." instance=ExtResource("3_t1apt")]
+position = Vector2(159, 189)
+next_scene = ExtResource("4_dwgr5")
+
+[node name="Player" parent="." instance=ExtResource("4_sa8h2")]
+position = Vector2(72, 92)

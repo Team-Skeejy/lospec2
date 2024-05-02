@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7khnlrdtspt"]
+[gd_scene load_steps=7 format=3 uid="uid://c7khnlrdtspt"]
 
 [ext_resource type="Script" path="res://scripts/fade_transition.gd" id="1_ojkqf"]
+[ext_resource type="PackedScene" uid="uid://dtvamhpca8lah" path="res://scenes/splash_screen.tscn" id="2_2cjxc"]
+[ext_resource type="PackedScene" uid="uid://qwhffhmi5oo7" path="res://scenes/tests/level_test_b.tscn" id="3_8lsyq"]
 
 [sub_resource type="Animation" id="Animation_rj3nk"]
 resource_name = "fade_in"
@@ -79,16 +81,19 @@ _data = {
 [node name="FadeTransition" type="Node" node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("1_ojkqf")
 animationPlayer = NodePath("ColorRect/AnimationPlayer")
+splash_screen = ExtResource("2_2cjxc")
+game = ExtResource("3_8lsyq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 process_mode = 3
+visible = false
 z_index = 4096
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
 process_mode = 3

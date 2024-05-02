@@ -1,3 +1,3 @@
 extends Node
 
-static var GRAVITY := 9.8
+static var GRAVITY := 980

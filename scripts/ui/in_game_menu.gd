@@ -3,8 +3,9 @@ extends Control
 var open_close_speed := 0.5
 
 var is_opened : bool = false
-const open_menu_position := Vector2(-128, -112)
-const closed_menu_position := Vector2(-128, 80)
+#const open_menu_position := Vector2(-128, -112)
+const open_menu_position := Vector2()
+const closed_menu_position := Vector2(0, 192)
 
 var tween : Tween
 
@@ -15,8 +16,8 @@ func _ready():
 
 
 
-func _process(delta):
-	if Input.is_action_just_pressed("Start") :
+func _process(_delta: float):
+	if Input.is_action_just_pressed("Start"):
 		if is_opened:
 			close()
 		else:

@@ -5,10 +5,12 @@ extends CharacterBody2D
 @export var interaction_area: Area2D
 
 var speed := 8000.0
-var jump_velocity := -200.0
+var jump_velocity := -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = Global.GRAVITY
+
+signal first_jump
 
 func a_press():
 	var collisions := interaction_area.get_overlapping_areas()
@@ -17,7 +19,8 @@ func a_press():
 			if area is Interactable:
 				area.interact()
 	elif is_on_floor():
-		velocity.y = jump_velocity
+		first_jump.emit()
+		jump()
 
 func _physics_process(delta: float):
 	# Add the gravity.
@@ -48,3 +51,6 @@ func _physics_process(delta: float):
 		sprite.play()
 
 	move_and_slide()
+
+func jump():
+	velocity.y = jump_velocity

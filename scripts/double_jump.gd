@@ -1,4 +1,4 @@
-class_name PostIt
+class_name DoubleJump
 extends Item
 
 @export var number_of_jumps : int = 2

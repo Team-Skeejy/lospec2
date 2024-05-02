@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6wamakomkbpm"]
+[gd_scene load_steps=3 format=3 uid="uid://b6wamakomkbpm"]
 
 [ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_kbx0n"]
+[ext_resource type="Script" path="res://scenes/test_scene.gd" id="1_vcf8v"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_vcf8v")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

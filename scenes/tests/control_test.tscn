@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://cilmgq43y0ehq"]
+
+[ext_resource type="Script" path="res://scenes/tests/control_test.gd" id="1_qs8bt"]
+
+[node name="Control" type="Control" node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_qs8bt")
+label = NodePath("Label3")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 256.0
+offset_bottom = 208.0
+text = "up  - ⬆ w
+down - ⬇ s
+left - ⬅ a
+right - ➡ s
+
+a - space z
+b - alt x
+
+start - esc
+select - tab enter
+"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 42.0
+text = "Current:"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 19.0
+offset_right = 88.0
+offset_bottom = 61.0
+text = "Current:"

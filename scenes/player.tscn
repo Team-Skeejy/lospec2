@@ -68,7 +68,6 @@ shape = SubResource("RectangleShape2D_rmf5r")
 shape = SubResource("RectangleShape2D_rmf5r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_bottom = 32
 limit_smoothed = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]

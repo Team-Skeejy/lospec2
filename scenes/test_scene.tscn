@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://b6wamakomkbpm"]
+[gd_scene load_steps=2 format=3 uid="uid://b6wamakomkbpm"]
+
+[ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_kbx0n"]
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_kbx0n")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 16.0
+text = "Marketm
+Closes in
+"
+horizontal_alignment = 1

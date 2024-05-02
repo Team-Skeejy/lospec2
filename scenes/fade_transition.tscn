@@ -1,34 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7khnlrdtspt"]
+[gd_scene load_steps=12 format=3 uid="uid://c7khnlrdtspt"]
 
 [ext_resource type="Script" path="res://scripts/fade_transition.gd" id="1_ojkqf"]
 [ext_resource type="PackedScene" uid="uid://dtvamhpca8lah" path="res://scenes/splash_screen.tscn" id="2_2cjxc"]
-[ext_resource type="PackedScene" uid="uid://qwhffhmi5oo7" path="res://scenes/tests/level_test_b.tscn" id="3_8lsyq"]
+[ext_resource type="PackedScene" uid="uid://coff0w2arnt35" path="res://scenes/tests/test_level.tscn" id="3_8lsyq"]
+[ext_resource type="Shader" path="res://scripts/fade_transition.gdshader" id="4_jxqvp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dtui6"]
+seed = 2
+frequency = 0.0124
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nc4u7"]
+width = 256
+height = 224
+noise = SubResource("FastNoiseLite_dtui6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gx24w"]
+shader = ExtResource("4_jxqvp")
+shader_parameter/pixel_size = -18
+shader_parameter/threshold = 0.0
+shader_parameter/noise = SubResource("NoiseTexture2D_nc4u7")
 
 [sub_resource type="Animation" id="Animation_rj3nk"]
 resource_name = "fade_in"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
+tracks/0/path = NodePath(".:material:shader_parameter/threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 0
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, true, false]
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_1aihd"]
@@ -36,44 +40,34 @@ resource_name = "fade_out"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
+tracks/0/path = NodePath(".:material:shader_parameter/threshold")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+"values": [1.0, 0.0]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_fwq8i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_change_scene"
-}]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [false, true, true]
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1w82w"]
 _data = {
+"RESET": SubResource("Animation_fwq8i"),
 "fade_in": SubResource("Animation_rj3nk"),
 "fade_out": SubResource("Animation_1aihd")
 }
@@ -86,8 +80,8 @@ game = ExtResource("3_8lsyq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 process_mode = 3
-visible = false
 z_index = 4096
+material = SubResource("ShaderMaterial_gx24w")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

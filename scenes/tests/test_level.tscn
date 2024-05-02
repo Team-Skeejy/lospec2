@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://coff0w2arnt35"]
+
+[ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
+[ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_s6ams"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("1_44mo6")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65536, 0, 4, -65535, 0, 1, -65534, 0, 1, -65533, 0, 1, -65532, 0, 1, -65531, 0, 1, -65530, 0, 1, -65529, 0, 1, -65528, 0, 1, -65527, 0, 1, -65526, 131072, 3, -65525, 131072, 3, -65524, 131072, 3, -65523, 131072, 3, -65522, 131072, 3, -65521, 65536, 3, -131062, 0, 2, -131061, 131072, 1, -131060, 131072, 1, -131059, 131072, 1, -131058, 131072, 1, -196597, 0, 2, -196596, 131072, 1, -196595, 131072, 1, -196594, 131072, 1, -262132, 0, 2, -262131, 196608, 2, -262130, 196608, 2, -131057, 196608, 3, -196593, 196608, 3, -262129, 65536, 2)
+
+[node name="Player" parent="." instance=ExtResource("2_s6ams")]
+position = Vector2(60, -116)

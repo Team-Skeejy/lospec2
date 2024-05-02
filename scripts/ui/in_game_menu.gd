@@ -3,9 +3,12 @@ extends Control
 var open_close_speed := 0.5
 
 var is_opened : bool = false
-const closed_menu_position := Vector2(0, 192)
+const open_menu_position := Vector2(-128, -112)
+const closed_menu_position := Vector2(-128, 80)
 
 var tween : Tween
+
+@onready var menu : TextureRect = $TextureRect
 
 func _ready():
 	pass
@@ -13,7 +16,6 @@ func _ready():
 
 
 func _process(delta):
-	print(delta)
 	if Input.is_action_just_pressed("Start") :
 		if is_opened:
 			close()
@@ -27,7 +29,7 @@ func open():
 		tween.kill()
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.tween_property($ColorRect, "position", Vector2(0, 0), open_close_speed)
+	tween.tween_property(menu, "position", open_menu_position, open_close_speed)
 	tween.tween_callback(_flip_is_opened)
 	
 func close():
@@ -35,13 +37,16 @@ func close():
 		tween.kill()
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.tween_property($ColorRect, "position", closed_menu_position, open_close_speed)
+	tween.tween_property(menu, "position", closed_menu_position, open_close_speed)
 	tween.tween_callback(_flip_is_opened)
-	#tween.tween_callback(_flip_paused)
+	tween.tween_callback(_flip_paused)
+	
 	
 
 func _flip_is_opened():
 	is_opened = not is_opened
+
+
 
 func _flip_paused():
 	get_tree().paused = not get_tree().paused

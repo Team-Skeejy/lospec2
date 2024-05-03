@@ -1,18 +1,19 @@
 extends Node
 class_name FadeTransition
 
-static var SPLASH_SCREEN: PackedScene
-static var MAIN_MENU: PackedScene
-static var GAME: PackedScene
+static var SPLASH_SCREEN: StringName
+static var MAIN_MENU: StringName
+static var GAME: StringName
 
 static var instance: FadeTransition
 
 @export var animationPlayer: AnimationPlayer
 
 @export_category("scenes")
-@export var splash_screen: PackedScene
-@export var main_menu: PackedScene
-@export var game: PackedScene
+@export_file("*.tscn") var splash_screen: String
+@export_file("*.tscn") var main_menu: String
+@export_file("*.tscn") var game: String
+
 
 @onready var starting_volume: float = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
 

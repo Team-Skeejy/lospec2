@@ -2,7 +2,7 @@ class_name Door
 extends Interactable
 
 @export var next_scene: PackedScene
-@export var next_scene_name: StringName
+@export_file var next_scene_name: String
 
 @export var sprite: AnimatedSprite2D
 

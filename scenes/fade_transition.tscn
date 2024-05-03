@@ -1,8 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7khnlrdtspt"]
+[gd_scene load_steps=8 format=3 uid="uid://c7khnlrdtspt"]
 
 [ext_resource type="Script" path="res://scripts/fade_transition.gd" id="1_ojkqf"]
-[ext_resource type="PackedScene" uid="uid://dtvamhpca8lah" path="res://scenes/splash_screen.tscn" id="2_2cjxc"]
-[ext_resource type="PackedScene" uid="uid://coff0w2arnt35" path="res://scenes/tests/test_level.tscn" id="3_8lsyq"]
 [ext_resource type="Shader" path="res://scripts/dither_transition.gdshader" id="4_i82lm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gx24w"]
@@ -65,8 +63,9 @@ _data = {
 [node name="FadeTransition" type="Node" node_paths=PackedStringArray("animationPlayer")]
 script = ExtResource("1_ojkqf")
 animationPlayer = NodePath("CanvasLayer/ColorRect/AnimationPlayer")
-splash_screen = ExtResource("2_2cjxc")
-game = ExtResource("3_8lsyq")
+splash_screen = "res://scenes/splash_screen.tscn"
+main_menu = "res://scenes/UI/ui_test.tscn"
+game = "res://scenes/tests/test_level.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://scripts/ui/in_game_menu.gd" id="1_nw72i"]
 [ext_resource type="Texture2D" uid="uid://dvleuqmgq62vt" path="res://textures/ui/in_game_menu.png" id="2_jeg86"]
 
-[node name="InGameMenu" type="Control"]
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="InGameMenu" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -13,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nw72i")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="InGameMenu"]
 layout_mode = 0
 offset_top = 192.0
 offset_right = 256.0

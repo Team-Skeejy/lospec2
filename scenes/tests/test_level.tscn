@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://coff0w2arnt35"]
+[gd_scene load_steps=4 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_s6ams"]
+[ext_resource type="PackedScene" uid="uid://dsbss8b7gdlc" path="res://scenes/UI/in_game_menu.tscn" id="3_pnx0j"]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -12,3 +13,5 @@ layer_0/tile_data = PackedInt32Array(-65536, 0, 0, -65535, 262144, 0, -65534, 19
 
 [node name="Player" parent="." instance=ExtResource("2_s6ams")]
 position = Vector2(40, -125)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_pnx0j")]

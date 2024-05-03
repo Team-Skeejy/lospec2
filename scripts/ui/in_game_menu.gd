@@ -24,10 +24,11 @@ func _process(_delta: float):
 			open()
 			
 func open():
-	_flip_paused()
-	get_tree().paused = true
 	if tween and tween.is_running():
-		tween.kill()
+		return
+	
+	_flip_paused()
+	
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(menu, "position", open_menu_position, open_close_speed)
@@ -35,7 +36,8 @@ func open():
 	
 func close():
 	if tween and tween.is_running():
-		tween.kill()
+		return
+	
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(menu, "position", closed_menu_position, open_close_speed)

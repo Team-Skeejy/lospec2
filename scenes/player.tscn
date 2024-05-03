@@ -57,7 +57,6 @@ interaction_area = NodePath("InteractionArea2D")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_glcxg")
 animation = &"idle"
-frame_progress = 0.40496
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_rmf5r")

@@ -22,6 +22,10 @@ func a_press():
 		first_jump.emit()
 		jump()
 
+func _ready():
+	sprite.play()
+	
+
 func _physics_process(delta: float):
 	# Add the gravity.
 	if not is_on_floor():
@@ -44,13 +48,11 @@ func _physics_process(delta: float):
 
 		velocity.x = direction * speed * delta
 		sprite.animation = "walk"
-		sprite.play()
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		sprite.animation = "idle"
-		sprite.play()
 
 	move_and_slide()
-
+	
 func jump():
 	velocity.y = jump_velocity

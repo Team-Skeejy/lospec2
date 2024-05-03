@@ -1,7 +1,6 @@
 shader_type canvas_item;
 
 uniform sampler2D noise;
-const int pixelsize = 1;
 const vec2 screen_size = vec2(256., 224.);
 uniform int pixel_size : hint_range(1, 10, 1);
 uniform float threshold : hint_range(0.0, 1.0, 0.1);

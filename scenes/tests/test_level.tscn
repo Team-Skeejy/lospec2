@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_s6ams"]
-[ext_resource type="PackedScene" uid="uid://dsbss8b7gdlc" path="res://scenes/UI/in_game_menu.tscn" id="3_pnx0j"]
+[ext_resource type="PackedScene" uid="uid://dsbss8b7gdlc" path="res://scenes/uix/in_game_menu.tscn" id="3_pnx0j"]
 
 [node name="TestLevel" type="Node2D"]
 

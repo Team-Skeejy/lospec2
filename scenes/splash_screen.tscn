@@ -87,19 +87,21 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Bubble-1" type="Sprite2D" parent="ColorRect/SkeejyCat"]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(172, 27)
 rotation = 0.386683
 scale = Vector2(0.162, 0.162)
 texture = ExtResource("3_j8gue")
 
 [node name="Bubble-2" type="Sprite2D" parent="ColorRect/SkeejyCat"]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(116, 46)
 rotation = -0.262028
 scale = Vector2(0.162, 0.162)
 texture = ExtResource("3_g2nr8")
 
 [node name="Bubble-3" type="Sprite2D" parent="ColorRect/SkeejyCat"]
-modulate = Color(1, 1, 1, 0.6)
+modulate = Color(1, 1, 1, 0)
 position = Vector2(84.5109, 72.0249)
 rotation = 0.144792
 scale = Vector2(0.162, 0.162)

@@ -69,4 +69,8 @@ shape = SubResource("RectangleShape2D_rmf5r")
 limit_bottom = 32
 limit_smoothed = true
 
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="DoubleJump" parent="." instance=ExtResource("4_12iee")]

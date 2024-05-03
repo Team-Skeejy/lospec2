@@ -8,14 +8,14 @@ var ignore_animation_end := false
 func _ready() -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -4)
 	if OS.get_name() == "Web":
-		get_tree().change_scene_to_packed(FadeTransition.MAIN_MENU)
+		get_tree().change_scene_to_file(FadeTransition.MAIN_MENU)
 	else:
 		animationPlayer.play("sleepy_fade")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(_ev: InputEvent) -> void:
 	if Input.is_action_just_pressed("Select"):
-		get_tree().change_scene_to_packed(FadeTransition.GAME)
+		get_tree().change_scene_to_file(FadeTransition.GAME)
 		ignore_animation_end = true
 	elif Input.is_anything_pressed():
 		FadeTransition.instance.transition_to(FadeTransition.MAIN_MENU)

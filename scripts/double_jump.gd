@@ -11,7 +11,6 @@ func _ready():
 	player.first_jump.connect(activate)
 
 func _physics_process(_delta: float):
-
 	if not active:
 		return
 

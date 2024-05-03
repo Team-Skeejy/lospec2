@@ -26,26 +26,15 @@ func _ready() -> void:
 	FadeTransition.instance = self
 	animationPlayer.play("fade_in")
 
-var next_scene: PackedScene
-var next_scene_name: StringName
+var next_scene: StringName
 
-func transition_to(scene: PackedScene) -> void:
+func transition_to(scene: StringName) -> void:
 	next_scene = scene
-	next_scene_name = ""
-	animationPlayer.play("fade_out")
-
-func transition_to_name(scene: StringName) -> void:
-	next_scene_name = scene
-	next_scene = null
 	animationPlayer.play("fade_out")
 
 func _change_scene() -> void:
 	if next_scene:
-		get_tree().change_scene_to_packed(next_scene)
-	elif next_scene_name:
-		get_tree().change_scene_to_file(next_scene_name)
+		get_tree().change_scene_to_file(next_scene)
 
-	next_scene = null
-	next_scene_name = ""
-
+	next_scene = ""
 	animationPlayer.play("fade_in")

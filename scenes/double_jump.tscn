@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2cxc3kwh0bon"]
+[gd_scene load_steps=2 format=3 uid="uid://7njayfatpoqh"]
 
 [ext_resource type="Script" path="res://scripts/double_jump.gd" id="1_lsndm"]
 

@@ -1,8 +1,7 @@
 class_name Door
 extends Interactable
 
-@export var next_scene: PackedScene
-@export_file var next_scene_name: String
+@export_file("*.tscn") var next_scene: String
 
 @export var sprite: AnimatedSprite2D
 
@@ -10,10 +9,7 @@ func interact():
 	sprite.animation = "open"
 	sprite.play()
 	if next_scene:
-		FadeTransition.instance.transition_to(next_scene.duplicate())
-	elif next_scene_name:
-		FadeTransition.instance.transition_to_name(next_scene_name)
-
+		FadeTransition.instance.transition_to(next_scene)
 
 func _on_body_entered(body):
 	if ! (body is Player): return

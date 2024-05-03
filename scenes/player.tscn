@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c214knk0hl84s" path="res://textures/character.png" id="1_3cjso"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8kpki"]
-[ext_resource type="PackedScene" path="res://scenes/double_jump.tscn" id="4_12iee"]
+[ext_resource type="PackedScene" uid="uid://7njayfatpoqh" path="res://scenes/double_jump.tscn" id="4_12iee"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyp5j"]
 atlas = ExtResource("1_3cjso")
@@ -66,6 +66,7 @@ shape = SubResource("RectangleShape2D_rmf5r")
 shape = SubResource("RectangleShape2D_rmf5r")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_bottom = 32
 limit_smoothed = true
 
 [node name="DoubleJump" parent="." instance=ExtResource("4_12iee")]

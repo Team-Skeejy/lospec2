@@ -4,12 +4,13 @@ extends CharacterBody2D
 @export var sprite: AnimatedSprite2D
 @export var interaction_area: Area2D
 
-@export_category("stats")
-@export var speed := 800.
-@export var acceleration := 800.
-@export var friction := 1600.
-@export var air_friction := 1000.
-@export var jump_velocity := -300.
+# @export_category("stats")
+static var SPEED := 400.
+static var ACCELERATION := 1600.
+static var AERIAL_ACCELERATION := 800.
+static var FRICTION := 1600.
+static var AIR_FRICTION := 1000.
+static var JUMP_VELOCITY := -300.
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = Global.GRAVITY
@@ -18,39 +19,6 @@ signal first_jump  # emitted when first jumping, enables double jump
 
 func _ready():
 	sprite.play()
-
-func _physics_process(delta: float) -> void:
-	if not is_on_floor():  # Gravity
-		velocity.y += gravity * delta
-
-	if Input.is_action_just_pressed("A"):
-		a_press()
-	elif Input.is_action_just_pressed("B"):
-		b_press()
-
-	var direction: float = Input.get_axis("Left", "Right")
-
-	if direction:
-		sprite.scale.x = int(direction)  # flip sprite based on direction
-		accelerate(direction, delta)
-		sprite.animation = "walk"
-	else:
-		add_friction(delta)
-		sprite.animation = "idle"
-
-	move_and_slide()
-
-func accelerate(direction: float, delta: float) -> void:
-	velocity.x = move_toward(velocity.x, speed * direction, acceleration * delta)
-
-func add_friction(delta: float) -> void:
-	if is_on_floor():  # floor friction
-		velocity.x = move_toward(velocity.x, 0., friction * delta)
-	else:  # air friction
-		velocity.x = move_toward(velocity.x, 0., air_friction * delta)
-
-func jump() -> void:
-	velocity.y = jump_velocity
 
 func a_press() -> void:
 	var collisions := interaction_area.get_overlapping_areas()
@@ -64,3 +32,47 @@ func a_press() -> void:
 
 func b_press() -> void:
 	pass
+
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():  # Gravity
+		velocity.y += gravity * delta
+
+	if Input.is_action_just_pressed("A"):
+		a_press()
+	elif Input.is_action_just_pressed("B"):
+		b_press()
+
+
+	var direction: float = Input.get_axis("Left", "Right")
+	if direction:
+		accelerate(direction, delta)
+	else:
+		add_friction(delta)
+
+	move_and_slide()
+
+	if velocity.x > 0:
+		sprite.scale.x = 1
+	elif velocity.x < 0:
+		sprite.scale.x = -1
+
+	if velocity.length():
+		sprite.animation = "walk"  # need to extend this bit
+	else:
+		sprite.animation = "idle"
+
+func accelerate(direction: float, delta: float) -> void:
+	var acceleration := ACCELERATION if is_on_floor() else AERIAL_ACCELERATION
+	velocity.x = move_toward(velocity.x, SPEED * direction, acceleration * delta)
+
+func add_friction(delta: float) -> void:
+	var friction := FRICTION if is_on_floor() else AIR_FRICTION
+	velocity.x = move_toward(velocity.x, 0., friction * delta)
+
+func jump() -> void:
+	var direction: float = Input.get_axis("Left", "Right")
+	if direction > 0:
+		velocity.x = SPEED
+	elif direction < 0:
+		velocity.x = -SPEED
+	velocity.y = JUMP_VELOCITY

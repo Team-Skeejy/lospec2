@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/fade_transition.gd" id="1_ojkqf"]
 [ext_resource type="PackedScene" uid="uid://dtvamhpca8lah" path="res://scenes/splash_screen.tscn" id="2_2cjxc"]
 [ext_resource type="PackedScene" uid="uid://coff0w2arnt35" path="res://scenes/tests/test_level.tscn" id="3_8lsyq"]
-[ext_resource type="Shader" path="res://scenes/shader_transition.gdshader" id="4_i82lm"]
+[ext_resource type="Shader" path="res://scripts/dither_transition.gdshader" id="4_i82lm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gx24w"]
 shader = ExtResource("4_i82lm")

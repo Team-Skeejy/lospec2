@@ -4,6 +4,8 @@
 
 [node name="DoubleJump" type="Node"]
 script = ExtResource("1_lsndm")
+number_of_jumps = null
+disabled = null
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

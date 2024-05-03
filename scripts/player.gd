@@ -7,7 +7,7 @@ static var AERIAL_ACCELERATION := 800.
 static var FRICTION := 1600.
 static var AIR_FRICTION := 1000.
 static var JUMP_VELOCITY := -300.
-static var COYOTE_TIME := 0.1
+static var COYOTE_TIME := 0.2
 
 
 @export var sprite: AnimatedSprite2D
@@ -36,16 +36,18 @@ func a_press() -> void:
 		first_jump.emit()
 		coyote_timer = 0
 		jump()
+		print('first_jump')
+
 
 func b_press() -> void:
 	pass
 
 func jump() -> void:
 	var direction: float = Input.get_axis("Left", "Right")
-	if direction > 0:
-		velocity.x = SPEED
-	elif direction < 0:
-		velocity.x = -SPEED
+	#if direction > 0:
+		#velocity.x = SPEED
+	#elif direction < 0:
+		#velocity.x = -SPEED
 	velocity.y = JUMP_VELOCITY
 
 func accelerate(direction: float, delta: float) -> void:
@@ -77,14 +79,22 @@ func _physics_process(delta: float) -> void:
 	else:
 		add_friction(delta)
 
+	
+		
+
 	move_and_slide()
-
+	
 	if velocity.x > 0:
-		sprite.scale.x = 1
+		sprite.flip_h = false
 	elif velocity.x < 0:
-		sprite.scale.x = -1
-
+		sprite.flip_h = true
+		
 	if velocity.length():
 		sprite.animation = "walk"  # need to extend this bit
 	else:
 		sprite.animation = "idle"
+
+func wall_jump(direction: int) -> void:
+	velocity.x = JUMP_VELOCITY * direction
+	velocity.y = JUMP_VELOCITY
+	

@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt1fj4qvrccb"]
+[gd_scene load_steps=11 format=3 uid="uid://bt1fj4qvrccb"]
 
 [ext_resource type="Texture2D" uid="uid://c214knk0hl84s" path="res://textures/character.png" id="1_3cjso"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8kpki"]
 [ext_resource type="PackedScene" uid="uid://7njayfatpoqh" path="res://scenes/double_jump.tscn" id="4_12iee"]
+[ext_resource type="PackedScene" uid="uid://dgiax17a4blq2" path="res://scenes/wall_jump.tscn" id="4_f8bfp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyp5j"]
 atlas = ExtResource("1_3cjso")
@@ -69,8 +70,7 @@ shape = SubResource("RectangleShape2D_rmf5r")
 limit_bottom = 32
 limit_smoothed = true
 
-[node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
 [node name="DoubleJump" parent="." instance=ExtResource("4_12iee")]
+number_of_jumps = null
+
+[node name="WallJump" parent="." instance=ExtResource("4_f8bfp")]

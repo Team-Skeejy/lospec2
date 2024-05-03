@@ -7,10 +7,13 @@ var jumps_available: int = 0
 @onready var timer: Timer = $Timer
 var active = false
 
+
 func _ready():
 	player.first_jump.connect(activate)
 
 func _physics_process(_delta: float):
+	if disabled: return
+	
 	if not active:
 		return
 
@@ -21,12 +24,13 @@ func _physics_process(_delta: float):
 	if not timer.is_stopped():
 		return
 
-	if Input.is_action_just_pressed("A"):
+	if Input.is_action_just_pressed("A") and not player.is_on_wall():
 		player.jump()
 		jumps_available -= 1
 		if jumps_available <= 0: deactivate()
 
 func activate():
+	if disabled: return
 	if number_of_jumps <= 1: return
 	active = true
 	timer.start()

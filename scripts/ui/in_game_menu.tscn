@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://g7ix8xbxhriq"]
+
+[ext_resource type="Script" path="res://scripts/ui/in_game_menu.gd" id="1_vngsg"]
+[ext_resource type="Texture2D" uid="uid://dvleuqmgq62vt" path="res://textures/ui/in_game_menu.png" id="2_03svk"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="InGameMenu" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vngsg")
+
+[node name="TextureRect" type="TextureRect" parent="InGameMenu"]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 256.0
+offset_bottom = 416.0
+texture = ExtResource("2_03svk")
+expand_mode = 1
+stretch_mode = 1

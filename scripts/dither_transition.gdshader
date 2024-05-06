@@ -10,10 +10,8 @@ const mat4 dither_matrix = mat4(vec4(1, 9, 3, 11),
 								vec4(16, 8, 14, 6)) / 17.;
 
 void fragment() {
-	float x = UV.x;
-	float y = UV.y;
-	x = floor(x * screen_size.x/float(pixel_size));
-	y = floor(y * screen_size.y/float(pixel_size));
+	float x = floor(UV.x * screen_size.x/float(pixel_size));
+	float y = floor(UV.y * screen_size.y/float(pixel_size));
 	x = mod(x, 4.);
 	y = mod(y, 4.);
 	float mat_val = dither_matrix[int(x)][int(y)];

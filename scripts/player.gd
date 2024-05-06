@@ -1,8 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
-static var SPEED := 400.
-static var ACCELERATION := 1600.
+static var SPEED := 100.
+static var ACCELERATION := 900.
 static var AERIAL_ACCELERATION := 800.
 static var FRICTION := 1600.
 static var AIR_FRICTION := 1000.
@@ -25,6 +25,7 @@ signal first_jump  # emitted when first jumping, enables double jump
 
 func _ready():
 	sprite.play()
+	Global.player = self
 
 func a_press() -> void:
 	var collisions := interaction_area.get_overlapping_areas()
@@ -48,6 +49,11 @@ func jump() -> void:
 		#velocity.x = SPEED
 	#elif direction < 0:
 		#velocity.x = -SPEED
+	sprite.animation = "jump"
+	sprite.play()
+	$JumpTimer.start()
+
+func _jump(): # _on_jump_timer_timeout
 	velocity.y = JUMP_VELOCITY
 
 func accelerate(direction: float, delta: float) -> void:
@@ -88,12 +94,18 @@ func _physics_process(delta: float) -> void:
 		sprite.flip_h = false
 	elif velocity.x < 0:
 		sprite.flip_h = true
-		
-	if velocity.length():
-		sprite.animation = "walk"  # need to extend this bit
-	else:
-		sprite.animation = "idle"
 
+func _process(_delta):
+	if is_on_floor():
+		if velocity.length():
+			sprite.animation = "walk" 
+		elif sprite.animation != "jump":
+			sprite.animation = "idle"
+		elif sprite.animation == "jump" and not sprite.is_playing():
+			sprite.animation = "land"
+		sprite.play()
+	
+	
 func wall_jump(direction: int) -> void:
 	velocity.x = JUMP_VELOCITY * direction
 	velocity.y = JUMP_VELOCITY

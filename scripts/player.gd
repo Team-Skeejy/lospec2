@@ -29,10 +29,14 @@ var items: Array[Item] = []
 var is_on_coyote_floor: bool = false:
 	get: return coyote_timer > 0.
 
+var animation_override : String = "" # ignore normal animation logic if set
+var controls_override : bool = false # ignore controls if true (for animations)
+
+var interact_target : Interactable
 
 func evaluate_items():
 	items = []
-	for child: Node in get_children():
+	for child: Node in inventory.get_children():
 		if child is Item:
 			items.append(child)
 
@@ -42,11 +46,8 @@ func _ready():
 	evaluate_items()
 
 func a_press(delta: float) -> void:
-	var collisions := interaction_area.get_overlapping_areas()
-	if len(collisions) > 0:
-		for area in collisions:
-			if area is Interactable:
-				area.interact()
+	if interact_target and is_on_floor():
+		interact_target.interact()
 	else:
 		jumping = true
 
@@ -94,7 +95,11 @@ func add_friction(delta: float) -> void:
 	var friction := FRICTION if is_on_floor() else AIR_FRICTION
 	velocity.x = move_toward(velocity.x, 0., friction * delta)
 
+
+
 func _physics_process(delta: float) -> void:
+	
+		
 	# Coyote Time Logic
 	if is_on_floor() && coyote_timer < COYOTE_TIME:
 		coyote_timer = COYOTE_TIME
@@ -103,6 +108,9 @@ func _physics_process(delta: float) -> void:
 
 	if !items.any(func(item): return item.override_gravity):  # Gravity
 		velocity.y += Global.GRAVITY * delta
+
+	if controls_override:
+		return
 
 	if Input.is_action_just_pressed("A"):
 		a_press(delta)
@@ -137,14 +145,17 @@ func _physics_process(delta: float) -> void:
 	elif velocity.x < 0:
 		sprite.flip_h = true
 
-func _process(_delta):
+func handle_animation():
 	var animation := ""
-
+	
 	for item in items:
 		if item.animation:
 			animation = item.animation
 			break
-
+	
+	if animation_override:
+		animation = animation_override
+	
 	# base movement animation logic
 	if !animation:
 		if is_on_floor():
@@ -152,7 +163,7 @@ func _process(_delta):
 				animation = "land"
 			elif sprite.animation == "land" && sprite.is_playing():  # play the whole landing animation
 				animation = "land"
-			elif velocity.length():  # if walking
+			elif velocity.length() and not is_on_wall():  # if walking
 				animation = "walk"
 			else:
 				animation = "idle"  # if standing still
@@ -161,7 +172,20 @@ func _process(_delta):
 				animation = "rise"
 			else:
 				animation = "fall"
-
+	
 	if sprite.animation != animation:
 		sprite.animation = animation
 		sprite.play()
+
+
+
+func _process(_delta):
+	var collisions := interaction_area.get_overlapping_areas()
+	interact_target = null
+	for area in collisions:
+		if area is Interactable:
+			interact_target = area
+			break
+		
+
+	handle_animation()

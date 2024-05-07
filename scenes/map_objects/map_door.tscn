@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://pt22hmf0q1qw"]
+
+[ext_resource type="Script" path="res://scripts/map_objects/map_door.gd" id="1_iiewg"]
+[ext_resource type="Texture2D" uid="uid://de1ff6gja80hc" path="res://textures/tilesets/doors.png" id="2_qx6ty"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el1ls"]
+atlas = ExtResource("2_qx6ty")
+region = Rect2(0, 0, 96, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ldmd"]
+size = Vector2(4, 54)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lr35u"]
+size = Vector2(20, 47.5)
+
+[node name="MapDoor" type="Area2D"]
+script = ExtResource("1_iiewg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = SubResource("AtlasTexture_el1ls")
+hframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_7ldmd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -24)
+shape = SubResource("RectangleShape2D_lr35u")

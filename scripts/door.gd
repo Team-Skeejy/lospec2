@@ -19,3 +19,5 @@ func _on_body_exited(body):
 	if ! (body is Player): return
 	sprite.animation = "closed"
 
+var a : Array = []
+

@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwoobo3k2h8bm"]
+
+[ext_resource type="Script" path="res://scripts/map_objects/warp_door.gd" id="1_1ny15"]
+[ext_resource type="Texture2D" uid="uid://de1ff6gja80hc" path="res://textures/tilesets/doors.png" id="2_uwf5q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4mlq"]
+atlas = ExtResource("2_uwf5q")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rga07"]
+atlas = ExtResource("2_uwf5q")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mswm1"]
+atlas = ExtResource("2_uwf5q")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iquis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4mlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rga07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mswm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rga07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4mlq")
+}],
+"loop": false,
+"name": &"openclose",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wsw2v"]
+size = Vector2(41, 38)
+
+[node name="WarpDoor" type="Area2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_1ny15")
+sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_iquis")
+animation = &"openclose"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -19)
+shape = SubResource("RectangleShape2D_wsw2v")

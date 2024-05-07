@@ -10,13 +10,18 @@ const closed_menu_position := Vector2(0, 192)
 var tween : Tween
 
 @onready var menu : TextureRect = $TextureRect
+@onready var interaction_name : Label = $TextureRect/Label
 
 func _ready():
 	pass
 
-
-
 func _process(_delta: float):
+	
+	if Global.player.interact_target:
+		interaction_name.text = Global.player.interact_target.interaction_name
+	elif interaction_name:
+		interaction_name.text = "Jump"
+	
 	if Input.is_action_just_pressed("Start"):
 		if is_opened:
 			close()

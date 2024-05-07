@@ -7,6 +7,7 @@ var WALL_GRAB_DECELLERATION := Global.GRAVITY * -0.9
 var wall_grab_timer := WALL_GRAB_GRACE_PERIOD
 var jumping := false
 var flip_direction := true  # on lift off, the player needs to go opposite direction, this flips after the user lifts their direction keys
+var coyote_timer := Player.COYOTE_TIME
 
 func jump(_delta: float):
 	if !jumping && player.is_on_wall_only() && player.direction:
@@ -25,7 +26,7 @@ func jump(_delta: float):
 func jump_ended():
 	jumping = false
 
-func _physics_process(delta: float):
+func physics_process(delta: float):
 	if player.is_on_wall_only() && player.direction && player.velocity.y >= 0:
 		if wall_grab_timer > 0:
 			wall_grab_timer = move_toward(wall_grab_timer, 0, delta)
@@ -35,7 +36,8 @@ func _physics_process(delta: float):
 			override_gravity = false
 			player.velocity.y += WALL_GRAB_DECELLERATION * delta
 
-
 	else:
 			override_gravity = false
 			wall_grab_timer = WALL_GRAB_GRACE_PERIOD
+
+	return false

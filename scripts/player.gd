@@ -128,16 +128,16 @@ func _physics_process(delta: float) -> void:
 		is_default_jump = false
 		jumping = false
 
-		for item in items:
-			item.jump_ended()
+		for item in items: item.jump_ended()
 
 	if direction:
 		accelerate(direction, delta)
 	else:
 		add_friction(delta)
 
-	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
+	items.any(func(item): return item.physics_process(delta))
 
+	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 	move_and_slide()
 
 	if velocity.x > 0:

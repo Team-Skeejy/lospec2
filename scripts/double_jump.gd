@@ -18,6 +18,7 @@ func jump(_delta: float) -> bool:
 func jump_ended():
 	jumping = false
 
-func _physics_process(_delta: float):
+func physics_process(_delta: float):
 	if player.is_on_coyote_floor:
 		jumps_remaining = MAX_JUMPS
+	return false

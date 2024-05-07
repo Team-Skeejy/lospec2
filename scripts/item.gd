@@ -26,3 +26,6 @@ func jump(delta: float) -> bool:
 
 func jump_ended() -> void:
   pass
+
+func physics_process(delta: float) -> bool:
+  return false

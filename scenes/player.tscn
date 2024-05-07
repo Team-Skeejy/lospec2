@@ -93,10 +93,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rmf5r"]
 size = Vector2(10, 31)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "interaction_area")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "interaction_area", "inventory")]
 script = ExtResource("1_8kpki")
 sprite = NodePath("AnimatedSprite2D")
 interaction_area = NodePath("InteractionArea2D")
+inventory = NodePath("Inventory")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_bottom = 32

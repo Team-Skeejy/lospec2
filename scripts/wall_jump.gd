@@ -1,24 +1,33 @@
 class_name WallJump
 extends Item
 
+var WALL_GRAB_GRACE_PERIOD := 2.
+var WALL_GRAB_DECELLERATION := Global.GRAVITY * -0.9
 
-@onready var player: Player = get_parent()
+var wall_grab_timer := WALL_GRAB_GRACE_PERIOD
 
-func _physics_process(delta):
-	if disabled:
-		return
-		
-	if player.is_on_coyote_floor:
-		return
-	
-	if not Input.is_action_just_pressed("A"):
-		return
-	
+func jump(_delta: float):
+	var direction: float = Input.get_axis("Left", "Right")
+	if player.is_on_wall_only() && direction:
+		player.velocity.y = Player.JUMP_VELOCITY
+		if direction > 0:
+			player.velocity.x = -Player.SPEED
+		elif direction < 0:
+			player.velocity.x = Player.SPEED
+		return true
+	return false
 
-	if player.is_on_wall_only() and Input.is_action_pressed("Left"):
-		player.wall_jump(-1)
-		print("wall_jump")
-	elif player.is_on_wall_only() and Input.is_action_pressed("Right"):
-		player.wall_jump(1)
-		print("wall_jump")
-	
+func _physics_process(delta: float):
+	if player.is_on_wall_only() && player.direction && player.velocity.y >= 0:
+		if wall_grab_timer > 0:
+			wall_grab_timer = move_toward(wall_grab_timer, 0, delta)
+			override_gravity = true
+			player.velocity.y = 0
+		else:
+			override_gravity = false
+			player.velocity.y += WALL_GRAB_DECELLERATION * delta
+
+
+	else:
+			override_gravity = false
+			wall_grab_timer = WALL_GRAB_GRACE_PERIOD

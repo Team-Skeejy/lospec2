@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dwncfd3vngdiu" path="res://textures/characters/player/player-idle2.png" id="3_n7b3a"]
 [ext_resource type="PackedScene" uid="uid://7njayfatpoqh" path="res://scenes/double_jump.tscn" id="4_12iee"]
 [ext_resource type="Texture2D" uid="uid://q1v42v2hpg56" path="res://textures/characters/player/player-Jump7.png" id="4_cdy44"]
-[ext_resource type="PackedScene" uid="uid://dgiax17a4blq2" path="res://scenes/wall_jump.tscn" id="4_f8bfp"]
+[ext_resource type="PackedScene" path="res://scenes/wall_jump.tscn" id="4_f8bfp"]
 [ext_resource type="Texture2D" uid="uid://drnrb02kc682s" path="res://textures/characters/player/player-walk3.png" id="4_yb6e6"]
 [ext_resource type="Texture2D" uid="uid://ccecxcywxk5hk" path="res://textures/characters/player/player-Jump8.png" id="5_7plbm"]
 [ext_resource type="Texture2D" uid="uid://c8yf4nxyssw28" path="res://textures/characters/player/player-walk4.png" id="5_dlu61"]
@@ -17,6 +17,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_glcxg"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_l5acl")
+}],
+"loop": true,
+"name": &"fall",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_ck63n")
@@ -57,6 +65,14 @@ animations = [{
 "speed": 4.0
 }, {
 "frames": [{
+"duration": 2.0,
+"texture": ExtResource("6_25oyk")
+}],
+"loop": true,
+"name": &"rise",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_yb6e6")
 }, {
@@ -82,9 +98,14 @@ script = ExtResource("1_8kpki")
 sprite = NodePath("AnimatedSprite2D")
 interaction_area = NodePath("InteractionArea2D")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_bottom = 32
+position_smoothing_speed = 2.0
+editor_draw_limits = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_glcxg")
-animation = &"jump"
+animation = &"land"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
@@ -95,14 +116,9 @@ shape = SubResource("RectangleShape2D_rmf5r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D"]
 shape = SubResource("RectangleShape2D_rmf5r")
 
-[node name="DoubleJump" parent="." instance=ExtResource("4_12iee")]
-
 [node name="WallJump" parent="." instance=ExtResource("4_f8bfp")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-limit_bottom = 32
-position_smoothing_speed = 2.0
-editor_draw_limits = true
+[node name="DoubleJump" parent="." instance=ExtResource("4_12iee")]
 
 [node name="JumpTimer" type="Timer" parent="."]
 wait_time = 0.2

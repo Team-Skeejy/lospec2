@@ -5,29 +5,30 @@ static var TERMINAL_VELOCITY := 900.
 
 static var SPEED := 100.
 static var ACCELERATION := 900.
-static var AERIAL_ACCELERATION := 800.
+static var AERIAL_ACCELERATION := 400.
 static var FRICTION := 1600.
 static var AIR_FRICTION := 1000.
-static var JUMP_VELOCITY := -200.
+static var JUMP_VELOCITY := -150.
 static var COYOTE_TIME := 0.2
-static var JUMP_DURATION := 0.5
+static var JUMP_DURATION := 0.2
 
 @export var sprite: AnimatedSprite2D
 @export var interaction_area: Area2D
+@export var inventory: Node
 
 var direction: float:
 	get: return Input.get_axis("Left", "Right")
 
 var coyote_timer := COYOTE_TIME
 var jump_timer := JUMP_DURATION
-var jump_reset := true
+var is_default_jump := true
+var jumping := false
 
 var items: Array[Item] = []
 
 var is_on_coyote_floor: bool = false:
 	get: return coyote_timer > 0.
 
-signal first_jump  # emitted when first jumping, enables double jump
 
 func evaluate_items():
 	items = []
@@ -47,8 +48,7 @@ func a_press(delta: float) -> void:
 			if area is Interactable:
 				area.interact()
 	else:
-		jump(delta)
-
+		jumping = true
 
 	for item: Item in items:
 		if item.a_press(delta):
@@ -62,27 +62,15 @@ func b_press(delta: float) -> void:
 # if the player can jump, then they will normal jump
 # otherwise code will try to execute an item jump
 func jump(delta: float) -> void:
-	# # add horizontal velocity on jump
-	# var direction: float = Input.get_axis("Left", "Right")
-	# if direction > 0:
-	# 	velocity.x = SPEED
-	# elif direction < 0:
-	# 	velocity.x = -SPEED
-
-	# $JumpTimer.start()
-	# sprite.animation = "jump"
-	# sprite.play()
-
-	if is_on_coyote_floor:
-		# first_jump.emit()
+	if is_on_coyote_floor || is_default_jump:
+		is_default_jump = true
 		coyote_timer = 0
-		# velocity.y = JUMP_VELOCITY
 		jump_with_no_horizontal_velocity()
 	else:
-		for item: Item in items:
-			print_debug(item)
-			if item.jump(delta):
-				break
+		items.any(func(item): item.jump(delta))
+		# for item: Item in items:
+		# 	if item.jump(delta):
+		# 		break
 
 func jump_with_horizontal_velocity() -> void:
 	if direction > 0:
@@ -121,8 +109,19 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_just_pressed("B"):
 		b_press(delta)
 
+	if Input.is_action_pressed("A") && jumping:
+		jump_timer = move_toward(jump_timer, 0, delta)
+		if jump_timer > 0:
+			jump(delta)
+		else:
+			is_default_jump = false
 	if Input.is_action_just_released("A"):
 		jump_timer = JUMP_DURATION
+		is_default_jump = false
+		jumping = false
+
+		for item in items:
+			item.jump_ended()
 
 	if direction:
 		accelerate(direction, delta)
@@ -166,8 +165,3 @@ func _process(_delta):
 	if sprite.animation != animation:
 		sprite.animation = animation
 		sprite.play()
-
-# func wall_jump(direction: int) -> void:
-# 	velocity.x = JUMP_VELOCITY * direction
-# 	velocity.y = JUMP_VELOCITY
-

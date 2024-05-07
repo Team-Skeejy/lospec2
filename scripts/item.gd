@@ -23,3 +23,6 @@ func b_press(delta: float) -> bool:
 # executed when jump command is issued (nothing to interact with)
 func jump(delta: float) -> bool:
   return false
+
+func jump_ended() -> void:
+  pass

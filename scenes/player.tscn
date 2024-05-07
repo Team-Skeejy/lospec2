@@ -119,6 +119,7 @@ shape = SubResource("RectangleShape2D_rmf5r")
 [node name="WallJump" parent="." instance=ExtResource("4_f8bfp")]
 
 [node name="DoubleJump" parent="." instance=ExtResource("4_12iee")]
+disabled = false
 
 [node name="JumpTimer" type="Timer" parent="."]
 wait_time = 0.2

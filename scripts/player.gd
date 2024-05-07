@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+static var TERMINAL_VELOCITY := 900.
+
 static var SPEED := 100.
 static var ACCELERATION := 900.
 static var AERIAL_ACCELERATION := 800.
@@ -126,6 +128,8 @@ func _physics_process(delta: float) -> void:
 		accelerate(direction, delta)
 	else:
 		add_friction(delta)
+
+	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 
 	move_and_slide()
 

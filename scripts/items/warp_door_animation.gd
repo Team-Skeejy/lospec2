@@ -17,6 +17,9 @@ func added():
 	else:
 		player.sprite.flip_h = false
 
+	var collision_shapes := player.interaction_area.get_children().filter(func(child): return child is CollisionShape2D)
+	for shape in collision_shapes: shape.disabled = true
+
 	var tween: Tween = create_tween()
 	tween.tween_property(Global.player, "global_position", source.global_position, WarpDoor.TWEEN_SPEED)
 
@@ -34,6 +37,7 @@ func added():
 
 	animation = "exit"
 	await player.sprite.animation_finished
+	for shape in collision_shapes: shape.disabled = false
 	player.remove_item(self)
 
 func removed():

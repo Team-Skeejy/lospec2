@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bt1fj4qvrccb"]
+[gd_scene load_steps=24 format=3 uid="uid://bt1fj4qvrccb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8kpki"]
 [ext_resource type="Texture2D" uid="uid://c1bd82gcwetib" path="res://textures/characters/player/player-idle1.png" id="2_ck63n"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://doytk5yqgxd0y" path="res://textures/characters/player/player-door14.png" id="4_2klh2"]
 [ext_resource type="PackedScene" uid="uid://7njayfatpoqh" path="res://scenes/double_jump.tscn" id="4_12iee"]
 [ext_resource type="Texture2D" uid="uid://q1v42v2hpg56" path="res://textures/characters/player/player-Jump7.png" id="4_cdy44"]
-[ext_resource type="PackedScene" uid="uid://dgiax17a4blq2" path="res://scenes/wall_jump.tscn" id="4_f8bfp"]
+[ext_resource type="PackedScene" uid="uid://dkyyt4v1drqb5" path="res://scenes/wall_jump.tscn" id="4_f8bfp"]
 [ext_resource type="Texture2D" uid="uid://drnrb02kc682s" path="res://textures/characters/player/player-walk3.png" id="4_yb6e6"]
 [ext_resource type="Texture2D" uid="uid://ccecxcywxk5hk" path="res://textures/characters/player/player-Jump8.png" id="5_7plbm"]
 [ext_resource type="Texture2D" uid="uid://c8yf4nxyssw28" path="res://textures/characters/player/player-walk4.png" id="5_dlu61"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cwjc0givpr08x" path="res://textures/characters/player/player-walk6.png" id="7_4n7qr"]
 [ext_resource type="Texture2D" uid="uid://bsc3v773js5xb" path="res://textures/characters/player/player-Jump10.png" id="7_l5acl"]
 [ext_resource type="Texture2D" uid="uid://j6wc5qwd766r" path="res://textures/characters/player/player-land11.png" id="8_n07a7"]
+[ext_resource type="Texture2D" uid="uid://c64dp3584rm14" path="res://textures/characters/player/player-none.png" id="14_8k1mv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_glcxg"]
 animations = [{
@@ -79,6 +80,14 @@ animations = [{
 "speed": 4.0
 }, {
 "frames": [{
+"duration": 0.5,
+"texture": ExtResource("5_7plbm")
+}],
+"loop": false,
+"name": &"jumpx2",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("8_n07a7")
 }, {
@@ -88,6 +97,14 @@ animations = [{
 "loop": false,
 "name": &"land",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_8k1mv")
+}],
+"loop": true,
+"name": &"none",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 2.0,
@@ -135,7 +152,7 @@ editor_draw_limits = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_glcxg")
-animation = &"door"
+animation = &"jump"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -15)

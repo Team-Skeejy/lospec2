@@ -6,8 +6,14 @@ extends Node
 var player: Player:
   get: return Global.player
 
-var override_gravity := false
 var animation := ""
+var priority := 0
+
+func added() -> void:
+  pass
+
+func removed() -> void:
+  pass
 
 # return true to stop propogation
 # executed when a is pressed always

@@ -9,7 +9,7 @@ static var AERIAL_ACCELERATION := 400.
 static var FRICTION := 1600.
 static var AIR_FRICTION := 1000.
 static var JUMP_VELOCITY := -150.
-static var COYOTE_TIME := 0.2
+static var COYOTE_TIME := 0.1
 static var JUMP_DURATION := 0.2
 
 @export var sprite: AnimatedSprite2D
@@ -29,16 +29,50 @@ var items: Array[Item] = []
 var is_on_coyote_floor: bool = false:
 	get: return coyote_timer > 0.
 
-var animation_override : String = "" # ignore normal animation logic if set
-var controls_override : bool = false # ignore controls if true (for animations)
-
-var interact_target : Interactable
+var interact_target: Interactable
 
 func evaluate_items():
 	items = []
 	for child: Node in inventory.get_children():
 		if child is Item:
-			items.append(child)
+			add_item(child)
+
+
+# # implemented, but don't use this, i think it's a bad idea
+# func add_item_at(item: Item, index: int = 0):
+# 	if item in items: return
+
+# 	if index == -1:
+# 		items.push_front(item)
+# 	elif index == 0 || index >= len(items):
+# 		items.push_back(item)
+# 	else:
+# 		items.insert(index, item)
+# 	inventory.add_child(item)
+
+
+func add_item(item: Item):
+	var parent := item.get_parent()
+	if !parent:
+		inventory.add_child(item)
+	if parent != inventory:
+		item.reparent(inventory)
+
+	for i in range(len(items)):
+		var itm: Item = items[i]
+		if itm.priority >= item.priority:
+			items.insert(i, item)
+			item.added()
+			return
+		i += 1
+	items.push_back(item)
+	item.added()
+
+func remove_item(item: Item):
+	var index := items.find(item)
+	if index > -1:
+		items.remove_at(index)
+		item.removed()
 
 func _ready():
 	sprite.play()
@@ -98,19 +132,13 @@ func add_friction(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	
-		
+
+
 	# Coyote Time Logic
 	if is_on_floor() && coyote_timer < COYOTE_TIME:
 		coyote_timer = COYOTE_TIME
 	elif !is_on_floor() && coyote_timer > 0:
 		coyote_timer = move_toward(coyote_timer, 0, delta)
-
-	if !items.any(func(item): return item.override_gravity):  # Gravity
-		velocity.y += Global.GRAVITY * delta
-
-	if controls_override:
-		return
 
 	if Input.is_action_just_pressed("A"):
 		a_press(delta)
@@ -130,12 +158,12 @@ func _physics_process(delta: float) -> void:
 
 		for item in items: item.jump_ended()
 
-	if direction:
-		accelerate(direction, delta)
-	else:
-		add_friction(delta)
-
-	items.any(func(item): return item.physics_process(delta))
+	if !items.any(func(item): return item.physics_process(delta)):
+		velocity.y += Global.GRAVITY * delta
+		if direction:
+			accelerate(direction, delta)
+		else:
+			add_friction(delta)
 
 	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 	move_and_slide()
@@ -147,15 +175,12 @@ func _physics_process(delta: float) -> void:
 
 func handle_animation():
 	var animation := ""
-	
+
 	for item in items:
 		if item.animation:
 			animation = item.animation
 			break
-	
-	if animation_override:
-		animation = animation_override
-	
+
 	# base movement animation logic
 	if !animation:
 		if is_on_floor():
@@ -172,7 +197,7 @@ func handle_animation():
 				animation = "rise"
 			else:
 				animation = "fall"
-	
+
 	if sprite.animation != animation:
 		sprite.animation = animation
 		sprite.play()
@@ -186,6 +211,6 @@ func _process(_delta):
 		if area is Interactable:
 			interact_target = area
 			break
-		
+
 
 	handle_animation()

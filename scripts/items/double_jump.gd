@@ -5,10 +5,21 @@ static var MAX_JUMPS: int = 2
 var jumps_remaining: int = 2
 var jumping := false
 
+func _init():
+	priority = 1
+
+func reset_animation():
+	await player.sprite.animation_finished
+	animation = ""
+
+
 func jump(_delta: float) -> bool:
 	if !jumping && jumps_remaining > 0:
 		jumps_remaining -= 1
 		jumping = true
+
+		animation = "jumpx2"
+		reset_animation()
 
 	if jumping:
 		player.jump_with_horizontal_velocity()

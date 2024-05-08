@@ -40,8 +40,28 @@ animations = [{
 "texture": ExtResource("6_lngsh")
 }],
 "loop": false,
-"name": &"door",
+"name": &"enter",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_lngsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jw3fu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2klh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vkcam")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tdoai")
+}],
+"loop": false,
+"name": &"exit",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -152,7 +172,7 @@ editor_draw_limits = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_glcxg")
-animation = &"jump"
+animation = &"exit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -15)

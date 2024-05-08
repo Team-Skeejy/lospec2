@@ -9,7 +9,7 @@ var block_physics := true
 func _init(src: WarpDoor, tgt: WarpDoor):
 	source = src
 	target = tgt
-	self.animation = "door"
+	self.animation = "enter"
 
 func added():
 	if player.global_position.x > source.global_position.x:
@@ -30,10 +30,9 @@ func added():
 	tween.tween_property(Global.player, "global_position", target.global_position, WarpDoor.TRAVEL_SPEED)
 	await tween.finished
 
-	target.sprite.frame = 2
-	target.sprite.play()
+	target.arrive()
 
-	animation = "door"
+	animation = "exit"
 	await player.sprite.animation_finished
 	player.remove_item(self)
 

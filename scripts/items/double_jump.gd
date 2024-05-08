@@ -6,7 +6,8 @@ var jumps_remaining: int = 2
 var jumping := false
 
 func _init():
-	priority = 1
+	priority = 2
+
 
 func reset_animation():
 	await player.sprite.animation_finished
@@ -24,10 +25,13 @@ func jump(_delta: float) -> bool:
 	if jumping:
 		player.jump_with_horizontal_velocity()
 		return true
+
 	return false
+
 
 func jump_ended():
 	jumping = false
+
 
 func physics_process(_delta: float):
 	if player.is_on_coyote_floor:

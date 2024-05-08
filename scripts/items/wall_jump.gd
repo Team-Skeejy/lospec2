@@ -11,13 +11,13 @@ var coyote_timer := Player.COYOTE_TIME
 var was_on_wall := false
 
 func _init():
-	priority = 2
+	priority = 1
 
 func jump(_delta: float):
 	if !jumping && player.direction && (coyote_timer || player.is_on_wall_only()):
 		if player.is_on_wall_only():
 			flip_direction = true
-		if coyote_timer:
+		elif coyote_timer:
 			flip_direction = false
 		jumping = true
 		coyote_timer = 0
@@ -58,6 +58,6 @@ func physics_process(delta: float):
 		else:
 			player.velocity.y += WALL_GRAB_DECELLERATION * delta
 
-	else:
+	if player.is_on_floor_only():
 			wall_grab_timer = WALL_GRAB_GRACE_PERIOD
 	return false

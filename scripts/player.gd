@@ -24,23 +24,29 @@ var jump_timer := JUMP_DURATION
 var is_default_jump := true
 var jumping := false
 
+# logical items
 var items: Array[Item] = []
 
+# is the player within the coyote grace period?
 var is_on_coyote_floor: bool = false:
 	get: return coyote_timer > 0.
 
+# used to trigger exit function in interactables
+var _prev_interact_target: Interactable
+# current targeted interactable
 var interact_target: Interactable
 
+# used to reevaluate items from player/inventory into the items list
+# does not run removed from items already in the list
 func evaluate_items():
 	items = []
 	for child: Node in inventory.get_children():
 		if child is Item:
 			add_item(child)
 
-
 # # implemented, but don't use this, i think it's a bad idea
 # func add_item_at(item: Item, index: int = 0):
-# 	if item in items: return
+# 	if item in items.filter(func(item): return !item.disabled): return
 
 # 	if index == -1:
 # 		items.push_front(item)
@@ -50,7 +56,9 @@ func evaluate_items():
 # 		items.insert(index, item)
 # 	inventory.add_child(item)
 
-
+# reparents item to player/inventory
+# adds item to item list
+# runs item.added()
 func add_item(item: Item):
 	var parent := item.get_parent()
 	if !parent:
@@ -68,6 +76,9 @@ func add_item(item: Item):
 	items.push_back(item)
 	item.added()
 
+# removes item from item list
+# runs item.removed()
+# DOES NOT reparent item
 func remove_item(item: Item):
 	var index := items.find(item)
 	if index > -1:
@@ -79,20 +90,18 @@ func _ready():
 	Global.player = self
 	evaluate_items()
 
+# handles a press logic
 func a_press(delta: float) -> void:
 	if interact_target and is_on_floor():
 		interact_target.interact()
 	else:
 		jumping = true
 
-	for item: Item in items:
-		if item.a_press(delta):
-			break
+	for item: Item in items.filter(func(item): return !item.disabled): if item.a_press(delta): break
 
+# handles b press logic
 func b_press(delta: float) -> void:
-	for item: Item in items:
-		if item.b_press(delta):
-			break
+	for item: Item in items.filter(func(item): return !item.disabled): if item.b_press(delta): break
 
 # if the player can jump, then they will normal jump
 # otherwise code will try to execute an item jump
@@ -102,10 +111,7 @@ func jump(delta: float) -> void:
 		coyote_timer = 0
 		jump_with_no_horizontal_velocity()
 	else:
-		items.any(func(item): item.jump(delta))
-		# for item: Item in items:
-		# 	if item.jump(delta):
-		# 		break
+		for item: Item in items.filter(func(item): return !item.disabled): if item.jump(delta): break
 
 func jump_with_horizontal_velocity() -> void:
 	if direction > 0:
@@ -118,22 +124,22 @@ func jump_with_horizontal_velocity() -> void:
 func jump_with_no_horizontal_velocity() -> void:
 	velocity.y = JUMP_VELOCITY
 
-func _jump():  # _on_jump_timer_timeout
-	jump_with_no_horizontal_velocity()
+# gravity calc for player
+func add_gravity(delta: float):
+	velocity.y += Global.GRAVITY * delta
 
-func accelerate(dir: float, delta: float) -> void:
+# adds left right forces based on controls using arrow keys
+func add_player_left_right(dir: float, delta: float) -> void:
 	var acc := ACCELERATION if is_on_floor() else AERIAL_ACCELERATION
 	velocity.x = move_toward(velocity.x, SPEED * dir, acc * delta)
 
+# slows the player down in all situations
 func add_friction(delta: float) -> void:
 	var friction := FRICTION if is_on_floor() else AIR_FRICTION
 	velocity.x = move_toward(velocity.x, 0., friction * delta)
 
 
-
 func _physics_process(delta: float) -> void:
-
-
 	# Coyote Time Logic
 	if is_on_floor() && coyote_timer < COYOTE_TIME:
 		coyote_timer = COYOTE_TIME
@@ -156,27 +162,37 @@ func _physics_process(delta: float) -> void:
 		is_default_jump = false
 		jumping = false
 
-		for item in items: item.jump_ended()
+		for item in items.filter(func(item): return !item.disabled): item.jump_ended()
 
-	if !items.any(func(item): return item.physics_process(delta)):
-		velocity.y += Global.GRAVITY * delta
+	var default_physics := true
+	for item: Item in items.filter(func(item): return !item.disabled):
+		if item.physics_process(delta):
+			default_physics = false
+			break
+
+	# if default physics operations have not been muted by items
+	if default_physics:
+		add_gravity(delta)
 		if direction:
-			accelerate(direction, delta)
+			add_player_left_right(direction, delta)
 		else:
 			add_friction(delta)
 
+	# clamps player speed
 	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 	move_and_slide()
 
+	# sprite directions
 	if velocity.x > 0:
 		sprite.flip_h = false
 	elif velocity.x < 0:
 		sprite.flip_h = true
 
+# animation logic
 func handle_animation():
 	var animation := ""
 
-	for item in items:
+	for item in items.filter(func(item): return !item.disabled):
 		if item.animation:
 			animation = item.animation
 			break
@@ -202,15 +218,21 @@ func handle_animation():
 		sprite.animation = animation
 		sprite.play()
 
-
-
 func _process(_delta):
 	var collisions := interaction_area.get_overlapping_areas()
+	_prev_interact_target = interact_target
 	interact_target = null
+
 	for area in collisions:
 		if area is Interactable:
+			if _prev_interact_target != area:
+				if _prev_interact_target: _prev_interact_target.exited_interact_area()
+				area.entered_interact_area()
 			interact_target = area
 			break
+
+	if !interact_target && _prev_interact_target:
+		_prev_interact_target.exited_interact_area()
 
 
 	handle_animation()

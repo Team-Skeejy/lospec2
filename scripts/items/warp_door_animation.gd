@@ -25,8 +25,7 @@ func added():
 
 	await player.sprite.animation_finished
 
-
-	self.animation = "none"
+	animation = "none"
 
 	tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD)

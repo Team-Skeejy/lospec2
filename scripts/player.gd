@@ -13,6 +13,7 @@ static var COYOTE_TIME := 0.1
 static var JUMP_DURATION := 0.2
 
 @export var sprite: AnimatedSprite2D
+@export var sprite_animation_player: AnimationPlayer
 @export var interaction_area: Area2D
 @export var inventory: Node
 
@@ -182,12 +183,6 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 	move_and_slide()
 
-	# sprite directions
-	if velocity.x > 0:
-		sprite.flip_h = false
-	elif velocity.x < 0:
-		sprite.flip_h = true
-
 # animation logic
 func handle_animation():
 	var animation := ""
@@ -200,9 +195,9 @@ func handle_animation():
 	# base movement animation logic
 	if !animation:
 		if is_on_floor():
-			if sprite.animation == "fall":  # just landed
+			if sprite_animation_player.animation == "fall":  # just landed
 				animation = "land"
-			elif sprite.animation == "land" && sprite.is_playing():  # play the whole landing animation
+			elif sprite_animation_player.animation == "land" && sprite.is_playing():  # play the whole landing animation
 				animation = "land"
 			elif velocity.length() and not is_on_wall():  # if walking
 				animation = "walk"
@@ -214,11 +209,20 @@ func handle_animation():
 			else:
 				animation = "fall"
 
-	if sprite.animation != animation:
-		sprite.animation = animation
-		sprite.play()
+	if velocity.x > 0:
+		animation += "_l"
+	elif velocity.x < 0:
+		animation += "_r"
 
-func _process(_delta):
+	# if sprite.animation != animation:
+	# 	sprite.animation = animation
+	# 	sprite.play()
+
+	if sprite_animation_player.animation != animation:
+		sprite_animation_player.animation = animation
+		sprite_animation_player.play()
+
+func _process(_delta: float):
 	var collisions := interaction_area.get_overlapping_areas()
 	_prev_interact_target = interact_target
 	interact_target = null

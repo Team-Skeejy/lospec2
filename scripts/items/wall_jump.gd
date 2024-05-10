@@ -1,30 +1,34 @@
 class_name WallJump
 extends Item
 
-var WALL_GRAB_GRACE_PERIOD := 2.
-var WALL_GRAB_DEGRADATION_PERIOD := 3.
-var WALL_GRAB_DECELLERATION := Global.GRAVITY * -0.9
+var WALL_GRAB_GRACE_PERIOD := 2.  # how long the player can hold onto a wall for without sliding
+var WALL_GRAB_DEGRADATION_PERIOD := 3.  # how long takes for the grab to taper off
+var WALL_GRAB_DECELLERATION := -Global.GRAVITY  # maximum amount of slow the player experiences holding onto the wall
 
-var wall_grab_timer := WALL_GRAB_GRACE_PERIOD
-var wall_grab_degradation_timer := WALL_GRAB_DEGRADATION_PERIOD
-var jumping := false
-var wall_jumping := false
+var wall_grab_timer := WALL_GRAB_GRACE_PERIOD  # timer for how long the player can grab onto the wall for
+var wall_grab_degradation_timer := WALL_GRAB_DEGRADATION_PERIOD  # timer to ease back into using full gravity
+var jumping := false  # whether or not to process using walljump logic
+var wall_jumping := false  # whether or not to continue processing jump like a wall jump
 var flip_direction := true  # on lift off, the player needs to go opposite direction, this flips after the user lifts their direction keys
-var coyote_timer := Player.COYOTE_TIME
-var was_on_wall := false
+var coyote_timer := Player.COYOTE_TIME  # used to give lenience for when to walljump
+var was_on_wall := false  # used to initialise coyote timer
 
 func _init():
 	priority = 1
 
 func jump(_delta: float):
-	if !jumping && player.direction && (coyote_timer || player.is_on_wall_only()):
-		if player.is_on_wall_only():
-			flip_direction = true
-		elif coyote_timer:
-			flip_direction = false
-		jumping = true
-		wall_jumping = true
-		coyote_timer = 0
+	if !jumping:
+		if player.direction && (coyote_timer || player.is_on_wall_only()):
+			if player.is_on_wall_only():
+				flip_direction = true
+			elif coyote_timer:
+				flip_direction = false
+			jumping = true
+			wall_jumping = true
+			coyote_timer = 0
+		else:
+			wall_jumping = false
+
 
 	if jumping:
 		if Input.is_action_just_released("Left") || Input.is_action_just_released("Right"):

@@ -35,7 +35,7 @@ func added():
 	target.arrive()
 
 	animation = "exit"
-	await player.sprite.animation_finished
+	await player.sprite_animation_player.animation_finished
 	for shape in collision_shapes: shape.disabled = false
 	player.remove_item(self)
 

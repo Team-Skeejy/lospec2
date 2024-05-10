@@ -195,9 +195,9 @@ func handle_animation():
 	# base movement animation logic
 	if !animation:
 		if is_on_floor():
-			if sprite_animation_player.animation == "fall":  # just landed
+			if sprite_animation_player.current_animation == "fall":  # just landed
 				animation = "land"
-			elif sprite_animation_player.animation == "land" && sprite.is_playing():  # play the whole landing animation
+			elif sprite_animation_player.current_animation == "land" && sprite.is_playing():  # play the whole landing animation
 				animation = "land"
 			elif velocity.length() and not is_on_wall():  # if walking
 				animation = "walk"
@@ -210,16 +210,17 @@ func handle_animation():
 				animation = "fall"
 
 	if velocity.x > 0:
-		animation += "_l"
-	elif velocity.x < 0:
 		animation += "_r"
-
+	elif velocity.x < 0:
+		animation += "_l"
+	else:
+		animation += "_l"
 	# if sprite.animation != animation:
 	# 	sprite.animation = animation
 	# 	sprite.play()
 
-	if sprite_animation_player.animation != animation:
-		sprite_animation_player.animation = animation
+	if sprite_animation_player.current_animation != animation:
+		sprite_animation_player.current_animation = animation
 		sprite_animation_player.play()
 
 func _process(_delta: float):

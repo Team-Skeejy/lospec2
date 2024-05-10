@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+enum EDirection {
+	left, right
+}
+
 static var TERMINAL_VELOCITY := 900.
 
 static var SPEED := 100.
@@ -12,7 +16,6 @@ static var JUMP_VELOCITY := -150.
 static var COYOTE_TIME := 0.1
 static var JUMP_DURATION := 0.2
 
-@export var sprite: AnimatedSprite2D
 @export var sprite_animation_player: AnimationPlayer
 @export var interaction_area: Area2D
 @export var inventory: Node
@@ -36,6 +39,9 @@ var is_on_coyote_floor: bool = false:
 var _prev_interact_target: Interactable
 # current targeted interactable
 var interact_target: Interactable
+
+var _facing: EDirection = EDirection.right
+var _animation := "idle"
 
 # used to reevaluate items from player/inventory into the items list
 # does not run removed from items already in the list
@@ -87,7 +93,7 @@ func remove_item(item: Item):
 		item.removed()
 
 func _ready():
-	sprite.play()
+	sprite_animation_player.play()
 	Global.player = self
 	evaluate_items()
 
@@ -195,9 +201,9 @@ func handle_animation():
 	# base movement animation logic
 	if !animation:
 		if is_on_floor():
-			if sprite_animation_player.animation == "fall":  # just landed
+			if _animation == "fall":  # just landed
 				animation = "land"
-			elif sprite_animation_player.animation == "land" && sprite.is_playing():  # play the whole landing animation
+			elif _animation == "land" && sprite_animation_player.is_playing():  # play the whole landing animation
 				animation = "land"
 			elif velocity.length() and not is_on_wall():  # if walking
 				animation = "walk"
@@ -209,18 +215,21 @@ func handle_animation():
 			else:
 				animation = "fall"
 
+	if _animation != animation:
+		sprite_animation_player.play(animation + ("_l" if _facing == EDirection.left else "_r"))
+		_animation = animation
+
+	var facing := _facing
 	if velocity.x > 0:
-		animation += "_l"
+		facing = EDirection.left
 	elif velocity.x < 0:
-		animation += "_r"
+		facing = EDirection.right
 
-	# if sprite.animation != animation:
-	# 	sprite.animation = animation
-	# 	sprite.play()
-
-	if sprite_animation_player.animation != animation:
-		sprite_animation_player.animation = animation
-		sprite_animation_player.play()
+	if _facing != facing:
+		var animation_position := sprite_animation_player.current_animation_position
+		sprite_animation_player.animation = _animation + ("_l" if _facing == EDirection.left else "_r")
+		sprite_animation_player.seek(animation_position)
+		_facing = facing
 
 func _process(_delta: float):
 	var collisions := interaction_area.get_overlapping_areas()

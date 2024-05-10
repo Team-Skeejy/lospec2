@@ -19,7 +19,7 @@ func jump(_delta: float) -> bool:
 		jumps_remaining -= 1
 		jumping = true
 
-		animation = "jumpx2"
+		animation = "jump_x2"
 		reset_animation()
 
 	if jumping:

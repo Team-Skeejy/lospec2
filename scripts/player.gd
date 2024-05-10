@@ -42,6 +42,8 @@ var interact_target: Interactable
 
 var _facing: EDirection = EDirection.right
 var _animation := "idle"
+var animation_name: String:
+	get: return _animation + ("_l" if _facing == EDirection.left else "_r")
 
 # used to reevaluate items from player/inventory into the items list
 # does not run removed from items already in the list
@@ -93,7 +95,7 @@ func remove_item(item: Item):
 		item.removed()
 
 func _ready():
-	sprite_animation_player.play()
+	sprite_animation_player.play(animation_name)
 	Global.player = self
 	evaluate_items()
 
@@ -189,6 +191,7 @@ func _physics_process(delta: float) -> void:
 	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 	move_and_slide()
 
+
 # animation logic
 func handle_animation():
 	var animation := ""
@@ -216,20 +219,19 @@ func handle_animation():
 				animation = "fall"
 
 	if _animation != animation:
-		sprite_animation_player.play(animation + ("_l" if _facing == EDirection.left else "_r"))
 		_animation = animation
+		sprite_animation_player.play(animation_name)
 
 	var facing := _facing
 	if velocity.x > 0:
-		facing = EDirection.left
-	elif velocity.x < 0:
 		facing = EDirection.right
+	elif velocity.x < 0:
+		facing = EDirection.left
 
 	if _facing != facing:
-		var animation_position := sprite_animation_player.current_animation_position
-		sprite_animation_player.animation = _animation + ("_l" if _facing == EDirection.left else "_r")
-		sprite_animation_player.seek(animation_position)
 		_facing = facing
+		sprite_animation_player.current_animation = animation_name
+
 
 func _process(_delta: float):
 	var collisions := interaction_area.get_overlapping_areas()

@@ -10,7 +10,7 @@ func _init():
 
 
 func reset_animation():
-	await player.sprite.animation_finished
+	await player.sprite_animation_player.animation_finished
 	animation = ""
 
 

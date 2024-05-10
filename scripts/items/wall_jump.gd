@@ -1,10 +1,12 @@
 class_name WallJump
 extends Item
 
-var WALL_GRAB_GRACE_PERIOD := 1.
+var WALL_GRAB_GRACE_PERIOD := 2.
+var WALL_GRAB_DEGRADATION_PERIOD := 3.
 var WALL_GRAB_DECELLERATION := Global.GRAVITY * -0.9
 
 var wall_grab_timer := WALL_GRAB_GRACE_PERIOD
+var wall_grab_degradation_timer := WALL_GRAB_DEGRADATION_PERIOD
 var jumping := false
 var flip_direction := true  # on lift off, the player needs to go opposite direction, this flips after the user lifts their direction keys
 var coyote_timer := Player.COYOTE_TIME
@@ -50,14 +52,17 @@ func physics_process(delta: float):
 		was_on_wall = true
 
 	# grab grace period
-	if player.is_on_wall_only() && player.direction && player.velocity.y >= 0:
-		if wall_grab_timer > 0:
-			wall_grab_timer = move_toward(wall_grab_timer, 0, delta)
-			player.velocity.y = 0
-			return true
-		else:
-			player.velocity.y += WALL_GRAB_DECELLERATION * delta
+	if player.is_on_wall_only():
+		if player.direction && player.velocity.y >= 0:
+			if wall_grab_timer > 0:
+				wall_grab_timer = move_toward(wall_grab_timer, 0, delta)
+				player.velocity.y = 0
+				return true
+			else:
+				wall_grab_degradation_timer = move_toward(wall_grab_degradation_timer, 0, delta)
+				player.velocity.y += WALL_GRAB_DECELLERATION * (wall_grab_degradation_timer / WALL_GRAB_DEGRADATION_PERIOD) * delta
 
 	if player.is_on_floor_only():
 			wall_grab_timer = WALL_GRAB_GRACE_PERIOD
+			wall_grab_degradation_timer = WALL_GRAB_DEGRADATION_PERIOD
 	return false

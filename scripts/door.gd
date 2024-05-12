@@ -5,7 +5,7 @@ extends Interactable
 
 @export var sprite: AnimatedSprite2D
 
-func interact():
+func interact(_interactor: Humanoid):
 	sprite.animation = "open"
 	sprite.play()
 	if next_scene:
@@ -19,5 +19,5 @@ func _on_body_exited(body):
 	if ! (body is Player): return
 	sprite.animation = "closed"
 
-var a : Array = []
+var a: Array = []
 

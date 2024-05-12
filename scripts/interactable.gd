@@ -9,5 +9,5 @@ func entered_interact_area():
 func exited_interact_area():
   pass
 
-func interact():
+func interact(_interactor: Humanoid):
   pass

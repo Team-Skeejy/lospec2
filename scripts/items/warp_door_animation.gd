@@ -23,7 +23,7 @@ func added():
 	var tween: Tween = create_tween()
 	tween.tween_property(Global.player, "global_position", source.global_position, WarpDoor.TWEEN_SPEED)
 
-	await player.sprite.animation_finished
+	await player.sprite_animation_player.animation_finished
 
 	animation = "none"
 

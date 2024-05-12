@@ -12,10 +12,10 @@ func _init(src: WarpDoor, tgt: WarpDoor):
 	self.animation = "enter"
 
 func added():
-	if player.global_position.x > source.global_position.x:
-		player.sprite.flip_h = true
+	if player.global_position.x > source.global_position.x: 
+		player._facing = player.EDirection.left
 	else:
-		player.sprite.flip_h = false
+		player._facing = player.EDirection.right
 
 	var collision_shapes := player.interaction_area.get_children().filter(func(child): return child is CollisionShape2D)
 	for shape in collision_shapes: shape.disabled = true

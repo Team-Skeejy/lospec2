@@ -1,6 +1,6 @@
 extends Node
 
-static var GRAVITY := 980
+static var GRAVITY : float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player : Player
 
 var sell_dialogue : PackedStringArray

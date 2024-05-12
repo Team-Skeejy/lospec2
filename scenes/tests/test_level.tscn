@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://du7d3x6mae8wj"]
+[gd_scene load_steps=7 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_s6ams"]
 [ext_resource type="PackedScene" uid="uid://dsbss8b7gdlc" path="res://scenes/ui/in_game_menu.tscn" id="3_pnx0j"]
 [ext_resource type="PackedScene" uid="uid://cyie1qowb60eh" path="res://scenes/map_objects/sittable.tscn" id="4_h0oka"]
+[ext_resource type="PackedScene" uid="uid://bwoobo3k2h8bm" path="res://scenes/map_objects/warp_door.tscn" id="5_pcnwj"]
+[ext_resource type="PackedScene" uid="uid://pt22hmf0q1qw" path="res://scenes/map_objects/map_door.tscn" id="6_lvxox"]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -26,6 +28,29 @@ position = Vector2(67, -18)
 
 [node name="Sittable3" parent="." instance=ExtResource("4_h0oka")]
 position = Vector2(341, -98)
+
+[node name="WarpDoor" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
+position = Vector2(-83, -18)
+destination = NodePath("../WarpDoor5")
+
+[node name="WarpDoor2" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
+position = Vector2(894, -210)
+destination = NodePath("../WarpDoor4")
+
+[node name="WarpDoor3" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
+position = Vector2(894, -114)
+destination = NodePath("../WarpDoor2")
+
+[node name="WarpDoor4" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
+position = Vector2(894, -18)
+destination = NodePath("../WarpDoor3")
+
+[node name="WarpDoor5" parent="." node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
+position = Vector2(836, -18)
+destination = NodePath("../WarpDoor")
+
+[node name="MapDoor" parent="." instance=ExtResource("6_lvxox")]
+position = Vector2(206, -18)
 
 [node name="Player" parent="." instance=ExtResource("2_s6ams")]
 position = Vector2(50, -33)

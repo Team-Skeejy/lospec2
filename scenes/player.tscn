@@ -1,8 +1,8 @@
 [gd_scene load_steps=37 format=3 uid="uid://bt1fj4qvrccb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8kpki"]
-[ext_resource type="PackedScene" uid="uid://7njayfatpoqh" path="res://scenes/double_jump.tscn" id="4_12iee"]
-[ext_resource type="PackedScene" uid="uid://dkyyt4v1drqb5" path="res://scenes/wall_jump.tscn" id="4_f8bfp"]
+[ext_resource type="PackedScene" uid="uid://7njayfatpoqh" path="res://scenes/items/double_jump.tscn" id="2_1xg3s"]
+[ext_resource type="PackedScene" uid="uid://dkyyt4v1drqb5" path="res://scenes/items/wall_jump.tscn" id="3_rcyl3"]
 [ext_resource type="Texture2D" uid="uid://dl1xq5j6x8731" path="res://textures/characters/player/Sprite 1.png" id="21_tx0hg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rmf5r"]
@@ -543,9 +543,9 @@ shape = SubResource("RectangleShape2D_y0xy1")
 
 [node name="Inventory" type="Node" parent="."]
 
-[node name="DoubleJump" parent="Inventory" instance=ExtResource("4_12iee")]
+[node name="DoubleJump" parent="Inventory" instance=ExtResource("2_1xg3s")]
 
-[node name="WallJump" parent="Inventory" instance=ExtResource("4_f8bfp")]
+[node name="WallJump" parent="Inventory" instance=ExtResource("3_rcyl3")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)

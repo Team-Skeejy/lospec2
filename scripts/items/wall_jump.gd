@@ -18,8 +18,8 @@ func _init():
 
 func jump(_delta: float):
 	if !jumping:
-		if player.direction && (coyote_timer || player.is_on_wall_only()):
-			if player.is_on_wall_only():
+		if holder.input_direction && (coyote_timer || holder.is_on_wall_only()):
+			if holder.is_on_wall_only():
 				flip_direction = true
 			elif coyote_timer:
 				flip_direction = false
@@ -34,8 +34,8 @@ func jump(_delta: float):
 		if Input.is_action_just_released("Left") || Input.is_action_just_released("Right"):
 			flip_direction = false
 
-		player.velocity.y = Player.JUMP_VELOCITY
-		player.velocity.x = player.direction * Player.SPEED * (-1 if flip_direction else 1)
+		holder.velocity.y = Player.JUMP_VELOCITY
+		holder.velocity.x = holder.input_direction * Player.SPEED * (-1 if flip_direction else 1)
 		return true
 	return false
 
@@ -44,40 +44,40 @@ func jump_ended():
 
 func _physics_process(delta: float):
 	# coyote timer
-	if player.is_on_floor() || player.is_on_ceiling():
+	if holder.is_on_floor() || holder.is_on_ceiling():
 		coyote_timer = 0
-	elif coyote_timer && !player.is_on_wall_only():
+	elif coyote_timer && !holder.is_on_wall_only():
 		coyote_timer = move_toward(coyote_timer, 0, delta)
 
 func physics_process(delta: float):
 	# coyote timer initialiser
-	if !player.is_on_wall_only() && was_on_wall:
+	if !holder.is_on_wall_only() && was_on_wall:
 		was_on_wall = false
-	elif player.is_on_wall_only() && !was_on_wall:
+	elif holder.is_on_wall_only() && !was_on_wall:
 		coyote_timer = Player.COYOTE_TIME
 		was_on_wall = true
 
 	# grab grace period
-	if player.is_on_wall_only():
-		if player.direction && player.velocity.y >= 0:
+	if holder.is_on_wall_only():
+		if holder.input_direction && holder.velocity.y >= 0:
 			if wall_grab_timer > 0:
 				animation = "wall_grab"
 				wall_grab_timer = move_toward(wall_grab_timer, 0, delta)
-				player.velocity.y = 0
+				holder.velocity.y = 0
 				return true
 			else:
 				animation = "wall_slide"
 				wall_grab_degradation_timer = move_toward(wall_grab_degradation_timer, 0, delta)
-				player.velocity.y += WALL_GRAB_DECELLERATION * (wall_grab_degradation_timer / WALL_GRAB_DEGRADATION_PERIOD) * delta
+				holder.velocity.y += WALL_GRAB_DECELLERATION * (wall_grab_degradation_timer / WALL_GRAB_DEGRADATION_PERIOD) * delta
 	elif wall_jumping:
-		if player.velocity.y > 0:
+		if holder.velocity.y > 0:
 			animation = "wall_jump_fall"
-		elif player.velocity.y < 0:
+		elif holder.velocity.y < 0:
 			animation = "wall_jump_rise"
 	else:
 		animation = ""
 
-	if player.is_on_floor_only():
+	if holder.is_on_floor_only():
 			wall_jumping = false
 			wall_grab_timer = WALL_GRAB_GRACE_PERIOD
 			wall_grab_degradation_timer = WALL_GRAB_DEGRADATION_PERIOD

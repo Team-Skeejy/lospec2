@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyie1qowb60eh"]
+
+[ext_resource type="Script" path="res://scripts/map_objects/sittable.gd" id="1_3xx43"]
+[ext_resource type="Texture2D" uid="uid://bwfxfnwff3p1l" path="res://textures/tilesets/tileset1.png" id="2_pnuj6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhcch"]
+size = Vector2(26, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ok6yg"]
+atlas = ExtResource("2_pnuj6")
+region = Rect2(160, 16, 32, 32)
+
+[node name="Sittable" type="Area2D"]
+script = ExtResource("1_3xx43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_mhcch")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = SubResource("AtlasTexture_ok6yg")

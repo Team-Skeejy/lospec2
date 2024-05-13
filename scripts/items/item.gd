@@ -1,27 +1,26 @@
 # I think item is a little bit poorly named
-# they're actually heirachical player behaviour extensions
+# they're actually heirachical holder behaviour extensions
 class_name Item
 extends Node
 
 @export var disabled: bool = false
 
-var player: Player:
-  get: return Global.player
+var holder: Humanoid
 
-# overrides animations of the player
+# overrides animations of the holder
 var animation := ""
 
 # the lower the priority, the earlier the item is evaluated in the prio stack
 var priority := 0
 
-# executed when item is added to player inventory using the Player.add_item() method
-func added() -> void:
-  pass
+# executed when item is added to holder inventory using the Player.add_item() method
+func added(_holder: Humanoid) -> void:
+  holder = _holder
 
-# executed when item is removed from player inventory using the Player.remove_item() method
-# must handle own deletion/reparenting, this only removes item from the player's item list
+# executed when item is removed from holder inventory using the Player.remove_item() method
+# must handle own deletion/reparenting, this only removes item from the holder's item list
 func removed() -> void:
-  pass
+  holder = null
 
 # return true to stop propogation
 # executed when a is pressed always
@@ -42,9 +41,9 @@ func jump(delta: float) -> bool:
 func jump_ended() -> void:
   pass
 
-# return true to block default physics process in player
+# return true to block default physics process in holder
 # does not block velocity capping
-# this is run after player control logic
+# this is run after holder control logic
 # before default controls and physics
 # before move and slide
 func physics_process(delta: float) -> bool:

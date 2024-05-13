@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://7njayfatpoqh"]
 
-[ext_resource type="Script" path="res://scripts/items/double_jump.gd" id="1_bp5kg"]
+[ext_resource type="Script" path="res://scripts/items/double_jump.gd" id="1_pla11"]
 
 [node name="DoubleJump" type="Node"]
-script = ExtResource("1_bp5kg")
+script = ExtResource("1_pla11")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

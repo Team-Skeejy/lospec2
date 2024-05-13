@@ -6,7 +6,9 @@ static var TRAVEL_SPEED := 1.
 
 @export var destination: WarpDoor
 @export var sprite: AnimatedSprite2D
+
 var arriving := false
+var last_interactor: Humanoid
 
 func _init():
 	interaction_name = "Ride"
@@ -19,13 +21,13 @@ func exited_interact_area():
 	sprite.animation = "openclose"
 	# sprite.frame = 0
 
-func interact():
-	Global.player.add_item(WarpDoorAnimation.new(self, destination))
+func interact(interactor: Humanoid):
+	interactor.add_item(WarpTo.new(self, destination))
 	sprite.animation = "openclose"
 	sprite.frame = 1
 	sprite.play()
 
-func arrive():
+func arrive(interactor: Humanoid):
 	arriving = true
 	sprite.animation = "openclose"
 	sprite.frame = 2
@@ -33,5 +35,5 @@ func arrive():
 	await sprite.animation_finished
 	arriving = false
 
-	if Global.player.interact_target == self:
+	if interactor.interact_target == self:
 		sprite.animation = "ajar"

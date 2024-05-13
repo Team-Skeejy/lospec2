@@ -10,7 +10,7 @@ func _init():
 
 
 func reset_animation():
-	await player.sprite_animation_player.animation_finished
+	await holder.sprite_animation_player.animation_finished
 	animation = ""
 
 
@@ -23,7 +23,7 @@ func jump(_delta: float) -> bool:
 		reset_animation()
 
 	if jumping:
-		player.jump_with_horizontal_velocity()
+		holder.jump_with_horizontal_velocity()
 		return true
 
 	return false
@@ -34,6 +34,6 @@ func jump_ended():
 
 
 func physics_process(_delta: float):
-	if player.is_on_coyote_floor:
+	if holder.is_on_coyote_floor:
 		jumps_remaining = MAX_JUMPS
 	return false

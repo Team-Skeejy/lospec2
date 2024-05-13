@@ -34,13 +34,18 @@ theme = ExtResource("1_gpr5s")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 8
+text = "erqwerqwerqwerqwer"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DespawnTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleNotifier1" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(0, 0, 20, 20)
+
+[node name="VisibleNotifier2" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(80.5, 0)
 rect = Rect2(0, 0, 20, 20)
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

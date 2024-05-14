@@ -8,7 +8,6 @@ var coyote_timer := COYOTE_TIME
 var input_direction: float:
 	get: return Input.get_axis("Left", "Right")
 
-
 # is the player within the coyote grace period?
 var is_on_coyote_floor: bool = false:
 	get: return coyote_timer > 0.

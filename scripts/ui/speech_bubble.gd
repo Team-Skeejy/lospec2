@@ -7,13 +7,14 @@ extends PanelContainer
 @onready var visible_notifier2 : VisibleOnScreenNotifier2D = $VisibleNotifier2
 
 var text_speed : int = 20 # in chars/second
-var despawn_time : float = 0.5 # how much time after showing all text will it despawn
+var despawn_time : float = 1. # how much time after showing all text will it despawn
 var _visible_characters : float = 0.0
 var _started : bool = true
 enum State {
 	GROWING, # when the label is becoming bigger
 	READABLE,# when info can be gained 
-	READ 	 # when info has already been optained
+	READ, 	 # when info has already been obtained
+	DESPAWNING 
 }
 var curr_state : SpeechBubble.State
 
@@ -32,8 +33,8 @@ func init(text: String, type: Type):
 	if type == Type.SMALL_TALK:
 		color = Color.hex(0x000000ff)
 	elif type == Type.BUY:
-		color = Color.hex(0x007062ff)
-		#c = Color.hex(0x0aff0aff) # brighter green
+		#color = Color.hex(0x007062ff)
+		color = Color.hex(0x0aff0aff) # brighter green
 	elif type == Type.SELL:
 		color = Color.hex(0xff032bff)
 	else:
@@ -51,11 +52,8 @@ func _process(delta: float):
 	if not _started:
 		return
 		
-
-	if curr_state == State.READ:
-		return
 	# show more characters
-	if curr_state == State.GROWING: 
+	elif curr_state == State.GROWING: 
 		_visible_characters += delta * text_speed
 		label.visible_characters = int(_visible_characters)
 		
@@ -64,15 +62,27 @@ func _process(delta: float):
 			despawn_timer.start(despawn_time)
 			visible_notifier2.position.x = size.x - 20
 			curr_state = State.READABLE
+			
 	# when it's readable and on screen, read it
 	elif curr_state == State.READABLE and \
 		visible_notifier1.is_on_screen() and \
 		visible_notifier2.is_on_screen(): 
 		seen.emit(curr_type)
 		curr_state = State.READ
+		
+	#wait for the despawn timer
+	if curr_state == State.READ:
+		return
+	
+	# despawn
+	elif curr_state == State.DESPAWNING:
+		_visible_characters -= delta * text_speed * 4.
+		if _visible_characters <= 0.:
+			queue_free()
+		label.visible_characters = int(_visible_characters)
 
 func _on_despawn_timer_timeout():
-	queue_free()
+	curr_state = State.DESPAWNING
 
 func on_seen():
 	seen.emit()

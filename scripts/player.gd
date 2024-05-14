@@ -79,4 +79,4 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float):
 	super._process(delta)
-	handle_animation()
+	#handle_animation()

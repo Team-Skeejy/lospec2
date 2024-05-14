@@ -39,10 +39,4 @@ func on_child_transitioned(state:State, new_state_name:String) -> void:
 	
 	current_state = new_state
 
-func handle_collision(collision: KinematicCollision2D):
-	if current_state.has_method("handle_collision"):
-		current_state.handle_collision(collision)
-	
-func handle_interaction():
-	if current_state.has_method('handle_interaction'):
-		current_state.handle_interaction()
+

@@ -3,7 +3,9 @@ extends CharacterBody2D
 
 static var TERMINAL_VELOCITY := 900.
 
-static var SPEED := 100.
+static var SPEED := 50. # this probably should not be a static since 
+						# we most likely want npcs to move at a 
+						# different speed from the player 
 static var ACCELERATION := 900.
 static var AERIAL_ACCELERATION := 400.
 static var FRICTION := 1600.
@@ -181,3 +183,5 @@ func _process(_delta: float):
 
 	if !interact_target && _prev_interact_target:
 		_prev_interact_target.exited_interact_area()
+		
+	handle_animation()

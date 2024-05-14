@@ -5,6 +5,10 @@
 [ext_resource type="Script" path="res://scripts/ui/speech_bubble.gd" id="3_ej8al"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6pp20"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 1.0
 texture = ExtResource("2_u86ef")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
@@ -18,10 +22,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gpr5s")
@@ -34,7 +38,6 @@ theme = ExtResource("1_gpr5s")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 8
-text = "erqwerqwerqwerqwer"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -42,10 +45,11 @@ vertical_alignment = 1
 one_shot = true
 
 [node name="VisibleNotifier1" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.8, 0.85)
 rect = Rect2(0, 0, 20, 20)
 
 [node name="VisibleNotifier2" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(80.5, 0)
+scale = Vector2(0.8, 0.85)
 rect = Rect2(0, 0, 20, 20)
 
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

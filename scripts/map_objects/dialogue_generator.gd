@@ -3,16 +3,27 @@ extends Node2D
 
 
 @export var speech_bubble_scene : PackedScene
-var speech_bubble_spacing : int = 20
+var speech_bubble_spacing : int = 16
 var speech_bubble_movement_speed : float = 0.1
-func _ready():
-	pass
-	
-func _process(delta):
-	if Input.is_action_just_pressed("A"): #for testing
-		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY, SpeechBubble.Type.SMALL_TALK].pick_random()
-		new_speech_bubble(_t)
+var dialogue_timer : Timer
+var dialogue_time_interval : float = 3.
 
+func check_requirements() -> bool:
+	return false
+
+func _ready():
+	dialogue_timer = Timer.new()
+	add_child(dialogue_timer)
+	dialogue_timer.timeout.connect(_on_dialogue_timer_timeout)
+	dialogue_timer.wait_time = dialogue_time_interval
+	dialogue_timer.start()
+
+func _on_dialogue_timer_timeout():
+	if check_requirements(): # if requirements are met generate green or red bubbles
+		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
+		new_speech_bubble(_t)
+	else: # if not, generate small talk
+		new_speech_bubble(SpeechBubble.Type.SMALL_TALK)
 
 func new_speech_bubble(type: SpeechBubble.Type):
 	var speech_bubble_y : int = 0
@@ -39,14 +50,11 @@ func new_speech_bubble(type: SpeechBubble.Type):
 	speech_bubble.init(text, type)
 	speech_bubble.seen.connect(_on_seen)
 
-var debug_num_seen : int = 0
-@onready var debug_label : Label = $Camera2D/Label
+
+
 
 func _on_seen(type):
-	debug_num_seen += 1
-	debug_label.text = str(debug_num_seen)
-	print(type)
-
+	pass
 
 
 

@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 static var TERMINAL_VELOCITY := 900.
 
-static var SPEED := 50. # this probably should not be a static since 
+static var SPEED := 70. # this probably should not be a static since 
 						# we most likely want npcs to move at a 
 						# different speed from the player 
 static var ACCELERATION := 900.

@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://g7ix8xbxhriq"]
+[gd_scene load_steps=5 format=3 uid="uid://g7ix8xbxhriq"]
 
 [ext_resource type="Script" path="res://scripts/ui/in_game_menu.gd" id="1_vngsg"]
 [ext_resource type="Texture2D" uid="uid://dvleuqmgq62vt" path="res://textures/ui/in_game_menu.png" id="2_03svk"]
+[ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="3_yk58a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3hmtj"]
+shader = ExtResource("3_yk58a")
+shader_parameter/vhs_resolution = Vector2(256, 224)
+shader_parameter/samples = 3
+shader_parameter/crease_noise = 1.0
+shader_parameter/crease_opacity = 0.5
+shader_parameter/filter_intensity = 0.2
+shader_parameter/tape_crease_smear = 0.1
+shader_parameter/tape_crease_intensity = 0.3
+shader_parameter/tape_crease_jitter = 0.0
+shader_parameter/tape_crease_speed = 0.4
+shader_parameter/tape_crease_discoloration = 0.3
+shader_parameter/bottom_border_thickness = 0.1
+shader_parameter/bottom_border_jitter = 0.0
+shader_parameter/noise_intensity = 0.1
 
 [node name="InGameMenu" type="CanvasLayer"]
 
@@ -30,3 +47,11 @@ offset_left = 4.0
 offset_top = 7.0
 offset_right = 44.0
 offset_bottom = 23.0
+
+[node name="TextureRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3hmtj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

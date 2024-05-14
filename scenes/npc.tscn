@@ -486,6 +486,7 @@ _data = {
 
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "inventory")]
 collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_qucbd")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite_animation_player = NodePath("AnimationPlayer")

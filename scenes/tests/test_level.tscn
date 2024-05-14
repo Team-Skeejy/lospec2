@@ -62,4 +62,9 @@ position = Vector2(206, -18)
 
 [node name="NPC" parent="NPCs" instance=ExtResource("7_4jeeo")]
 position = Vector2(-228, -40)
-collision_mask = 2
+
+[node name="NPC2" parent="NPCs" instance=ExtResource("7_4jeeo")]
+position = Vector2(-342, -101)
+
+[node name="NPC3" parent="NPCs" instance=ExtResource("7_4jeeo")]
+position = Vector2(31, -101)

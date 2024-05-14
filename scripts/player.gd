@@ -36,11 +36,21 @@ func a_press(delta: float) -> void:
 	else:
 		jumping = true
 
+	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("A", delta)
 	for item: Item in items.filter(func(item): return !item.disabled): if item.a_press(delta): break
 
 # handles b press logic
 func b_press(delta: float) -> void:
+	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("B", delta)
 	for item: Item in items.filter(func(item): return !item.disabled): if item.b_press(delta): break
+
+func up_press(delta: float) -> void:
+	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Up", delta)
+	for item: Item in items.filter(func(item): return !item.disabled): if item.up_press(delta): break
+
+func down_press(delta: float) -> void:
+	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Down", delta)
+	for item: Item in items.filter(func(item): return !item.disabled): if item.down_press(delta): break
 
 func jump_with_horizontal_velocity() -> void:
 	if input_direction > 0:
@@ -56,10 +66,15 @@ func _physics_process(delta: float) -> void:
 	elif !is_on_floor() && coyote_timer > 0:
 		coyote_timer = move_toward(coyote_timer, 0, delta)
 
-	if Input.is_action_just_pressed("A"):
-		a_press(delta)
-	elif Input.is_action_just_pressed("B"):
-		b_press(delta)
+	if Input.is_action_just_pressed("Up"): up_press(delta)
+	if Input.is_action_just_pressed("Down"): down_press(delta)
+	if Input.is_action_just_pressed("Left"):
+		for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Left", delta)
+	if Input.is_action_just_pressed("Right"):
+		for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Right", delta)
+
+	if Input.is_action_just_pressed("A"): a_press(delta)
+	elif Input.is_action_just_pressed("B"): b_press(delta)
 
 	if Input.is_action_pressed("A") && jumping:
 		jump_timer = move_toward(jump_timer, 0, delta)

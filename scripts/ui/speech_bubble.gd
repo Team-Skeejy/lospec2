@@ -3,7 +3,8 @@ extends PanelContainer
 
 @onready var label : Label = $Label
 @onready var despawn_timer : Timer = $DespawnTimer
-@onready var visible_notifier : VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
+@onready var visible_notifier1 : VisibleOnScreenNotifier2D = $VisibleNotifier1
+@onready var visible_notifier2 : VisibleOnScreenNotifier2D = $VisibleNotifier2
 
 var text_speed : int = 20 # in chars/second
 var despawn_time : float = 0.5 # how much time after showing all text will it despawn
@@ -14,14 +15,14 @@ enum State {
 	READABLE,# when info can be gained 
 	READ 	 # when info has already been optained
 }
-var curr_state : State 
+var curr_state : SpeechBubble.State
 
 enum Type {
 	BUY,
 	SELL,
 	SMALL_TALK
 }
-var curr_type : Type 
+var curr_type : SpeechBubble.Type 
 
 signal seen(t: Type)
 
@@ -61,10 +62,12 @@ func _process(delta: float):
 		# when all chars are shown, make it readable
 		if label.visible_ratio >= 1.0: 
 			despawn_timer.start(despawn_time)
-			visible_notifier.rect.size.x = size.x
+			visible_notifier2.position.x = size.x - 20
 			curr_state = State.READABLE
 	# when it's readable and on screen, read it
-	elif curr_state == State.READABLE and visible_notifier.is_on_screen(): 
+	elif curr_state == State.READABLE and \
+		visible_notifier1.is_on_screen() and \
+		visible_notifier2.is_on_screen(): 
 		seen.emit(curr_type)
 		curr_state = State.READ
 
@@ -73,4 +76,3 @@ func _on_despawn_timer_timeout():
 
 func on_seen():
 	seen.emit()
-	visible_notifier

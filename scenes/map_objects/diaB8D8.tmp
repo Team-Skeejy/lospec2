@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://itbjvhraldeu"]
+
+[ext_resource type="Script" path="res://scripts/map_objects/dialogue_generator.gd" id="1_mfdet"]
+[ext_resource type="PackedScene" uid="uid://bfgmw6gg4doac" path="res://scenes/ui/speech_bubble.tscn" id="2_ryvse"]
+
+[node name="DialogueGenerator" type="Node2D"]
+script = ExtResource("1_mfdet")
+speech_bubble_scene = ExtResource("2_ryvse")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Label" type="Label" parent="Camera2D"]
+offset_left = -117.0
+offset_top = 87.0
+offset_right = -77.0
+offset_bottom = 103.0
+text = "0"

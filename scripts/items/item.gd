@@ -22,19 +22,44 @@ func added(_holder: Humanoid) -> void:
 func removed() -> void:
   holder = null
 
+# executed when any non-select non-start button is pressed
+# does not override
+func any_press(_button: String, _delta: float) -> void:
+  pass
+
 # return true to stop propogation
 # executed when a is pressed always
-func a_press(delta: float) -> bool:
+func up_press(_delta: float) -> bool:
+  return false
+
+# return true to stop propogation
+# executed when a is pressed always
+func down_press(_delta: float) -> bool:
+  return false
+
+# # return true to stop propogation
+# # executed when a is pressed always
+# func left_press(_delta: float) -> bool:
+#   return false
+
+# # return true to stop propogation
+# # executed when a is pressed always
+# func right_press(_delta: float) -> bool:
+#   return false
+
+# return true to stop propogation
+# executed when a is pressed always
+func a_press(_delta: float) -> bool:
   return false
 
 # return true to stop propogation
 # exectued when b is pressed always
-func b_press(delta: float) -> bool:
+func b_press(_delta: float) -> bool:
   return false
 
 # return true to stop propogation
 # executed when jump command is issued (nothing to interact with)
-func jump(delta: float) -> bool:
+func jump(_delta: float) -> bool:
   return false
 
 # for managing jump logic

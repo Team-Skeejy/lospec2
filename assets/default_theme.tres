@@ -1,7 +1,10 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://my27t5dp6cqn"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://my27t5dp6cqn"]
 
 [ext_resource type="FontFile" uid="uid://2oybdcbupp7b" path="res://assets/04b03.ttf" id="1_vtm87"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gj06"]
+
 [resource]
 default_font = ExtResource("1_vtm87")
-default_font_size = 16
+default_font_size = 8
+HSeparator/styles/separator = SubResource("StyleBoxEmpty_4gj06")

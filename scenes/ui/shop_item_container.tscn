@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dis1ex838jf3d"]
+
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_ctt7q"]
+[ext_resource type="Script" path="res://scripts/ui/shop_item_container.gd" id="2_6qrql"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="3_1x1yq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tjlms"]
+resource_local_to_scene = true
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource("1_ctt7q")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(176, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0htf2"]
+resource_local_to_scene = true
+atlas = ExtResource("3_1x1yq")
+region = Rect2(0, 0, 32, 32)
+
+[node name="ShopItemContainer" type="PanelContainer" node_paths=PackedStringArray("item_sprite")]
+offset_right = 44.0
+offset_bottom = 44.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_tjlms")
+script = ExtResource("2_6qrql")
+style_box = SubResource("StyleBoxTexture_tjlms")
+item_sprite = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_0htf2")

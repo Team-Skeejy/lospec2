@@ -52,7 +52,6 @@ func new_speech_bubble(type: SpeechBubble.Type):
 
 
 
-
 func _on_seen(type):
 	pass
 

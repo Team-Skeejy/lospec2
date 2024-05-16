@@ -1,28 +1,42 @@
-[gd_scene load_steps=5 format=3 uid="uid://g7ix8xbxhriq"]
+[gd_scene load_steps=14 format=3 uid="uid://g7ix8xbxhriq"]
 
 [ext_resource type="Script" path="res://scripts/ui/in_game_menu.gd" id="1_vngsg"]
 [ext_resource type="Texture2D" uid="uid://dvleuqmgq62vt" path="res://textures/ui/in_game_menu.png" id="2_03svk"]
+[ext_resource type="Script" path="res://scripts/ui/SettingsMenu.gd" id="3_wdk8l"]
 [ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="3_yk58a"]
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="4_t0xic"]
+[ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="5_4oxyn"]
+[ext_resource type="Script" path="res://scripts/ui/ghost_setting.gd" id="6_gikv3"]
+[ext_resource type="Script" path="res://scripts/ui/volume_setting.gd" id="7_hey0o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_euxu0"]
+texture = ExtResource("4_t0xic")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(144, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_or1u3"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wynj1"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_or1u3")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqknj"]
+resource_local_to_scene = true
+atlas = ExtResource("4_t0xic")
+region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3hmtj"]
 shader = ExtResource("3_yk58a")
-shader_parameter/vhs_resolution = Vector2(256, 224)
-shader_parameter/samples = 3
-shader_parameter/crease_noise = 1.0
-shader_parameter/crease_opacity = 0.5
-shader_parameter/filter_intensity = 0.2
-shader_parameter/tape_crease_smear = 0.1
-shader_parameter/tape_crease_intensity = 0.3
-shader_parameter/tape_crease_jitter = 0.0
-shader_parameter/tape_crease_speed = 0.4
-shader_parameter/tape_crease_discoloration = 0.3
-shader_parameter/bottom_border_thickness = 0.1
-shader_parameter/bottom_border_jitter = 0.0
-shader_parameter/noise_intensity = 0.1
+shader_parameter/crt_ghost = 0.337
 
 [node name="InGameMenu" type="CanvasLayer"]
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("settings_menu")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -31,6 +45,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vngsg")
+settings_menu = NodePath("../SettingsMenu")
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 0
@@ -48,10 +63,87 @@ offset_top = 7.0
 offset_right = 44.0
 offset_bottom = 23.0
 
-[node name="TextureRect" type="ColorRect" parent="."]
+[node name="SettingsMenu" type="CenterContainer" parent="." node_paths=PackedStringArray("settings_container")]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_wdk8l")
+settings_container = NodePath("PanelContainer/VBoxContainer/SettingsContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="SettingsMenu"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_euxu0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsMenu/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_4oxyn")
+theme_override_font_sizes/font_size = 12
+text = "SETTINGS"
+horizontal_alignment = 1
+
+[node name="SettingsContainer" type="VBoxContainer" parent="SettingsMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VolumeSetting" type="HBoxContainer" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
+layout_mode = 2
+script = ExtResource("7_hey0o")
+slider = NodePath("HSlider")
+
+[node name="Indicator" type="TextureRect" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_wynj1")
+
+[node name="SettingName" type="Label" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+layout_mode = 2
+text = "Volume"
+
+[node name="VSeparator" type="VSeparator" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+step = 10.0
+
+[node name="GhostSetting" type="HBoxContainer" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider", "crt_ghost_texture")]
+layout_mode = 2
+script = ExtResource("6_gikv3")
+slider = NodePath("HSlider")
+crt_ghost_texture = NodePath("../../../../../CrtGhostEffect")
+
+[node name="Indicator" type="TextureRect" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_uqknj")
+
+[node name="SettingName" type="Label" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting"]
+layout_mode = 2
+text = "Crt Ghosting"
+
+[node name="VSeparator" type="VSeparator" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1.0
+step = 0.1
+
+[node name="CrtGhostEffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_3hmtj")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[connection signal="value_changed" from="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting/HSlider" to="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting" method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting/HSlider" to="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting" method="_on_h_slider_value_changed"]

@@ -1,7 +1,7 @@
 class_name NPCIdle
 extends NPCState
 
-
+@export var idle_to : String = "NPCPatrol"
 var timer : Timer
 static var IDLE_TIME = 2.
 
@@ -19,4 +19,4 @@ func Exit() -> void:
 	
 
 func _on_timer_timeout():
-	transitioned.emit(self, "NPCWander")
+	transitioned.emit(self, idle_to)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://bcvk2nfue47o2"]
+[gd_scene load_steps=38 format=3 uid="uid://bcvk2nfue47o2"]
 
 [ext_resource type="Texture2D" uid="uid://b5k7j4ignx3kf" path="res://textures/characters/RedCharacter.png" id="1_ma7oy"]
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_qucbd"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_ktl0k"]
 [ext_resource type="Script" path="res://scripts/state_machine/NPCIdle.gd" id="4_8eufg"]
 [ext_resource type="Script" path="res://scripts/state_machine/NPCWander.gd" id="5_rcpxd"]
+[ext_resource type="Script" path="res://scripts/state_machine/NPCPatrol.gd" id="6_kb2o8"]
 [ext_resource type="PackedScene" uid="uid://itbjvhraldeu" path="res://scenes/map_objects/dialogue_generator.tscn" id="6_t5wgk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyifl"]
@@ -519,7 +520,7 @@ shape = SubResource("RectangleShape2D_ksgov")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_ktl0k")
-initial_state = NodePath("NPCIdle")
+initial_state = NodePath("NPCPatrol")
 
 [node name="NPCIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("4_8eufg")
@@ -529,8 +530,10 @@ npc = NodePath("../..")
 script = ExtResource("5_rcpxd")
 npc = NodePath("../..")
 
+[node name="NPCPatrol" type="Node" parent="StateMachine"]
+script = ExtResource("6_kb2o8")
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="DialogueGenerator" parent="." instance=ExtResource("6_t5wgk")]
 position = Vector2(0, -38)

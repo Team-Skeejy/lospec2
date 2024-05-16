@@ -11,6 +11,7 @@ var tween : Tween
 
 @onready var menu : TextureRect = $TextureRect
 @onready var interaction_name : Label = $TextureRect/Label
+@export var settings_menu : CenterContainer
 
 func _ready():
 	pass
@@ -28,6 +29,9 @@ func _process(_delta: float):
 		else:
 			open()
 			
+	if Input.is_action_just_pressed("Select") and is_opened:
+		settings_menu.visible = not settings_menu.visible
+			
 func open():
 	if tween and tween.is_running():
 		return
@@ -43,6 +47,7 @@ func close():
 	if tween and tween.is_running():
 		return
 	
+	settings_menu.hide()
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(menu, "position", closed_menu_position, open_close_speed)

@@ -26,7 +26,6 @@ func _on_dialogue_timer_timeout():
 		new_speech_bubble(SpeechBubble.Type.SMALL_TALK)
 
 func new_speech_bubble(type: SpeechBubble.Type):
-	var speech_bubble_y : int = 0
 	for child in get_children().filter(func(x): return x is SpeechBubble):
 	
 		var tween : Tween = get_tree().create_tween()

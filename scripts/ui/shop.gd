@@ -23,7 +23,6 @@ func _ready():
 	item_container_array[selected_container_idx].select()
 
 
-
 func _process(delta):
 	if Input.is_action_just_pressed("Left"):
 		item_container_array[selected_container_idx].deselect()
@@ -51,7 +50,8 @@ func start_description(sic:ShopItemContainer):
 	description_lebel.visible_ratio = 0
 	description_tween = get_tree().create_tween()
 	description_tween.tween_property(description_lebel, "visible_ratio", 1.0, description_text_duration)
-	
+
+
 func buy():
 	var thing_youre_buying = item_container_array[selected_container_idx].item
 	print_debug("buying " + str(thing_youre_buying))

@@ -1,10 +1,28 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://my27t5dp6cqn"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://my27t5dp6cqn"]
 
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_47deq"]
 [ext_resource type="FontFile" uid="uid://2oybdcbupp7b" path="res://assets/04b03.ttf" id="1_vtm87"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gj06"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_044ob"]
+atlas = ExtResource("1_47deq")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dnw3e"]
+color = Color(1, 1, 1, 1)
+thickness = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xh0u7"]
 
 [resource]
 default_font = ExtResource("1_vtm87")
 default_font_size = 8
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_4gj06")
+HSlider/icons/grabber = SubResource("AtlasTexture_044ob")
+HSlider/icons/grabber_disabled = SubResource("AtlasTexture_044ob")
+HSlider/icons/grabber_highlight = SubResource("AtlasTexture_044ob")
+HSlider/styles/grabber_area = SubResource("StyleBoxLine_dnw3e")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_dnw3e")
+HSlider/styles/slider = SubResource("StyleBoxLine_dnw3e")
+VSeparator/styles/separator = SubResource("StyleBoxEmpty_xh0u7")

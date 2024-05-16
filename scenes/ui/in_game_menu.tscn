@@ -33,6 +33,7 @@ region = Rect2(0, 48, 16, 16)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3hmtj"]
 shader = ExtResource("3_yk58a")
 shader_parameter/crt_ghost = 0.337
+shader_parameter/v_pixels = 223.0
 
 [node name="InGameMenu" type="CanvasLayer"]
 
@@ -117,7 +118,7 @@ step = 10.0
 layout_mode = 2
 script = ExtResource("6_gikv3")
 slider = NodePath("HSlider")
-crt_ghost_texture = NodePath("../../../../../CrtGhostEffect")
+crt_ghost_texture = NodePath("../../../../../CrtEffect")
 
 [node name="Indicator" type="TextureRect" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting"]
 layout_mode = 2
@@ -137,7 +138,7 @@ size_flags_horizontal = 10
 max_value = 1.0
 step = 0.1
 
-[node name="CrtGhostEffect" type="ColorRect" parent="."]
+[node name="CrtEffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_3hmtj")
 anchors_preset = 15
 anchor_right = 1.0

@@ -3,9 +3,9 @@ extends CharacterBody2D
 
 static var TERMINAL_VELOCITY := 900.
 
-static var SPEED := 70. # this probably should not be a static since 
-						# we most likely want npcs to move at a 
-						# different speed from the player 
+static var SPEED := 70.  # this probably should not be a static since
+	# we most likely want npcs to move at a
+	# different speed from the player
 static var ACCELERATION := 900.
 static var AERIAL_ACCELERATION := 400.
 static var FRICTION := 1600.
@@ -176,12 +176,12 @@ func _process(_delta: float):
 	for area in collisions:
 		if area is Interactable:
 			if _prev_interact_target != area:
-				if _prev_interact_target: _prev_interact_target.exited_interact_area()
+				if _prev_interact_target && is_instance_valid(_prev_interact_target): _prev_interact_target.exited_interact_area()
 				area.entered_interact_area()
 			interact_target = area
 			break
 
-	if !interact_target && _prev_interact_target:
+	if !interact_target && _prev_interact_target && is_instance_valid(_prev_interact_target):
 		_prev_interact_target.exited_interact_area()
-		
+
 	handle_animation()

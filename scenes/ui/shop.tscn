@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5hif2fst0d2w"]
+[gd_scene load_steps=11 format=3 uid="uid://b5hif2fst0d2w"]
 
 [ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_g877e"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_ikuha"]
@@ -22,7 +22,11 @@ region_rect = Rect2(144, 0, 32, 32)
 atlas = ExtResource("2_ikuha")
 region = Rect2(0, 32, 16, 16)
 
-[node name="Shop" type="Control" node_paths=PackedStringArray("item_container_container", "description_lebel", "cost_label")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8imc"]
+atlas = ExtResource("2_ikuha")
+region = Rect2(16, 32, 16, 16)
+
+[node name="Shop" type="Control" node_paths=PackedStringArray("item_container_container", "name_label", "description_label", "cost_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +37,8 @@ theme = ExtResource("1_g877e")
 script = ExtResource("2_tphn1")
 item_container_container = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/ItemContainerContainer")
 item_container_scene = ExtResource("5_036du")
-description_lebel = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer/DescriptionLabel")
+name_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/ItemNameLabel")
+description_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer/DescriptionLabel")
 cost_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer/CostLabel")
 
 [node name="HowMuchMoneyYouNowHavePlaceHolderLabel" type="Label" parent="."]
@@ -78,6 +83,7 @@ text = "SHOP"
 
 [node name="ItemContainerContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
+theme_override_constants/separation = 1
 
 [node name="ItemNameLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
@@ -89,7 +95,7 @@ layout_mode = 2
 theme_override_styles/panel = ExtResource("6_jy8ic")
 
 [node name="DescriptionLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer"]
-custom_minimum_size = Vector2(0, 32)
+custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "vert v"
@@ -114,6 +120,17 @@ layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
 text = "Buy"
+
+[node name="BButton" type="TextureRect" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+texture = SubResource("AtlasTexture_c8imc")
+
+[node name="ContinueLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+text = "Quit"
 
 [node name="MenuBarPlaceHolder" type="TextureRect" parent="VBoxContainer"]
 layout_mode = 2

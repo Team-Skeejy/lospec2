@@ -4,6 +4,7 @@ extends Humanoid
 static var COYOTE_TIME := 0.1
 
 var coyote_timer := COYOTE_TIME
+var physics_enabled := true
 
 var input_direction: float:
 	get: return Input.get_axis("Left", "Right")
@@ -60,6 +61,7 @@ func jump_with_horizontal_velocity() -> void:
 	jump_with_no_horizontal_velocity()
 
 func _physics_process(delta: float) -> void:
+	if !physics_enabled: return
 	# Coyote Time Logic
 	if is_on_floor() && coyote_timer < COYOTE_TIME:
 		coyote_timer = COYOTE_TIME

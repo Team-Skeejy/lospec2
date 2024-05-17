@@ -9,7 +9,8 @@ func interact(_interactor: Humanoid):
 	sprite.animation = "open"
 	sprite.play()
 	if next_scene:
-		FadeTransition.instance.transition_to(next_scene)
+		Global.instance.store_player_and_transition_to(next_scene)
+		# FadeTransition.instance.transition_to(next_scene)
 
 func _on_body_entered(body):
 	if ! (body is Player): return

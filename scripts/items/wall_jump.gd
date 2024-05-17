@@ -3,7 +3,7 @@ extends Item
 
 var WALL_GRAB_GRACE_PERIOD := 2.  # how long the player can hold onto a wall for without sliding
 var WALL_GRAB_DEGRADATION_PERIOD := 3.  # how long takes for the grab to taper off
-var WALL_GRAB_DECELLERATION := -Global.GRAVITY  # maximum amount of slow the player experiences holding onto the wall
+var WALL_GRAB_DECELLERATION: float = -Global.GRAVITY  # maximum amount of slow the player experiences holding onto the wall
 
 var wall_grab_timer := WALL_GRAB_GRACE_PERIOD  # timer for how long the player can grab onto the wall for
 var wall_grab_degradation_timer := WALL_GRAB_DEGRADATION_PERIOD  # timer to ease back into using full gravity

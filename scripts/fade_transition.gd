@@ -28,11 +28,13 @@ func _ready() -> void:
 
 var next_scene: StringName
 
-func transition_to(scene: StringName) -> void:
+func transition_to(scene: StringName, callable: Callable = func(): pass ) -> void:
 	next_scene = scene
 	animationPlayer.play("fade_out")
 
-func _change_scene() -> void:
+	await animationPlayer.animation_finished
+	callable.call()
+
 	if next_scene:
 		get_tree().change_scene_to_file(next_scene)
 

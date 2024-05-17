@@ -68,6 +68,7 @@ main_menu = "res://scenes/UI/ui_test.tscn"
 game = "res://scenes/tests/test_level.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 process_mode = 3

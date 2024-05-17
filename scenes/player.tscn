@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dkyyt4v1drqb5" path="res://scenes/items/wall_jump.tscn" id="3_rcyl3"]
 [ext_resource type="Texture2D" uid="uid://dl1xq5j6x8731" path="res://textures/characters/player/Sprite 1.png" id="21_tx0hg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmf5r"]
-size = Vector2(10, 28)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_6ltew"]
+points = PackedVector2Array(0, 15, -6, 0, -6, -8, 0, -12, 6, -8, 6, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0xy1"]
 size = Vector2(13, 27)
@@ -532,8 +532,8 @@ position_smoothing_speed = 2.0
 editor_draw_limits = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -15)
-shape = SubResource("RectangleShape2D_rmf5r")
+position = Vector2(0, -16)
+shape = SubResource("ConvexPolygonShape2D_6ltew")
 
 [node name="InteractionArea2D" type="Area2D" parent="."]
 position = Vector2(0, -16)

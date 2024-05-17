@@ -1,13 +1,28 @@
-[gd_scene load_steps=14 format=3 uid="uid://g7ix8xbxhriq"]
+[gd_scene load_steps=20 format=3 uid="uid://g7ix8xbxhriq"]
 
 [ext_resource type="Script" path="res://scripts/ui/in_game_menu.gd" id="1_vngsg"]
-[ext_resource type="Texture2D" uid="uid://dvleuqmgq62vt" path="res://textures/ui/in_game_menu.png" id="2_03svk"]
+[ext_resource type="Texture2D" uid="uid://dvwmrm386lhtk" path="res://textures/aseprite/in_game_menu.png" id="2_loyln"]
+[ext_resource type="Script" path="res://scripts/ui/TimeRemaining.gd" id="3_ewpyp"]
 [ext_resource type="Script" path="res://scripts/ui/SettingsMenu.gd" id="3_wdk8l"]
 [ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="3_yk58a"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="4_t0xic"]
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="5_4oxyn"]
 [ext_resource type="Script" path="res://scripts/ui/ghost_setting.gd" id="6_gikv3"]
 [ext_resource type="Script" path="res://scripts/ui/volume_setting.gd" id="7_hey0o"]
+[ext_resource type="Texture2D" uid="uid://b4i7msur382jl" path="res://textures/palette-bright.png" id="10_qg5df"]
+[ext_resource type="Texture2D" uid="uid://bflniuulbyoiv" path="res://textures/palette-dark.png" id="11_nqh5f"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qqmsx"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xqi4"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_qqmsx")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3dl5"]
+atlas = ExtResource("4_t0xic")
+region = Rect2(16, 80, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_euxu0"]
 texture = ExtResource("4_t0xic")
@@ -32,12 +47,16 @@ region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3hmtj"]
 shader = ExtResource("3_yk58a")
-shader_parameter/crt_ghost = 0.337
-shader_parameter/v_pixels = 223.0
+shader_parameter/crt_ghost = 0.0
+shader_parameter/darken = false
+shader_parameter/num_colors = 16
+shader_parameter/precision = 0.135
+shader_parameter/palette_in = ExtResource("10_qg5df")
+shader_parameter/palette_out = ExtResource("11_nqh5f")
 
 [node name="InGameMenu" type="CanvasLayer"]
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("menu", "interaction_name", "settings_menu")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("menu", "interaction_name", "settings_menu", "crt_effects")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -49,13 +68,14 @@ script = ExtResource("1_vngsg")
 menu = NodePath("PauseMenu")
 interaction_name = NodePath("PauseMenu/Label")
 settings_menu = NodePath("../SettingsMenu")
+crt_effects = NodePath("../CrtEffect")
 
 [node name="PauseMenu" type="TextureRect" parent="Control"]
 layout_mode = 0
 offset_top = 192.0
 offset_right = 256.0
 offset_bottom = 416.0
-texture = ExtResource("2_03svk")
+texture = ExtResource("2_loyln")
 expand_mode = 1
 stretch_mode = 1
 
@@ -65,6 +85,32 @@ offset_left = 4.0
 offset_top = 7.0
 offset_right = 44.0
 offset_bottom = 23.0
+
+[node name="TimeRemaining" type="HBoxContainer" parent="Control/PauseMenu" node_paths=PackedStringArray("hour_texture", "minute_texture", "ten_min_timer")]
+process_mode = 1
+layout_mode = 0
+offset_left = 216.0
+offset_top = 16.0
+offset_right = 248.0
+offset_bottom = 32.0
+theme_override_constants/separation = 0
+script = ExtResource("3_ewpyp")
+hour_texture = NodePath("HourTexture")
+minute_texture = NodePath("MinuteTexture")
+ten_min_timer = NodePath("TenMinuteTimer")
+
+[node name="HourTexture" type="TextureRect" parent="Control/PauseMenu/TimeRemaining"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_7xqi4")
+stretch_mode = 2
+
+[node name="MinuteTexture" type="TextureRect" parent="Control/PauseMenu/TimeRemaining"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_y3dl5")
+stretch_mode = 2
+
+[node name="TenMinuteTimer" type="Timer" parent="Control/PauseMenu/TimeRemaining"]
+autostart = true
 
 [node name="SettingsMenu" type="CenterContainer" parent="." node_paths=PackedStringArray("settings_container")]
 process_mode = 2
@@ -148,5 +194,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[connection signal="timeout" from="Control/PauseMenu/TimeRemaining/TenMinuteTimer" to="Control/PauseMenu/TimeRemaining" method="_on_ten_minute_timer_timeout"]
 [connection signal="value_changed" from="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting/HSlider" to="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting/HSlider" to="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/GhostSetting" method="_on_h_slider_value_changed"]

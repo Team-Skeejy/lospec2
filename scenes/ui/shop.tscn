@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5hif2fst0d2w"]
+[gd_scene load_steps=10 format=3 uid="uid://b5hif2fst0d2w"]
 
 [ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_g877e"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_ikuha"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dis1ex838jf3d" path="res://scenes/ui/shop_item_container.tscn" id="5_036du"]
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="5_nn6at"]
 [ext_resource type="StyleBox" uid="uid://bggnvvsx5wev8" path="res://assets/style_boxes/speech_bubble.tres" id="6_jy8ic"]
+[ext_resource type="Texture2D" uid="uid://cmwjlxahd2yff" path="res://textures/ui/spacer.png" id="7_28ly3"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mtbk5"]
 texture = ExtResource("2_ikuha")
@@ -30,69 +31,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_g877e")
 script = ExtResource("2_tphn1")
-item_container_container = NodePath("CenterContainer/ShopPanel/VBC/ItemContainerContainer")
+item_container_container = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/ItemContainerContainer")
 item_container_scene = ExtResource("5_036du")
-description_lebel = NodePath("CenterContainer/ShopPanel/VBC/DescriptionContainer/DescriptionLabel")
-cost_label = NodePath("CenterContainer/ShopPanel/VBC/BottomContainer/CostLabel")
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ShopPanel" type="PanelContainer" parent="CenterContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_mtbk5")
-
-[node name="VBC" type="VBoxContainer" parent="CenterContainer/ShopPanel"]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/ShopPanel/VBC"]
-layout_mode = 2
-
-[node name="SHOPLabel" type="Label" parent="CenterContainer/ShopPanel/VBC"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_fonts/font = ExtResource("5_nn6at")
-theme_override_font_sizes/font_size = 24
-text = "SHOP"
-
-[node name="ItemContainerContainer" type="HBoxContainer" parent="CenterContainer/ShopPanel/VBC"]
-layout_mode = 2
-
-[node name="DescriptionContainer" type="PanelContainer" parent="CenterContainer/ShopPanel/VBC"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("6_jy8ic")
-
-[node name="DescriptionLabel" type="Label" parent="CenterContainer/ShopPanel/VBC/DescriptionContainer"]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "vert v"
-autowrap_mode = 2
-
-[node name="BottomContainer" type="HBoxContainer" parent="CenterContainer/ShopPanel/VBC"]
-layout_mode = 2
-
-[node name="CostLabel" type="Label" parent="CenterContainer/ShopPanel/VBC/BottomContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 16
-text = "COST:"
-
-[node name="AButton" type="TextureRect" parent="CenterContainer/ShopPanel/VBC/BottomContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-texture = SubResource("AtlasTexture_d4k6d")
-
-[node name="BuyLabel" type="Label" parent="CenterContainer/ShopPanel/VBC/BottomContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_font_sizes/font_size = 16
-text = "Buy"
+description_lebel = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer/DescriptionLabel")
+cost_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer/CostLabel")
 
 [node name="HowMuchMoneyYouNowHavePlaceHolderLabel" type="Label" parent="."]
 layout_mode = 1
@@ -103,3 +45,77 @@ offset_top = -8.0
 offset_right = 119.0
 grow_vertical = 0
 text = "YOU CURRENTLY HAVE: 42069$"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="ShopPanel" type="PanelContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mtbk5")
+
+[node name="VBC" type="VBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SHOPLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("5_nn6at")
+theme_override_font_sizes/font_size = 24
+text = "SHOP"
+
+[node name="ItemContainerContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+layout_mode = 2
+
+[node name="ItemNameLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+layout_mode = 2
+text = "Item name"
+horizontal_alignment = 1
+
+[node name="DescriptionContainer" type="PanelContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("6_jy8ic")
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "vert v"
+autowrap_mode = 2
+
+[node name="BottomContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+layout_mode = 2
+
+[node name="CostLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+text = "COST:"
+
+[node name="AButton" type="TextureRect" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = SubResource("AtlasTexture_d4k6d")
+
+[node name="BuyLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+text = "Buy"
+
+[node name="MenuBarPlaceHolder" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("7_28ly3")

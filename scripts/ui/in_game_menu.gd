@@ -9,8 +9,8 @@ const closed_menu_position := Vector2(0, 192)
 
 var tween : Tween
 
-@onready var menu : TextureRect = $TextureRect
-@onready var interaction_name : Label = $TextureRect/Label
+@export var menu : TextureRect
+@export var interaction_name : Label
 @export var settings_menu : CenterContainer
 
 func _ready():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://g7ix8xbxhriq"]
+[gd_scene load_steps=15 format=3 uid="uid://g7ix8xbxhriq"]
 
 [ext_resource type="Script" path="res://scripts/ui/in_game_menu.gd" id="1_vngsg"]
 [ext_resource type="Texture2D" uid="uid://dvleuqmgq62vt" path="res://textures/ui/in_game_menu.png" id="2_03svk"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="5_4oxyn"]
 [ext_resource type="Script" path="res://scripts/ui/ghost_setting.gd" id="6_gikv3"]
 [ext_resource type="Script" path="res://scripts/ui/volume_setting.gd" id="7_hey0o"]
+[ext_resource type="PackedScene" uid="uid://b5hif2fst0d2w" path="res://scenes/ui/shop.tscn" id="8_xx278"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_euxu0"]
 texture = ExtResource("4_t0xic")
@@ -37,7 +38,7 @@ shader_parameter/v_pixels = 223.0
 
 [node name="InGameMenu" type="CanvasLayer"]
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("settings_menu")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("menu", "interaction_name", "settings_menu")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -46,9 +47,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vngsg")
+menu = NodePath("PauseMenu")
+interaction_name = NodePath("PauseMenu/Label")
 settings_menu = NodePath("../SettingsMenu")
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="PauseMenu" type="TextureRect" parent="Control"]
 layout_mode = 0
 offset_top = 192.0
 offset_right = 256.0
@@ -57,7 +60,7 @@ texture = ExtResource("2_03svk")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Label" type="Label" parent="Control/TextureRect"]
+[node name="Label" type="Label" parent="Control/PauseMenu"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 7.0
@@ -137,6 +140,9 @@ layout_mode = 2
 size_flags_horizontal = 10
 max_value = 1.0
 step = 0.1
+
+[node name="Shop" parent="." instance=ExtResource("8_xx278")]
+visible = false
 
 [node name="CrtEffect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_3hmtj")

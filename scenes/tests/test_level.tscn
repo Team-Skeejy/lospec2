@@ -68,6 +68,9 @@ position = Vector2(206, -18)
 [node name="NPC" parent="NPCs" instance=ExtResource("7_4jeeo")]
 position = Vector2(-370, -20)
 
+[node name="StateMachine" parent="NPCs/NPC" index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("NPCIdle")
+
 [node name="NPCPatrol" parent="NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2", "npc")]
 position1 = NodePath("../../../Node2D")
 position2 = NodePath("../../../Node2D2")

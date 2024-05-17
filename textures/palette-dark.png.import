@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvleuqmgq62vt"
-path="res://.godot/imported/in_game_menu.png-4069d4e47f95752f616c3a4eb5bb7b9a.ctex"
+uid="uid://bflniuulbyoiv"
+path="res://.godot/imported/palette-dark.png-6807fc705679ad012fa1c16253d22e9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/ui/in_game_menu.png"
-dest_files=["res://.godot/imported/in_game_menu.png-4069d4e47f95752f616c3a4eb5bb7b9a.ctex"]
+source_file="res://textures/palette-dark.png"
+dest_files=["res://.godot/imported/palette-dark.png-6807fc705679ad012fa1c16253d22e9e.ctex"]
 
 [params]
 

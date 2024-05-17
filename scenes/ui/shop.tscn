@@ -78,6 +78,7 @@ text = "SHOP"
 
 [node name="ItemContainerContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="ItemNameLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2

@@ -12,6 +12,7 @@ var tween : Tween
 @export var menu : TextureRect
 @export var interaction_name : Label
 @export var settings_menu : CenterContainer
+@export var crt_effects : ColorRect
 
 func _ready():
 	pass
@@ -31,6 +32,8 @@ func _process(_delta: float):
 			
 	if Input.is_action_just_pressed("Select") and is_opened:
 		settings_menu.visible = not settings_menu.visible
+		var curr_darken = crt_effects.material.get_shader_parameter("darken")
+		crt_effects.material.set_shader_parameter("darken", not curr_darken)
 			
 func open():
 	if tween and tween.is_running():

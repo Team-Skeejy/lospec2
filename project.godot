@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Glob="*res://scenes/global/global.tscn"
 Fade="*res://scenes/fade_transition.tscn"
+InfoManager="*res://scenes/global/information_manager.tscn"
 
 [display]
 

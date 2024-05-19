@@ -5,7 +5,7 @@ static var ARRIVAL_THRESHOLD := 8.
 
 signal on_arrival
 
-@export var company: String  # TODO set up companies in Global (not strings)
+@onready var company: String  = Global.instance.all_companies.pick_random() # TODO set up companies somewhere else
 @export var navigation_agent : NavigationAgent2D
 
 var INTERACT_THRESHOLD_DISTANCE := 40.

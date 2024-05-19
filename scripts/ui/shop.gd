@@ -67,7 +67,7 @@ func buy():
 		# TODO incredibly loud buzzer sound
 		return
 	
-	var item : Item = selected_container.buy()
+	var item : Item = selected_container.bugy()
 	Global.player.add_item(item)
 	Global.instance.update_money(-item_cost)
 	print_debug("buying " + str(selected_container.item_resource.name))

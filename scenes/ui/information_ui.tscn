@@ -1,22 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf0wabkpsckws"]
+[gd_scene load_steps=3 format=3 uid="uid://bf0wabkpsckws"]
 
-[ext_resource type="Texture2D" uid="uid://dvwmrm386lhtk" path="res://textures/aseprite/in_game_menu.png" id="1_yip3e"]
-[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_e7qqg"]
+[ext_resource type="Script" path="res://scripts/ui/information_ui.gd" id="1_0dqsq"]
+[ext_resource type="PackedScene" uid="uid://bocrl0rkn4tu6" path="res://scenes/ui/information_ui_row.tscn" id="1_n8v1a"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fshga"]
-atlas = ExtResource("2_e7qqg")
-region = Rect2(48, 32, 16, 16)
-
-[node name="InformationUI" type="Control"]
+[node name="InformationUI" type="Control" node_paths=PackedStringArray("row_container")]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -128.0
-offset_bottom = -180.0
+offset_bottom = -193.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_0dqsq")
+row_container = NodePath("RowContainer")
+row_scene = ExtResource("1_n8v1a")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -26,55 +25,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-top_level = true
-layout_mode = 0
-offset_left = -64.0
-offset_top = -1.0
-offset_right = 192.0
-offset_bottom = 223.0
-texture = ExtResource("1_yip3e")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="RowContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 12.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Red Corp"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 9
-texture = SubResource("AtlasTexture_fshga")
-
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 9
-texture = SubResource("AtlasTexture_fshga")
-
-[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 9
-texture = SubResource("AtlasTexture_fshga")
-
-[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 9
-texture = SubResource("AtlasTexture_fshga")
-
-[node name="TextureRect5" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 9
-texture = SubResource("AtlasTexture_fshga")
+theme_override_constants/separation = 2

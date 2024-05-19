@@ -24,6 +24,16 @@ var sell_dialogue: PackedStringArray
 var buy_dialogue: PackedStringArray
 var small_talk_dialogue: PackedStringArray
 
+static var all_companies : Array[String] = [
+	"Crimson Co",
+	"Greenland Oil",
+	"Blue Inc.",
+	"Yellower",
+	"Cylantro",
+	"B.I.M.",
+	"Vatican llc"
+] 
+
 func _ready():
 	# I do this in global because I don't want to open files everytime a new dialogue generator is created
 	setup_dialogue()

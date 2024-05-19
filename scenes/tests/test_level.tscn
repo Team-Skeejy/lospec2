@@ -72,16 +72,25 @@ position = Vector2(-370, -20)
 [node name="StateMachine" parent="NPCs/NPC" index="5" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("NPCIdle")
 
-[node name="NPCPatrol" parent="NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2", "npc")]
+[node name="NPCPatrol" parent="NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
 position1 = NodePath("../../../Node2D")
 position2 = NodePath("../../../Node2D2")
-npc = NodePath("../..")
+
+[node name="NPC2" parent="NPCs" instance=ExtResource("7_4jeeo")]
+position = Vector2(39, -97)
+
+[node name="NPCPatrol" parent="NPCs/NPC2/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
+position1 = NodePath("../../../../Objects/Sittable")
+position2 = NodePath("../../../Node2D3")
 
 [node name="Node2D" type="Node2D" parent="NPCs"]
 position = Vector2(-335, -17)
 
 [node name="Node2D2" type="Node2D" parent="NPCs"]
 position = Vector2(-243, -82)
+
+[node name="Node2D3" type="Node2D" parent="NPCs"]
+position = Vector2(22, -99)
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("7_v50b3")]
 position = Vector2(-386, -82)
@@ -112,3 +121,4 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(-358, -82)
 
 [editable path="NPCs/NPC"]
+[editable path="NPCs/NPC2"]

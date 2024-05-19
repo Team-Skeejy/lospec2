@@ -1,15 +1,16 @@
 class_name SpeechBubble
 extends PanelContainer
 
-@onready var label : Label = $Label
-@onready var despawn_timer : Timer = $DespawnTimer
-@onready var visible_notifier1 : VisibleOnScreenNotifier2D = $VisibleNotifier1
-@onready var visible_notifier2 : VisibleOnScreenNotifier2D = $VisibleNotifier2
-
+@export var label : Label 
+@export var despawn_timer : Timer 
+@export var visible_notifier1 : VisibleOnScreenNotifier2D 
+@export var visible_notifier2 : VisibleOnScreenNotifier2D 
+@export var style_box : StyleBoxTexture
 var text_speed : int = 20 # in chars/second
 var despawn_time : float = 1. # how much time after showing all text will it despawn
 var _visible_characters : float = 0.0
 var _started : bool = true
+
 enum State {
 	GROWING, # when the label is becoming bigger
 	READABLE,# when info can be gained 
@@ -69,6 +70,11 @@ func _process(delta: float):
 		visible_notifier2.is_on_screen(): 
 		seen.emit(curr_type)
 		curr_state = State.READ
+		if curr_type == Type.SELL:
+			style_box.region_rect.position = Vector2(112, 32)
+		elif curr_type == Type.BUY:
+			style_box.region_rect.position = Vector2(112, 64)
+			
 		
 	#wait for the despawn timer
 	if curr_state == State.READ:

@@ -530,10 +530,12 @@ npc = NodePath("../..")
 script = ExtResource("5_rcpxd")
 npc = NodePath("../..")
 
-[node name="NPCPatrol" type="Node" parent="StateMachine"]
+[node name="NPCPatrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("6_kb2o8")
+npc = NodePath("../..")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="DialogueGenerator" parent="." instance=ExtResource("6_t5wgk")]
+[node name="DialogueGenerator" parent="." node_paths=PackedStringArray("npc") instance=ExtResource("6_t5wgk")]
 position = Vector2(0, -38)
+npc = NodePath("..")

@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 var open_close_speed := 0.5
 
@@ -11,6 +11,7 @@ var tween: Tween
 
 @export var menu : TextureRect
 @export var interaction_name : Label
+@export var money_label : Label 
 @export var settings_menu : CenterContainer
 @export var crt_effects : ColorRect
 
@@ -23,7 +24,9 @@ func _process(_delta: float):
 		interaction_name.text = Global.player.interact_target.interaction_name
 	elif interaction_name:
 		interaction_name.text = "Jump"
-
+	
+	money_label.text = str(Global.instance.player_money) + "$"
+	
 	if Input.is_action_just_pressed("Start"):
 		if is_opened:
 			close()

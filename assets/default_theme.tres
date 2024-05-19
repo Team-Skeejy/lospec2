@@ -18,6 +18,7 @@ thickness = 4
 [resource]
 default_font = ExtResource("1_vtm87")
 default_font_size = 8
+HBoxContainer/constants/separation = 0
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_4gj06")
 HSlider/icons/grabber = SubResource("AtlasTexture_044ob")
 HSlider/icons/grabber_disabled = SubResource("AtlasTexture_044ob")
@@ -25,4 +26,5 @@ HSlider/icons/grabber_highlight = SubResource("AtlasTexture_044ob")
 HSlider/styles/grabber_area = SubResource("StyleBoxLine_dnw3e")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxLine_dnw3e")
 HSlider/styles/slider = SubResource("StyleBoxLine_dnw3e")
+VBoxContainer/constants/separation = 3
 VSeparator/styles/separator = SubResource("StyleBoxEmpty_xh0u7")

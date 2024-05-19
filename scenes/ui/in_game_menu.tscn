@@ -54,21 +54,22 @@ shader_parameter/precision = 0.135
 shader_parameter/palette_in = ExtResource("10_qg5df")
 shader_parameter/palette_out = ExtResource("11_nqh5f")
 
-[node name="InGameMenu" type="CanvasLayer"]
-
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("menu", "interaction_name", "settings_menu", "crt_effects")]
+[node name="InGameMenu" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects")]
 process_mode = 3
+script = ExtResource("1_vngsg")
+menu = NodePath("Control/PauseMenu")
+interaction_name = NodePath("Control/PauseMenu/InteractionLabel")
+money_label = NodePath("Control/PauseMenu/MoneyLabel")
+settings_menu = NodePath("SettingsMenu")
+crt_effects = NodePath("CrtEffect")
+
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vngsg")
-menu = NodePath("PauseMenu")
-interaction_name = NodePath("PauseMenu/Label")
-settings_menu = NodePath("../SettingsMenu")
-crt_effects = NodePath("../CrtEffect")
 
 [node name="PauseMenu" type="TextureRect" parent="Control"]
 layout_mode = 0
@@ -79,12 +80,27 @@ texture = ExtResource("2_loyln")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Label" type="Label" parent="Control/PauseMenu"]
+[node name="InteractionLabel" type="Label" parent="Control/PauseMenu"]
 layout_mode = 0
-offset_left = 4.0
-offset_top = 7.0
+offset_left = 2.0
+offset_top = 1.0
 offset_right = 44.0
-offset_bottom = 23.0
+offset_bottom = 17.0
+theme_override_colors/font_color = Color(1, 0.0117647, 0.168627, 1)
+theme_override_colors/font_shadow_color = Color(0.501961, 0, 0.203922, 1)
+theme_override_font_sizes/font_size = 16
+text = "Jump"
+
+[node name="MoneyLabel" type="Label" parent="Control/PauseMenu"]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 17.0
+offset_right = 50.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(0.0392157, 1, 0.0392157, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.439216, 0.384314, 1)
+theme_override_font_sizes/font_size = 16
+text = "50$"
 
 [node name="TimeRemaining" type="HBoxContainer" parent="Control/PauseMenu" node_paths=PackedStringArray("hour_texture", "minute_texture", "ten_min_timer")]
 process_mode = 1
@@ -111,6 +127,17 @@ stretch_mode = 2
 
 [node name="TenMinuteTimer" type="Timer" parent="Control/PauseMenu/TimeRemaining"]
 autostart = true
+
+[node name="MarketClosesIn" type="Label" parent="Control/PauseMenu"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 1.0
+offset_right = 255.0
+offset_bottom = 17.0
+theme_override_constants/line_spacing = 0
+text = "Market
+Closes in:"
+horizontal_alignment = 1
 
 [node name="SettingsMenu" type="CenterContainer" parent="." node_paths=PackedStringArray("settings_container")]
 process_mode = 2

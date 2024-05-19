@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://chgarhx70a6gr"]
 
 [ext_resource type="Script" path="res://scenes/tests/resource_test.gd" id="1_i2n7b"]
-[ext_resource type="Script" path="res://scenes/tests/item_resource.gd" id="2_7rp3r"]
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="2_7rp3r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ki0n3"]
 
@@ -10,6 +10,8 @@ script = ExtResource("2_7rp3r")
 texture = SubResource("AtlasTexture_ki0n3")
 name = ""
 description = ""
+item_scene = "res://scenes/items/sample_item.tscn"
+cost = 0
 
 [node name="ResourceTest" type="Node2D"]
 position = Vector2(0, -2)

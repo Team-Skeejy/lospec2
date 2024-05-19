@@ -18,6 +18,7 @@ static var instance: Global
 @export_file("*.tscn") var test_shop_scene: String
 
 static var player: Player
+var player_money : int = 50
 
 var sell_dialogue: PackedStringArray
 var buy_dialogue: PackedStringArray
@@ -100,3 +101,5 @@ func go_to_next_phase():
 			current_phase = GamePhase.test_platformer
 	go_to_phase(current_phase)
 
+func update_money(change: int):
+	player_money += change

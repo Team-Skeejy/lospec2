@@ -534,7 +534,6 @@ npc = NodePath("../..")
 script = ExtResource("6_kb2o8")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="DialogueGenerator" parent="." instance=ExtResource("6_t5wgk")]
 position = Vector2(0, -38)

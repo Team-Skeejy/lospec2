@@ -20,13 +20,15 @@ func _ready():
 	dialogue_timer.start()
 
 func _on_dialogue_timer_timeout():
-	if check_requirements() and npc.company not in InformationManager.instance.completed_companies:  # if requirements are met generate green or red bubbles
+	if npc.company in InformationManager.instance.completed_companies:
+		new_speech_bubble(SpeechBubble.Type.SMALL_TALK, true)
+	elif check_requirements(): # if requirements are met generate green or red bubbles
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
 		new_speech_bubble(_t)
 	else:  # if not, generate small talk
 		new_speech_bubble(SpeechBubble.Type.SMALL_TALK)
 
-func new_speech_bubble(type: SpeechBubble.Type):
+func new_speech_bubble(type: SpeechBubble.Type, completed: bool = false):
 	for child in get_children().filter(func(x): return x is SpeechBubble):
 
 		var tween: Tween = get_tree().create_tween()
@@ -37,6 +39,8 @@ func new_speech_bubble(type: SpeechBubble.Type):
 						)
 
 	var speech_bubble: SpeechBubble = speech_bubble_scene.instantiate()
+	if completed: 
+		speech_bubble.set_completed()
 	add_child(speech_bubble)
 
 	var text: String = ""

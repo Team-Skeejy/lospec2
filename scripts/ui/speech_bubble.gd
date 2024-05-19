@@ -87,6 +87,9 @@ func _process(delta: float):
 			queue_free()
 		label.visible_characters = int(_visible_characters)
 
+func set_completed():
+	style_box.region_rect.position = Vector2(112, 96)
+
 func _on_despawn_timer_timeout():
 	curr_state = State.DESPAWNING
 

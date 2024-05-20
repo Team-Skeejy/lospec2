@@ -1,7 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bocrl0rkn4tu6"]
+[gd_scene load_steps=9 format=3 uid="uid://bocrl0rkn4tu6"]
 
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_3qpgc"]
 [ext_resource type="Script" path="res://scripts/ui/information_ui_row.gd" id="1_7ru6o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1eoi7"]
+resource_local_to_scene = true
+atlas = ExtResource("1_3qpgc")
+region = Rect2(35, 99, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fshga"]
 resource_local_to_scene = true
@@ -28,41 +33,56 @@ resource_local_to_scene = true
 atlas = ExtResource("1_3qpgc")
 region = Rect2(48, 34, 16, 12)
 
-[node name="InfoUiRow" type="HBoxContainer" node_paths=PackedStringArray("info_textures", "company_label")]
+[node name="InfoUiRow" type="HBoxContainer" node_paths=PackedStringArray("info_textures", "company_label", "tickbox")]
 offset_right = 256.0
 offset_bottom = 12.0
 script = ExtResource("1_7ru6o")
 info_textures = [NodePath("TextureRect"), NodePath("TextureRect2"), NodePath("TextureRect3"), NodePath("TextureRect4"), NodePath("TextureRect5")]
 company_label = NodePath("CompanyNameLabel")
+tickbox = NodePath("TextureRect6")
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("AtlasTexture_1eoi7")
+stretch_mode = 3
 
 [node name="CompanyNameLabel" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Vatican llc."
+text = "........................"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 size_flags_horizontal = 9
 texture = SubResource("AtlasTexture_fshga")
+stretch_mode = 3
 
 [node name="TextureRect2" type="TextureRect" parent="."]
 layout_mode = 2
 texture = SubResource("AtlasTexture_dnmb5")
+stretch_mode = 3
 
 [node name="TextureRect3" type="TextureRect" parent="."]
 layout_mode = 2
 texture = SubResource("AtlasTexture_pr3m4")
+stretch_mode = 3
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 layout_mode = 2
 texture = SubResource("AtlasTexture_6dwbs")
+stretch_mode = 3
 
 [node name="TextureRect5" type="TextureRect" parent="."]
 layout_mode = 2
 texture = SubResource("AtlasTexture_6rphd")
+stretch_mode = 3
 
 [node name="VSeparator" type="VSeparator" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 2

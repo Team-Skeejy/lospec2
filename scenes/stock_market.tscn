@@ -1,0 +1,291 @@
+[gd_scene load_steps=20 format=3 uid="uid://mrr1rr2w3306"]
+
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_qm1a0"]
+[ext_resource type="Script" path="res://scripts/ui/stock_market.gd" id="1_rrppw"]
+[ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="2_ltg76"]
+
+[sub_resource type="Curve" id="Curve_2b7ix"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(1e-05, 1), 0.0, 0.0, 1, 1, Vector2(1, 1), 0.0, 0.0, 1, 0]
+point_count = 3
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ap0ar"]
+texture = ExtResource("1_qm1a0")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(144, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4csu"]
+atlas = ExtResource("1_qm1a0")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y6vmq"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6110"]
+atlas = SubResource("CompressedTexture2D_y6vmq")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fedk8"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmpjn"]
+atlas = SubResource("CompressedTexture2D_fedk8")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xatss"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uydme"]
+atlas = SubResource("CompressedTexture2D_xatss")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_laa2d"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w88fo"]
+atlas = SubResource("CompressedTexture2D_laa2d")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_adk2s"]
+texture = ExtResource("1_qm1a0")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+region_rect = Rect2(48, 64, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_txrps"]
+texture = ExtResource("1_qm1a0")
+axis_stretch_horizontal = 1
+region_rect = Rect2(32, 64, 16, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gxbbp"]
+content_margin_bottom = 3.0
+texture = ExtResource("1_qm1a0")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(80, 32, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hx7j7"]
+content_margin_bottom = 3.0
+texture = ExtResource("1_qm1a0")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(80, 32, 32, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ri582"]
+texture = ExtResource("1_qm1a0")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+expand_margin_left = 9.0
+expand_margin_bottom = 9.0
+region_rect = Rect2(144, 32, 32, 32)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="StockMarket" type="Control" parent="." node_paths=PackedStringArray("graph_panel", "graph_line", "graph_origin_node", "buy_container", "sell_container", "info_textures", "buy_chance_label", "sell_chance_label", "buy_payout_label", "sell_payout_label", "company_name_label", "money_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rrppw")
+graph_panel = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/Graph")
+graph_line = NodePath("GraphLine")
+graph_origin_node = NodePath("GraphOrigin")
+buy_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/BuyContainer")
+sell_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/SellContainer")
+info_textures = [NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect2"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect3"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect4"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect5")]
+buy_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/Chance")
+sell_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/Chance")
+buy_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/Label")
+sell_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/Label")
+company_name_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/CompanyName")
+money_label = NodePath("VBoxContainer/Label/PanelContainer/MoneyLabel")
+
+[node name="GraphOrigin" type="Node2D" parent="StockMarket"]
+position = Vector2(18, 91)
+
+[node name="GraphLine" type="Line2D" parent="StockMarket"]
+z_index = 1
+width = 2.0
+width_curve = SubResource("Curve_2b7ix")
+default_color = Color(0, 0, 0, 1)
+begin_cap_mode = 1
+end_cap_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StockMarket"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="StockMarket/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ap0ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ltg76")
+theme_override_font_sizes/font_size = 24
+text = "STOCK MARKET"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="VSeparator" type="VSeparator" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="CompanyName" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Crimson Corp."
+
+[node name="TextureRect" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+texture = SubResource("AtlasTexture_t4csu")
+
+[node name="TextureRect2" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_h6110")
+
+[node name="TextureRect3" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_nmpjn")
+
+[node name="TextureRect4" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_uydme")
+
+[node name="TextureRect5" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_w88fo")
+
+[node name="Graph" type="Panel" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(222, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_adk2s")
+
+[node name="line" type="Panel" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/Graph"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_txrps")
+
+[node name="HSeparator" type="HSeparator" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BuySell" type="HBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Buy" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BuyContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_gxbbp")
+
+[node name="BuyLabel" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/BuyContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ltg76")
+theme_override_font_sizes/font_size = 24
+text = "BUY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Chance" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy"]
+layout_mode = 2
+text = "Chance: 20%"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy"]
+layout_mode = 2
+text = "Payout: $40"
+horizontal_alignment = 1
+
+[node name="Sell" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SellContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_hx7j7")
+
+[node name="SellLabel" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/SellContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ltg76")
+theme_override_font_sizes/font_size = 24
+text = "SELL"
+
+[node name="Chance" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell"]
+layout_mode = 2
+text = "Chance: 80%"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell"]
+layout_mode = 2
+text = "Payout: $10"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="StockMarket/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "L/R Select - A Confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/Label"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -21.0
+offset_right = 38.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ri582")
+
+[node name="MoneyLabel" type="Label" parent="StockMarket/VBoxContainer/Label/PanelContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0392157, 1, 0.0392157, 1)
+theme_override_colors/font_shadow_color = Color(0, 0.439216, 0.384314, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 16
+text = "50$"

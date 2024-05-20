@@ -1,27 +1,43 @@
 class_name InformationUI
 extends Control
 
-var rows : Dictionary = {}
 @export var row_container : VBoxContainer
 @export var row_scene : PackedScene
 
+var full_rows : Dictionary = {} # key: company, value: InformationUIRow
+var max_rows := 15
+var empty_rows : Array[InformationUIRow] = []
+
+var expanded: bool = false
+var expansion_tween : Tween
+var tween_duration : float = 0.5
+var retracted_size := Vector2(160, 29)
+var expanded_size := Vector2(160, 189)
+
+
 func _ready():
 	InformationManager.instance.information_added.connect(on_info_added)
+	day_start() # TODO remove and call elsewhere
 
 func day_start():
-	rows = {}
+	full_rows = {}
+	empty_rows = []
 	for c in row_container.get_children():
 		c.queue_free()
+		
+	for _i in max_rows:
+		var row : InformationUIRow = row_scene.instantiate()
+		row_container.add_child(row)
+		empty_rows.append(row)
 
 func on_info_added(company: String, type: InformationManager.Type):
 	var row : InformationUIRow
-	if company not in rows.keys():
-		row = row_scene.instantiate()
+	if company not in full_rows.keys():
+		row = empty_rows.pop_back()
 		row.set_company(company)
-		row_container.add_child(row)
-		rows[company] = row
+		full_rows[company] = row
 	else:
-		row = rows[company]
+		row = full_rows[company]
 	
 	if type == InformationManager.Type.BUY:
 		row.add_buy_info()
@@ -29,3 +45,33 @@ func on_info_added(company: String, type: InformationManager.Type):
 		row.add_sell_info()
 	
 	row_container.move_child(row, 0)
+
+func flip_expanded():
+	if expanded:
+		retract()
+	else:
+		expand()
+
+func expand():
+	print_debug("expand")
+	if expansion_tween and expansion_tween.is_running():
+		expansion_tween.kill()  
+	
+	expanded = true
+	expansion_tween = get_tree().create_tween()
+	expansion_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	expansion_tween.tween_property(self, "size", expanded_size, tween_duration)
+	await expansion_tween.finished
+	print('done')
+	
+	
+func retract():
+	print_debug("not expand")
+	
+	if expansion_tween and expansion_tween.is_running():
+		expansion_tween.kill()
+	
+	expanded = false
+	expansion_tween = get_tree().create_tween()
+	expansion_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	expansion_tween.tween_property(self, "size", retracted_size, tween_duration)

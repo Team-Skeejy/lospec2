@@ -9,5 +9,6 @@ player_scene = ExtResource("2_farim")
 player_storage = NodePath("PlayerStorage")
 test_game_scene = "res://scenes/tests/test_level.tscn"
 test_shop_scene = "res://scenes/tests/shop_test.tscn"
+test_bet_scene = "res://scenes/stock_market.tscn"
 
 [node name="PlayerStorage" type="Node" parent="."]

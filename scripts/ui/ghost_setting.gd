@@ -6,7 +6,7 @@ var ghosting : float = 0.3
 
 @export var crt_ghost_texture : ColorRect
 var crt_ghost_material : ShaderMaterial
-var ghost_scale:float = 0.7
+var ghost_scale:float = 1.0
 
 func _ready():
 	crt_ghost_material = crt_ghost_texture.material

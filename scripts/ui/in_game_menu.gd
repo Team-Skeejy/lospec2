@@ -14,12 +14,13 @@ var tween: Tween
 @export var money_label : Label 
 @export var settings_menu : CenterContainer
 @export var crt_effects : ColorRect
+@export var info_ui : InformationUI
 
 func _ready():
+	info_ui.retract()
 	pass
 
 func _process(_delta: float):
-
 	if Global.player.interact_target && is_instance_valid(Global.player.interact_target):
 		interaction_name.text = Global.player.interact_target.interaction_name
 	elif interaction_name:
@@ -32,13 +33,20 @@ func _process(_delta: float):
 			close()
 		else:
 			open()
-
-	if Input.is_action_just_pressed("Select") and is_opened:
+	
+	# only check for other inputs if it's not opened
+	if not is_opened:
+		return
+	
+	if Input.is_action_just_pressed("Select"):
 		settings_menu.visible = not settings_menu.visible
 
 		var curr_darken = crt_effects.material.get_shader_parameter("darken")
 		crt_effects.material.set_shader_parameter("darken", not curr_darken)
-			
+		
+	elif Input.is_action_just_pressed("A") and not settings_menu.visible:
+		info_ui.flip_expanded()
+		
 func open():
 	if tween and tween.is_running():
 		return
@@ -55,6 +63,7 @@ func close():
 		return
 
 	settings_menu.hide()
+	info_ui.retract()
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(menu, "position", closed_menu_position, open_close_speed)

@@ -16,6 +16,7 @@ static var instance: Global
 @export_file("*.tscn") var home_scene: String
 @export_file("*.tscn") var test_game_scene: String
 @export_file("*.tscn") var test_shop_scene: String
+@export_file("*.tscn") var test_bet_scene : String
 
 static var player: Player
 var player_money : int = 50
@@ -67,7 +68,7 @@ func spawn_player(parent: Node2D, spawn_point: Node2D):
 	player.physics_enabled = true
 
 enum GamePhase {
-	intro, tutorial, platformer, shop, home, test_platformer, test_shop
+	intro, tutorial, platformer, shop, home, test_platformer, test_shop, test_bet
 }
 
 var current_phase: GamePhase = GamePhase.intro
@@ -90,6 +91,8 @@ func go_to_phase(phase: GamePhase):
 			FadeTransition.instance.transition_to(home_scene)
 		GamePhase.test_platformer:
 			store_player_and_transition_to(test_game_scene)
+		GamePhase.test_bet:
+			store_player_and_transition_to(test_bet_scene)
 		GamePhase.test_shop:
 			store_player_and_transition_to(test_shop_scene)
 
@@ -106,6 +109,8 @@ func go_to_next_phase():
 		GamePhase.platformer:
 			current_phase = GamePhase.shop
 		GamePhase.test_platformer:
+			current_phase = GamePhase.test_bet
+		GamePhase.test_bet:
 			current_phase = GamePhase.test_shop
 		GamePhase.test_shop:
 			current_phase = GamePhase.test_platformer

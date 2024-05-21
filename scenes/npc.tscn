@@ -539,3 +539,7 @@ npc = NodePath("../..")
 [node name="DialogueGenerator" parent="." node_paths=PackedStringArray("npc") instance=ExtResource("6_t5wgk")]
 position = Vector2(0, -38)
 npc = NodePath("..")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(2.00001, -9.5)
+scale = Vector2(17.1, 12.15)

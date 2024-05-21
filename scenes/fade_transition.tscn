@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c7khnlrdtspt"]
 
-[ext_resource type="Script" path="res://scripts/fade_transition.gd" id="1_ojkqf"]
+[ext_resource type="Script" path="res://scripts/globals/fade_transition.gd" id="1_ojkqf"]
 [ext_resource type="Shader" path="res://scripts/shaders/dither_transition.gdshader" id="4_i82lm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gx24w"]

@@ -29,6 +29,7 @@ var curr_type : SpeechBubble.Type
 signal seen(t: Type)
 
 func init(text: String, type: Type):
+	print_debug(text)
 	label.text = text
 	var color : Color
 	if type == Type.SMALL_TALK:
@@ -55,7 +56,7 @@ func _process(delta: float):
 		
 	# show more characters
 	elif curr_state == State.GROWING: 
-		_visible_characters += delta * text_speed
+		_visible_characters += delta * text_speed * Modifiers.talk_speed
 		label.visible_characters = int(_visible_characters)
 		
 		# when all chars are shown, make it readable
@@ -82,7 +83,7 @@ func _process(delta: float):
 	
 	# despawn
 	elif curr_state == State.DESPAWNING:
-		_visible_characters -= delta * text_speed * 4.
+		_visible_characters -= delta * text_speed * 4. * Modifiers.talk_speed
 		if _visible_characters <= 0.:
 			queue_free()
 		label.visible_characters = int(_visible_characters)

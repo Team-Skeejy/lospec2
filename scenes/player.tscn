@@ -1,13 +1,11 @@
 [gd_scene load_steps=35 format=3 uid="uid://bt1fj4qvrccb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8kpki"]
+[ext_resource type="PackedScene" uid="uid://g7ix8xbxhriq" path="res://scenes/ui/ui.tscn" id="3_5oucy"]
 [ext_resource type="Texture2D" uid="uid://dl1xq5j6x8731" path="res://textures/characters/player/Sprite 1.png" id="21_tx0hg"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_6ltew"]
-points = PackedVector2Array(0, 15, -6, 0, -6, -8, 0, -12, 6, -8, 6, 0)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0xy1"]
-size = Vector2(13, 27)
+size = Vector2(14, 27)
 
 [sub_resource type="Animation" id="Animation_boisu"]
 length = 0.001
@@ -529,15 +527,16 @@ limit_bottom = 32
 position_smoothing_speed = 2.0
 editor_draw_limits = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
-shape = SubResource("ConvexPolygonShape2D_6ltew")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(10, 3)
+polygon = PackedVector2Array(-10, -4, -13, -5, -16, -16, -16, -27, -10, -32, -4, -27, -4, -16, -7, -5)
 
 [node name="InteractionArea2D" type="Area2D" parent="."]
+show_behind_parent = true
 position = Vector2(0, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D"]
-position = Vector2(0.5, 1.5)
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_y0xy1")
 
 [node name="Inventory" type="Node" parent="."]
@@ -553,3 +552,5 @@ frame = 78
 libraries = {
 "": SubResource("AnimationLibrary_yiqum")
 }
+
+[node name="UI" parent="." instance=ExtResource("3_5oucy")]

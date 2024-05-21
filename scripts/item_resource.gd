@@ -6,4 +6,5 @@ extends Resource
 @export_multiline var description : String = ""
 @export_file("*.tscn") var item_scene : String = "res://scenes/items/sample_item.tscn"
 @export var cost : int
+@export var for_sale : bool = true
 #@export var category : String 

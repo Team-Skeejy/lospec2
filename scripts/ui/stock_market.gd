@@ -16,8 +16,6 @@ extends Control
 
 @export var company_name_label : Label
 
-@export var money_label : Label
-
 var animation_step_duration := 0.03
 static var GRAPH_ANIMATION_NUM_POINTS := 40
 
@@ -50,7 +48,6 @@ var companies_left : Array
 signal animation_done
 
 func _ready():
-	money_label.text = "$%d" % Global.instance.player_money
 	
 	print_debug("Generating sample information") # TODO remove
 	InformationManager.instance.generate_sample_info() 
@@ -80,7 +77,6 @@ func buy():
 		graph_animation("up")
 		await animation_done
 		Global.instance.update_money(base_buy_payout)
-		money_label.text = "$%d" % Global.instance.player_money
 		
 	else:
 		graph_animation("down")
@@ -91,7 +87,6 @@ func sell():
 		graph_animation("up")
 		await animation_done
 		Global.instance.update_money(base_sell_payout)
-		money_label.text = "$%d" % Global.instance.player_money
 		
 	else:
 		graph_animation("down")

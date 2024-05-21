@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://mrr1rr2w3306"]
+[gd_scene load_steps=19 format=3 uid="uid://mrr1rr2w3306"]
 
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_qm1a0"]
 [ext_resource type="Script" path="res://scripts/ui/stock_market.gd" id="1_rrppw"]
@@ -85,19 +85,9 @@ texture_margin_right = 5.0
 texture_margin_bottom = 5.0
 region_rect = Rect2(80, 32, 32, 32)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ri582"]
-texture = ExtResource("1_qm1a0")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
-expand_margin_left = 9.0
-expand_margin_bottom = 9.0
-region_rect = Rect2(144, 32, 32, 32)
-
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="StockMarket" type="Control" parent="." node_paths=PackedStringArray("graph_panel", "graph_line", "graph_origin_node", "buy_container", "sell_container", "info_textures", "buy_chance_label", "sell_chance_label", "buy_payout_label", "sell_payout_label", "company_name_label", "money_label")]
+[node name="StockMarket" type="Control" parent="." node_paths=PackedStringArray("graph_panel", "graph_line", "graph_origin_node", "buy_container", "sell_container", "info_textures", "buy_chance_label", "sell_chance_label", "buy_payout_label", "sell_payout_label", "company_name_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -116,7 +106,6 @@ sell_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxC
 buy_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/Label")
 sell_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/Label")
 company_name_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/CompanyName")
-money_label = NodePath("VBoxContainer/Label/PanelContainer/MoneyLabel")
 
 [node name="GraphOrigin" type="Node2D" parent="StockMarket"]
 position = Vector2(18, 91)
@@ -136,6 +125,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="StockMarket/VBoxContainer"]
 layout_mode = 2
@@ -263,29 +253,6 @@ layout_mode = 2
 text = "Payout: $10"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="StockMarket/VBoxContainer"]
-custom_minimum_size = Vector2(0, 20)
+[node name="Control" type="Control" parent="StockMarket/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-text = "L/R Select - A Confirm"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/Label"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = -21.0
-offset_right = 38.0
-offset_bottom = 4.0
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxTexture_ri582")
-
-[node name="MoneyLabel" type="Label" parent="StockMarket/VBoxContainer/Label/PanelContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.0392157, 1, 0.0392157, 1)
-theme_override_colors/font_shadow_color = Color(0, 0.439216, 0.384314, 1)
-theme_override_constants/shadow_outline_size = 0
-theme_override_font_sizes/font_size = 16
-text = "50$"

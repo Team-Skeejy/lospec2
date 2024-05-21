@@ -1,17 +1,17 @@
 [gd_scene load_steps=24 format=3 uid="uid://g7ix8xbxhriq"]
 
-[ext_resource type="Script" path="res://scripts/ui/in_game_menu.gd" id="1_vngsg"]
-[ext_resource type="Texture2D" uid="uid://dvwmrm386lhtk" path="res://textures/aseprite/in_game_menu.png" id="2_loyln"]
-[ext_resource type="Script" path="res://scripts/ui/TimeRemaining.gd" id="3_ewpyp"]
-[ext_resource type="Script" path="res://scripts/ui/SettingsMenu.gd" id="3_wdk8l"]
-[ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="3_yk58a"]
-[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="4_t0xic"]
-[ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="5_4oxyn"]
-[ext_resource type="PackedScene" uid="uid://bf0wabkpsckws" path="res://scenes/ui/information_ui.tscn" id="5_ywbxu"]
-[ext_resource type="Script" path="res://scripts/ui/ghost_setting.gd" id="6_gikv3"]
-[ext_resource type="Script" path="res://scripts/ui/volume_setting.gd" id="7_hey0o"]
-[ext_resource type="Texture2D" uid="uid://b4i7msur382jl" path="res://textures/palette-bright.png" id="10_qg5df"]
-[ext_resource type="Texture2D" uid="uid://bflniuulbyoiv" path="res://textures/palette-dark.png" id="11_nqh5f"]
+[ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_u6oey"]
+[ext_resource type="Texture2D" uid="uid://dvwmrm386lhtk" path="res://textures/aseprite/in_game_menu.png" id="2_fmcbu"]
+[ext_resource type="Script" path="res://scripts/ui/TimeRemaining.gd" id="3_l3apt"]
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="4_tpqrp"]
+[ext_resource type="PackedScene" uid="uid://bf0wabkpsckws" path="res://scenes/ui/information_ui.tscn" id="5_rbeyn"]
+[ext_resource type="Script" path="res://scripts/ui/SettingsMenu.gd" id="6_2f6t0"]
+[ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="7_k3xr1"]
+[ext_resource type="Script" path="res://scripts/ui/volume_setting.gd" id="8_xtbfx"]
+[ext_resource type="Script" path="res://scripts/ui/ghost_setting.gd" id="9_7ndav"]
+[ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="10_ffw14"]
+[ext_resource type="Texture2D" uid="uid://b4i7msur382jl" path="res://textures/palette-bright.png" id="11_hv6us"]
+[ext_resource type="Texture2D" uid="uid://bflniuulbyoiv" path="res://textures/palette-dark.png" id="12_378hj"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qqmsx"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
@@ -22,23 +22,23 @@ atlas = SubResource("CompressedTexture2D_qqmsx")
 region = Rect2(0, 64, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3dl5"]
-atlas = ExtResource("4_t0xic")
+atlas = ExtResource("4_tpqrp")
 region = Rect2(16, 80, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ss1m2"]
-atlas = ExtResource("4_t0xic")
+atlas = ExtResource("4_tpqrp")
 region = Rect2(32, 16, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rksdm"]
-atlas = ExtResource("4_t0xic")
+atlas = ExtResource("4_tpqrp")
 region = Rect2(32, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ktqkj"]
-atlas = ExtResource("4_t0xic")
+atlas = ExtResource("4_tpqrp")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_euxu0"]
-texture = ExtResource("4_t0xic")
+texture = ExtResource("4_tpqrp")
 texture_margin_left = 6.0
 texture_margin_top = 6.0
 texture_margin_right = 6.0
@@ -55,21 +55,21 @@ region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqknj"]
 resource_local_to_scene = true
-atlas = ExtResource("4_t0xic")
+atlas = ExtResource("4_tpqrp")
 region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3hmtj"]
-shader = ExtResource("3_yk58a")
+shader = ExtResource("10_ffw14")
 shader_parameter/crt_ghost = 0.0
 shader_parameter/darken = false
 shader_parameter/num_colors = 16
 shader_parameter/precision = 0.135
-shader_parameter/palette_in = ExtResource("10_qg5df")
-shader_parameter/palette_out = ExtResource("11_nqh5f")
+shader_parameter/palette_in = ExtResource("11_hv6us")
+shader_parameter/palette_out = ExtResource("12_378hj")
 
-[node name="InGameMenu" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui")]
 process_mode = 3
-script = ExtResource("1_vngsg")
+script = ExtResource("1_u6oey")
 menu = NodePath("Control/PauseMenu")
 interaction_name = NodePath("Control/PauseMenu/InteractionLabel")
 money_label = NodePath("Control/PauseMenu/MoneyLabel")
@@ -91,7 +91,7 @@ layout_mode = 0
 offset_top = 192.0
 offset_right = 256.0
 offset_bottom = 416.0
-texture = ExtResource("2_loyln")
+texture = ExtResource("2_fmcbu")
 expand_mode = 1
 stretch_mode = 1
 
@@ -127,7 +127,7 @@ offset_top = 16.0
 offset_right = 248.0
 offset_bottom = 32.0
 theme_override_constants/separation = 0
-script = ExtResource("3_ewpyp")
+script = ExtResource("3_l3apt")
 hour_texture = NodePath("HourTexture")
 minute_texture = NodePath("MinuteTexture")
 ten_min_timer = NodePath("TenMinuteTimer")
@@ -156,7 +156,7 @@ text = "Market
 Closes in:"
 horizontal_alignment = 1
 
-[node name="InformationUI" parent="Control/PauseMenu" instance=ExtResource("5_ywbxu")]
+[node name="InformationUI" parent="Control/PauseMenu" instance=ExtResource("5_rbeyn")]
 layout_mode = 1
 offset_left = 48.0
 offset_top = 3.0
@@ -211,7 +211,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_wdk8l")
+script = ExtResource("6_2f6t0")
 settings_container = NodePath("PanelContainer/VBoxContainer/SettingsContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="SettingsMenu"]
@@ -223,7 +223,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="SettingsMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("5_4oxyn")
+theme_override_fonts/font = ExtResource("7_k3xr1")
 theme_override_font_sizes/font_size = 12
 text = "SETTINGS"
 horizontal_alignment = 1
@@ -233,7 +233,7 @@ layout_mode = 2
 
 [node name="VolumeSetting" type="HBoxContainer" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
 layout_mode = 2
-script = ExtResource("7_hey0o")
+script = ExtResource("8_xtbfx")
 slider = NodePath("HSlider")
 
 [node name="Indicator" type="TextureRect" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
@@ -255,7 +255,7 @@ step = 10.0
 
 [node name="GhostSetting" type="HBoxContainer" parent="SettingsMenu/PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider", "crt_ghost_texture")]
 layout_mode = 2
-script = ExtResource("6_gikv3")
+script = ExtResource("9_7ndav")
 slider = NodePath("HSlider")
 crt_ghost_texture = NodePath("../../../../../CrtEffect")
 

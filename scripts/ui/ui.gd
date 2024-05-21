@@ -79,4 +79,5 @@ func _flip_is_opened():
 
 func _flip_paused():
 	get_tree().paused = not get_tree().paused
+	print(get_tree().paused)
 

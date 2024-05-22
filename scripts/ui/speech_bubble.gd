@@ -14,9 +14,10 @@ var _started : bool = true
 
 enum State {
 	GROWING, # when the label is becoming bigger
+	WAITING, # when non_readable, wait
 	READABLE,# when info can be gained 
 	READ, 	 # when info has already been obtained
-	DESPAWNING 
+	DESPAWNING,
 }
 var curr_state : SpeechBubble.State
 
@@ -27,9 +28,11 @@ enum Type {
 }
 var curr_type : SpeechBubble.Type 
 
+var readable:bool = true
+
 signal seen(t: Type)
 
-func init(text: String, type: Type):
+func init(text: String, type: Type, _readable:bool = true):
 	label.text = text
 	var color : Color
 	if type == Type.SMALL_TALK:
@@ -47,6 +50,7 @@ func init(text: String, type: Type):
 	_started = true
 	curr_state = State.GROWING
 	curr_type = type
+	readable = _readable
 	
 	
 
@@ -63,7 +67,10 @@ func _process(delta: float):
 		if label.visible_ratio >= 1.0: 
 			despawn_timer.start(despawn_time)
 			visible_notifier2.position.x = size.x - 20
-			curr_state = State.READABLE
+			if readable:
+				curr_state = State.READABLE
+			else:
+				curr_state = State.WAITING
 			
 	# when it's readable and on screen, read it
 	elif curr_state == State.READABLE and \

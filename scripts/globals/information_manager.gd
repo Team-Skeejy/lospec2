@@ -34,6 +34,7 @@ func add_info(company: String, type: Type):
 
 
 func generate_sample_info():
+	print_debug("Generating sample info")
 	information_gathered = {}
 	for _i in 3:
 		var company = Global.all_companies.pick_random()

@@ -12,6 +12,14 @@ var dialogue_time_interval: float = 3.
 func check_requirements() -> bool:
 	return true
 
+var completed : bool :
+	get:
+		return npc.company in InformationManager.instance.completed_companies
+
+func _process(delta):
+	if Input.is_action_just_pressed("Select"):
+		new_custom_speech_bubble("Frick you you fricking fuck", SpeechBubble.Type.SELL)
+
 func _ready():
 	dialogue_timer = Timer.new()
 	add_child(dialogue_timer)
@@ -20,15 +28,13 @@ func _ready():
 	dialogue_timer.start()
 
 func _on_dialogue_timer_timeout():
-	if npc.company in InformationManager.instance.completed_companies:
-		new_speech_bubble(SpeechBubble.Type.SMALL_TALK, true)
-	elif check_requirements():  # if requirements are met generate green or red bubbles
+	if check_requirements() and not completed:  # if requirements are met generate green or red bubbles
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
-		new_speech_bubble(_t)
+		new_dialogue_speech_bubble(_t)
 	else:  # if not, generate small talk
-		new_speech_bubble(SpeechBubble.Type.SMALL_TALK)
+		new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK)
 
-func new_speech_bubble(type: SpeechBubble.Type, completed: bool = false):
+func add_speech_bubble(speech_bubble: SpeechBubble):
 	for child in get_children().filter(func(x): return x is SpeechBubble):
 		var tween: Tween = get_tree().create_tween()
 		tween.tween_property(child,
@@ -36,11 +42,17 @@ func new_speech_bubble(type: SpeechBubble.Type, completed: bool = false):
 							child.position.y - speech_bubble_spacing,
 							speech_bubble_movement_speed
 						)
+	add_child(speech_bubble)
 
+func new_custom_speech_bubble(text:String, type:SpeechBubble.Type):
+	var speech_bubble: SpeechBubble = speech_bubble_scene.instantiate()
+	speech_bubble.init(text, type, false) # Custom speech bubbles don't change colour when read
+	add_speech_bubble(speech_bubble)
+
+func new_dialogue_speech_bubble(type: SpeechBubble.Type):
 	var speech_bubble: SpeechBubble = speech_bubble_scene.instantiate()
 	if completed:
 		speech_bubble.set_completed()
-	add_child(speech_bubble)
 
 	var text: String = ""
 	if type == SpeechBubble.Type.BUY:
@@ -52,6 +64,7 @@ func new_speech_bubble(type: SpeechBubble.Type, completed: bool = false):
 
 	speech_bubble.init(text, type)
 	speech_bubble.seen.connect(_on_seen)
+	add_speech_bubble(speech_bubble)
 
 
 

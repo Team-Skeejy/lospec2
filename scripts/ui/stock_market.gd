@@ -1,5 +1,6 @@
 extends Control
 
+@export_category("Nodes")
 @export var graph_panel: Panel
 @export var graph_line: Line2D
 @export var graph_origin_node: Node2D
@@ -7,14 +8,17 @@ extends Control
 @export var buy_container: PanelContainer
 @export var sell_container: PanelContainer
 
-@export var info_textures: Array[TextureRect]
-
 @export var buy_chance_label: Label
 @export var sell_chance_label: Label
 @export var buy_payout_label: Label
 @export var sell_payout_label: Label
 
 @export var company_name_label: Label
+@export var info_textures: Array[TextureRect]
+@export_category("SFX")
+@export var animation_sound : AudioStreamPlayer
+@export var win_sound : AudioStreamPlayer
+@export var lose_sound : AudioStreamPlayer
 
 var animation_step_duration := 0.03
 static var GRAPH_ANIMATION_NUM_POINTS := 40
@@ -45,11 +49,12 @@ var selected_button: ButtonType = ButtonType.SELL
 
 var companies_left: Array
 
+
 signal animation_done
 
 func _ready():
 
-	# InformationManager.instance.generate_sample_info()
+	InformationManager.instance.generate_sample_info() # TODO REMOVE
 
 	flip_selected()
 	companies_left = InformationManager.instance.completed_companies
@@ -76,26 +81,28 @@ func buy():
 		graph_animation("up")
 		await animation_done
 		Global.instance.update_money(base_buy_payout)
-
+		win()
 	else:
 		graph_animation("down")
 		await animation_done
+		lose()
 
 func sell():
 	if randf() < base_sell_chance / 100.:
-		graph_animation("up")
-		await animation_done
-		Global.instance.update_money(base_sell_payout)
-
-	else:
 		graph_animation("down")
 		await animation_done
+		Global.instance.update_money(base_sell_payout)
+		win()
+	else:
+		graph_animation("up")
+		await animation_done
+		lose()
 
-func win():  # TODO put in animations/sfx
-	print_debug("You win!")
+func win():
+	win_sound.play()
 
 func lose():
-	print_debug("You lose!")
+	lose_sound.play()
 
 
 func flip_selected():
@@ -147,8 +154,10 @@ func start_next_company():
 		base_sell_payout = n_buy * BASE_PAYOUT
 
 	set_odds_payout_labels(base_buy_chance, base_sell_chance, base_buy_payout, base_sell_payout)
-	allow_input = true
+	await get_tree().create_timer(animation_step_duration * 10).timeout
 	graph_line.clear_points()
+	allow_input = true
+	
 
 
 func set_odds_payout_labels(buy_chance: int, sell_chance: int, buy_payout: int, sell_payout: int):
@@ -162,6 +171,8 @@ func set_odds_payout_labels(buy_chance: int, sell_chance: int, buy_payout: int, 
 
 
 func graph_animation(direction: String = "down"):
+	allow_input = false
+	animation_sound.play()
 	allow_input = false
 	graph_line.clear_points()
 

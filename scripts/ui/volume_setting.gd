@@ -1,7 +1,7 @@
 class_name VolumeSetting
 extends SettingRow
 
-var volume : int = 50
+var volume : int = 80
 @export var slider : HSlider
 
 

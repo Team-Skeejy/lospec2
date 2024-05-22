@@ -1,8 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://mrr1rr2w3306"]
+[gd_scene load_steps=22 format=3 uid="uid://mrr1rr2w3306"]
 
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_qm1a0"]
 [ext_resource type="Script" path="res://scripts/ui/stock_market.gd" id="1_rrppw"]
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="2_ltg76"]
+[ext_resource type="AudioStream" uid="uid://c3js0d822duna" path="res://audio/stock_market_animation.wav" id="4_3nyoj"]
+[ext_resource type="AudioStream" uid="uid://c2wq3ta0vkfrk" path="res://audio/stock_market_win.wav" id="5_28gr6"]
+[ext_resource type="AudioStream" uid="uid://uvaysmstttn7" path="res://audio/stock_market_lose.wav" id="6_v0mra"]
 
 [sub_resource type="Curve" id="Curve_2b7ix"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(1e-05, 1), 0.0, 0.0, 1, 1, Vector2(1, 1), 0.0, 0.0, 1, 0]
@@ -87,7 +90,7 @@ region_rect = Rect2(80, 32, 32, 32)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="StockMarket" type="Control" parent="." node_paths=PackedStringArray("graph_panel", "graph_line", "graph_origin_node", "buy_container", "sell_container", "info_textures", "buy_chance_label", "sell_chance_label", "buy_payout_label", "sell_payout_label", "company_name_label")]
+[node name="StockMarket" type="Control" parent="." node_paths=PackedStringArray("graph_panel", "graph_line", "graph_origin_node", "buy_container", "sell_container", "buy_chance_label", "sell_chance_label", "buy_payout_label", "sell_payout_label", "company_name_label", "info_textures", "animation_sound", "win_sound", "lose_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,12 +103,15 @@ graph_line = NodePath("GraphLine")
 graph_origin_node = NodePath("GraphOrigin")
 buy_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/BuyContainer")
 sell_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/SellContainer")
-info_textures = [NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect2"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect3"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect4"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect5")]
 buy_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/Chance")
 sell_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/Chance")
 buy_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/Label")
 sell_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/Label")
 company_name_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/CompanyName")
+info_textures = [NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect2"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect3"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect4"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect5")]
+animation_sound = NodePath("Audio/Animation")
+win_sound = NodePath("Audio/Win")
+lose_sound = NodePath("Audio/Lose")
 
 [node name="GraphOrigin" type="Node2D" parent="StockMarket"]
 position = Vector2(18, 87)
@@ -256,3 +262,14 @@ horizontal_alignment = 1
 [node name="Control" type="Control" parent="StockMarket/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+
+[node name="Audio" type="Node" parent="StockMarket"]
+
+[node name="Animation" type="AudioStreamPlayer" parent="StockMarket/Audio"]
+stream = ExtResource("4_3nyoj")
+
+[node name="Win" type="AudioStreamPlayer" parent="StockMarket/Audio"]
+stream = ExtResource("5_28gr6")
+
+[node name="Lose" type="AudioStreamPlayer" parent="StockMarket/Audio"]
+stream = ExtResource("6_v0mra")

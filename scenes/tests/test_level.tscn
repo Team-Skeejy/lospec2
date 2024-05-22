@@ -60,7 +60,7 @@ position = Vector2(836, -18)
 destination = NodePath("../WarpDoor")
 
 [node name="MapDoor" parent="Objects" node_paths=PackedStringArray("lock") instance=ExtResource("6_lvxox")]
-position = Vector2(-360, -82)
+position = Vector2(-208, -84)
 lock = NodePath("Lock")
 
 [node name="Lock" type="Node" parent="Objects/MapDoor"]

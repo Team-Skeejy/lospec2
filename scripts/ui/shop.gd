@@ -66,8 +66,7 @@ func buy():
 	if selected_container.sold_out or Global.instance.player_money < item_cost:
 		# TODO incredibly loud buzzer sound
 		return
-
-	var item: Behaviour = selected_container.buy()
-	Global.player.add_behaviour(item)
 	Global.instance.update_money(-item_cost)
+	var item : ItemResource = selected_container.buy()
+	Global.player.add_item(item)
 	print_debug("buying " + str(selected_container.item_resource.name))

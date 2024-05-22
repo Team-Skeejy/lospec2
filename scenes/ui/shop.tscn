@@ -18,9 +18,10 @@ script = ExtResource("3_uhx6c")
 texture = SubResource("AtlasTexture_avyh5")
 name = "Sticky Note"
 description = "Lets you wall jump"
-item_scene = "res://scenes/items/wall_jump.tscn"
+behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 10
 for_sale = true
+key_type = 1
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4b6kg"]
 load_path = "res://.godot/imported/items.png-0ff49a2de52bde375542713c23dcdb50.ctex"
@@ -34,9 +35,10 @@ script = ExtResource("3_uhx6c")
 texture = SubResource("AtlasTexture_fx887")
 name = "Genuine Leather Shoes"
 description = "Lets you survive high falls"
-item_scene = "res://scenes/items/sample_item.tscn"
+behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 20
 for_sale = true
+key_type = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lo1y6"]
 atlas = ExtResource("4_o5i03")
@@ -47,9 +49,10 @@ script = ExtResource("3_uhx6c")
 texture = SubResource("AtlasTexture_lo1y6")
 name = "#FFFFFF Business Card"
 description = "Will surely impress even the most discerning businessmen"
-item_scene = "res://scenes/items/sample_item.tscn"
+behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 10
 for_sale = true
+key_type = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ssfbp"]
 atlas = ExtResource("4_o5i03")
@@ -60,9 +63,10 @@ script = ExtResource("3_uhx6c")
 texture = SubResource("AtlasTexture_ssfbp")
 name = "Extra Strength Arabica"
 description = "Make the coffee in the cafeteria extra strong, making everybody speak faster"
-item_scene = "res://scenes/items/speak_faster.tscn"
+behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 0
 for_sale = true
+key_type = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_foeow"]
 atlas = ExtResource("4_o5i03")
@@ -73,9 +77,10 @@ script = ExtResource("3_uhx6c")
 texture = SubResource("AtlasTexture_foeow")
 name = "Mysterious Pills"
 description = "Will let you reach greater heights "
-item_scene = "res://scenes/items/double_jump.tscn"
+behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 50
 for_sale = true
+key_type = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mtbk5"]
 texture = ExtResource("2_ikuha")

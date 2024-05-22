@@ -64,6 +64,7 @@ func add_behaviour(behaviour: Behaviour):
 			return
 		i += 1
 	behaviours.push_back(behaviour)
+	print_debug(len(behaviours))
 	behaviour.added(self)
 
 # # implemented, but don't use this, i think it's a bad idea
@@ -117,9 +118,9 @@ func evaluate_item_physics(delta: float):
 func handle_animation():
 	var animation := ""
 
-	for item in behaviours.filter(func(item): return !item.disabled):
-		if item.animation:
-			animation = item.animation
+	for behaviour in behaviours.filter(func(behaviour): return !behaviour.disabled):
+		if behaviour.animation:
+			animation = behaviour.animation
 			break
 
 	# base movement animation logic

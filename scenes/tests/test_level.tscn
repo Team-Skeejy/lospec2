@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://du7d3x6mae8wj"]
+[gd_scene load_steps=11 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="Script" path="res://scripts/test_level.gd" id="1_ovvlx"]
 [ext_resource type="PackedScene" uid="uid://cyie1qowb60eh" path="res://scenes/map_objects/sittable.tscn" id="4_h0oka"]
 [ext_resource type="PackedScene" uid="uid://bwoobo3k2h8bm" path="res://scenes/map_objects/warp_door.tscn" id="5_pcnwj"]
 [ext_resource type="PackedScene" uid="uid://pt22hmf0q1qw" path="res://scenes/map_objects/map_door.tscn" id="6_lvxox"]
+[ext_resource type="Script" path="res://scripts/interactables/lock.gd" id="6_vxbyk"]
 [ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="7_4jeeo"]
 [ext_resource type="PackedScene" uid="uid://bgmqtfse5886o" path="res://scenes/map_objects/player_spawner.tscn" id="7_v50b3"]
 [ext_resource type="PackedScene" uid="uid://cecdbwt1q0fns" path="res://scenes/map_objects/bg_door_load.tscn" id="8_6fohb"]
@@ -58,8 +59,13 @@ destination = NodePath("../WarpDoor3")
 position = Vector2(836, -18)
 destination = NodePath("../WarpDoor")
 
-[node name="MapDoor" parent="Objects" instance=ExtResource("6_lvxox")]
-position = Vector2(206, -18)
+[node name="MapDoor" parent="Objects" node_paths=PackedStringArray("lock") instance=ExtResource("6_lvxox")]
+position = Vector2(-360, -82)
+lock = NodePath("Lock")
+
+[node name="Lock" type="Node" parent="Objects/MapDoor"]
+script = ExtResource("6_vxbyk")
+key = 1
 
 [node name="NPCs" type="Node2D" parent="."]
 
@@ -93,7 +99,7 @@ position = Vector2(-243, -82)
 position = Vector2(22, -99)
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("7_v50b3")]
-position = Vector2(328, -42)
+position = Vector2(-386, -93)
 
 [node name="Label" type="Label" parent="."]
 offset_left = -378.0
@@ -105,7 +111,7 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Door2" parent="." instance=ExtResource("8_6fohb")]
-position = Vector2(-414, -100)
+position = Vector2(-479, -37)
 next_scene = "res://scenes/tests/level_test_a.tscn"
 
 [node name="Label" type="Label" parent="Door2"]
@@ -118,7 +124,7 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="NextPhaseWaterCooler" parent="." instance=ExtResource("10_4bo24")]
-position = Vector2(-358, -82)
+position = Vector2(-414, -83)
 
 [editable path="NPCs/NPC"]
 [editable path="NPCs/NPC2"]

@@ -1,6 +1,8 @@
 class_name Player
 extends Humanoid
 
+var inventory : Array[ItemResource] = []
+
 static var COYOTE_TIME := 0.1
 
 var coyote_timer := COYOTE_TIME
@@ -33,7 +35,7 @@ func jump_with_no_horizontal_velocity() -> void:
 # handles a press logic
 func a_press(delta: float) -> void:
 	if interact_target and is_on_floor():
-		interact_target.interact(self)
+		interact_target._interact(self)
 	else:
 		jumping = true
 
@@ -93,6 +95,18 @@ func _physics_process(delta: float) -> void:
 
 	direction = input_direction
 	super._physics_process(delta)
+
+func add_item(item: ItemResource):
+	var behaviour_scene: PackedScene = load(item.behaviour_scene)
+	var behaviour = behaviour_scene.instantiate()
+	add_behaviour(behaviour)
+	inventory.append(item)
+
+func has_key(k: Lock.Type) -> bool:
+	for item_resource : ItemResource in inventory:
+		if item_resource.key_type == k:
+			return true
+	return false
 
 func _process(delta: float):
 	super._process(delta)

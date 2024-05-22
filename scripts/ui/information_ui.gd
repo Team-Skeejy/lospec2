@@ -53,7 +53,6 @@ func flip_expanded():
 		expand()
 
 func expand():
-	print_debug("expand")
 	if expansion_tween and expansion_tween.is_running():
 		expansion_tween.kill()  
 	
@@ -66,8 +65,6 @@ func expand():
 	
 	
 func retract():
-	print_debug("not expand")
-	
 	if expansion_tween and expansion_tween.is_running():
 		expansion_tween.kill()
 	

@@ -6,6 +6,7 @@ extends PanelContainer
 @export var visible_notifier1 : VisibleOnScreenNotifier2D 
 @export var visible_notifier2 : VisibleOnScreenNotifier2D 
 @export var style_box : StyleBoxTexture
+
 var text_speed : int = 20 # in chars/second
 var despawn_time : float = 1. # how much time after showing all text will it despawn
 var _visible_characters : float = 0.0
@@ -29,7 +30,6 @@ var curr_type : SpeechBubble.Type
 signal seen(t: Type)
 
 func init(text: String, type: Type):
-	print_debug(text)
 	label.text = text
 	var color : Color
 	if type == Type.SMALL_TALK:

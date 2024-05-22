@@ -15,15 +15,13 @@ func _ready():
 	item_texture.texture = item_resource.texture
 
 
-func buy() -> Behaviour:
+func buy() -> ItemResource:
 	if sold_out:
 		print_debug("This shouldn't be happening")
 		return null
-	var item_scene: PackedScene = load(item_resource.item_scene)
-	var item = item_scene.instantiate()
 	sold_out = true
 	item_texture.texture = sold_out_texture
-	return item
+	return item_resource
 
 func select():
 	if selected: return

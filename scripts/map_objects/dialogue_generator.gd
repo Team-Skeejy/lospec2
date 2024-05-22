@@ -3,7 +3,7 @@ extends Node2D
 
 
 @export var speech_bubble_scene: PackedScene
-@export var npc : NPC
+@export var npc: NPC
 var speech_bubble_spacing: int = 16
 var speech_bubble_movement_speed: float = 0.1
 var dialogue_timer: Timer
@@ -22,7 +22,7 @@ func _ready():
 func _on_dialogue_timer_timeout():
 	if npc.company in InformationManager.instance.completed_companies:
 		new_speech_bubble(SpeechBubble.Type.SMALL_TALK, true)
-	elif check_requirements(): # if requirements are met generate green or red bubbles
+	elif check_requirements():  # if requirements are met generate green or red bubbles
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
 		new_speech_bubble(_t)
 	else:  # if not, generate small talk
@@ -30,7 +30,6 @@ func _on_dialogue_timer_timeout():
 
 func new_speech_bubble(type: SpeechBubble.Type, completed: bool = false):
 	for child in get_children().filter(func(x): return x is SpeechBubble):
-
 		var tween: Tween = get_tree().create_tween()
 		tween.tween_property(child,
 							"position:y",
@@ -39,7 +38,7 @@ func new_speech_bubble(type: SpeechBubble.Type, completed: bool = false):
 						)
 
 	var speech_bubble: SpeechBubble = speech_bubble_scene.instantiate()
-	if completed: 
+	if completed:
 		speech_bubble.set_completed()
 	add_child(speech_bubble)
 

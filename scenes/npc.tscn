@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bcvk2nfue47o2"]
+[gd_scene load_steps=39 format=3 uid="uid://bcvk2nfue47o2"]
 
 [ext_resource type="Texture2D" uid="uid://b5k7j4ignx3kf" path="res://textures/characters/RedCharacter.png" id="1_ma7oy"]
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_qucbd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/NPCWander.gd" id="5_rcpxd"]
 [ext_resource type="Script" path="res://scripts/state_machine/NPCPatrol.gd" id="6_kb2o8"]
 [ext_resource type="PackedScene" uid="uid://itbjvhraldeu" path="res://scenes/map_objects/dialogue_generator.tscn" id="6_t5wgk"]
+[ext_resource type="Script" path="res://scripts/state_machine/NPCSecurity.gd" id="7_h4ju1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyifl"]
 size = Vector2(11, 28)
@@ -485,11 +486,12 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksgov"]
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "behaviour_node")]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "dialog_generator", "sprite_animation_player", "interaction_area", "behaviour_node")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_qucbd")
 navigation_agent = NodePath("NavigationAgent2D")
+dialog_generator = NodePath("DialogueGenerator")
 sprite_animation_player = NodePath("AnimationPlayer")
 interaction_area = NodePath("InteractionArea2D")
 behaviour_node = NodePath("Behaviours")
@@ -533,6 +535,9 @@ npc = NodePath("../..")
 [node name="NPCPatrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("6_kb2o8")
 npc = NodePath("../..")
+
+[node name="NPCSecurity" type="Node" parent="StateMachine"]
+script = ExtResource("7_h4ju1")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

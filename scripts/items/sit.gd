@@ -19,6 +19,7 @@ func added(_holder: Humanoid):
 
 func any_press(_button: String, _delta: float) -> void:
 	holder.remove_item(self)
+	queue_free()
 
 func physics_process(_delta: float) -> bool:
 	holder.velocity = Vector2.ZERO

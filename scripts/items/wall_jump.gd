@@ -1,5 +1,5 @@
 class_name WallJump
-extends Item
+extends Behaviour
 
 var WALL_GRAB_GRACE_PERIOD := 2.  # how long the player can hold onto a wall for without sliding
 var WALL_GRAB_DEGRADATION_PERIOD := 3.  # how long takes for the grab to taper off

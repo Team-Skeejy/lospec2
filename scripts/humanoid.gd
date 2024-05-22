@@ -3,9 +3,6 @@ extends CharacterBody2D
 
 static var TERMINAL_VELOCITY := 900.
 
-static var SPEED := 70.  # this probably should not be a static since
-	# we most likely want npcs to move at a
-	# different speed from the player
 static var ACCELERATION := 900.
 static var AERIAL_ACCELERATION := 400.
 static var FRICTION := 1600.
@@ -13,6 +10,7 @@ static var AIR_FRICTION := 1000.
 static var JUMP_VELOCITY := -150.
 static var JUMP_DURATION := 0.2
 
+var speed := 70.
 var jump_timer := JUMP_DURATION
 var is_default_jump := true
 var jumping := false
@@ -21,14 +19,14 @@ var direction := 0.
 
 @export var sprite_animation_player: AnimationPlayer
 @export var interaction_area: Area2D
-@export var inventory: Node
+@export var behaviour_node: Node
 
 enum EDirection {
 	left, right
 }
 
-# logical items
-var items: Array[Item] = []
+# logical behaviours
+var behaviours: Array[Behaviour] = []
 
 var _facing: EDirection = EDirection.right
 var _animation := "idle"
@@ -40,53 +38,53 @@ var _prev_interact_target: Interactable
 # current targeted interactable
 var interact_target: Interactable
 
-# used to reevaluate items from player/inventory into the items list
-# does not run removed from items already in the list
+# used to reevaluate behaviours from player/behaviour_node into the behaviours list
+# does not run removed from behaviours already in the list
 func evaluate_items():
-	items = []
-	for child: Node in inventory.get_children():
-		if child is Item:
-			add_item(child)
+	behaviours = []
+	for child: Node in behaviour_node.get_children():
+		if child is Behaviour:
+			add_behaviour(child)
 
-# reparents item to player/inventory
+# reparents item to player/behaviour_node
 # adds item to item list
 # runs item.added()
-func add_item(item: Item):
-	var parent := item.get_parent()
+func add_behaviour(behaviour: Behaviour):
+	var parent := behaviour.get_parent()
 	if !parent:
-		inventory.add_child(item)
-	if parent != inventory:
-		item.reparent(inventory)
+		behaviour_node.add_child(behaviour)
+	if parent != behaviour_node:
+		behaviour.reparent(behaviour_node)
 
-	for i in range(len(items)):
-		var itm: Item = items[i]
-		if itm.priority >= item.priority:
-			items.insert(i, item)
-			item.added(self)
+	for i in range(len(behaviours)):
+		var itm: Behaviour = behaviours[i]
+		if itm.priority >= behaviour.priority:
+			behaviours.insert(i, behaviour)
+			behaviour.added(self)
 			return
 		i += 1
-	items.push_back(item)
-	item.added(self)
+	behaviours.push_back(behaviour)
+	behaviour.added(self)
 
 # # implemented, but don't use this, i think it's a bad idea
-# func add_item_at(item: Item, index: int = 0):
-# 	if item in items.filter(func(item): return !item.disabled): return
+# func add_item_at(item: Behaviour, index: int = 0):
+# 	if item in behaviours.filter(func(item): return !item.disabled): return
 
 # 	if index == -1:
-# 		items.push_front(item)
-# 	elif index == 0 || index >= len(items):
-# 		items.push_back(item)
+# 		behaviours.push_front(item)
+# 	elif index == 0 || index >= len(behaviours):
+# 		behaviours.push_back(item)
 # 	else:
-# 		items.insert(index, item)
-# 	inventory.add_child(item)
+# 		behaviours.insert(index, item)
+# 	behaviour_node.add_child(item)
 
 # removes item from item list
 # runs item.removed()
 # DOES NOT reparent item
-func remove_item(item: Item):
-	var index := items.find(item)
+func remove_item(item: Behaviour):
+	var index := behaviours.find(item)
 	if index > -1:
-		items.remove_at(index)
+		behaviours.remove_at(index)
 		item.removed()
 
 func _ready():
@@ -96,7 +94,7 @@ func _ready():
 # adds left right forces based on controls using arrow keys
 func add_left_right(dir: float, delta: float) -> void:
 	var acc := ACCELERATION if is_on_floor() else AERIAL_ACCELERATION
-	velocity.x = move_toward(velocity.x, SPEED * dir, acc * delta)
+	velocity.x = move_toward(velocity.x, speed * dir, acc * delta)
 
 # gravity calc for player
 func add_gravity(delta: float):
@@ -109,7 +107,7 @@ func add_friction(delta: float) -> void:
 
 func evaluate_item_physics(delta: float):
 	var default_physics := true
-	for item: Item in items.filter(func(item): return !item.disabled):
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled):
 		if item.physics_process(delta):
 			default_physics = false
 			break
@@ -119,7 +117,7 @@ func evaluate_item_physics(delta: float):
 func handle_animation():
 	var animation := ""
 
-	for item in items.filter(func(item): return !item.disabled):
+	for item in behaviours.filter(func(item): return !item.disabled):
 		if item.animation:
 			animation = item.animation
 			break
@@ -156,7 +154,7 @@ func handle_animation():
 		sprite_animation_player.current_animation = animation_name
 
 func _physics_process(delta: float):
-	# if default physics operations have not been muted by items
+	# if default physics operations have not been muted by behaviours
 	if evaluate_item_physics(delta):
 		add_gravity(delta)
 		if direction:

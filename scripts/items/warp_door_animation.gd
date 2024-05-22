@@ -1,5 +1,5 @@
 class_name WarpTo
-extends Item
+extends Behaviour
 
 var target: WarpDoor
 var source: WarpDoor

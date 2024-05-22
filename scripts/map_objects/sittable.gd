@@ -5,5 +5,5 @@ func _init():
 	interaction_name = "sit"
 
 func interact(interactor: Humanoid):
-		interactor.add_item(Sit.new(self))
+		interactor.add_behaviour(Sit.new(self))
 

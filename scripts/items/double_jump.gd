@@ -1,5 +1,5 @@
 class_name DoubleJump
-extends Item
+extends Behaviour
 
 static var MAX_JUMPS: int = 1
 var jumps_remaining: int = 2

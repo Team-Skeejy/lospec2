@@ -1,7 +1,7 @@
 extends Control
 
 @export_category("Inventory")
-@export var items_inventory : Array[ItemResource]
+@export var items_inventory: Array[ItemResource]
 @export_category("Nodes")
 @export var item_container_container: HBoxContainer
 @export var item_container_scene: PackedScene
@@ -61,13 +61,13 @@ func get_currently_selected_container() -> ShopItemContainer:
 	return item_container_array[selected_container_idx]
 
 func buy():
-	var selected_container : ShopItemContainer = get_currently_selected_container()
+	var selected_container: ShopItemContainer = get_currently_selected_container()
 	var item_cost = selected_container.item_resource.cost
 	if selected_container.sold_out or Global.instance.player_money < item_cost:
 		# TODO incredibly loud buzzer sound
 		return
-	
-	var item : Item = selected_container.buy()
-	Global.player.add_item(item)
+
+	var item: Behaviour = selected_container.buy()
+	Global.player.add_behaviour(item)
 	Global.instance.update_money(-item_cost)
 	print_debug("buying " + str(selected_container.item_resource.name))

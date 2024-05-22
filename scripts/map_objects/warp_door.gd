@@ -22,7 +22,7 @@ func exited_interact_area():
 	# sprite.frame = 0
 
 func interact(interactor: Humanoid):
-	interactor.add_item(WarpTo.new(self, destination))
+	interactor.add_behaviour(WarpTo.new(self, destination))
 	sprite.animation = "openclose"
 	sprite.frame = 1
 	sprite.play()

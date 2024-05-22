@@ -1,5 +1,5 @@
 class_name Sit
-extends Item
+extends Behaviour
 
 var source: Sittable
 

@@ -25,7 +25,7 @@ func jump(delta: float) -> void:
 		coyote_timer = 0
 		jump_with_no_horizontal_velocity()
 	else:
-		for item: Item in items.filter(func(item): return !item.disabled): if item.jump(delta): break
+		for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.jump(delta): break
 
 func jump_with_no_horizontal_velocity() -> void:
 	velocity.y = JUMP_VELOCITY
@@ -37,21 +37,21 @@ func a_press(delta: float) -> void:
 	else:
 		jumping = true
 
-	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("A", delta)
-	for item: Item in items.filter(func(item): return !item.disabled): if item.a_press(delta): break
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): item.any_press("A", delta)
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.a_press(delta): break
 
 # handles b press logic
 func b_press(delta: float) -> void:
-	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("B", delta)
-	for item: Item in items.filter(func(item): return !item.disabled): if item.b_press(delta): break
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): item.any_press("B", delta)
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.b_press(delta): break
 
 func up_press(delta: float) -> void:
-	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Up", delta)
-	for item: Item in items.filter(func(item): return !item.disabled): if item.up_press(delta): break
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): item.any_press("Up", delta)
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.up_press(delta): break
 
 func down_press(delta: float) -> void:
-	for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Down", delta)
-	for item: Item in items.filter(func(item): return !item.disabled): if item.down_press(delta): break
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): item.any_press("Down", delta)
+	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.down_press(delta): break
 
 func jump_with_horizontal_velocity() -> void:
 	if input_direction > 0:
@@ -71,9 +71,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Up"): up_press(delta)
 	if Input.is_action_just_pressed("Down"): down_press(delta)
 	if Input.is_action_just_pressed("Left"):
-		for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Left", delta)
+		for item: Behaviour in behaviours.filter(func(item): return !item.disabled): item.any_press("Left", delta)
 	if Input.is_action_just_pressed("Right"):
-		for item: Item in items.filter(func(item): return !item.disabled): item.any_press("Right", delta)
+		for item: Behaviour in behaviours.filter(func(item): return !item.disabled): item.any_press("Right", delta)
 
 	if Input.is_action_just_pressed("A"): a_press(delta)
 	elif Input.is_action_just_pressed("B"): b_press(delta)
@@ -89,7 +89,7 @@ func _physics_process(delta: float) -> void:
 		is_default_jump = false
 		jumping = false
 
-		for item in items.filter(func(item): return !item.disabled): item.jump_ended()
+		for item in behaviours.filter(func(item): return !item.disabled): item.jump_ended()
 
 	direction = input_direction
 	super._physics_process(delta)

@@ -1,6 +1,6 @@
 # I think item is a little bit poorly named
 # they're actually heirachical holder behaviour extensions
-class_name Item
+class_name Behaviour
 extends Node
 
 @export var disabled: bool = false
@@ -71,5 +71,5 @@ func jump_ended() -> void:
 # this is run after holder control logic
 # before default controls and physics
 # before move and slide
-func physics_process(delta: float) -> bool:
+func physics_process(_delta: float) -> bool:
   return false

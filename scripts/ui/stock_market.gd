@@ -54,7 +54,7 @@ signal animation_done
 
 func _ready():
 
-	InformationManager.instance.generate_sample_info() # TODO REMOVE
+	#InformationManager.instance.generate_sample_info() # TODO REMOVE
 
 	flip_selected()
 	companies_left = InformationManager.instance.completed_companies

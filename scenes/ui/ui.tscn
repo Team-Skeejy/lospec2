@@ -68,7 +68,7 @@ shader_parameter/precision = 0.135
 shader_parameter/palette_in = ExtResource("11_hv6us")
 shader_parameter/palette_out = ExtResource("12_378hj")
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui", "inventory")]
 process_mode = 3
 script = ExtResource("1_u6oey")
 menu = NodePath("Control/PauseMenu")
@@ -77,6 +77,7 @@ money_label = NodePath("Control/PauseMenu/MoneyLabel")
 settings_menu = NodePath("SettingsMenu")
 crt_effects = NodePath("CrtEffect")
 info_ui = NodePath("Control/PauseMenu/InformationUI")
+inventory = NodePath("Control/PauseMenu/InvContainer/Inventory")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -157,6 +158,15 @@ text = "Market
 Closes in:"
 horizontal_alignment = 1
 
+[node name="InvContainer" type="CenterContainer" parent="Control/PauseMenu"]
+layout_mode = 0
+offset_top = 41.0
+offset_right = 256.0
+offset_bottom = 205.0
+
+[node name="Inventory" parent="Control/PauseMenu/InvContainer" instance=ExtResource("6_ve48v")]
+layout_mode = 2
+
 [node name="InformationUI" parent="Control/PauseMenu" instance=ExtResource("5_rbeyn")]
 layout_mode = 1
 offset_left = 48.0
@@ -203,13 +213,6 @@ stretch_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = " See Info"
-
-[node name="Inventory" parent="Control/PauseMenu" instance=ExtResource("6_ve48v")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 236.0
-offset_bottom = 140.0
 
 [node name="SettingsMenu" type="CenterContainer" parent="." node_paths=PackedStringArray("settings_container")]
 process_mode = 2

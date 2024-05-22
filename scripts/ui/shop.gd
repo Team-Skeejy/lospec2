@@ -10,8 +10,8 @@ extends Control
 var item_container_array: Array[ShopItemContainer] = []
 var selected_container_idx: int = 0
 var num_items_for_sale: int = 4
-var description_text_duration: float = 0.5
 var cost_label_pattern: String = "COST: $%s"
+var description_text_duration: float = 0.5
 
 var description_tween: Tween
 

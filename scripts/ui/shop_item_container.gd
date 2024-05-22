@@ -34,3 +34,10 @@ func deselect():
 	if not selected: return
 	style_box.region_rect.position.x -= 32
 	selected = false
+
+func darken():
+	item_texture.modulate = Color.hex(0x0000000FF)
+	
+func brighten():
+	item_texture.modulate = Color.hex(0x0FFFFFFFF)
+	

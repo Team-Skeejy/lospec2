@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://bt46g18v2jxni"]
+[gd_scene load_steps=3 format=3 uid="uid://bt46g18v2jxni"]
+
+[ext_resource type="Script" path="res://scripts/ui/inventory.gd" id="1_pcorx"]
+[ext_resource type="PackedScene" uid="uid://dis1ex838jf3d" path="res://scenes/ui/shop_item_container.tscn" id="2_4kfc8"]
 
 [node name="Inventory" type="GridContainer"]
 offset_left = 9.0
@@ -6,3 +9,5 @@ offset_top = 39.0
 offset_right = 245.0
 offset_bottom = 179.0
 columns = 5
+script = ExtResource("1_pcorx")
+item_container_scene = ExtResource("2_4kfc8")

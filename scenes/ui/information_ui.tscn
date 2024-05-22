@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bf0wabkpsckws"]
+[gd_scene load_steps=6 format=3 uid="uid://bf0wabkpsckws"]
 
 [ext_resource type="Script" path="res://scripts/ui/information_ui.gd" id="1_0dqsq"]
 [ext_resource type="PackedScene" uid="uid://bocrl0rkn4tu6" path="res://scenes/ui/information_ui_row.tscn" id="1_n8v1a"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="3_em1g8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mrhm5"]
+texture = ExtResource("3_em1g8")
+texture_margin_left = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(48, 96, 32, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b0f0q"]
 texture = ExtResource("3_em1g8")
@@ -26,13 +33,14 @@ script = ExtResource("1_0dqsq")
 row_container = NodePath("RowContainer")
 row_scene = ExtResource("1_n8v1a")
 
-[node name="Panel" type="ColorRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_mrhm5")
 
 [node name="RowContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

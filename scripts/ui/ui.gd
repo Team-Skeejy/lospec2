@@ -1,3 +1,4 @@
+class_name UI
 extends CanvasLayer
 
 var open_close_speed := 0.5
@@ -15,7 +16,7 @@ var tween: Tween
 @export var settings_menu : CenterContainer
 @export var crt_effects : ColorRect
 @export var info_ui : InformationUI
-
+@export var inventory : Inventory
 func _ready():
 	info_ui.retract()
 	pass
@@ -81,3 +82,5 @@ func _flip_paused():
 	get_tree().paused = not get_tree().paused
 	print(get_tree().paused)
 
+func update_items():
+	inventory.update_items()

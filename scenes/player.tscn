@@ -515,9 +515,10 @@ _data = {
 "wall_slide_r": SubResource("Animation_bhuei")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite_animation_player", "interaction_area", "behaviour_node")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ui", "sprite_animation_player", "interaction_area", "behaviour_node")]
 z_index = 1
 script = ExtResource("1_8kpki")
+ui = NodePath("UI")
 sprite_animation_player = NodePath("AnimationPlayer")
 interaction_area = NodePath("InteractionArea2D")
 behaviour_node = NodePath("Behaviours")

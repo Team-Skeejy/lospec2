@@ -2,7 +2,7 @@ class_name Player
 extends Humanoid
 
 var inventory : Array[ItemResource] = []
-
+@export var ui : UI
 static var COYOTE_TIME := 0.1
 
 var coyote_timer := COYOTE_TIME
@@ -101,6 +101,7 @@ func add_item(item: ItemResource):
 	var behaviour = behaviour_scene.instantiate()
 	add_behaviour(behaviour)
 	inventory.append(item)
+	ui.update_items()
 
 func has_key(k: Lock.Type) -> bool:
 	for item_resource : ItemResource in inventory:

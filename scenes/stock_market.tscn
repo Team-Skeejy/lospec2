@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://mrr1rr2w3306"]
+[gd_scene load_steps=23 format=3 uid="uid://mrr1rr2w3306"]
 
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_qm1a0"]
 [ext_resource type="Script" path="res://scripts/ui/stock_market.gd" id="1_rrppw"]
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="2_ltg76"]
+[ext_resource type="FontFile" uid="uid://cgu755mepfnwj" path="res://assets/bm-space.ttf" id="3_3qqya"]
 [ext_resource type="AudioStream" uid="uid://c3js0d822duna" path="res://audio/stock_market_animation.wav" id="4_3nyoj"]
 [ext_resource type="AudioStream" uid="uid://c2wq3ta0vkfrk" path="res://audio/stock_market_win.wav" id="5_28gr6"]
 [ext_resource type="AudioStream" uid="uid://uvaysmstttn7" path="res://audio/stock_market_lose.wav" id="6_v0mra"]
@@ -90,7 +91,7 @@ region_rect = Rect2(80, 32, 32, 32)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
-[node name="StockMarket" type="Control" parent="." node_paths=PackedStringArray("graph_panel", "graph_line", "graph_origin_node", "buy_container", "sell_container", "buy_chance_label", "sell_chance_label", "buy_payout_label", "sell_payout_label", "company_name_label", "info_textures", "animation_sound", "win_sound", "lose_sound")]
+[node name="StockMarket" type="Control" parent="." node_paths=PackedStringArray("graph_panel", "graph_line", "graph_origin_node", "buy_container", "sell_container", "buy_chance_label", "sell_chance_label", "buy_payout_label", "sell_payout_label", "company_name_label", "info_textures", "stock_market_ui", "not_enough_info_label", "animation_sound", "win_sound", "lose_sound")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,17 +99,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rrppw")
-graph_panel = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/Graph")
+graph_panel = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/Graph")
 graph_line = NodePath("GraphLine")
 graph_origin_node = NodePath("GraphOrigin")
-buy_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/BuyContainer")
-sell_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/SellContainer")
-buy_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/Chance")
-sell_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/Chance")
-buy_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/Label")
-sell_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/Label")
-company_name_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/CompanyName")
-info_textures = [NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect2"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect3"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect4"), NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/TextureRect5")]
+buy_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Buy/BuyContainer")
+sell_container = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Sell/SellContainer")
+buy_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Buy/Chance")
+sell_chance_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Sell/Chance")
+buy_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Buy/Label")
+sell_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Sell/Label")
+company_name_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2/CompanyName")
+info_textures = [NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2/TextureRect"), NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2/TextureRect2"), NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2/TextureRect3"), NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2/TextureRect4"), NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2/TextureRect5")]
+stock_market_ui = NodePath("VBoxContainer/CenterContainer/PanelContainer/StockMarketUI")
+not_enough_info_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/NotEnoughInformation")
 animation_sound = NodePath("Audio/Animation")
 win_sound = NodePath("Audio/Win")
 lose_sound = NodePath("Audio/Lose")
@@ -141,54 +144,69 @@ size_flags_vertical = 3
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ap0ar")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer"]
+[node name="NotEnoughInformation" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer"]
+visible = false
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_3qqya")
+theme_override_font_sizes/font_size = 9
+text = "You didn't gather enough information to go to the Stock Market..."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="StockMarketUI" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ltg76")
 theme_override_font_sizes/font_size = 24
 text = "STOCK MARKET"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="VSeparator" type="VSeparator" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="VSeparator" type="VSeparator" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
 layout_mode = 2
 
-[node name="CompanyName" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="CompanyName" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
 layout_mode = 2
 text = "Crimson Corp."
 
-[node name="TextureRect" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="_Info" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
+text = "Info: "
+
+[node name="TextureRect" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
 texture = SubResource("AtlasTexture_t4csu")
 
-[node name="TextureRect2" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect2" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_h6110")
 
-[node name="TextureRect3" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect3" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_nmpjn")
 
-[node name="TextureRect4" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect4" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_uydme")
 
-[node name="TextureRect5" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect5" type="TextureRect" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/HBoxContainer2"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_w88fo")
 
-[node name="Graph" type="Panel" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="Graph" type="Panel" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI"]
 custom_minimum_size = Vector2(222, 50)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_adk2s")
 
-[node name="line" type="Panel" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/Graph"]
+[node name="line" type="Panel" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/Graph"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 1
 anchors_preset = 14
@@ -199,23 +217,23 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_txrps")
 
-[node name="HSeparator" type="HSeparator" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI"]
 layout_mode = 2
 
-[node name="BuySell" type="HBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer"]
+[node name="BuySell" type="HBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI"]
 layout_mode = 2
 
-[node name="Buy" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell"]
+[node name="Buy" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BuyContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy"]
+[node name="BuyContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Buy"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_gxbbp")
 
-[node name="BuyLabel" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy/BuyContainer"]
+[node name="BuyLabel" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Buy/BuyContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ltg76")
 theme_override_font_sizes/font_size = 24
@@ -223,38 +241,38 @@ text = "BUY"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Chance" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy"]
+[node name="Chance" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Buy"]
 layout_mode = 2
 text = "Chance: 20%"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Buy"]
+[node name="Label" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Buy"]
 layout_mode = 2
 text = "Payout: $40"
 horizontal_alignment = 1
 
-[node name="Sell" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell"]
+[node name="Sell" type="VBoxContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SellContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell"]
+[node name="SellContainer" type="PanelContainer" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Sell"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxTexture_hx7j7")
 
-[node name="SellLabel" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell/SellContainer"]
+[node name="SellLabel" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Sell/SellContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_ltg76")
 theme_override_font_sizes/font_size = 24
 text = "SELL"
 
-[node name="Chance" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell"]
+[node name="Chance" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Sell"]
 layout_mode = 2
 text = "Chance: 80%"
 horizontal_alignment = 1
 
-[node name="Label" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/BuySell/Sell"]
+[node name="Label" type="Label" parent="StockMarket/VBoxContainer/CenterContainer/PanelContainer/StockMarketUI/BuySell/Sell"]
 layout_mode = 2
 text = "Payout: $10"
 horizontal_alignment = 1

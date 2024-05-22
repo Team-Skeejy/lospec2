@@ -15,6 +15,8 @@ extends Control
 
 @export var company_name_label: Label
 @export var info_textures: Array[TextureRect]
+@export var stock_market_ui : VBoxContainer
+@export var not_enough_info_label : Label
 @export_category("SFX")
 @export var animation_sound : AudioStreamPlayer
 @export var win_sound : AudioStreamPlayer
@@ -53,13 +55,19 @@ var companies_left: Array
 signal animation_done
 
 func _ready():
-
+	#print_debug("It is I, the stock market, generating sample information")
 	#InformationManager.instance.generate_sample_info() # TODO REMOVE
 
 	flip_selected()
 	companies_left = InformationManager.instance.completed_companies
 	animation_done.connect(start_next_company)
-	start_next_company()
+	if len(InformationManager.instance.completed_companies) > 0:
+		start_next_company()
+	else:
+		stock_market_ui.hide()
+		not_enough_info_label.show()
+		await get_tree().create_timer(2.0).timeout
+		start_next_company()
 
 func _process(delta):
 	if not allow_input:
@@ -119,11 +127,15 @@ static var BASE_PAYOUT = 10  # TODO move to somewhere else, payout based on comp
 
 func start_next_company():
 	if len(companies_left) == 0:
+		InformationManager.instance.clear_information()
 		Global.instance.go_to_next_phase()
 		return
 
-	var company = companies_left.pop_front()
+	var company = companies_left.pop_back()
+	company_name_label.visible_ratio = 0.0
 	company_name_label.text = company
+	var tween : Tween = get_tree().create_tween()
+	tween.tween_property(company_name_label, "visible_ratio", 1.0, animation_step_duration*15)
 	var info = InformationManager.instance.information_gathered[company]
 	var n_sell := 0
 	var n_buy := 0
@@ -155,6 +167,7 @@ func start_next_company():
 
 	set_odds_payout_labels(base_buy_chance, base_sell_chance, base_buy_payout, base_sell_payout)
 	await get_tree().create_timer(animation_step_duration * 10).timeout
+	InformationManager.instance.remove_company(company)
 	graph_line.clear_points()
 	allow_input = true
 	

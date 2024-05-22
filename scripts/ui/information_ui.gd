@@ -17,6 +17,7 @@ var expanded_size := Vector2(160, 189)
 
 func _ready():
 	InformationManager.instance.information_added.connect(on_info_added)
+	InformationManager.instance.company_removed.connect(on_company_removed)
 	day_start() # TODO remove and call elsewhere
 
 func day_start():
@@ -45,6 +46,13 @@ func on_info_added(company: String, type: InformationManager.Type):
 		row.add_sell_info()
 	
 	row_container.move_child(row, 0)
+
+func on_company_removed(company: String):
+	var row = full_rows[company]
+	full_rows.erase(company)
+	row.reset()
+	row_container.move_child(row, max_rows - 1)
+
 
 func flip_expanded():
 	if expanded:

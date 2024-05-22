@@ -13,7 +13,7 @@ var tween: Tween
 @export var menu : TextureRect
 @export var interaction_name : Label
 @export var money_label : Label 
-@export var settings_menu : CenterContainer
+@export var settings_menu : SettingsMenu
 @export var crt_effects : ColorRect
 @export var info_ui : InformationUI
 @export var inventory : Inventory
@@ -42,8 +42,6 @@ func _process(_delta: float):
 	if Input.is_action_just_pressed("Select"):
 		settings_menu.visible = not settings_menu.visible
 
-		var curr_darken = crt_effects.material.get_shader_parameter("darken")
-		crt_effects.material.set_shader_parameter("darken", not curr_darken)
 		
 	elif Input.is_action_just_pressed("A") and not settings_menu.visible:
 		info_ui.flip_expanded()

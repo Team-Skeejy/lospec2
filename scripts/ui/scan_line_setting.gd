@@ -1,7 +1,7 @@
-class_name GhostSetting
+class_name ScanLineSetting
 extends SettingRow
 
-var ghosting : float = 0.3
+var scan_line : float = 0.05
 @export var slider : HSlider
 
 var crt_texture : ColorRect
@@ -10,7 +10,7 @@ var crt_material : ShaderMaterial
 func init(texture: ColorRect):
 	crt_texture = texture
 	crt_material = crt_texture.material
-	slider.value = ghosting
+	slider.value = scan_line
 
 func left():
 	slider.value -= slider.step
@@ -20,4 +20,4 @@ func right():
 	
 
 func _on_h_slider_value_changed(value):
-	crt_material.set_shader_parameter("crt_ghost", value)
+	crt_material.set_shader_parameter("scan_line_intensity", value)

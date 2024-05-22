@@ -3,11 +3,17 @@ extends CenterContainer
 
 
 @export var settings_container : VBoxContainer
+@export var ghost_setting : GhostSetting
+@export var scan_line_setting : ScanLineSetting
+@export var crt_texture : ColorRect
 
 var selected_row : int = 0
 
+
 func _ready():
 	select(selected_row)
+	ghost_setting.init(crt_texture) 
+	scan_line_setting.init(crt_texture)
 
 func select(row):
 	settings_container.get_children()[selected_row].deselect()

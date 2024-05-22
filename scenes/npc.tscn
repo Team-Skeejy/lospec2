@@ -485,14 +485,14 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksgov"]
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "inventory")]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "behaviour_node")]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_qucbd")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite_animation_player = NodePath("AnimationPlayer")
 interaction_area = NodePath("InteractionArea2D")
-inventory = NodePath("Inventory")
+behaviour_node = NodePath("Behaviours")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -15)
@@ -516,7 +516,7 @@ libraries = {
 position = Vector2(1, -14)
 shape = SubResource("RectangleShape2D_ksgov")
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Behaviours" type="Node" parent="."]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_ktl0k")

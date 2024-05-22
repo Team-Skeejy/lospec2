@@ -16,16 +16,16 @@ static var instance: Global
 @export_file("*.tscn") var home_scene: String
 @export_file("*.tscn") var test_game_scene: String
 @export_file("*.tscn") var test_shop_scene: String
-@export_file("*.tscn") var test_bet_scene : String
+@export_file("*.tscn") var test_bet_scene: String
 
 static var player: Player
-var player_money : int = 50
+var player_money: int = 50
 
 var sell_dialogue: PackedStringArray
 var buy_dialogue: PackedStringArray
 var small_talk_dialogue: PackedStringArray
 
-static var all_companies : Array[String] = [
+static var all_companies: Array[String] = [
 	"Crimson Co",
 	"Greenland Oil",
 	"Blue Inc.",
@@ -33,7 +33,7 @@ static var all_companies : Array[String] = [
 	"Cylantro",
 	"B.I.M.",
 	"Vatican llc"
-] 
+]
 
 func _ready():
 	# I do this in global because I don't want to open files everytime a new dialogue generator is created

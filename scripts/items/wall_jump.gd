@@ -35,7 +35,7 @@ func jump(_delta: float):
 			flip_direction = false
 
 		holder.velocity.y = Player.JUMP_VELOCITY
-		holder.velocity.x = holder.input_direction * Player.SPEED * (-1 if flip_direction else 1)
+		holder.velocity.x = holder.input_direction * holder.speed * (-1 if flip_direction else 1)
 		return true
 	return false
 

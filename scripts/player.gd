@@ -55,9 +55,9 @@ func down_press(delta: float) -> void:
 
 func jump_with_horizontal_velocity() -> void:
 	if input_direction > 0:
-		velocity.x = SPEED
+		velocity.x = speed
 	elif input_direction < 0:
-		velocity.x = -SPEED
+		velocity.x = -speed
 	jump_with_no_horizontal_velocity()
 
 func _physics_process(delta: float) -> void:

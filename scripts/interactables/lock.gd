@@ -4,16 +4,15 @@ extends Node
 enum Type {
 	none,
 	key1,
-	key2
+	key2,
+	key3
 }
 
 @export var key : Type = Type.none
 
-var opened : bool :
-	get:
-		return Global.player.has_key(key)
-
 func can_be_opened() -> bool:
-	print_debug('can I be opened?')
+	if key == Type.none: 
+		return true
+	
 	return Global.player.has_key(key)
 	

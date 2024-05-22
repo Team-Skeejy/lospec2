@@ -49,7 +49,6 @@ signal animation_done
 
 func _ready():
 
-	print_debug("Generating sample information")  # TODO remove
 	# InformationManager.instance.generate_sample_info()
 
 	flip_selected()

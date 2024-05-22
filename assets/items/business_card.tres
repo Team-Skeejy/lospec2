@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://bho0byvbf05tw"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_3fduw"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_beucc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo1y6"]
+atlas = ExtResource("2_beucc")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_3fduw")
+texture = SubResource("AtlasTexture_lo1y6")
+name = "#FFFFFF Business Card"
+description = "Will surely impress even the most discerning businessmen"
+behaviour_scene = "res://scenes/items/sample_item.tscn"
+cost = 10
+for_sale = true
+category = 0
+key_type = 2

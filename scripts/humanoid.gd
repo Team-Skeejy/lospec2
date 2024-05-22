@@ -64,7 +64,6 @@ func add_behaviour(behaviour: Behaviour):
 			return
 		i += 1
 	behaviours.push_back(behaviour)
-	print_debug(len(behaviours))
 	behaviour.added(self)
 
 # # implemented, but don't use this, i think it's a bad idea

@@ -108,7 +108,7 @@ sell_payout_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxC
 company_name_label = NodePath("VBoxContainer/CenterContainer/PanelContainer/VBoxContainer/HBoxContainer2/CompanyName")
 
 [node name="GraphOrigin" type="Node2D" parent="StockMarket"]
-position = Vector2(18, 91)
+position = Vector2(18, 87)
 
 [node name="GraphLine" type="Line2D" parent="StockMarket"]
 z_index = 1

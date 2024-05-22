@@ -21,6 +21,7 @@ func buy() -> ItemResource:
 		return null
 	sold_out = true
 	item_texture.texture = sold_out_texture
+	item_resource.for_sale = false
 	return item_resource
 
 func select():

@@ -4,11 +4,11 @@ extends Node
 static var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 static var instance: Global
-
-@export var player_scene: PackedScene
-
+@export_category("Items")
+@export var all_items : Array[ItemResource]
+@export_category("Nodes")
 @export var player_storage: Node
-
+@export var player_scene: PackedScene
 @export_file("*.tscn") var intro_scene: String
 @export_file("*.tscn") var tutorial_scene: String
 @export_file("*.tscn") var platformer_scene: String
@@ -36,10 +36,28 @@ static var all_companies: Array[String] = [
 ]
 
 func _ready():
+	Global.instance = self
+	
 	# I do this in global because I don't want to open files everytime a new dialogue generator is created
 	setup_dialogue()
-	Global.instance = self
+	setup_items()
 
+func setup_items():
+	# yes this is the actual way you look for all files in a path
+	var items_path := "res://assets/items/"
+	var dir = DirAccess.open(items_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			all_items.append(ResourceLoader.load(items_path+file_name))
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	else:
+		print("An error occurred when trying to access " + items_path)
+	
+	
+	
 func setup_dialogue():
 	var sell_file_path = "res://assets/text/sell_dialogue.txt"
 	var file_access: FileAccess = FileAccess.open(sell_file_path, FileAccess.READ)

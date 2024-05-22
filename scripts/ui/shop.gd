@@ -1,7 +1,6 @@
 extends Control
 
-@export_category("Inventory")
-@export var items_inventory: Array[ItemResource]
+
 @export_category("Nodes")
 @export var item_container_container: HBoxContainer
 @export var item_container_scene: PackedScene
@@ -17,10 +16,9 @@ var cost_label_pattern: String = "COST: $%s"
 var description_tween: Tween
 
 func _ready():
-	print_debug("lol, i'm here for some reason")
 	for _i in num_items_for_sale:
 		var item_container: ShopItemContainer = item_container_scene.instantiate()
-		item_container.item_resource = items_inventory.pick_random()
+		item_container.item_resource = Global.instance.all_items.pick_random()
 		item_container_container.add_child(item_container)
 		item_container_array.append(item_container)
 		item_container.on_selected.connect(start_description)

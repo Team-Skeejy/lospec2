@@ -7,6 +7,7 @@ signal on_arrival
 
 @onready var company: String = Global.instance.all_companies.pick_random()  # TODO set up companies somewhere else
 @export var navigation_agent: NavigationAgent2D
+@export var vision_container: Node2D
 
 var INTERACT_THRESHOLD_DISTANCE := 40.
 
@@ -31,6 +32,12 @@ func _process(delta):
 		if position.distance_to(navigation_agent.get_next_path_position()) > INTERACT_THRESHOLD_DISTANCE:
 			interact_target.interact(self)
 	super._process(delta)
+	if vision_container:
+		match _facing:
+			EDirection.right:
+				vision_container.scale.x = 1
+			EDirection.left:
+				vision_container.scale.x = -1
 
 func _physics_process(delta: float) -> void:
 	if !arrived:

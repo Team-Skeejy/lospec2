@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://du7d3x6mae8wj"]
+[gd_scene load_steps=12 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="Script" path="res://scripts/test_level.gd" id="1_ovvlx"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bgmqtfse5886o" path="res://scenes/map_objects/player_spawner.tscn" id="7_v50b3"]
 [ext_resource type="PackedScene" uid="uid://cecdbwt1q0fns" path="res://scenes/map_objects/bg_door_load.tscn" id="8_6fohb"]
 [ext_resource type="PackedScene" uid="uid://ba1kvwuvllyw6" path="res://scenes/map_objects/next_phase_water_cooler.tscn" id="10_4bo24"]
+[ext_resource type="PackedScene" uid="uid://c8khqqigj1d2g" path="res://scenes/npc_guard.tscn" id="11_dec8k"]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_ovvlx")
@@ -40,7 +41,7 @@ position = Vector2(67, -18)
 position = Vector2(341, -98)
 
 [node name="WarpDoor" parent="Objects" node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
-position = Vector2(-292, -18)
+position = Vector2(-293, -18)
 destination = NodePath("../WarpDoor2")
 
 [node name="WarpDoor2" parent="Objects" node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
@@ -126,5 +127,22 @@ metadata/_edit_use_anchors_ = true
 [node name="NextPhaseWaterCooler" parent="." instance=ExtResource("10_4bo24")]
 position = Vector2(-414, -83)
 
+[node name="NPC Guard" parent="." instance=ExtResource("11_dec8k")]
+position = Vector2(679, -116)
+
+[node name="NPCGuardPatrol" parent="NPC Guard/StateMachine" index="4" node_paths=PackedStringArray("position1", "position2")]
+position1 = NodePath("../../../Guard Patrol Point 1")
+position2 = NodePath("../../../Guard Patrol Point 2")
+
+[node name="NPCGuardAlert" parent="NPC Guard/StateMachine" index="5"]
+on_idle = ""
+
+[node name="Guard Patrol Point 1" type="Node2D" parent="."]
+position = Vector2(598, -116)
+
+[node name="Guard Patrol Point 2" type="Node2D" parent="."]
+position = Vector2(808, -116)
+
 [editable path="NPCs/NPC"]
 [editable path="NPCs/NPC2"]
+[editable path="NPC Guard"]

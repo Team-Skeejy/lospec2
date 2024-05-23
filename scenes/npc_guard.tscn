@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8khqqigj1d2g"]
+
+[ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="1_jo0f2"]
+[ext_resource type="Texture2D" uid="uid://dht8ce2g5igq2" path="res://textures/aseprite/torch.png" id="2_q78co"]
+
+[node name="NPC" node_paths=PackedStringArray("vision_container") instance=ExtResource("1_jo0f2")]
+vision_container = NodePath("VisionContainer")
+
+[node name="Sprite2D" parent="." index="1"]
+modulate = Color(0.404511, 0.404511, 0.404511, 1)
+
+[node name="VisionContainer" type="Node2D" parent="." index="2"]
+
+[node name="Torch" type="Sprite2D" parent="VisionContainer" index="0"]
+position = Vector2(56, -16)
+texture = ExtResource("2_q78co")
+
+[node name="DangerZone" type="Area2D" parent="VisionContainer/Torch" index="0"]
+position = Vector2(-56, 16)
+scale = Vector2(1, 0.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionContainer/Torch/DangerZone" index="0"]
+position = Vector2(7, -24)
+polygon = PackedVector2Array(0, 0, 96, -36, 98, -16, 98, 2, 96, 20)
+
+[node name="StateMachine" parent="." index="6" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("NPCGuardPatrol")
+
+[node name="NPCGuardIdle" parent="StateMachine" index="3" node_paths=PackedStringArray("danger_zone")]
+danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
+
+[node name="NPCGuardPatrol" parent="StateMachine" index="4" node_paths=PackedStringArray("danger_zone")]
+danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
+
+[node name="NPCGuardAlert" parent="StateMachine" index="5" node_paths=PackedStringArray("danger_zone")]
+danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
+
+[node name="Label" type="Label" parent="." index="10"]
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 8.0
+text = "Security"
+horizontal_alignment = 1

@@ -2,6 +2,8 @@ class_name NPCIdle
 extends NPCState
 
 @export var idle_to: String = "NPCPatrol"
+@export var on_alert: String = "NPCGuardAlert"
+
 
 @export var danger_zone: Area2D
 

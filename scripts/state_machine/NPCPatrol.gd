@@ -1,13 +1,16 @@
 class_name NPCPatrol
 extends NPCState
 
+@export var on_alert: String
+@export var on_idle: String
+
 @export var position1: Node2D
 @export var position2: Node2D
 @export var danger_zone: Area2D
 
 func on_danger_zone(body: Node2D):
 	if body is Player:
-		transitioned.emit(self, "NPCSecurity")
+		transitioned.emit(self, on_alert)
 
 func Enter():
 	# if danger_zone is defnied
@@ -15,7 +18,7 @@ func Enter():
 		# if the player is already in the danger zone
 		if danger_zone.get_overlapping_bodies().any(func(body): return body is Player):
 			# straight to the security mode
-			transitioned.emit(self, "NPCSecurity")
+			transitioned.emit(self, on_alert)
 		# if the player enters while patrolling, we go to security
 		danger_zone.body_entered.connect(on_danger_zone)
 
@@ -39,4 +42,4 @@ func Exit():
 func _on_arrival():
 	# print("arrived")
 	npc.on_arrival.disconnect(_on_arrival)
-	transitioned.emit(self, "NPCIdle")
+	transitioned.emit(self, on_idle)

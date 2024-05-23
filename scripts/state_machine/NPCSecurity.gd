@@ -1,16 +1,17 @@
 class_name NPCSecurity
 extends NPCState
 
-static var WARNING_TIME := 5.
+static var WARNING_TIME := 2.
 var countdown := WARNING_TIME
 
 var seen_before := false
 
 @export var danger_zone: Area2D
+@export var on_idle: String
 
 func on_undanger_zone(body: Node2D):
 	if body is Player:
-		transitioned.emit(self, "NPCIdle")
+		transitioned.emit(self, on_idle)
 
 func Enter() -> void:
 	countdown = WARNING_TIME
@@ -24,16 +25,16 @@ func Enter() -> void:
 			print_debug("OI, get outta here!")
 			seen_before = true
 	else:
-		transitioned.emit(self, "NPCIdle")
+		transitioned.emit(self, on_idle)
 
-func Process(delta: float) -> void:
+var done := false
+func Update(delta: float) -> void:
 	if countdown > 0:
 		countdown = move_toward(countdown, 0, delta)
-	else:
-		# TODO
-		# Yell at player
-		# npc.dialog_generator.new_speech_bubble(SpeechBubble.Type.SELL, "Alright... You're coming with me")
+	elif !done:
+		done = true
 		print_debug("send the player to the shadow realm")
+		# npc.dialog_generator.new_speech_bubble(SpeechBubble.Type.SELL, "Alright... You're coming with me")
 		Global.instance.go_to_next_phase()
 
 func Exit() -> void:

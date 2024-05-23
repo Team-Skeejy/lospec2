@@ -35,6 +35,8 @@ static var all_companies: Array[String] = [
 	"Vatican llc"
 ]
 
+signal new_speech_bubble(pos: Vector2)
+
 func _ready():
 	Global.instance = self
 	

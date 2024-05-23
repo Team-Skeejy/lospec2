@@ -11,7 +11,6 @@ func _ready() -> void:
 	for child: Node in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
-			@warning_ignore("unsafe_property_access", "unsafe_method_access")
 			child.transitioned.connect(on_child_transitioned)
 
 	if initial_state:

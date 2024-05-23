@@ -7,7 +7,6 @@ signal on_arrival
 
 @onready var company: String = Global.instance.all_companies.pick_random()  # TODO set up companies somewhere else
 @export var navigation_agent: NavigationAgent2D
-@export var dialog_generator: DialogueGenerator
 
 var INTERACT_THRESHOLD_DISTANCE := 40.
 

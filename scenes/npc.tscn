@@ -486,15 +486,15 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksgov"]
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "dialog_generator", "sprite_animation_player", "interaction_area", "behaviour_node")]
-collision_layer = 0
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator")]
+collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_qucbd")
 navigation_agent = NodePath("NavigationAgent2D")
-dialog_generator = NodePath("DialogueGenerator")
 sprite_animation_player = NodePath("AnimationPlayer")
 interaction_area = NodePath("InteractionArea2D")
 behaviour_node = NodePath("Behaviours")
+dialogue_generator = NodePath("DialogueGenerator")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -15)
@@ -542,7 +542,7 @@ script = ExtResource("7_h4ju1")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="DialogueGenerator" parent="." node_paths=PackedStringArray("npc") instance=ExtResource("6_t5wgk")]
-position = Vector2(0, -38)
+position = Vector2(0, -25)
 npc = NodePath("..")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]

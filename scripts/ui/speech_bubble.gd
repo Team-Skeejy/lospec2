@@ -4,7 +4,6 @@ extends PanelContainer
 @export var label : Label 
 @export var despawn_timer : Timer 
 @export var visible_notifier1 : VisibleOnScreenNotifier2D 
-@export var visible_notifier2 : VisibleOnScreenNotifier2D 
 @export var style_box : StyleBoxTexture
 
 var text_speed : int = 20 # in chars/second
@@ -66,7 +65,7 @@ func _process(delta: float):
 		# when all chars are shown, make it readable
 		if label.visible_ratio >= 1.0: 
 			despawn_timer.start(despawn_time)
-			visible_notifier2.position.x = size.x - 20
+			visible_notifier1.rect.size.x = size.x
 			if readable:
 				curr_state = State.READABLE
 			else:
@@ -74,8 +73,7 @@ func _process(delta: float):
 			
 	# when it's readable and on screen, read it
 	elif curr_state == State.READABLE and \
-		visible_notifier1.is_on_screen() and \
-		visible_notifier2.is_on_screen(): 
+		visible_notifier1.is_on_screen():
 		seen.emit(curr_type)
 		curr_state = State.READ
 		if curr_type == Type.SELL:

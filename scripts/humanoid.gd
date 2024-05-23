@@ -20,6 +20,7 @@ var direction := 0.
 @export var sprite_animation_player: AnimationPlayer
 @export var interaction_area: Area2D
 @export var behaviour_node: Node
+@export var dialogue_generator: DialogueGenerator
 
 enum EDirection {
 	left, right

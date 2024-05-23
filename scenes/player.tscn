@@ -1,7 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://bt1fj4qvrccb"]
+[gd_scene load_steps=37 format=3 uid="uid://bt1fj4qvrccb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8kpki"]
 [ext_resource type="PackedScene" uid="uid://g7ix8xbxhriq" path="res://scenes/ui/ui.tscn" id="3_5oucy"]
+[ext_resource type="PackedScene" uid="uid://itbjvhraldeu" path="res://scenes/map_objects/dialogue_generator.tscn" id="4_5mmsc"]
+[ext_resource type="Script" path="res://scripts/items/small_talk_action.gd" id="4_ctild"]
 [ext_resource type="Texture2D" uid="uid://dl1xq5j6x8731" path="res://textures/characters/player/Sprite 1.png" id="21_tx0hg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0xy1"]
@@ -515,13 +517,14 @@ _data = {
 "wall_slide_r": SubResource("Animation_bhuei")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ui", "sprite_animation_player", "interaction_area", "behaviour_node")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ui", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator")]
 z_index = 1
 script = ExtResource("1_8kpki")
 ui = NodePath("UI")
 sprite_animation_player = NodePath("AnimationPlayer")
 interaction_area = NodePath("InteractionArea2D")
 behaviour_node = NodePath("Behaviours")
+dialogue_generator = NodePath("DialogueGenerator")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_bottom = 32
@@ -555,3 +558,9 @@ libraries = {
 [node name="UI" parent="." instance=ExtResource("3_5oucy")]
 
 [node name="Behaviours" type="Node" parent="."]
+
+[node name="Node" type="Node" parent="Behaviours"]
+script = ExtResource("4_ctild")
+
+[node name="DialogueGenerator" parent="." instance=ExtResource("4_5mmsc")]
+position = Vector2(0, -25)

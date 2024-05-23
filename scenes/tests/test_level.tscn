@@ -31,7 +31,7 @@ end_position = Vector2(3, -49)
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="Sittable" parent="Objects" instance=ExtResource("4_h0oka")]
-position = Vector2(85, -98)
+position = Vector2(599, -117)
 
 [node name="Sittable2" parent="Objects" instance=ExtResource("4_h0oka")]
 position = Vector2(67, -18)
@@ -80,7 +80,7 @@ position1 = NodePath("../../../Node2D")
 position2 = NodePath("../../../Node2D2")
 
 [node name="NPC2" parent="NPCs" instance=ExtResource("7_4jeeo")]
-position = Vector2(39, -97)
+position = Vector2(530, -123)
 
 [node name="StateMachine" parent="NPCs/NPC2" index="5" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("NPCIdle")
@@ -96,7 +96,7 @@ position = Vector2(-335, -17)
 position = Vector2(-243, -82)
 
 [node name="Node2D3" type="Node2D" parent="NPCs"]
-position = Vector2(22, -99)
+position = Vector2(519, -116)
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("7_v50b3")]
 position = Vector2(-386, -93)

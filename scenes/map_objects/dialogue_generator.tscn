@@ -1,8 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://itbjvhraldeu"]
+[gd_scene load_steps=4 format=3 uid="uid://itbjvhraldeu"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/dialogue_generator.gd" id="1_mfdet"]
 [ext_resource type="PackedScene" uid="uid://bfgmw6gg4doac" path="res://scenes/ui/speech_bubble.tscn" id="2_ryvse"]
 
-[node name="DialogueGenerator" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6u6j"]
+size = Vector2(72, 27.5)
+
+[node name="DialogueGenerator" type="Node2D" node_paths=PackedStringArray("dialogue_area")]
 script = ExtResource("1_mfdet")
 speech_bubble_scene = ExtResource("2_ryvse")
+dialogue_area = NodePath("DialogueArea")
+
+[node name="DialogueArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea"]
+position = Vector2(0, 7.75)
+shape = SubResource("RectangleShape2D_s6u6j")

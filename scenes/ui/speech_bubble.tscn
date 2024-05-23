@@ -4,7 +4,7 @@
 [ext_resource type="StyleBox" uid="uid://bggnvvsx5wev8" path="res://assets/style_boxes/speech_bubble.tres" id="2_13pcl"]
 [ext_resource type="Script" path="res://scripts/ui/speech_bubble.gd" id="3_ej8al"]
 
-[node name="SpeechBubble" type="PanelContainer" node_paths=PackedStringArray("label", "despawn_timer", "visible_notifier1", "visible_notifier2")]
+[node name="SpeechBubble" type="PanelContainer" node_paths=PackedStringArray("label", "despawn_timer", "visible_notifier1")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -22,7 +22,6 @@ script = ExtResource("3_ej8al")
 label = NodePath("Label")
 despawn_timer = NodePath("DespawnTimer")
 visible_notifier1 = NodePath("VisibleNotifier1")
-visible_notifier2 = NodePath("VisibleNotifier2")
 style_box = ExtResource("2_13pcl")
 
 [node name="Label" type="Label" parent="."]
@@ -38,10 +37,6 @@ vertical_alignment = 1
 one_shot = true
 
 [node name="VisibleNotifier1" type="VisibleOnScreenNotifier2D" parent="."]
-scale = Vector2(0.8, 0.85)
-rect = Rect2(0, 0, 20, 20)
-
-[node name="VisibleNotifier2" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(0.8, 0.85)
 rect = Rect2(0, 0, 20, 20)
 

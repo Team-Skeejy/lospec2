@@ -534,7 +534,6 @@ npc = NodePath("../..")
 
 [node name="NPCPatrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("6_kb2o8")
-on_idle = "NPCIdle"
 npc = NodePath("../..")
 
 [node name="NPCGuardIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
@@ -544,13 +543,10 @@ npc = NodePath("../..")
 
 [node name="NPCGuardPatrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("6_kb2o8")
-on_alert = "NPCGuardAlert"
-on_idle = "NPCGuardIdle"
 npc = NodePath("../..")
 
 [node name="NPCGuardAlert" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("7_h4ju1")
-on_idle = "NPCGuardIdle"
 npc = NodePath("../..")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

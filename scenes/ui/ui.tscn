@@ -98,7 +98,7 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "50$"
 
-[node name="TimeRemaining" type="HBoxContainer" parent="Control/PauseMenu" node_paths=PackedStringArray("hour_texture", "minute_texture", "ten_min_timer")]
+[node name="TimeRemaining" type="HBoxContainer" parent="Control/PauseMenu" node_paths=PackedStringArray("hour_texture", "minute_texture")]
 process_mode = 1
 layout_mode = 0
 offset_left = 216.0
@@ -109,7 +109,6 @@ theme_override_constants/separation = 0
 script = ExtResource("3_l3apt")
 hour_texture = NodePath("HourTexture")
 minute_texture = NodePath("MinuteTexture")
-ten_min_timer = NodePath("TenMinuteTimer")
 
 [node name="HourTexture" type="TextureRect" parent="Control/PauseMenu/TimeRemaining"]
 layout_mode = 2

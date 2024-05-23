@@ -3,9 +3,17 @@ extends Node
 
 static var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+static var TIME_LIMIT: float = 2 * 60  # 2 minute time limit
+static var TIME_DIVISIONS: int = 8 * 6  # 8 hr days, divided into 10 minute segments
+static var TIME_SEGMENT_LENGTH: float = TIME_LIMIT / TIME_DIVISIONS
+var time_limit_countdown: float = TIME_LIMIT
+var prev_time_signal_at: int = 0
+signal time_changed(part: int, of: int)
+signal time_out
+
 static var instance: Global
 @export_category("Items")
-@export var all_items : Array[ItemResource]
+@export var all_items: Array[ItemResource]
 @export_category("Nodes")
 @export var player_storage: Node
 @export var player_scene: PackedScene
@@ -37,10 +45,23 @@ static var all_companies: Array[String] = [
 
 func _ready():
 	Global.instance = self
-	
+
 	# I do this in global because I don't want to open files everytime a new dialogue generator is created
 	setup_dialogue()
 	setup_items()
+
+
+func _process(delta: float):
+	time_limit_countdown = move_toward(time_limit_countdown, 0, delta)
+	var parts: int = (time_limit_countdown / TIME_SEGMENT_LENGTH) + 1
+	if time_limit_countdown == 0 && prev_time_signal_at != 0:
+		prev_time_signal_at = 0
+		time_changed.emit(0, TIME_DIVISIONS)
+		time_out.emit()
+	elif parts != prev_time_signal_at:
+		prev_time_signal_at = parts
+		time_changed.emit(parts, TIME_DIVISIONS)
+
 
 func setup_items():
 	# yes this is the actual way you look for all files in a path
@@ -50,14 +71,13 @@ func setup_items():
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			all_items.append(ResourceLoader.load(items_path+file_name))
+			all_items.append(ResourceLoader.load(items_path + file_name))
 			file_name = dir.get_next()
 		dir.list_dir_end()
 	else:
 		print("An error occurred when trying to access " + items_path)
-	
-	
-	
+
+
 func setup_dialogue():
 	var sell_file_path = "res://assets/text/sell_dialogue.txt"
 	var file_access: FileAccess = FileAccess.open(sell_file_path, FileAccess.READ)
@@ -103,18 +123,21 @@ func go_to_phase(phase: GamePhase):
 			FadeTransition.instance.transition_to(platformer_scene)
 		GamePhase.platformer:
 			FadeTransition.instance.transition_to(platformer_scene)
+			reset_timer()
 		GamePhase.shop:
 			FadeTransition.instance.transition_to(shop_scene)
 		GamePhase.home:
 			FadeTransition.instance.transition_to(home_scene)
 		GamePhase.test_platformer:
 			store_player_and_transition_to(test_game_scene)
+			reset_timer()
 		GamePhase.test_bet:
 			store_player_and_transition_to(test_bet_scene)
 		GamePhase.test_shop:
 			store_player_and_transition_to(test_shop_scene)
 
 func go_to_next_phase():
+	time_limit_countdown = 0
 	match (current_phase):
 		GamePhase.intro:
 			current_phase = GamePhase.tutorial
@@ -136,3 +159,8 @@ func go_to_next_phase():
 
 func update_money(change: int):
 	player_money += change
+
+func reset_timer():
+	time_limit_countdown = TIME_LIMIT
+	prev_time_signal_at = TIME_DIVISIONS
+	time_changed.emit(TIME_DIVISIONS, TIME_DIVISIONS)

@@ -22,6 +22,11 @@ Fade="*res://scenes/fade_transition.tscn"
 InfoManager="*res://scenes/global/information_manager.tscn"
 Modifiers="*res://scripts/globals/modifiers.gd"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+gdscript/warnings/narrowing_conversion=0
+
 [display]
 
 window/size/viewport_width=256

@@ -18,8 +18,7 @@ func added(_holder: Humanoid):
 	tween.tween_property(holder, "global_position", source.global_position, WarpDoor.TWEEN_SPEED)
 
 func any_press(_button: String, _delta: float) -> void:
-	holder.remove_item(self)
-	queue_free()
+	holder.remove_behaviour(self)
 
 func physics_process(_delta: float) -> bool:
 	holder.velocity = Vector2.ZERO

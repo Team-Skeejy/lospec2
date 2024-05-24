@@ -1,13 +1,12 @@
-class_name WarpTo
+class_name Hide
 extends Behaviour
 
-var target: WarpDoor
-var source: WarpDoor
+var source: HideDoor
 
-func _init(src: WarpDoor, tgt: WarpDoor):
+func _init(src: HideDoor):
 	source = src
-	target = tgt
 	self.animation = "enter"
+	name = "Hide"
 
 func added(_holder: Humanoid):
 	super.added(_holder)
@@ -16,28 +15,19 @@ func added(_holder: Humanoid):
 	else:
 		holder._facing = holder.EDirection.right
 
-	var collision_shapes := holder.interaction_area.get_children().filter(func(child): return child is CollisionShape2D)
-	for shape in collision_shapes: shape.disabled = true
-
 	var tween: Tween = create_tween()
 	tween.tween_property(holder, "global_position", source.global_position, WarpDoor.TWEEN_SPEED)
 
 	await holder.sprite_animation_player.animation_finished
-
 	animation = "none"
 
-	tween = create_tween()
-	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property(holder, "global_position", target.global_position, WarpDoor.TRAVEL_SPEED)
-	await tween.finished
-
-	target.arrive(holder)
-
-	animation = "exit"
+func any_press(_button: String, _delta: float) -> void:
+	source.leave(holder)
+	self.animation = "exit"
 	await holder.sprite_animation_player.animation_finished
-	for shape in collision_shapes: shape.disabled = false
-	holder.remove_behaviour(self)
+	if holder: holder.remove_behaviour(self)
 
 func physics_process(_delta: float):
 	holder.velocity = Vector2.ZERO
 	return true
+

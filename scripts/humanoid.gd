@@ -82,7 +82,7 @@ func add_behaviour(behaviour: Behaviour):
 # removes item from item list
 # runs item.removed()
 # DOES NOT reparent item
-func remove_item(item: Behaviour):
+func remove_behaviour(item: Behaviour):
 	var index := behaviours.find(item)
 	if index > -1:
 		behaviours.remove_at(index)

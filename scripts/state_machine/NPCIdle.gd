@@ -12,17 +12,9 @@ static var IDLE_TIME = 2.
 
 func on_danger_zone(body: Node2D):
 	if body is Player:
-		transitioned.emit(self, "NPCSecurity")
+		transitioned.emit(self, on_alert)
 
 func Enter() -> void:
-	# if danger_zone is defnied
-	if danger_zone:
-		# if the player is already in the danger zon
-		if danger_zone.get_overlapping_bodies().any(func(body): return body is Player):
-			# straight to the security mode
-			transitioned.emit(self, "NPCSecurity")
-		# if the player enters while patrolling, we go to security
-		danger_zone.body_entered.connect(on_danger_zone)
 
 	# create a timer and wait for it to start wandering
 	timer = Timer.new()
@@ -31,6 +23,15 @@ func Enter() -> void:
 	add_child(timer)
 	timer.start()
 	timer.timeout.connect(_on_timer_timeout)
+
+func Update(_delta: float):
+	if !danger_zone: return
+	var players := danger_zone.get_overlapping_bodies().filter(func(body): return body is Player)
+	for player in players:
+		if player.behaviours.any(func(behaviour): return behaviour is Hide):
+			continue
+		else:
+			transitioned.emit(self, on_alert)
 
 func Exit() -> void:
 	if timer.timeout.is_connected(_on_timer_timeout):

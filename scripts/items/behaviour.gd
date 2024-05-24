@@ -20,6 +20,7 @@ func added(_holder: Humanoid) -> void:
 # executed when item is removed from holder inventory using the Player.remove_item() method
 # must handle own deletion/reparenting, this only removes item from the holder's item list
 func removed() -> void:
+  queue_free()
   holder = null
 
 # executed when any non-select non-start button is pressed
@@ -40,12 +41,12 @@ func down_press(_delta: float) -> bool:
 # # return true to stop propogation
 # # executed when a is pressed always
 # func left_press(_delta: float) -> bool:
-#   return false
+#  return false
 
 # # return true to stop propogation
 # # executed when a is pressed always
 # func right_press(_delta: float) -> bool:
-#   return false
+#  return false
 
 # return true to stop propogation
 # executed when a is pressed always

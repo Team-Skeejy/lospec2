@@ -9,15 +9,15 @@ const open_menu_position := Vector2()
 const closed_menu_position := Vector2(0, 192)
 
 var tween: Tween
-@export var notification_scene : PackedScene
-@export var menu : TextureRect
-@export var interaction_name : Label
-@export var money_label : Label 
-@export var settings_menu : SettingsMenu
-@export var crt_effects : ColorRect
-@export var info_ui : InformationUI
-@export var inventory : Inventory
-@export var notification_holder : Control
+@export var notification_scene: PackedScene
+@export var menu: TextureRect
+@export var interaction_name: Label
+@export var money_label: Label
+@export var settings_menu: SettingsMenu
+@export var crt_effects: ColorRect
+@export var info_ui: InformationUI
+@export var inventory: Inventory
+@export var notification_holder: Control
 func _ready():
 	info_ui.retract()
 	pass
@@ -27,26 +27,26 @@ func _process(_delta: float):
 		interaction_name.text = Global.player.interact_target.interaction_name
 	elif interaction_name:
 		interaction_name.text = "Jump"
-	
+
 	money_label.text = str(Global.instance.player_money) + "$"
-	
+
 	if Input.is_action_just_pressed("Start"):
 		if is_opened:
 			close()
 		else:
 			open()
-	
+
 	# only check for other inputs if it's not opened
 	if not is_opened:
 		return
-	
+
 	if Input.is_action_just_pressed("Select"):
 		settings_menu.visible = not settings_menu.visible
 
-		
+
 	elif Input.is_action_just_pressed("A") and not settings_menu.visible:
 		info_ui.flip_expanded()
-		
+
 func open():
 	if tween and tween.is_running():
 		return
@@ -79,12 +79,14 @@ func _flip_paused():
 func update_items():
 	inventory.update_items()
 
-func new_notification_no_texture(text: String):
+func new_notification_no_texture(text: String, length: float = Notification.DEFAULT_DESPAWN_TIME):
 	var notif := notification_scene.instantiate()
+	notif.despawn_time = length
 	notification_holder.add_child(notif)
 	notif.start_no_texture(text)
-	
-func new_notification_with_texture(text: String, pos: Vector2, dark:bool):
+
+func new_notification_with_texture(text: String, pos: Vector2, dark: bool, length: float = Notification.DEFAULT_DESPAWN_TIME):
 	var notif := notification_scene.instantiate()
+	notif.despawn_time = length
 	notification_holder.add_child(notif)
 	notif.start_with_texture(text, pos, dark)

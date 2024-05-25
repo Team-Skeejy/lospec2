@@ -89,6 +89,8 @@ func remove_behaviour(item: Behaviour):
 		item.removed()
 
 func _ready():
+	floor_constant_speed = true
+	floor_snap_length = 3
 	sprite_animation_player.play(animation_name)
 	evaluate_items()
 
@@ -166,6 +168,7 @@ func _physics_process(delta: float):
 	# clamps player speed
 	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 	move_and_slide()
+	
 
 func _process(_delta: float):
 	var collisions := interaction_area.get_overlapping_areas()

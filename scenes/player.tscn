@@ -519,6 +519,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ui", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator")]
 z_index = 1
+collision_mask = 17
 script = ExtResource("1_8kpki")
 ui = NodePath("UI")
 sprite_animation_player = NodePath("AnimationPlayer")
@@ -533,7 +534,7 @@ editor_draw_limits = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(10, 3)
-polygon = PackedVector2Array(-10, -4, -13, -5, -16, -7, -16, -27, -10, -32, -4, -27, -4, -7, -7, -5)
+polygon = PackedVector2Array(-16, -5, -16, -27, -10, -32, -4, -27, -4, -5, -10, -4)
 
 [node name="InteractionArea2D" type="Area2D" parent="."]
 show_behind_parent = true
@@ -563,4 +564,4 @@ libraries = {
 script = ExtResource("4_ctild")
 
 [node name="DialogueGenerator" parent="." instance=ExtResource("4_5mmsc")]
-position = Vector2(0, -25)
+position = Vector2(0, -24)

@@ -5,4 +5,4 @@
 [resource]
 resource_local_to_scene = true
 shader = ExtResource("1_pjeio")
-shader_parameter/active = true
+shader_parameter/active = false

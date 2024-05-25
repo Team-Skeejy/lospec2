@@ -107,9 +107,14 @@ func has_key(k: Lock.Type) -> bool:
 		if item_resource.key_type == k:
 			return true
 	return false
+	floor_stop_on_slope
 
 func _process(delta: float):
 	super._process(delta)
 	if interact_target:
 		interact_target.shader_sprite.material.set_shader_parameter("active", true)
 	#handle_animation()
+	if Input.is_action_pressed("Down"):
+		collision_mask = 1
+	else:
+		collision_mask = 17

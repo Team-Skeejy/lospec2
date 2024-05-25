@@ -9,6 +9,7 @@ func _process(delta):
 		_flip_paused()
 		settings_menu.visible = not settings_menu.visible
 	elif Input.is_action_just_pressed("Start"):
+		get_tree().paused = false
 		FadeTransition.instance.transition_to(game_scene)
 	
 

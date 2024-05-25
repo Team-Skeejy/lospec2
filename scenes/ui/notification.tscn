@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://nf1pbilmoorh"]
+
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_mnsnp"]
+[ext_resource type="Script" path="res://scripts/ui/notification.gd" id="1_yfloc"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_288ve"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1atfl"]
+content_margin_left = 7.0
+content_margin_top = 7.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+texture = ExtResource("1_mnsnp")
+texture_margin_left = 13.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+region_rect = Rect2(176, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnled"]
+atlas = ExtResource("2_288ve")
+region = Rect2(0, 224, 32, 32)
+
+[node name="Notification" type="Control" node_paths=PackedStringArray("label", "despawn_timer", "item_texture")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yfloc")
+label = NodePath("CenterContainer/PanelContainer/HBoxContainer/Label")
+despawn_timer = NodePath("Timer")
+item_texture = NodePath("CenterContainer/PanelContainer/HBoxContainer/TextureRect")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1atfl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_bnled")
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+text = "One of the amazing 
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

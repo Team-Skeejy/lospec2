@@ -26,32 +26,32 @@ region_rect = Rect2(144, 64, 32, 32)
 atlas = ExtResource("1_qm1a0")
 region = Rect2(32, 32, 16, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y6vmq"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b78r5"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h6110"]
-atlas = SubResource("CompressedTexture2D_y6vmq")
+atlas = SubResource("CompressedTexture2D_b78r5")
 region = Rect2(48, 32, 16, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fedk8"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pf561"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmpjn"]
-atlas = SubResource("CompressedTexture2D_fedk8")
+atlas = SubResource("CompressedTexture2D_pf561")
 region = Rect2(32, 32, 16, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xatss"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_o6y2w"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uydme"]
-atlas = SubResource("CompressedTexture2D_xatss")
+atlas = SubResource("CompressedTexture2D_o6y2w")
 region = Rect2(32, 32, 16, 16)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_laa2d"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_g7lqv"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w88fo"]
-atlas = SubResource("CompressedTexture2D_laa2d")
+atlas = SubResource("CompressedTexture2D_g7lqv")
 region = Rect2(32, 32, 16, 16)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_adk2s"]

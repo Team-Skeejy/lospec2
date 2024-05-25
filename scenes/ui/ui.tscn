@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://g7ix8xbxhriq"]
+[gd_scene load_steps=19 format=3 uid="uid://g7ix8xbxhriq"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_u6oey"]
 [ext_resource type="Texture2D" uid="uid://dvwmrm386lhtk" path="res://textures/aseprite/in_game_menu.png" id="2_fmcbu"]
+[ext_resource type="PackedScene" uid="uid://nf1pbilmoorh" path="res://scenes/ui/notification.tscn" id="2_wciut"]
 [ext_resource type="Script" path="res://scripts/ui/TimeRemaining.gd" id="3_l3apt"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="4_tpqrp"]
 [ext_resource type="PackedScene" uid="uid://bf0wabkpsckws" path="res://scenes/ui/information_ui.tscn" id="5_rbeyn"]
@@ -45,18 +46,20 @@ shader_parameter/scan_line_intensity = 0.056
 shader_parameter/palette_in = ExtResource("11_hv6us")
 shader_parameter/palette_out = ExtResource("12_378hj")
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui", "inventory")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui", "inventory", "notification_holder")]
 process_mode = 3
 script = ExtResource("1_u6oey")
-menu = NodePath("Control/PauseMenu")
-interaction_name = NodePath("Control/PauseMenu/InteractionLabel")
-money_label = NodePath("Control/PauseMenu/MoneyLabel")
+notification_scene = ExtResource("2_wciut")
+menu = NodePath("PauseMenu")
+interaction_name = NodePath("PauseMenu/InteractionLabel")
+money_label = NodePath("PauseMenu/MoneyLabel")
 settings_menu = NodePath("SettingsMenu")
 crt_effects = NodePath("CrtEffect")
-info_ui = NodePath("Control/PauseMenu/InformationUI")
-inventory = NodePath("Control/PauseMenu/InvContainer/Inventory")
+info_ui = NodePath("PauseMenu/InformationUI")
+inventory = NodePath("PauseMenu/InvContainer/Inventory")
+notification_holder = NodePath("NotificationHolder")
 
-[node name="Control" type="Control" parent="."]
+[node name="NotificationHolder" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,9 +67,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseMenu" type="TextureRect" parent="Control"]
+[node name="PauseMenu" type="TextureRect" parent="."]
 show_behind_parent = true
-layout_mode = 0
 offset_top = 192.0
 offset_right = 256.0
 offset_bottom = 416.0
@@ -74,7 +76,7 @@ texture = ExtResource("2_fmcbu")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="InteractionLabel" type="Label" parent="Control/PauseMenu"]
+[node name="InteractionLabel" type="Label" parent="PauseMenu"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 1.0
@@ -86,7 +88,7 @@ theme_override_constants/shadow_outline_size = 0
 text = "Jump"
 vertical_alignment = 1
 
-[node name="MoneyLabel" type="Label" parent="Control/PauseMenu"]
+[node name="MoneyLabel" type="Label" parent="PauseMenu"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 17.0
@@ -98,7 +100,7 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_font_sizes/font_size = 16
 text = "50$"
 
-[node name="TimeRemaining" type="HBoxContainer" parent="Control/PauseMenu" node_paths=PackedStringArray("hour_texture", "minute_texture")]
+[node name="TimeRemaining" type="HBoxContainer" parent="PauseMenu" node_paths=PackedStringArray("hour_texture", "minute_texture")]
 process_mode = 1
 layout_mode = 0
 offset_left = 216.0
@@ -110,20 +112,20 @@ script = ExtResource("3_l3apt")
 hour_texture = NodePath("HourTexture")
 minute_texture = NodePath("MinuteTexture")
 
-[node name="HourTexture" type="TextureRect" parent="Control/PauseMenu/TimeRemaining"]
+[node name="HourTexture" type="TextureRect" parent="PauseMenu/TimeRemaining"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_7xqi4")
 stretch_mode = 2
 
-[node name="MinuteTexture" type="TextureRect" parent="Control/PauseMenu/TimeRemaining"]
+[node name="MinuteTexture" type="TextureRect" parent="PauseMenu/TimeRemaining"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_y3dl5")
 stretch_mode = 2
 
-[node name="TenMinuteTimer" type="Timer" parent="Control/PauseMenu/TimeRemaining"]
+[node name="TenMinuteTimer" type="Timer" parent="PauseMenu/TimeRemaining"]
 autostart = true
 
-[node name="MarketClosesIn" type="Label" parent="Control/PauseMenu"]
+[node name="MarketClosesIn" type="Label" parent="PauseMenu"]
 layout_mode = 0
 offset_left = 210.0
 offset_top = 1.0
@@ -134,23 +136,23 @@ text = "Market
 Closes in:"
 horizontal_alignment = 1
 
-[node name="InvContainer" type="CenterContainer" parent="Control/PauseMenu"]
+[node name="InvContainer" type="CenterContainer" parent="PauseMenu"]
 layout_mode = 0
 offset_top = 41.0
 offset_right = 256.0
 offset_bottom = 205.0
 
-[node name="Inventory" parent="Control/PauseMenu/InvContainer" instance=ExtResource("6_ve48v")]
+[node name="Inventory" parent="PauseMenu/InvContainer" instance=ExtResource("6_ve48v")]
 layout_mode = 2
 
-[node name="InformationUI" parent="Control/PauseMenu" instance=ExtResource("5_rbeyn")]
+[node name="InformationUI" parent="PauseMenu" instance=ExtResource("5_rbeyn")]
 layout_mode = 1
 offset_left = 48.0
 offset_top = 3.0
 offset_right = -48.0
 offset_bottom = -190.0
 
-[node name="Controls" type="HBoxContainer" parent="Control/PauseMenu"]
+[node name="Controls" type="HBoxContainer" parent="PauseMenu"]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 1
 anchors_preset = 12
@@ -160,32 +162,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Start" type="TextureRect" parent="Control/PauseMenu/Controls"]
+[node name="Start" type="TextureRect" parent="PauseMenu/Controls"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_ss1m2")
 stretch_mode = 2
 
-[node name="Continue" type="Label" parent="Control/PauseMenu/Controls"]
+[node name="Continue" type="Label" parent="PauseMenu/Controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = " Continue"
 
-[node name="Select" type="TextureRect" parent="Control/PauseMenu/Controls"]
+[node name="Select" type="TextureRect" parent="PauseMenu/Controls"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_rksdm")
 stretch_mode = 2
 
-[node name="Settings" type="Label" parent="Control/PauseMenu/Controls"]
+[node name="Settings" type="Label" parent="PauseMenu/Controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = " Settings"
 
-[node name="A" type="TextureRect" parent="Control/PauseMenu/Controls"]
+[node name="A" type="TextureRect" parent="PauseMenu/Controls"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_ktqkj")
 stretch_mode = 2
 
-[node name="SeeInfo" type="Label" parent="Control/PauseMenu/Controls"]
+[node name="SeeInfo" type="Label" parent="PauseMenu/Controls"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = " See Info"
@@ -195,6 +197,7 @@ visible = false
 crt_texture = NodePath("../CrtEffect")
 
 [node name="CrtEffect" type="ColorRect" parent="."]
+top_level = true
 material = SubResource("ShaderMaterial_3hmtj")
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,4 +205,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[connection signal="timeout" from="Control/PauseMenu/TimeRemaining/TenMinuteTimer" to="Control/PauseMenu/TimeRemaining" method="_on_ten_minute_timer_timeout"]
+[connection signal="timeout" from="PauseMenu/TimeRemaining/TenMinuteTimer" to="PauseMenu/TimeRemaining" method="_on_ten_minute_timer_timeout"]

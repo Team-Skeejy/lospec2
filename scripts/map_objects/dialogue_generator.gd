@@ -36,8 +36,11 @@ func respond_to_small_talk():
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
 		new_dialogue_speech_bubble(_t)
 		has_info_to_give = false
+		Global.instance.new_notification_no_texture("AHAHAHAHAHAHAHAHAHAH")
+		
 	else:  # if not, generate small talk
 		new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK)
+		Global.instance.new_notification_no_texture("WOWOWOWOWOWOWOWOWOW")
 
 func add_speech_bubble(speech_bubble: SpeechBubble):
 	add_child(speech_bubble)

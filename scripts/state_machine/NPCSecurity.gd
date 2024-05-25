@@ -20,9 +20,9 @@ func Enter() -> void:
 		# Yell at player
 		# TODO
 		if seen_before:
-			print_debug("You again?! Scram!")
+			npc.dialogue_generator.new_custom_speech_bubble("You again?! Scram!", SpeechBubble.Type.SELL)
 		else:
-			print_debug("OI, get outta here!")
+			npc.dialogue_generator.new_custom_speech_bubble("OI, get outta here!", SpeechBubble.Type.SELL)
 			seen_before = true
 	else:
 		transitioned.emit(self, on_idle)
@@ -34,8 +34,9 @@ func Update(delta: float) -> void:
 	elif !done:
 		done = true
 		print_debug("send the player to the shadow realm")
-		# npc.dialog_generator.new_speech_bubble(SpeechBubble.Type.SELL, "Alright... You're coming with me")
+		npc.dialogue_generator.new_custom_speech_bubble("Alright... You're coming with me", SpeechBubble.Type.SELL)
 		Global.instance.go_to_next_phase()
+		Global.instance.store_player_and_transition_to("res://scenes/ui/kicked_out.tscn")
 
 func Exit() -> void:
 	if danger_zone && danger_zone.body_exited.is_connected(on_undanger_zone):

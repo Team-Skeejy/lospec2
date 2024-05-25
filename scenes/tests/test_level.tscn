@@ -39,7 +39,7 @@ position = Vector2(610, -114)
 position = Vector2(67, -18)
 
 [node name="Sittable3" parent="Objects" instance=ExtResource("4_h0oka")]
-position = Vector2(341, -98)
+position = Vector2(421, -130)
 
 [node name="WarpDoor" parent="Objects" node_paths=PackedStringArray("destination") instance=ExtResource("5_pcnwj")]
 position = Vector2(-293, -18)
@@ -62,7 +62,7 @@ position = Vector2(836, -18)
 destination = NodePath("../WarpDoor")
 
 [node name="MapDoor" parent="Objects" node_paths=PackedStringArray("lock") instance=ExtResource("6_lvxox")]
-position = Vector2(-210, -74)
+position = Vector2(-39, -85)
 lock = NodePath("Lock")
 
 [node name="Lock" type="Node" parent="Objects/MapDoor"]
@@ -82,10 +82,10 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="NextPhaseWaterCooler" parent="Objects" instance=ExtResource("10_4bo24")]
-position = Vector2(-414, -83)
+position = Vector2(361, -67)
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("7_v50b3")]
-position = Vector2(409, -171)
+position = Vector2(745, -164)
 
 [node name="Door2" parent="." instance=ExtResource("8_6fohb")]
 position = Vector2(-479, -37)
@@ -109,6 +109,7 @@ position = Vector2(-370, -20)
 initial_state = NodePath("NPCIdle")
 
 [node name="NPCPatrol" parent="NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
+on_idle = "NPCIdle"
 position1 = NodePath("../../../Node2D")
 position2 = NodePath("../../../Node2D2")
 

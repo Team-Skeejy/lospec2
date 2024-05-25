@@ -51,6 +51,7 @@ func up_press(delta: float) -> void:
 	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.up_press(delta): break
 
 func down_press(delta: float) -> void:
+	position.y += 1
 	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): item.any_press("Down", delta)
 	for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.down_press(delta): break
 

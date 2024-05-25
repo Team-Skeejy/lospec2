@@ -112,4 +112,6 @@ func has_key(k: Lock.Type) -> bool:
 
 func _process(delta: float):
 	super._process(delta)
+	if interact_target:
+		interact_target.shader_sprite.material.set_shader_parameter("active", true)
 	#handle_animation()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba1kvwuvllyw6"]
+[gd_scene load_steps=6 format=3 uid="uid://ba1kvwuvllyw6"]
 
 [ext_resource type="Script" path="res://scripts/next_phase_water_cooler.gd" id="1_fjup5"]
+[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="1_pucr2"]
 [ext_resource type="Texture2D" uid="uid://bwfxfnwff3p1l" path="res://textures/tilesets/tileset1.png" id="1_vqpw7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_coveu"]
@@ -10,13 +11,15 @@ size = Vector2(26, 31)
 atlas = ExtResource("1_vqpw7")
 region = Rect2(192, 16, 16, 32)
 
-[node name="NextPhaseWaterCooler" type="Area2D"]
+[node name="NextPhaseWaterCooler" type="Area2D" node_paths=PackedStringArray("shader_sprite")]
 script = ExtResource("1_fjup5")
+shader_sprite = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_coveu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_pucr2")
 position = Vector2(0, -16)
 texture = SubResource("AtlasTexture_h70eo")

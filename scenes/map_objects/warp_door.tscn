@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwoobo3k2h8bm"]
+[gd_scene load_steps=10 format=3 uid="uid://bwoobo3k2h8bm"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/warp_door.gd" id="1_1ny15"]
+[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="1_a7jc4"]
 [ext_resource type="Texture2D" uid="uid://de1ff6gja80hc" path="res://textures/tilesets/doors.png" id="2_uwf5q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g8omb"]
@@ -53,11 +54,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wsw2v"]
 size = Vector2(41, 38)
 
-[node name="WarpDoor" type="Area2D" node_paths=PackedStringArray("sprite")]
+[node name="WarpDoor" type="Area2D" node_paths=PackedStringArray("sprite", "shader_sprite")]
 script = ExtResource("1_1ny15")
 sprite = NodePath("AnimatedSprite2D")
+shader_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("1_a7jc4")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_iquis")
 animation = &"openclose"

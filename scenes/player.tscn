@@ -559,7 +559,7 @@ libraries = {
 
 [node name="Behaviours" type="Node" parent="."]
 
-[node name="Node" type="Node" parent="Behaviours"]
+[node name="SmallTalk" type="Node" parent="Behaviours"]
 script = ExtResource("4_ctild")
 
 [node name="DialogueGenerator" parent="." instance=ExtResource("4_5mmsc")]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cecdbwt1q0fns"]
+[gd_scene load_steps=11 format=3 uid="uid://cecdbwt1q0fns"]
 
 [ext_resource type="Script" path="res://scripts/door.gd" id="1_jlv2j"]
 [ext_resource type="Texture2D" uid="uid://bkldgnln5emkq" path="res://textures/elevator.png" id="2_fjq3s"]
+[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="2_h48tb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5opu5"]
 size = Vector2(19, 32)
@@ -26,7 +27,7 @@ region = Rect2(114, 0, 38, 38)
 atlas = ExtResource("2_fjq3s")
 region = Rect2(152, 0, 38, 38)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_b6cgn"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_f1rgd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -60,19 +61,54 @@ animations = [{
 "loop": false,
 "name": &"open",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly0kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n7kk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dbay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulnim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nwlp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulnim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dbay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5n7kk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly0kq")
+}],
+"loop": false,
+"name": &"openclose",
+"speed": 4.0
 }]
 
-[node name="Door" type="Area2D" node_paths=PackedStringArray("sprite")]
+[node name="Door" type="Area2D" node_paths=PackedStringArray("sprite", "shader_sprite")]
 script = ExtResource("1_jlv2j")
 sprite = NodePath("AnimatedSprite2D")
+shader_sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-3.5, 3)
 shape = SubResource("RectangleShape2D_5opu5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_b6cgn")
-animation = &"closed"
+material = ExtResource("2_h48tb")
+position = Vector2(3, -19)
+sprite_frames = SubResource("SpriteFrames_f1rgd")
+animation = &"openclose"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

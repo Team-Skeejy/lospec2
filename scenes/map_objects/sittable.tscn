@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyie1qowb60eh"]
+[gd_scene load_steps=6 format=3 uid="uid://cyie1qowb60eh"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/sittable.gd" id="1_3xx43"]
+[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="1_elep0"]
 [ext_resource type="Texture2D" uid="uid://bwfxfnwff3p1l" path="res://textures/tilesets/tileset1.png" id="2_pnuj6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhcch"]
@@ -10,13 +11,15 @@ size = Vector2(26, 24)
 atlas = ExtResource("2_pnuj6")
 region = Rect2(160, 16, 32, 32)
 
-[node name="Sittable" type="Area2D"]
+[node name="Sittable" type="Area2D" node_paths=PackedStringArray("shader_sprite")]
 script = ExtResource("1_3xx43")
+shader_sprite = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_mhcch")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_elep0")
 position = Vector2(0, -16)
 texture = SubResource("AtlasTexture_ok6yg")

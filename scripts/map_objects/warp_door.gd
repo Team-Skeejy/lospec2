@@ -19,6 +19,7 @@ func entered_interact_area():
 
 func exited_interact_area():
 	sprite.animation = "openclose"
+	super.exited_interact_area()
 	# sprite.frame = 0
 
 func interact(interactor: Humanoid):

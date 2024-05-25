@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://pt22hmf0q1qw"]
+[gd_scene load_steps=7 format=3 uid="uid://pt22hmf0q1qw"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/map_door.gd" id="1_iiewg"]
-[ext_resource type="Texture2D" uid="uid://de1ff6gja80hc" path="res://textures/tilesets/doors.png" id="2_qx6ty"]
+[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="2_5y0nl"]
+[ext_resource type="Texture2D" uid="uid://coompyfxhl1yu" path="res://textures/aseprite/doors.png" id="3_obvvm"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_el1ls"]
-atlas = ExtResource("2_qx6ty")
+[sub_resource type="AtlasTexture" id="AtlasTexture_27dnm"]
+atlas = ExtResource("3_obvvm")
 region = Rect2(0, 0, 96, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ldmd"]
@@ -13,20 +14,25 @@ size = Vector2(4, 54)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lr35u"]
 size = Vector2(20, 47.5)
 
-[node name="MapDoor" type="Area2D"]
+[node name="MapDoor" type="Area2D" node_paths=PackedStringArray("shader_sprite")]
 script = ExtResource("1_iiewg")
+shader_sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_5y0nl")
 position = Vector2(0, -24)
-texture = SubResource("AtlasTexture_el1ls")
+texture = SubResource("AtlasTexture_27dnm")
 hframes = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_7ldmd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_lr35u")

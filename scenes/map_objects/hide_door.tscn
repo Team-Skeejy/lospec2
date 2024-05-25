@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3cctlqah457r"]
+[gd_scene load_steps=11 format=3 uid="uid://b3cctlqah457r"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/hide_door.gd" id="1_6er3i"]
+[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="2_5oer1"]
 [ext_resource type="Texture2D" uid="uid://bkldgnln5emkq" path="res://textures/elevator.png" id="2_lt1pr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5opu5"]
@@ -94,15 +95,17 @@ animations = [{
 "speed": 4.0
 }]
 
-[node name="HideDoor" type="Area2D" node_paths=PackedStringArray("sprite")]
+[node name="HideDoor" type="Area2D" node_paths=PackedStringArray("sprite", "shader_sprite")]
 script = ExtResource("1_6er3i")
 sprite = NodePath("AnimatedSprite2D")
+shader_sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -16)
 shape = SubResource("RectangleShape2D_5opu5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("2_5oer1")
 position = Vector2(3, -19)
 sprite_frames = SubResource("SpriteFrames_b6cgn")
 animation = &"openclose"

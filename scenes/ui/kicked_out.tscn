@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsxw4h1c6mm6j"]
+
+[ext_resource type="Script" path="res://scripts/ui/kicked_out.gd" id="1_5iffo"]
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_mbvl5"]
+[ext_resource type="FontFile" uid="uid://cgu755mepfnwj" path="res://assets/bm-space.ttf" id="3_pdsso"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0cyak"]
+texture = ExtResource("2_mbvl5")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(144, 64, 32, 32)
+
+[node name="KickedOut" type="CanvasLayer"]
+script = ExtResource("1_5iffo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_0cyak")
+
+[node name="NotEnoughInformation" type="Label" parent="VBoxContainer/CenterContainer/PanelContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_pdsso")
+theme_override_font_sizes/font_size = 9
+text = "You got kicked out"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

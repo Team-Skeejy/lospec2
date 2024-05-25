@@ -66,7 +66,7 @@ _data = {
 script = ExtResource("1_ojkqf")
 animationPlayer = NodePath("CanvasLayer/ColorRect/AnimationPlayer")
 splash_screen = "res://scenes/splash_screen.tscn"
-main_menu = "res://scenes/UI/ui_test.tscn"
+main_menu = "res://scenes/UI/main_menu.tscn"
 game = "res://scenes/tests/test_level.tscn"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

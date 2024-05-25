@@ -45,6 +45,10 @@ static var all_companies: Array[String] = [
 
 signal new_speech_bubble(pos: Vector2)
 
+var volume : int = 80
+var crt_ghost_intensity : float = 0.3
+var scanline_intensity : float = 0.05
+
 func _ready():
 	Global.instance = self
 
@@ -166,3 +170,9 @@ func reset_timer():
 	time_limit_countdown = TIME_LIMIT
 	prev_time_signal_at = TIME_DIVISIONS
 	time_changed.emit(TIME_DIVISIONS, TIME_DIVISIONS)
+
+func new_notification_no_texture(text: String):
+	player.ui.new_notification_no_texture(text)
+	
+func new_notification_with_texture(text: String, pos: Vector2, dark:bool):
+	player.ui.new_notification_with_texture(text, pos, dark)

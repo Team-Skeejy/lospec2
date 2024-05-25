@@ -1,0 +1,104 @@
+[gd_scene load_steps=10 format=3 uid="uid://dt6vqi3xctlav"]
+
+[ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_8hyft"]
+[ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="2_h38ja"]
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="2_o7dha"]
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="3_dposn"]
+[ext_resource type="PackedScene" uid="uid://bkuioef3meg5d" path="res://scenes/ui/settings_menu.tscn" id="5_2jw2j"]
+[ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="6_gcg6g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dgjn"]
+atlas = ExtResource("3_dposn")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vl55w"]
+atlas = ExtResource("3_dposn")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x41rh"]
+shader = ExtResource("6_gcg6g")
+shader_parameter/crt_ghost = 1.0
+shader_parameter/darken = true
+shader_parameter/num_colors = null
+shader_parameter/precision = 1.0
+shader_parameter/scan_line_intensity = 1.0
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("settings_menu")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8hyft")
+script = ExtResource("2_o7dha")
+settings_menu = NodePath("SettingsMenu")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_h38ja")
+theme_override_font_sizes/font_size = 36
+text = "TRADER
+INSIDE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Start" type="TextureRect" parent="VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_4dgjn")
+
+[node name="Press" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = ": Begin"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_vl55w")
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = ": Settings"
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "[A]: Space/Z
+[B]: Alt/X
+[Start]: Enter/Esc
+[Select]: Tab"
+
+[node name="SettingsMenu" parent="." node_paths=PackedStringArray("crt_texture") instance=ExtResource("5_2jw2j")]
+visible = false
+layout_mode = 1
+crt_texture = NodePath("../ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_x41rh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

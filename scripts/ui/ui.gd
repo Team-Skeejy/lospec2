@@ -9,7 +9,7 @@ const open_menu_position := Vector2()
 const closed_menu_position := Vector2(0, 192)
 
 var tween: Tween
-
+@export var notification_scene : PackedScene
 @export var menu : TextureRect
 @export var interaction_name : Label
 @export var money_label : Label 
@@ -17,6 +17,7 @@ var tween: Tween
 @export var crt_effects : ColorRect
 @export var info_ui : InformationUI
 @export var inventory : Inventory
+@export var notification_holder : Control
 func _ready():
 	info_ui.retract()
 	pass
@@ -69,15 +70,21 @@ func close():
 	tween.tween_callback(_flip_is_opened)
 	tween.tween_callback(_flip_paused)
 
-
-
 func _flip_is_opened():
 	is_opened = not is_opened
-
-
 
 func _flip_paused():
 	get_tree().paused = not get_tree().paused
 
 func update_items():
 	inventory.update_items()
+
+func new_notification_no_texture(text: String):
+	var notif := notification_scene.instantiate()
+	notification_holder.add_child(notif)
+	notif.start_no_texture(text)
+	
+func new_notification_with_texture(text: String, pos: Vector2, dark:bool):
+	var notif := notification_scene.instantiate()
+	notification_holder.add_child(notif)
+	notif.start_with_texture(text, pos, dark)

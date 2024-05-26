@@ -133,7 +133,8 @@ enum GamePhase {
 var current_phase: GamePhase = GamePhase.intro
 
 func store_player_and_transition_to(next_scene: String):
-	player.physics_enabled = false
+	if player:
+		player.physics_enabled = false
 	await FadeTransition.instance.transition_to(next_scene, store_player)
 
 func go_to_phase(phase: GamePhase):

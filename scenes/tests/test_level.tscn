@@ -117,11 +117,7 @@ metadata/_edit_use_anchors_ = true
 [node name="NPC" parent="NPCs" instance=ExtResource("7_4jeeo")]
 position = Vector2(-370, -20)
 
-[node name="StateMachine" parent="NPCs/NPC" index="5" node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("NPCIdle")
-
 [node name="NPCPatrol" parent="NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-on_idle = "NPCIdle"
 position1 = NodePath("../../../Node2D")
 position2 = NodePath("../../../Node2D2")
 
@@ -129,9 +125,6 @@ position2 = NodePath("../../../Node2D2")
 position = Vector2(346, -179)
 lock = NodePath("Lock")
 type = 1
-
-[node name="StateMachine" parent="NPCs/NPC2" index="5" node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("NPCIdle")
 
 [node name="NPCPatrol" parent="NPCs/NPC2/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
 position1 = NodePath("../../../../Objects/Sittable")
@@ -156,9 +149,6 @@ company_resource = ExtResource("13_jp4i5")
 lock = NodePath("Lock")
 type = 2
 
-[node name="StateMachine" parent="NPCs/NPC3" index="5" node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("NPCIdle")
-
 [node name="NPCIdle" parent="NPCs/NPC3/StateMachine" index="0"]
 idle_to = "NPCIdle"
 
@@ -170,11 +160,11 @@ item_needed = ExtResource("12_6hrtu")
 position = Vector2(679, -116)
 collision_mask = 2
 
-[node name="NPCPatrol" parent="NPC Guard/StateMachine" index="2"]
-on_idle = ""
-
 [node name="CollisionPolygon2D" parent="NPC Guard/VisionContainer/Torch/DangerZone" index="2"]
 disabled = true
+
+[node name="NPCPatrol" parent="NPC Guard/StateMachine" index="2"]
+on_idle = ""
 
 [node name="NPCGuardPatrol" parent="NPC Guard/StateMachine" index="4" node_paths=PackedStringArray("position1", "position2")]
 position1 = NodePath("../../../Guard Patrol Point 1")

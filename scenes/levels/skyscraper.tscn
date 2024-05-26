@@ -1,11 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://15ei017vrpft"]
+[gd_scene load_steps=11 format=3 uid="uid://15ei017vrpft"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_ke51a"]
 [ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="2_3m4kc"]
 [ext_resource type="Script" path="res://scripts/player_spawner.gd" id="2_xhf77"]
+[ext_resource type="Script" path="res://scripts/tutorial.gd" id="3_lumv6"]
+[ext_resource type="PackedScene" uid="uid://c7wqlhul1t4pg" path="res://scenes/ui/small_text_panel.tscn" id="4_aghfq"]
 [ext_resource type="PackedScene" uid="uid://pt22hmf0q1qw" path="res://scenes/map_objects/map_door.tscn" id="4_udmfk"]
+[ext_resource type="PackedScene" uid="uid://ba1kvwuvllyw6" path="res://scenes/map_objects/next_phase_water_cooler.tscn" id="5_6e2fr"]
 [ext_resource type="Script" path="res://scripts/interactables/lock.gd" id="5_us257"]
-[ext_resource type="Resource" uid="uid://cuhoyaouimreh" path="res://assets/items/visitor_pass.tres" id="6_sctf1"]
+[ext_resource type="Resource" uid="uid://cw1s1sycptn15" path="res://assets/items/visitor_pass.tres" id="6_sctf1"]
 [ext_resource type="Resource" uid="uid://d53323wdlki5" path="res://assets/companies/grey.tres" id="7_x0eux"]
 
 [node name="Skyscraper" type="Node2D"]
@@ -21,6 +24,27 @@ layer_1/tile_data = PackedInt32Array(-131044, 589824, 3, -196579, 589824, 3, -26
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
 position = Vector2(1005, -167)
 script = ExtResource("2_xhf77")
+
+[node name="Tutorial" type="Node2D" parent="."]
+script = ExtResource("3_lumv6")
+
+[node name="SmallTextPanel" parent="Tutorial" instance=ExtResource("4_aghfq")]
+offset_left = 819.0
+offset_top = -198.0
+offset_right = 819.0
+offset_bottom = -198.0
+text = "This is the tutorial phase
+"
+
+[node name="SmallTextPanel2" parent="Tutorial" instance=ExtResource("4_aghfq")]
+offset_left = 981.0
+offset_top = -173.0
+offset_right = 981.0
+offset_bottom = -173.0
+text = "Next scene"
+
+[node name="NextPhaseWaterCooler" parent="Tutorial" instance=ExtResource("5_6e2fr")]
+position = Vector2(1008, -127)
 
 [node name="Cyan" type="Node2D" parent="."]
 

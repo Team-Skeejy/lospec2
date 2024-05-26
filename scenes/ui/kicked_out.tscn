@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsxw4h1c6mm6j"]
+[gd_scene load_steps=5 format=3 uid="uid://dwknooae33e8f"]
 
 [ext_resource type="Script" path="res://scripts/ui/kicked_out.gd" id="1_5iffo"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_mbvl5"]

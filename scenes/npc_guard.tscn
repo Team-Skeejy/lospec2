@@ -1,25 +1,48 @@
-[gd_scene load_steps=3 format=3 uid="uid://cukgcxvgbdga"]
+[gd_scene load_steps=8 format=3 uid="uid://cukgcxvgbdga"]
 
 [ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="1_jo0f2"]
+[ext_resource type="Shader" path="res://shader/darkness.gdshader" id="2_q1r7m"]
 [ext_resource type="Texture2D" uid="uid://dht8ce2g5igq2" path="res://textures/aseprite/torch.png" id="2_q78co"]
+[ext_resource type="PackedScene" uid="uid://c5k0aw1wvm0lx" path="res://scenes/alert.tscn" id="4_i1xol"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1euaw"]
+shader = ExtResource("2_q1r7m")
+shader_parameter/lightness = -1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2eiy0"]
+radius = 19.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xuewe"]
+size = Vector2(105, 39)
 
 [node name="NPC" node_paths=PackedStringArray("vision_container") instance=ExtResource("1_jo0f2")]
 vision_container = NodePath("VisionContainer")
 
 [node name="Sprite2D" parent="." index="1"]
-modulate = Color(0.404511, 0.404511, 0.404511, 1)
+material = SubResource("ShaderMaterial_1euaw")
 
 [node name="VisionContainer" type="Node2D" parent="." index="2"]
 
 [node name="Torch" type="Sprite2D" parent="VisionContainer" index="0"]
-position = Vector2(56, -16)
+position = Vector2(56, -24)
 texture = ExtResource("2_q78co")
 
 [node name="DangerZone" type="Area2D" parent="VisionContainer/Torch" index="0"]
 position = Vector2(-56, 16)
 scale = Vector2(1, 0.5)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionContainer/Torch/DangerZone" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="VisionContainer/Torch/DangerZone" index="0"]
+position = Vector2(0, -22)
+scale = Vector2(1, 2)
+shape = SubResource("CircleShape2D_2eiy0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="VisionContainer/Torch/DangerZone" index="1"]
+position = Vector2(53, -23)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_xuewe")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionContainer/Torch/DangerZone" index="2"]
+visible = false
 position = Vector2(7, -24)
 polygon = PackedVector2Array(0, 0, 96, -36, 98, -16, 98, 2, 96, 20)
 
@@ -34,9 +57,10 @@ on_alert = "NPCGuardAlert"
 on_idle = "NPCGuardIdle"
 danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
 
-[node name="NPCGuardAlert" parent="StateMachine" index="5" node_paths=PackedStringArray("danger_zone")]
+[node name="NPCGuardAlert" parent="StateMachine" index="5" node_paths=PackedStringArray("danger_zone", "alert")]
 danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
 on_idle = "NPCGuardIdle"
+alert = NodePath("../../Alert")
 
 [node name="Label" type="Label" parent="." index="10"]
 offset_left = -20.0
@@ -44,3 +68,6 @@ offset_right = 20.0
 offset_bottom = 8.0
 text = "Security"
 horizontal_alignment = 1
+
+[node name="Alert" parent="." index="11" instance=ExtResource("4_i1xol")]
+position = Vector2(0, -40)

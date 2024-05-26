@@ -34,7 +34,6 @@ grow_vertical = 2
 theme = ExtResource("1_8hyft")
 script = ExtResource("2_o7dha")
 settings_menu = NodePath("SettingsMenu")
-game_scene = "res://scenes/tests/test_level.tscn"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1

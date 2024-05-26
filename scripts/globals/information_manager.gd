@@ -48,7 +48,7 @@ func generate_sample_info():
 	print_debug("Generating sample info")
 	#information_gathered = {}
 	for _i in 9:
-		var company = Global.all_companies.pick_random()
+		var company = Global.instance.companies.keys().pick_random()
 		if company in information_gathered.keys():
 			continue
 		information_gathered[company] = []

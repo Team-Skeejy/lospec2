@@ -33,15 +33,8 @@ var sell_dialogue: PackedStringArray
 var buy_dialogue: PackedStringArray
 var small_talk_dialogue: PackedStringArray
 
-static var all_companies: Array[String] = [
-	"Crimson Co",
-	"Greenland Oil",
-	"Blue Inc.",
-	"Yellower",
-	"Cylantro",
-	"B.I.M.",
-	"Vatican llc"
-]
+# key: company_name (str), value company_resource (CompanyResource)
+static var companies: Dictionary = {}
 
 signal new_speech_bubble(pos: Vector2)
 
@@ -55,6 +48,8 @@ func _ready():
 	# I do this in global because I don't want to open files everytime a new dialogue generator is created
 	setup_dialogue()
 	setup_items()
+	setup_companies()
+	print_debug(companies)
 
 
 func _process(delta: float):
@@ -83,6 +78,19 @@ func setup_items():
 	else:
 		print("An error occurred when trying to access " + items_path)
 
+func setup_companies():
+	var items_path := "res://assets/companies/"
+	var dir = DirAccess.open(items_path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			var resource = ResourceLoader.load(items_path + file_name)
+			companies[resource.company_name] = resource
+			file_name = dir.get_next()
+		dir.list_dir_end()
+	else:
+		print("An error occurred when trying to access " + items_path)
 
 func setup_dialogue():
 	var sell_file_path = "res://assets/text/sell_dialogue.txt"
@@ -174,5 +182,5 @@ func reset_timer():
 func new_notification_no_texture(text: String):
 	player.ui.new_notification_no_texture(text)
 	
-func new_notification_with_texture(text: String, pos: Vector2, dark:bool):
-	player.ui.new_notification_with_texture(text, pos, dark)
+func new_notification_with_texture(text: String, texture: Texture, dark:bool):
+	player.ui.new_notification_with_texture(text, texture, dark)

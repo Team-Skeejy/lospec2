@@ -16,4 +16,5 @@ behaviour_scene = "res://scenes/items/wall_jump.tscn"
 cost = 10
 for_sale = true
 category = 0
-key_type = 1
+locked_notification_text = "wow you are so not sticky ahaha"
+unlocked_notification_text = "sticky boy"

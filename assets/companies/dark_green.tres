@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CompanyResource" load_steps=2 format=3 uid="uid://4gl8jyarpnch"]
+
+[ext_resource type="Script" path="res://scripts/company_resource.gd" id="1_mi7a2"]
+
+[resource]
+script = ExtResource("1_mi7a2")
+company_name = "Dark Green Inc."
+company_base_payout = 10
+jacket_spritesheet_path = "res://textures/characters/dark_green/jacket.png"
+tie_spritesheet_path = "res://textures/characters/dark_green/tie.png"
+woman_spritesheet_path = "res://textures/characters/dark_green/woman.png"

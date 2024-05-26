@@ -147,23 +147,23 @@ func start_next_company():
 			n_buy += 1
 			info_textures[i].texture.region.position = green_info_position
 
-
+	var base_payout : int = Global.instance.companies[company].company_base_payout
 
 	if n_buy == InformationManager.MAX_INFO_PER_COMPANY:
 		base_buy_chance = 99
 		base_sell_chance = 1
-		base_buy_payout = BASE_PAYOUT * 3
-		base_sell_payout = BASE_PAYOUT * 10
+		base_buy_payout = base_payout * 3
+		base_sell_payout = base_payout * 10
 	elif n_buy == InformationManager.MAX_INFO_PER_COMPANY:
 		base_buy_chance = 1
 		base_sell_chance = 99
-		base_buy_payout = BASE_PAYOUT * 10
-		base_sell_payout = BASE_PAYOUT * 3
+		base_buy_payout = base_payout * 10
+		base_sell_payout = base_payout * 3
 	else:
 		base_buy_chance = n_buy * 100 / InformationManager.MAX_INFO_PER_COMPANY
 		base_sell_chance = 100 - base_buy_chance
-		base_buy_payout = n_sell * BASE_PAYOUT
-		base_sell_payout = n_buy * BASE_PAYOUT
+		base_buy_payout = n_sell * base_payout
+		base_sell_payout = n_buy * base_payout
 
 	set_odds_payout_labels(base_buy_chance, base_sell_chance, base_buy_payout, base_sell_payout)
 	await get_tree().create_timer(animation_step_duration * 10).timeout

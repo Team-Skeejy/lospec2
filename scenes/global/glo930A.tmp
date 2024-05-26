@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2tdeb17l1bgf"]
+
+[ext_resource type="Script" path="res://scripts/globals/global.gd" id="1_ov5qs"]
+[ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_farim"]
+
+[node name="Global" type="Node" node_paths=PackedStringArray("player_storage")]
+script = ExtResource("1_ov5qs")
+player_storage = NodePath("PlayerStorage")
+player_scene = ExtResource("2_farim")
+test_game_scene = "res://scenes/tests/test_level.tscn"
+test_shop_scene = "res://scenes/tests/shop_test.tscn"
+test_bet_scene = "res://scenes/stock_market.tscn"
+
+[node name="PlayerStorage" type="Node" parent="."]

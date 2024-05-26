@@ -102,12 +102,8 @@ func add_item(item: ItemResource):
 	inventory.append(item)
 	ui.update_items()
 
-func has_key(k: Lock.Type) -> bool:
-	for item_resource: ItemResource in inventory:
-		if item_resource.key_type == k:
-			return true
-	return false
-	floor_stop_on_slope
+func has_item(i: ItemResource) -> bool:
+	return i in inventory
 
 func _process(delta: float):
 	super._process(delta)

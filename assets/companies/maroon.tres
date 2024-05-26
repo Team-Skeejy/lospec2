@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CompanyResource" load_steps=2 format=3 uid="uid://c8yhh61ii4krr"]
+
+[ext_resource type="Script" path="res://scripts/company_resource.gd" id="1_a43g4"]
+
+[resource]
+script = ExtResource("1_a43g4")
+company_name = "Maroon Inc."
+company_base_payout = 10
+jacket_spritesheet_path = "res://textures/characters/maroon/jacket.png"
+tie_spritesheet_path = "res://textures/characters/maroon/tie.png"
+woman_spritesheet_path = "res://textures/characters/maroon/woman.png"

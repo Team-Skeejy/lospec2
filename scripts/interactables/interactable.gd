@@ -2,7 +2,7 @@ class_name Interactable
 extends Area2D
 
 var interaction_name: String = ""
-var locked_by: Lock.Type = Lock.Type.none
+#var locked_by: Lock.Type = Lock.Type.none
 @export var lock : Lock
 @export var shader_sprite : Node2D
 

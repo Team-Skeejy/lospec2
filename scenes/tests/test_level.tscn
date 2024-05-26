@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://du7d3x6mae8wj"]
+[gd_scene load_steps=16 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="Script" path="res://scripts/test_level.gd" id="1_ovvlx"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://ba1kvwuvllyw6" path="res://scenes/map_objects/next_phase_water_cooler.tscn" id="10_4bo24"]
 [ext_resource type="PackedScene" uid="uid://b3cctlqah457r" path="res://scenes/map_objects/hide_door.tscn" id="11_0yare"]
 [ext_resource type="PackedScene" uid="uid://cukgcxvgbdga" path="res://scenes/npc_guard.tscn" id="11_dec8k"]
+[ext_resource type="Resource" uid="uid://m5iqwhu8wv11" path="res://assets/items/sticky_note.tres" id="12_6hrtu"]
+[ext_resource type="Resource" uid="uid://4gl8jyarpnch" path="res://assets/companies/dark_green.tres" id="13_jp4i5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o1mx"]
 size = Vector2(224.902, 32)
@@ -78,7 +80,6 @@ lock = NodePath("Lock")
 
 [node name="Lock" type="Node" parent="Objects/MapDoor"]
 script = ExtResource("6_vxbyk")
-key = 1
 
 [node name="HideDoor" parent="Objects" instance=ExtResource("11_0yare")]
 position = Vector2(640, -114)
@@ -96,7 +97,7 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(361, -67)
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("7_v50b3")]
-position = Vector2(393, -34)
+position = Vector2(344, -27)
 
 [node name="Door2" parent="." instance=ExtResource("8_6fohb")]
 position = Vector2(-479, -37)
@@ -124,8 +125,10 @@ on_idle = "NPCIdle"
 position1 = NodePath("../../../Node2D")
 position2 = NodePath("../../../Node2D2")
 
-[node name="NPC2" parent="NPCs" instance=ExtResource("7_4jeeo")]
-position = Vector2(530, -123)
+[node name="NPC2" parent="NPCs" node_paths=PackedStringArray("lock") instance=ExtResource("7_4jeeo")]
+position = Vector2(346, -179)
+lock = NodePath("Lock")
+type = 1
 
 [node name="StateMachine" parent="NPCs/NPC2" index="5" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("NPCIdle")
@@ -133,6 +136,10 @@ initial_state = NodePath("NPCIdle")
 [node name="NPCPatrol" parent="NPCs/NPC2/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
 position1 = NodePath("../../../../Objects/Sittable")
 position2 = NodePath("../../../Node2D3")
+
+[node name="Lock" type="Node" parent="NPCs/NPC2"]
+script = ExtResource("6_vxbyk")
+item_needed = ExtResource("12_6hrtu")
 
 [node name="Node2D" type="Node2D" parent="NPCs"]
 position = Vector2(-335, -17)
@@ -142,6 +149,22 @@ position = Vector2(-243, -82)
 
 [node name="Node2D3" type="Node2D" parent="NPCs"]
 position = Vector2(519, -116)
+
+[node name="NPC3" parent="NPCs" node_paths=PackedStringArray("lock") instance=ExtResource("7_4jeeo")]
+position = Vector2(301, -15)
+company_resource = ExtResource("13_jp4i5")
+lock = NodePath("Lock")
+type = 2
+
+[node name="StateMachine" parent="NPCs/NPC3" index="5" node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("NPCIdle")
+
+[node name="NPCIdle" parent="NPCs/NPC3/StateMachine" index="0"]
+idle_to = "NPCIdle"
+
+[node name="Lock" type="Node" parent="NPCs/NPC3"]
+script = ExtResource("6_vxbyk")
+item_needed = ExtResource("12_6hrtu")
 
 [node name="NPC Guard" parent="." instance=ExtResource("11_dec8k")]
 position = Vector2(679, -116)
@@ -158,4 +181,5 @@ position = Vector2(808, -116)
 
 [editable path="NPCs/NPC"]
 [editable path="NPCs/NPC2"]
+[editable path="NPCs/NPC3"]
 [editable path="NPC Guard"]

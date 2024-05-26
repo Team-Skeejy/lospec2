@@ -13,8 +13,6 @@ var despawn_time: float = 5.0
 var tween_time: float = 1.0
 var despawn_distance: float = 64
 
-var show_texture: bool = true
-var texture_position: Vector2 = Vector2.ZERO
 var darken_texture: bool = false
 
 func _ready():
@@ -26,10 +24,10 @@ func start_no_texture(text: String):
 	label.text = text
 	start()
 
-func start_with_texture(text: String, texture_position: Vector2, dark: bool):
+func start_with_texture(text: String, texture: Texture, dark: bool):
 	item_texture.show()
-	label.text = text
-	item_texture.texture.region.position = texture_position
+	label.text = " " + text
+	item_texture.texture = texture
 	if dark:
 		item_texture.modulate = Color.BLACK
 	start()

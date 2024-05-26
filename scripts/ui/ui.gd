@@ -85,8 +85,8 @@ func new_notification_no_texture(text: String, length: float = Notification.DEFA
 	notification_holder.add_child(notif)
 	notif.start_no_texture(text)
 
-func new_notification_with_texture(text: String, pos: Vector2, dark: bool, length: float = Notification.DEFAULT_DESPAWN_TIME):
+func new_notification_with_texture(text: String, texture: Texture, dark: bool, length: float = Notification.DEFAULT_DESPAWN_TIME):
 	var notif := notification_scene.instantiate()
 	notif.despawn_time = length
 	notification_holder.add_child(notif)
-	notif.start_with_texture(text, pos, dark)
+	notif.start_with_texture(text, texture, dark)

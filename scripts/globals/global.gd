@@ -6,6 +6,7 @@ static var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_grav
 static var TIME_LIMIT: float = 2 * 60  # 2 minute time limit
 static var TIME_DIVISIONS: int = 8 * 6  # 8 hr days, divided into 10 minute segments
 static var TIME_SEGMENT_LENGTH: float = TIME_LIMIT / TIME_DIVISIONS
+var run_timer: bool = false
 var time_limit_countdown: float = TIME_LIMIT
 var prev_time_signal_at: int = 0
 signal time_changed(part: int, of: int)
@@ -17,11 +18,12 @@ static var instance: Global
 @export_category("Nodes")
 @export var player_storage: Node
 @export var player_scene: PackedScene
+@export_file("*.tscn") var menu_scene: String
 @export_file("*.tscn") var intro_scene: String
 @export_file("*.tscn") var tutorial_scene: String
+@export_file("*.tscn") var stock_market_scene: String
 @export_file("*.tscn") var platformer_scene: String
 @export_file("*.tscn") var shop_scene: String
-@export_file("*.tscn") var home_scene: String
 @export_file("*.tscn") var test_game_scene: String
 @export_file("*.tscn") var test_shop_scene: String
 @export_file("*.tscn") var test_bet_scene: String
@@ -53,7 +55,9 @@ func _ready():
 
 
 func _process(delta: float):
+	if !run_timer: return
 	time_limit_countdown = move_toward(time_limit_countdown, 0, delta)
+
 	var parts: int = (time_limit_countdown / TIME_SEGMENT_LENGTH) + 1
 	if time_limit_countdown == 0 && prev_time_signal_at != 0:
 		prev_time_signal_at = 0
@@ -123,7 +127,7 @@ func spawn_player(parent: Node2D, spawn_point: Node2D):
 	player.physics_enabled = true
 
 enum GamePhase {
-	intro, tutorial, platformer, shop, home, test_platformer, test_shop, test_bet
+	menu, intro, tutorial, platformer, stock_market, shop, test_platformer, test_shop, test_bet
 }
 
 var current_phase: GamePhase = GamePhase.intro
@@ -133,18 +137,23 @@ func store_player_and_transition_to(next_scene: String):
 	await FadeTransition.instance.transition_to(next_scene, store_player)
 
 func go_to_phase(phase: GamePhase):
+	current_phase = phase
 	match (phase):
+		GamePhase.menu:
+			FadeTransition.instance.transition_to(menu_scene)
 		GamePhase.intro:
-			FadeTransition.instance.transition_to(platformer_scene)
+			store_player_and_transition_to(intro_scene)
 		GamePhase.tutorial:
-			FadeTransition.instance.transition_to(platformer_scene)
-		GamePhase.platformer:
-			FadeTransition.instance.transition_to(platformer_scene)
+			store_player_and_transition_to(tutorial_scene)
 			reset_timer()
+			run_timer = false
+		GamePhase.stock_market:
+			store_player_and_transition_to(stock_market_scene)
 		GamePhase.shop:
-			FadeTransition.instance.transition_to(shop_scene)
-		GamePhase.home:
-			FadeTransition.instance.transition_to(home_scene)
+			store_player_and_transition_to(shop_scene)
+		GamePhase.platformer:
+			store_player_and_transition_to(platformer_scene)
+			reset_timer()
 		GamePhase.test_platformer:
 			store_player_and_transition_to(test_game_scene)
 			reset_timer()
@@ -156,23 +165,15 @@ func go_to_phase(phase: GamePhase):
 func go_to_next_phase():
 	time_limit_countdown = 0
 	match (current_phase):
-		GamePhase.intro:
-			current_phase = GamePhase.tutorial
-		GamePhase.tutorial:
-			current_phase = GamePhase.shop
-		GamePhase.shop:
-			current_phase = GamePhase.home
-		GamePhase.home:
-			current_phase = GamePhase.platformer
-		GamePhase.platformer:
-			current_phase = GamePhase.shop
-		GamePhase.test_platformer:
-			current_phase = GamePhase.test_bet
-		GamePhase.test_bet:
-			current_phase = GamePhase.test_shop
-		GamePhase.test_shop:
-			current_phase = GamePhase.test_platformer
-	go_to_phase(current_phase)
+		GamePhase.menu: go_to_phase(GamePhase.intro)
+		GamePhase.intro: go_to_phase(GamePhase.tutorial)
+		GamePhase.tutorial: go_to_phase(GamePhase.stock_market)
+		GamePhase.stock_market: go_to_phase(GamePhase.shop)
+		GamePhase.shop: go_to_phase(GamePhase.platformer)
+		GamePhase.platformer: go_to_phase(GamePhase.stock_market)
+		GamePhase.test_platformer: go_to_phase(GamePhase.test_bet)
+		GamePhase.test_bet: go_to_phase(GamePhase.test_shop)
+		GamePhase.test_shop: go_to_phase(GamePhase.test_platformer)
 
 func update_money(change: int):
 	player_money += change
@@ -184,6 +185,6 @@ func reset_timer():
 
 func new_notification_no_texture(text: String):
 	player.ui.new_notification_no_texture(text)
-	
-func new_notification_with_texture(text: String, texture: Texture, dark:bool):
+
+func new_notification_with_texture(text: String, texture: Texture, dark: bool):
 	player.ui.new_notification_with_texture(text, texture, dark)

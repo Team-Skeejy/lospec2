@@ -5,14 +5,14 @@
 
 [node name="Global" type="Node" node_paths=PackedStringArray("player_storage")]
 script = ExtResource("1_ov5qs")
-all_items = null
 player_storage = NodePath("PlayerStorage")
 player_scene = ExtResource("2_farim")
-intro_scene = null
-tutorial_scene = null
-platformer_scene = null
-shop_scene = null
-home_scene = null
+menu_scene = "res://scenes/ui/main_menu.tscn"
+intro_scene = "res://scenes/intro.tscn"
+tutorial_scene = "res://scenes/levels/skyscraper.tscn"
+stock_market_scene = "res://scenes/stock_market.tscn"
+platformer_scene = "res://scenes/levels/skyscraper.tscn"
+shop_scene = "res://scenes/ui/shop.tscn"
 test_game_scene = "res://scenes/tests/test_level.tscn"
 test_shop_scene = "res://scenes/tests/shop_test.tscn"
 test_bet_scene = "res://scenes/stock_market.tscn"

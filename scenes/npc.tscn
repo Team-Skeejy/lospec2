@@ -1,7 +1,8 @@
-[gd_scene load_steps=39 format=3 uid="uid://bcvk2nfue47o2"]
+[gd_scene load_steps=40 format=3 uid="uid://bcvk2nfue47o2"]
 
 [ext_resource type="Texture2D" uid="uid://b5k7j4ignx3kf" path="res://textures/characters/RedCharacter.png" id="1_ma7oy"]
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_qucbd"]
+[ext_resource type="Resource" uid="uid://bk8td8bw4tjhy" path="res://assets/companies/cyan.tres" id="2_c7cwg"]
 [ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="3_ktl0k"]
 [ext_resource type="Script" path="res://scripts/state_machine/NPCIdle.gd" id="4_8eufg"]
 [ext_resource type="Script" path="res://scripts/state_machine/NPCWander.gd" id="5_rcpxd"]
@@ -486,15 +487,18 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksgov"]
 
-[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator")]
+[node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator", "sprite")]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_qucbd")
+company_resource = ExtResource("2_c7cwg")
 navigation_agent = NodePath("NavigationAgent2D")
 sprite_animation_player = NodePath("AnimationPlayer")
 interaction_area = NodePath("InteractionArea2D")
 behaviour_node = NodePath("Behaviours")
 dialogue_generator = NodePath("DialogueGenerator")
+sprite = NodePath("Sprite2D")
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -15)

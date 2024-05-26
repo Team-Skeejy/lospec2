@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CompanyResource" load_steps=2 format=3 uid="uid://cgclcgq55l427"]
+
+[ext_resource type="Script" path="res://scripts/company_resource.gd" id="1_rhg1c"]
+
+[resource]
+script = ExtResource("1_rhg1c")
+company_name = "White Inc."
+company_base_payout = 10
+jacket_spritesheet_path = "res://textures/characters/white/jacket.png"
+tie_spritesheet_path = "res://textures/characters/white/tie.png"
+woman_spritesheet_path = "res://textures/characters/white/woman.png"

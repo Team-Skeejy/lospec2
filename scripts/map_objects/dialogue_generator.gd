@@ -15,7 +15,11 @@ var has_info_to_give : bool = true
 static var RESPONSE_TIME := 0.4
 
 func check_requirements() -> bool:
-	return true
+	if npc.lock:
+		var can_be_opened : bool = npc.lock.can_be_opened()
+		return can_be_opened
+	else:
+		return true
 
 var completed : bool :
 	get:
@@ -28,19 +32,18 @@ func _ready():
 	Global.instance.new_speech_bubble.connect(_on_new_speech_bubble)
 
 func respond_to_small_talk():
-	await get_tree().create_timer(RESPONSE_TIME).timeout
 	if not npc:
 		return
+	if npc.company_resource.company_name == "GUARD":
+		return
 		
+	await get_tree().create_timer(RESPONSE_TIME).timeout
 	if check_requirements() and not completed:  # if requirements are met generate green or red bubbles
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
 		new_dialogue_speech_bubble(_t)
-		has_info_to_give = false
-		Global.instance.new_notification_no_texture("AHAHAHAHAHAHAHAHAHAH")
 		
 	else:  # if not, generate small talk
 		new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK)
-		Global.instance.new_notification_no_texture("WOWOWOWOWOWOWOWOWOW")
 
 func add_speech_bubble(speech_bubble: SpeechBubble):
 	add_child(speech_bubble)
@@ -75,6 +78,7 @@ func new_dialogue_speech_bubble(type: SpeechBubble.Type):
 func _on_seen(type: SpeechBubble.Type):
 	if not npc:
 		return
+	has_info_to_give = false
 		
 	if type == SpeechBubble.Type.SMALL_TALK:
 		return

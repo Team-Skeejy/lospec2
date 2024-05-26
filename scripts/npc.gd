@@ -5,10 +5,19 @@ static var ARRIVAL_THRESHOLD := 8.
 
 signal on_arrival
 
-@onready var company: String = Global.instance.all_companies.pick_random()  # TODO set up companies somewhere else
+enum NPCType {
+	Jacket,
+	Tie,
+	Woman
+}
+
+@export var company_resource : CompanyResource
+@export var lock : Lock
+@export var type : NPCType = NPCType.Jacket
 @export var navigation_agent: NavigationAgent2D
 @export var vision_container: Node2D
 
+@onready var company: String = company_resource.company_name
 var INTERACT_THRESHOLD_DISTANCE := 40.
 
 # global destination to walk npc towards
@@ -23,6 +32,14 @@ var arrived := true
 
 func _init():
 	speed = 40.
+	
+func _ready():
+	if type == NPCType.Jacket:
+		sprite.texture = load(company_resource.jacket_spritesheet_path)
+	elif type == NPCType.Tie:
+		sprite.texture = load(company_resource.tie_spritesheet_path)
+	elif type == NPCType.Woman:
+		sprite.texture = load(company_resource.woman_spritesheet_path)
 
 func is_within_threshold() -> bool:
 	return global_position.distance_to(navigation_agent.get_final_position()) < ARRIVAL_THRESHOLD

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CompanyResource" load_steps=2 format=3 uid="uid://dp2kb1mx35rqo"]
+
+[ext_resource type="Script" path="res://scripts/company_resource.gd" id="1_2sssa"]
+
+[resource]
+script = ExtResource("1_2sssa")
+company_name = "Orange Inc."
+company_base_payout = 10
+jacket_spritesheet_path = "res://textures/characters/orange/jacket.png"
+tie_spritesheet_path = "res://textures/characters/orange/tie.png"
+woman_spritesheet_path = "res://textures/characters/orange/woman.png"

@@ -489,7 +489,7 @@ _data = {
 
 [node name="NPC" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator", "sprite")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 18
 script = ExtResource("1_qucbd")
 company_resource = ExtResource("2_c7cwg")
 navigation_agent = NodePath("NavigationAgent2D")
@@ -503,6 +503,7 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -15)
 shape = SubResource("RectangleShape2D_kyifl")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
@@ -526,7 +527,7 @@ shape = SubResource("RectangleShape2D_ksgov")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_ktl0k")
-initial_state = NodePath("NPCPatrol")
+initial_state = NodePath("NPCIdle")
 
 [node name="NPCIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("4_8eufg")
@@ -538,6 +539,7 @@ npc = NodePath("../..")
 
 [node name="NPCPatrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("6_kb2o8")
+on_idle = "NPCIdle"
 npc = NodePath("../..")
 
 [node name="NPCGuardIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]

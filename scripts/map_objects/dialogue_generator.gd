@@ -41,6 +41,8 @@ func respond_to_small_talk():
 	if check_requirements() and not completed:  # if requirements are met generate green or red bubbles
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
 		new_dialogue_speech_bubble(_t)
+		has_info_to_give = false
+		
 		
 	else:  # if not, generate small talk
 		new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK)
@@ -78,7 +80,7 @@ func new_dialogue_speech_bubble(type: SpeechBubble.Type):
 func _on_seen(type: SpeechBubble.Type):
 	if not npc:
 		return
-	has_info_to_give = false
+		
 		
 	if type == SpeechBubble.Type.SMALL_TALK:
 		return

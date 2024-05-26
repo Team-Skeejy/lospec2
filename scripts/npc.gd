@@ -69,7 +69,4 @@ func _physics_process(delta: float) -> void:
 	else:
 		direction = 0
 
-
-
-
 	super._physics_process(delta)

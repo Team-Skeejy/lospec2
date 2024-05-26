@@ -1,28 +1,44 @@
-[gd_scene load_steps=5 format=3 uid="uid://cukgcxvgbdga"]
+[gd_scene load_steps=6 format=3 uid="uid://cukgcxvgbdga"]
 
 [ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="1_jo0f2"]
-[ext_resource type="Texture2D" uid="uid://uhwkp60tvv71" path="res://textures/characters/NPC guard.png" id="2_3kb7k"]
+[ext_resource type="Resource" uid="uid://damjqcn35kpt0" path="res://assets/companies/guard.tres" id="2_f7ayh"]
 [ext_resource type="Texture2D" uid="uid://dht8ce2g5igq2" path="res://textures/aseprite/torch.png" id="2_q78co"]
-[ext_resource type="Resource" uid="uid://damjqcn35kpt0" path="res://assets/companies/guard.tres" id="2_tfybb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rg0v1"]
+radius = 19.0263
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_we2c3"]
+size = Vector2(105, 36)
 
 [node name="NPC" node_paths=PackedStringArray("vision_container") instance=ExtResource("1_jo0f2")]
-company_resource = ExtResource("2_tfybb")
+company_resource = ExtResource("2_f7ayh")
 vision_container = NodePath("VisionContainer")
 
 [node name="Sprite2D" parent="." index="1"]
-texture = ExtResource("2_3kb7k")
+modulate = Color(0.404511, 0.404511, 0.404511, 1)
 
 [node name="VisionContainer" type="Node2D" parent="." index="2"]
 
 [node name="Torch" type="Sprite2D" parent="VisionContainer" index="0"]
-position = Vector2(56, -16)
+position = Vector2(56, -24)
 texture = ExtResource("2_q78co")
 
 [node name="DangerZone" type="Area2D" parent="VisionContainer/Torch" index="0"]
 position = Vector2(-56, 16)
 scale = Vector2(1, 0.5)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionContainer/Torch/DangerZone" index="0"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="VisionContainer/Torch/DangerZone" index="0"]
+position = Vector2(0, -22)
+scale = Vector2(1, 2)
+shape = SubResource("CircleShape2D_rg0v1")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="VisionContainer/Torch/DangerZone" index="1"]
+position = Vector2(52.5, -24)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_we2c3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionContainer/Torch/DangerZone" index="2"]
+visible = false
 position = Vector2(7, -24)
 polygon = PackedVector2Array(0, 0, 96, -36, 98, -16, 98, 2, 96, 20)
 

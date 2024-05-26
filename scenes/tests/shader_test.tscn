@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b20a38rxri225"]
+[gd_scene load_steps=11 format=3 uid="uid://b72m1thht6xpx"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_qbhuj"]
 [ext_resource type="Shader" path="res://scenes/tests/color_replace.gdshader" id="2_7k4im"]
+[ext_resource type="Texture2D" uid="uid://d2a5r25vy6uu0" path="res://textures/aseprite/Player Character.png" id="3_ktexn"]
+[ext_resource type="Shader" path="res://shader/darkness.gdshader" id="3_vjoaq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a5t1w"]
 shader = ExtResource("2_7k4im")
@@ -12,6 +14,32 @@ shader_parameter/threshold = 0.0
 shader = ExtResource("2_7k4im")
 shader_parameter/pixel_size = 1
 shader_parameter/threshold = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ii74l"]
+shader = ExtResource("3_vjoaq")
+shader_parameter/lightness = 0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_661ji"]
+atlas = ExtResource("3_ktexn")
+region = Rect2(0, 448, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s5kpv"]
+atlas = ExtResource("3_ktexn")
+region = Rect2(32, 448, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ll8v8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_661ji")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s5kpv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="Node2D" type="Node2D"]
 
@@ -26,3 +54,17 @@ material = SubResource("ShaderMaterial_5lpuu")
 offset_right = 257.0
 offset_bottom = 224.0
 color = Color(1, 1, 1, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_ii74l")
+position = Vector2(116, 144)
+sprite_frames = SubResource("SpriteFrames_ll8v8")
+frame_progress = 0.998847
+
+[node name="Label" type="Label" parent="AnimatedSprite2D"]
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = -17.0
+text = "Darkener"
+horizontal_alignment = 1

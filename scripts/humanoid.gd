@@ -169,7 +169,7 @@ func _physics_process(delta: float):
 	# clamps player speed
 	velocity = velocity.clamp(Vector2.ONE * -TERMINAL_VELOCITY, Vector2.ONE * TERMINAL_VELOCITY)
 	move_and_slide()
-	
+
 
 func _process(_delta: float):
 	var collisions := interaction_area.get_overlapping_areas()

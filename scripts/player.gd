@@ -109,8 +109,6 @@ func _process(delta: float):
 	super._process(delta)
 	if interact_target:
 		interact_target.shader_sprite.material.set_shader_parameter("active", true)
-	#handle_animation()
-	if Input.is_action_pressed("Down"):
-		collision_mask = 1
-	else:
-		collision_mask = 17
+
+	if Input.is_action_pressed("Down"): collision_mask = 1
+	else: collision_mask = 17

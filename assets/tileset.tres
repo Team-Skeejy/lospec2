@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=19 format=3 uid="uid://dgxsm67qwkt2c"]
+[gd_resource type="TileSet" load_steps=20 format=3 uid="uid://dgxsm67qwkt2c"]
 
 [ext_resource type="Texture2D" uid="uid://bwfxfnwff3p1l" path="res://textures/tilesets/tileset1.png" id="1_5yr8l"]
 
@@ -60,6 +60,9 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_es48u"]
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hdsnp"]
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p2wiu"]
@@ -501,6 +504,7 @@ texture = ExtResource("1_5yr8l")
 8:4/0/physics_layer_1/angular_velocity = 0.0
 8:4/0/physics_layer_1/polygon_0/points = PackedVector2Array(8, -8, -8, -8, -8, -7, 8, -7)
 8:4/0/physics_layer_1/polygon_0/one_way = true
+8:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_hdsnp")
 9:3/size_in_atlas = Vector2i(2, 2)
 9:3/0 = 0
 9:3/0/texture_origin = Vector2i(0, -8)

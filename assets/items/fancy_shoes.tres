@@ -18,4 +18,5 @@ behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 20
 for_sale = true
 category = 0
-key_type = 1
+locked_notification_text = "missing"
+unlocked_notification_text = "you have it!"

@@ -157,6 +157,7 @@ func store_player_and_transition_to(next_scene: String):
 
 func go_to_phase(phase: GamePhase):
 	current_phase = phase
+	run_timer = false
 	match (phase):
 		GamePhase.menu:
 			FadeTransition.instance.transition_to(menu_scene)
@@ -166,23 +167,24 @@ func go_to_phase(phase: GamePhase):
 		GamePhase.tutorial_platformer:
 			store_player_and_transition_to(tutorial_platformer_scene)
 			reset_timer()
-			run_timer = false
 		GamePhase.tutorial_stock_market:
 			store_player_and_transition_to(tutorial_stockmarket_scene)
 		GamePhase.tutorial_shop:
 			store_player_and_transition_to(tutorial_shop_scene)
 
+		GamePhase.platformer:
+			store_player_and_transition_to(platformer_scene)
+			reset_timer()
+			run_timer = true
 		GamePhase.stock_market:
 			store_player_and_transition_to(stock_market_scene)
 		GamePhase.shop:
 			store_player_and_transition_to(shop_scene)
-		GamePhase.platformer:
-			store_player_and_transition_to(platformer_scene)
-			reset_timer()
 
 		GamePhase.test_platformer:
 			store_player_and_transition_to(test_game_scene)
 			reset_timer()
+			run_timer = true
 		GamePhase.test_bet:
 			store_player_and_transition_to(test_bet_scene)
 		GamePhase.test_shop:

@@ -16,4 +16,5 @@ behaviour_scene = "res://scenes/items/speak_faster.tscn"
 cost = 0
 for_sale = true
 category = 0
-key_type = 1
+locked_notification_text = "missing"
+unlocked_notification_text = "you have it!"

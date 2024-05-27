@@ -15,12 +15,12 @@ extends Control
 
 @export var company_name_label: Label
 @export var info_textures: Array[TextureRect]
-@export var stock_market_ui : VBoxContainer
-@export var not_enough_info_label : Label
+@export var stock_market_ui: VBoxContainer
+@export var not_enough_info_label: Label
 @export_category("SFX")
-@export var animation_sound : AudioStreamPlayer
-@export var win_sound : AudioStreamPlayer
-@export var lose_sound : AudioStreamPlayer
+@export var animation_sound: AudioStreamPlayer
+@export var win_sound: AudioStreamPlayer
+@export var lose_sound: AudioStreamPlayer
 
 var animation_step_duration := 0.03
 static var GRAPH_ANIMATION_NUM_POINTS := 40
@@ -84,8 +84,8 @@ func select():
 	else:
 		sell()
 
-func buy():
-	if randf() < base_buy_chance / 100.:
+func buy(guaranteed_win: bool = false):
+	if guaranteed_win || randf() < base_buy_chance / 100.:
 		graph_animation("up")
 		await animation_done
 		Global.instance.update_money(base_buy_payout)
@@ -95,8 +95,8 @@ func buy():
 		await animation_done
 		lose()
 
-func sell():
-	if randf() < base_sell_chance / 100.:
+func sell(guaranteed_win: bool = false):
+	if guaranteed_win || randf() < base_sell_chance / 100.:
 		graph_animation("down")
 		await animation_done
 		Global.instance.update_money(base_sell_payout)
@@ -134,8 +134,8 @@ func start_next_company():
 	var company = companies_left.pop_back()
 	company_name_label.visible_ratio = 0.0
 	company_name_label.text = company
-	var tween : Tween = get_tree().create_tween()
-	tween.tween_property(company_name_label, "visible_ratio", 1.0, animation_step_duration*15)
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(company_name_label, "visible_ratio", 1.0, animation_step_duration * 15)
 	var info = InformationManager.instance.information_gathered[company]
 	var n_sell := 0
 	var n_buy := 0
@@ -147,7 +147,7 @@ func start_next_company():
 			n_buy += 1
 			info_textures[i].texture.region.position = green_info_position
 
-	var base_payout : int = Global.instance.companies[company].company_base_payout
+	var base_payout: int = Global.instance.companies[company].company_base_payout
 
 	if n_buy == InformationManager.MAX_INFO_PER_COMPANY:
 		base_buy_chance = 99
@@ -170,7 +170,6 @@ func start_next_company():
 	InformationManager.instance.remove_company(company)
 	graph_line.clear_points()
 	allow_input = true
-	
 
 
 func set_odds_payout_labels(buy_chance: int, sell_chance: int, buy_payout: int, sell_payout: int):

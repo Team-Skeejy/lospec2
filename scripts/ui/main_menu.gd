@@ -12,7 +12,5 @@ func _process(_delta: float):
 		Global.instance.go_to_phase(Global.GamePhase.intro)
 
 
-
-
 func _flip_paused():
 	get_tree().paused = not get_tree().paused

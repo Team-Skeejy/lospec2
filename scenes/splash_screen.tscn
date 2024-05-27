@@ -1,14 +1,14 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtvamhpca8lah"]
 
 [ext_resource type="Script" path="res://scripts/splash_screen.gd" id="1_fl7ee"]
-[ext_resource type="Texture2D" uid="uid://c0k3s4yidg7cm" path="res://templates/web_shared/skeejy_splash.png" id="2_pjvof"]
-[ext_resource type="Texture2D" uid="uid://coofsninmwmec" path="res://templates/web_shared/bubble-2.png" id="3_g2nr8"]
-[ext_resource type="Texture2D" uid="uid://pk52uil26bmd" path="res://templates/web_shared/bubble-1.png" id="3_j8gue"]
-[ext_resource type="Texture2D" uid="uid://b8meervqyqr74" path="res://templates/web_shared/bubble-3.png" id="5_cyed6"]
+[ext_resource type="Texture2D" uid="uid://c64d3tvfi1c4w" path="res://textures/splash/skeejy_cat.png" id="2_hunml"]
+[ext_resource type="Texture2D" uid="uid://bywdckepjqiy2" path="res://textures/splash/skeejy_bubble_3.png" id="3_h054y"]
+[ext_resource type="Texture2D" uid="uid://ctlt3hhw6vyf7" path="res://textures/splash/skeejy_bubble_2.png" id="4_k8etf"]
+[ext_resource type="Texture2D" uid="uid://biiu2kgjljxgu" path="res://textures/splash/skeejy_bubble_1.png" id="5_uybg1"]
 
 [sub_resource type="Animation" id="Animation_xnpbh"]
 resource_name = "sleepy_fade"
-length = 3.2
+length = 4.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -16,10 +16,10 @@ tracks/0/path = NodePath("ColorRect/SkeejyCat/Bubble-1:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 1.5, 2.5, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0, 2.1, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -28,10 +28,10 @@ tracks/1/path = NodePath("ColorRect/SkeejyCat/Bubble-2:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 2, 2.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0, 1.6, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -40,10 +40,10 @@ tracks/2/path = NodePath("ColorRect/SkeejyCat/Bubble-3:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.5, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"times": PackedFloat32Array(0, 1.1, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k6rp6"]
@@ -82,29 +82,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_pjvof")
+texture = ExtResource("2_hunml")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="Bubble-1" type="Sprite2D" parent="ColorRect/SkeejyCat"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(172, 27)
-rotation = 0.386683
-scale = Vector2(0.162, 0.162)
-texture = ExtResource("3_j8gue")
+position = Vector2(128, 112)
+texture = ExtResource("3_h054y")
 
 [node name="Bubble-2" type="Sprite2D" parent="ColorRect/SkeejyCat"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(116, 46)
-rotation = -0.262028
-scale = Vector2(0.162, 0.162)
-texture = ExtResource("3_g2nr8")
+position = Vector2(128, 112)
+texture = ExtResource("4_k8etf")
 
 [node name="Bubble-3" type="Sprite2D" parent="ColorRect/SkeejyCat"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(84.5109, 72.0249)
-rotation = 0.144792
-scale = Vector2(0.162, 0.162)
-texture = ExtResource("5_cyed6")
+position = Vector2(128, 112)
+texture = ExtResource("5_uybg1")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

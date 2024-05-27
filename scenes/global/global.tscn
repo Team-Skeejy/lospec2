@@ -9,7 +9,6 @@ player_storage = NodePath("PlayerStorage")
 player_scene = ExtResource("2_farim")
 menu_scene = "res://scenes/ui/main_menu.tscn"
 intro_scene = "res://scenes/intro.tscn"
-tutorial_scene = "res://scenes/levels/skyscraper.tscn"
 stock_market_scene = "res://scenes/stock_market.tscn"
 platformer_scene = "res://scenes/levels/skyscraper.tscn"
 shop_scene = "res://scenes/ui/shop.tscn"

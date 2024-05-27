@@ -8,8 +8,7 @@ var interaction_name: String = ""
 
 func entered_interact_area():
 	pass
-	
-	#shader_sprite.material.set_shader_parameter("active", true)
+
 
 func exited_interact_area():
 	shader_sprite.material.set_shader_parameter("active", false)

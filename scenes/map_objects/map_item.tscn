@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://twygc5kdgifq"]
+
+[ext_resource type="Script" path="res://scripts/map_objects/map_item.gd" id="1_67ghv"]
+[ext_resource type="Material" uid="uid://c3rif323ip0cw" path="res://assets/outline_material.tres" id="3_15oyq"]
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="3_dm2f3"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="4_h5caw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_relxi"]
+size = Vector2(72, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2oyn"]
+atlas = ExtResource("3_dm2f3")
+region = Rect2(208, 208, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avyh5"]
+atlas = ExtResource("4_h5caw")
+region = Rect2(0, 0, 32, 32)
+
+[node name="MapItem" type="Area2D" node_paths=PackedStringArray("sprite", "shader_sprite")]
+script = ExtResource("1_67ghv")
+sprite = NodePath("ItemSprite")
+shader_sprite = NodePath("Back")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_relxi")
+
+[node name="Back" type="Sprite2D" parent="."]
+material = ExtResource("3_15oyq")
+texture = SubResource("AtlasTexture_t2oyn")
+
+[node name="ItemSprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_avyh5")

@@ -26,7 +26,7 @@ func setup_items():
 
 func update_items():
 	for item_container in item_container_array:
-		if not item_container.item_resource.for_sale:
+		if Global.player.has_item(item_container.item_resource):
 			item_container.brighten()
 
 func _process(delta):

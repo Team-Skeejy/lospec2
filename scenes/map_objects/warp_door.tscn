@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bwoobo3k2h8bm"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/warp_door.gd" id="1_1ny15"]
-[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="1_a7jc4"]
+[ext_resource type="Material" uid="uid://c3rif323ip0cw" path="res://assets/outline_material.tres" id="1_a7jc4"]
 [ext_resource type="Texture2D" uid="uid://de1ff6gja80hc" path="res://textures/tilesets/doors.png" id="2_uwf5q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g8omb"]

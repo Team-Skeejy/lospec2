@@ -7,6 +7,10 @@ extends Control
 @export var name_label: Label
 @export var description_label: Label
 @export var cost_label: Label
+
+@export var tutorial_items: Array[ItemResource] = []
+@export var game_items: Array[ItemResource] = []
+
 var item_container_array: Array[ShopItemContainer] = []
 var selected_container_idx: int = 0
 var num_items_for_sale: int = 4
@@ -15,13 +19,23 @@ var description_text_duration: float = 0.5
 
 var description_tween: Tween
 
+func add_item(item: ItemResource):
+	var item_container: ShopItemContainer = item_container_scene.instantiate()
+	item_container.item_resource = item
+	item_container_container.add_child(item_container)
+	item_container_array.append(item_container)
+	item_container.on_selected.connect(start_description)
+
 func _ready():
-	for _i in num_items_for_sale:
-		var item_container: ShopItemContainer = item_container_scene.instantiate()
-		item_container.item_resource = Global.instance.all_items.pick_random()
-		item_container_container.add_child(item_container)
-		item_container_array.append(item_container)
-		item_container.on_selected.connect(start_description)
+	if Global.instance.current_phase == Global.GamePhase.tutorial_shop:
+		for item in tutorial_items:
+			add_item(item)
+	else:
+		for item in game_items:
+			if item.for_sale:
+				add_item(item)
+			if len(item_container_array) >= num_items_for_sale:
+				break
 
 	item_container_array[selected_container_idx].select()
 
@@ -41,6 +55,11 @@ func _process(delta):
 	elif Input.is_action_just_pressed("A"):
 		buy()
 	elif Input.is_action_just_pressed("B"):
+		if Global.instance.current_phase == Global.GamePhase.tutorial_shop:
+			if item_container_array.any(func(item): return !item.sold_out):
+				# sad noise
+				print_debug("sad noise")
+				return
 		Global.instance.go_to_next_phase()
 
 func start_description(sic: ShopItemContainer):
@@ -65,6 +84,6 @@ func buy():
 		# TODO incredibly loud buzzer sound
 		return
 	Global.instance.update_money(-item_cost)
-	var item : ItemResource = selected_container.buy()
+	var item: ItemResource = selected_container.buy()
 	Global.player.add_item(item)
 	print_debug("buying " + str(selected_container.item_resource.name))

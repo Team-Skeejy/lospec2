@@ -1,11 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5hif2fst0d2w"]
+[gd_scene load_steps=16 format=3 uid="uid://b5hif2fst0d2w"]
 
 [ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_g877e"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_ikuha"]
 [ext_resource type="Script" path="res://scripts/ui/shop.gd" id="2_tphn1"]
+[ext_resource type="Resource" uid="uid://cw1s1sycptn15" path="res://assets/items/visitor_pass.tres" id="4_w441j"]
 [ext_resource type="PackedScene" uid="uid://dis1ex838jf3d" path="res://scenes/ui/shop_item_container.tscn" id="5_036du"]
+[ext_resource type="Resource" uid="uid://bho0byvbf05tw" path="res://assets/items/business_card.tres" id="5_56k74"]
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="5_nn6at"]
+[ext_resource type="Resource" uid="uid://cqr31u0rhpakk" path="res://assets/items/fancy_shoes.tres" id="6_1xatf"]
 [ext_resource type="StyleBox" uid="uid://bggnvvsx5wev8" path="res://assets/style_boxes/speech_bubble.tres" id="6_jy8ic"]
+[ext_resource type="Resource" uid="uid://m5iqwhu8wv11" path="res://assets/items/sticky_note.tres" id="7_7uxck"]
+[ext_resource type="Resource" uid="uid://yg2xg5xfk5pv" path="res://assets/items/strong_coffee.tres" id="8_kcoyc"]
+[ext_resource type="Resource" uid="uid://caltdg5j655ji" path="res://assets/items/weird_pills.tres" id="9_jjx7n"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mtbk5"]
 texture = ExtResource("2_ikuha")
@@ -25,7 +31,9 @@ region = Rect2(0, 32, 16, 16)
 atlas = ExtResource("2_ikuha")
 region = Rect2(16, 32, 16, 16)
 
-[node name="Shop" type="Control" node_paths=PackedStringArray("item_container_container", "name_label", "description_label", "cost_label")]
+[node name="Shop" type="CanvasLayer"]
+
+[node name="Shop" type="Control" parent="." node_paths=PackedStringArray("item_container_container", "name_label", "description_label", "cost_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,8 +47,10 @@ item_container_scene = ExtResource("5_036du")
 name_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/ItemNameLabel")
 description_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer/DescriptionLabel")
 cost_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer/CostLabel")
+tutorial_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("4_w441j")])
+game_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("5_56k74"), ExtResource("6_1xatf"), ExtResource("7_7uxck"), ExtResource("8_kcoyc"), ExtResource("9_jjx7n")])
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,80 +58,80 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Shop/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="ShopPanel" type="PanelContainer" parent="VBoxContainer/CenterContainer"]
+[node name="ShopPanel" type="PanelContainer" parent="Shop/VBoxContainer/CenterContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_mtbk5")
 
-[node name="VBC" type="VBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel"]
+[node name="VBC" type="VBoxContainer" parent="Shop/VBoxContainer/CenterContainer/ShopPanel"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+[node name="HSeparator" type="HSeparator" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="SHOPLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+[node name="SHOPLabel" type="Label" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("5_nn6at")
 theme_override_font_sizes/font_size = 24
 text = "SHOP"
 
-[node name="ItemContainerContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+[node name="ItemContainerContainer" type="HBoxContainer" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="ItemNameLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+[node name="ItemNameLabel" type="Label" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
 text = "Item name"
 horizontal_alignment = 1
 
-[node name="DescriptionContainer" type="PanelContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+[node name="DescriptionContainer" type="PanelContainer" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("6_jy8ic")
 
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer"]
+[node name="DescriptionLabel" type="Label" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer"]
 custom_minimum_size = Vector2(180, 36)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "vert v"
 autowrap_mode = 2
 
-[node name="BottomContainer" type="HBoxContainer" parent="VBoxContainer/CenterContainer/ShopPanel/VBC"]
+[node name="BottomContainer" type="HBoxContainer" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC"]
 layout_mode = 2
 
-[node name="CostLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+[node name="CostLabel" type="Label" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
 text = "COST:"
 
-[node name="AButton" type="TextureRect" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+[node name="AButton" type="TextureRect" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 texture = SubResource("AtlasTexture_d4k6d")
 
-[node name="BuyLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+[node name="BuyLabel" type="Label" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
 text = "Buy"
 
-[node name="BButton" type="TextureRect" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+[node name="BButton" type="TextureRect" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 texture = SubResource("AtlasTexture_c8imc")
 
-[node name="ContinueLabel" type="Label" parent="VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
+[node name="ContinueLabel" type="Label" parent="Shop/VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 16
 text = "Quit"
 
-[node name="MenuBarPlaceHolder" type="TextureRect" parent="VBoxContainer"]
+[node name="MenuBarPlaceHolder" type="TextureRect" parent="Shop/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_vertical = 8

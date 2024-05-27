@@ -20,10 +20,15 @@ static var instance: Global
 @export var player_scene: PackedScene
 @export_file("*.tscn") var menu_scene: String
 @export_file("*.tscn") var intro_scene: String
-@export_file("*.tscn") var tutorial_scene: String
-@export_file("*.tscn") var stock_market_scene: String
+
+@export_file("*.tscn") var tutorial_platformer_scene: String
+@export_file("*.tscn") var tutorial_stockmarket_scene: String
+@export_file("*.tscn") var tutorial_shop_scene: String
+
 @export_file("*.tscn") var platformer_scene: String
+@export_file("*.tscn") var stock_market_scene: String
 @export_file("*.tscn") var shop_scene: String
+
 @export_file("*.tscn") var test_game_scene: String
 @export_file("*.tscn") var test_shop_scene: String
 @export_file("*.tscn") var test_bet_scene: String
@@ -127,7 +132,20 @@ func spawn_player(parent: Node2D, spawn_point: Node2D):
 	player.physics_enabled = true
 
 enum GamePhase {
-	menu, intro, tutorial, platformer, stock_market, shop, test_platformer, test_shop, test_bet
+	menu,
+	intro,
+
+	tutorial_platformer,
+	tutorial_stock_market,
+	tutorial_shop,
+
+	platformer,
+	stock_market,
+	shop,
+
+	test_platformer,
+	test_shop,
+	test_bet
 }
 
 var current_phase: GamePhase = GamePhase.intro
@@ -139,25 +157,34 @@ func store_player_and_transition_to(next_scene: String):
 
 func go_to_phase(phase: GamePhase):
 	current_phase = phase
+	run_timer = false
 	match (phase):
 		GamePhase.menu:
 			FadeTransition.instance.transition_to(menu_scene)
 		GamePhase.intro:
 			store_player_and_transition_to(intro_scene)
-		GamePhase.tutorial:
-			store_player_and_transition_to(tutorial_scene)
+
+		GamePhase.tutorial_platformer:
+			store_player_and_transition_to(tutorial_platformer_scene)
 			reset_timer()
-			run_timer = false
+		GamePhase.tutorial_stock_market:
+			store_player_and_transition_to(tutorial_stockmarket_scene)
+		GamePhase.tutorial_shop:
+			store_player_and_transition_to(tutorial_shop_scene)
+
+		GamePhase.platformer:
+			store_player_and_transition_to(platformer_scene)
+			reset_timer()
+			run_timer = true
 		GamePhase.stock_market:
 			store_player_and_transition_to(stock_market_scene)
 		GamePhase.shop:
 			store_player_and_transition_to(shop_scene)
-		GamePhase.platformer:
-			store_player_and_transition_to(platformer_scene)
-			reset_timer()
+
 		GamePhase.test_platformer:
 			store_player_and_transition_to(test_game_scene)
 			reset_timer()
+			run_timer = true
 		GamePhase.test_bet:
 			store_player_and_transition_to(test_bet_scene)
 		GamePhase.test_shop:
@@ -167,11 +194,16 @@ func go_to_next_phase():
 	time_limit_countdown = 0
 	match (current_phase):
 		GamePhase.menu: go_to_phase(GamePhase.intro)
-		GamePhase.intro: go_to_phase(GamePhase.tutorial)
-		GamePhase.tutorial: go_to_phase(GamePhase.stock_market)
+		GamePhase.intro: go_to_phase(GamePhase.tutorial_platformer)
+
+		GamePhase.tutorial_platformer: go_to_phase(GamePhase.tutorial_stock_market)
+		GamePhase.tutorial_stock_market: go_to_phase(GamePhase.tutorial_shop)
+		GamePhase.tutorial_shop: go_to_phase(GamePhase.platformer)
+
+		GamePhase.platformer: go_to_phase(GamePhase.stock_market)
 		GamePhase.stock_market: go_to_phase(GamePhase.shop)
 		GamePhase.shop: go_to_phase(GamePhase.platformer)
-		GamePhase.platformer: go_to_phase(GamePhase.stock_market)
+
 		GamePhase.test_platformer: go_to_phase(GamePhase.test_bet)
 		GamePhase.test_bet: go_to_phase(GamePhase.test_shop)
 		GamePhase.test_shop: go_to_phase(GamePhase.test_platformer)

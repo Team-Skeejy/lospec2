@@ -80,9 +80,9 @@ func _process(delta):
 
 func select():
 	if selected_button == ButtonType.BUY:
-		buy()
+		buy(Global.instance.current_phase == Global.GamePhase.tutorial_stock_market)
 	else:
-		sell()
+		sell(Global.instance.current_phase == Global.GamePhase.tutorial_stock_market)
 
 func buy(guaranteed_win: bool = false):
 	if guaranteed_win || randf() < base_buy_chance / 100.:

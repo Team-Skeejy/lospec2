@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_u6oey"]
 [ext_resource type="Texture2D" uid="uid://dvwmrm386lhtk" path="res://textures/aseprite/in_game_menu.png" id="2_fmcbu"]
-[ext_resource type="PackedScene" path="res://scenes/ui/notification.tscn" id="2_wciut"]
+[ext_resource type="PackedScene" uid="uid://nf1pbilmoorh" path="res://scenes/ui/notification.tscn" id="2_wciut"]
 [ext_resource type="Script" path="res://scripts/ui/time_remaining.gd" id="4_pmvnh"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="4_tpqrp"]
 [ext_resource type="PackedScene" uid="uid://bf0wabkpsckws" path="res://scenes/ui/information_ui.tscn" id="5_rbeyn"]

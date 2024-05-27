@@ -26,7 +26,7 @@ func _process(_delta: float):
 	if Global.player.interact_target && is_instance_valid(Global.player.interact_target):
 		interaction_name.text = Global.player.interact_target.interaction_name
 	elif interaction_name:
-		interaction_name.text = "Jump"
+		interaction_name.text = ""
 
 	money_label.text = str(Global.instance.player_money) + "$"
 

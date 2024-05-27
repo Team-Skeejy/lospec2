@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bgocvcrd7rod8"]
+
+[node name="Cash" type="Area2D"]

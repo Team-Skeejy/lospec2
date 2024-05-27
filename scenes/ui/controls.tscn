@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxtnyt4e1e6f1"]
+
+[ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="1_7afuq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tu7x3"]
+content_margin_left = 1.0
+content_margin_top = 0.0
+content_margin_right = 2.0
+content_margin_bottom = 0.0
+texture = ExtResource("1_7afuq")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(144, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37bc0"]
+atlas = ExtResource("1_7afuq")
+region = Rect2(32, 192, 112, 64)
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_tu7x3")
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_37bc0")
+
+[node name="dpad" type="Label" parent="PanelContainer/TextureRect"]
+layout_mode = 0
+offset_top = 41.0
+offset_right = 40.0
+offset_bottom = 57.0
+theme_override_constants/line_spacing = 0
+text = "WASD
+Arrows"
+horizontal_alignment = 1
+
+[node name="A" type="Label" parent="PanelContainer/TextureRect"]
+offset_left = 53.0
+offset_top = 5.0
+offset_right = 101.0
+offset_bottom = 13.0
+theme_override_constants/line_spacing = 0
+text = "Space/Z"
+
+[node name="B" type="Label" parent="PanelContainer/TextureRect"]
+offset_left = 53.0
+offset_top = 21.0
+offset_right = 101.0
+offset_bottom = 29.0
+theme_override_constants/line_spacing = 0
+text = "Alt/X"
+
+[node name="start" type="Label" parent="PanelContainer/TextureRect"]
+layout_mode = 2
+offset_left = 69.0
+offset_top = 36.0
+offset_right = 110.0
+offset_bottom = 44.0
+size_flags_horizontal = 3
+text = "Esc/Enter"
+
+[node name="select" type="Label" parent="PanelContainer/TextureRect"]
+layout_mode = 2
+offset_left = 71.0
+offset_top = 52.0
+offset_right = 151.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+text = "Tab"

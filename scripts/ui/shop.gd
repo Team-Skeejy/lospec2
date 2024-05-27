@@ -44,12 +44,12 @@ func _process(delta):
 		item_container_array[selected_container_idx].deselect()
 		selected_container_idx -= 1
 		if selected_container_idx < 0:
-			selected_container_idx = num_items_for_sale - 1
+			selected_container_idx = len(item_container_array) - 1
 		item_container_array[selected_container_idx].select()
 	elif Input.is_action_just_pressed("Right"):
 		item_container_array[selected_container_idx].deselect()
 		selected_container_idx += 1
-		if selected_container_idx >= num_items_for_sale:
+		if selected_container_idx >= len(item_container_array):
 			selected_container_idx = 0
 		item_container_array[selected_container_idx].select()
 	elif Input.is_action_just_pressed("A"):

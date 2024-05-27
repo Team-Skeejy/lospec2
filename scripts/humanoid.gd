@@ -6,11 +6,11 @@ static var TERMINAL_VELOCITY := 900.
 static var ACCELERATION := 900.
 static var AERIAL_ACCELERATION := 400.
 static var FRICTION := 1600.
-static var AIR_FRICTION := 1000.
-static var JUMP_VELOCITY := -150.
+static var AIR_FRICTION := 900.
+static var JUMP_VELOCITY := -160.
 static var JUMP_DURATION := 0.2
 
-var speed := 70.
+var speed := 90.
 var jump_timer := JUMP_DURATION
 var is_default_jump := true
 var jumping := false

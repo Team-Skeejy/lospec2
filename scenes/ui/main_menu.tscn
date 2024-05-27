@@ -1,11 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://dt6vqi3xctlav"]
+[gd_scene load_steps=13 format=3 uid="uid://dt6vqi3xctlav"]
 
 [ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_8hyft"]
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="2_h38ja"]
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="2_o7dha"]
+[ext_resource type="Texture2D" uid="uid://bwfxfnwff3p1l" path="res://textures/tilesets/tileset1.png" id="3_14qpr"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="3_dposn"]
 [ext_resource type="PackedScene" uid="uid://bkuioef3meg5d" path="res://scenes/ui/settings_menu.tscn" id="5_2jw2j"]
 [ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="6_gcg6g"]
+[ext_resource type="PackedScene" uid="uid://dxtnyt4e1e6f1" path="res://scenes/ui/controls.tscn" id="7_w4xae"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgweh"]
+texture = ExtResource("3_14qpr")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4dgjn"]
 atlas = ExtResource("3_dposn")
@@ -35,11 +47,21 @@ theme = ExtResource("1_8hyft")
 script = ExtResource("2_o7dha")
 settings_menu = NodePath("SettingsMenu")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_lgweh")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -71.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -55,7 +77,7 @@ vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/CenterContainer"]
 layout_mode = 2
@@ -82,17 +104,20 @@ texture = SubResource("AtlasTexture_vl55w")
 layout_mode = 2
 text = ": Settings"
 
-[node name="Label2" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "[A]: Space/Z
-[B]: Alt/X
-[Start]: Enter/Esc
-[Select]: Tab"
-
 [node name="SettingsMenu" parent="." node_paths=PackedStringArray("crt_texture") instance=ExtResource("5_2jw2j")]
 visible = false
 layout_mode = 1
 crt_texture = NodePath("../ColorRect")
+
+[node name="Controls" parent="." instance=ExtResource("7_w4xae")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1.0
+offset_top = 159.0
+offset_right = 257.0
+offset_bottom = 159.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_x41rh")
@@ -102,3 +127,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -19.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "A game by Team Skeejy
+For Lospec Jam 2"
+horizontal_alignment = 2

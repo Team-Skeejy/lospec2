@@ -9,6 +9,10 @@ extends Interactable
 		item_resource = v
 		sprite.texture = item_resource.texture
 		
+func _init():
+	interaction_name = "Get"
+
+
 func interact(_holder):
 	Global.player.add_item(item_resource)
 	queue_free()

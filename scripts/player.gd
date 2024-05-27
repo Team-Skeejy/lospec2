@@ -30,7 +30,7 @@ func jump(delta: float) -> void:
 		for item: Behaviour in behaviours.filter(func(item): return !item.disabled): if item.jump(delta): break
 
 func jump_with_no_horizontal_velocity() -> void:
-	velocity.y = JUMP_VELOCITY
+	velocity.y = JUMP_VELOCITY - Modifiers.jump_velocity
 
 # handles a press logic
 func a_press(delta: float) -> void:

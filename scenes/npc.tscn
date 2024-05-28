@@ -561,12 +561,7 @@ npc = NodePath("../..")
 position = Vector2(0, -25)
 npc = NodePath("..")
 
-[node name="DialogueArea" parent="DialogueGenerator" index="0"]
-visible = false
-
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
 position = Vector2(2.00001, -9.5)
 scale = Vector2(17.1, 12.15)
 metadata/_edit_lock_ = true
-
-[editable path="DialogueGenerator"]

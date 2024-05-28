@@ -5,13 +5,14 @@ extends Node2D
 @export var speech_bubble_scene: PackedScene
 @export var npc: NPC
 @export var dialogue_area : Area2D
+@export var info_icon : Sprite2D
 
 var speech_bubble_spacing: int = 16
 var speech_bubble_movement_speed: float = 0.1
 var dialogue_timer: Timer
 var dialogue_time_interval: float = 3.
 
-var has_info_to_give : bool = true
+var has_info_to_give : bool = false
 static var RESPONSE_TIME := 0.4
 
 func check_requirements() -> bool:
@@ -30,6 +31,9 @@ var completed : bool :
 
 func _ready():
 	Global.instance.new_speech_bubble.connect(_on_new_speech_bubble)
+	if npc and npc.company_resource.company_name != "GUARD":
+		has_info_to_give = true
+		info_icon.show()
 
 func respond_to_small_talk():
 	if not npc:
@@ -42,6 +46,7 @@ func respond_to_small_talk():
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
 		new_dialogue_speech_bubble(_t)
 		has_info_to_give = false
+		info_icon.hide()
 		
 		
 	else:  # if not, generate small talk

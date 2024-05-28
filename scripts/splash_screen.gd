@@ -15,6 +15,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(_ev: InputEvent) -> void:
 	if Input.is_action_just_pressed("Select"):
+		print_debug("REMOVE ME REMOVE ME")
+		Global.instance.current_phase = Global.GamePhase.platformer 
 		get_tree().change_scene_to_file(FadeTransition.GAME)
 		ignore_animation_end = true
 	elif Input.is_anything_pressed():

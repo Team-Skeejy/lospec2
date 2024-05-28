@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://ghe8um7leqb7"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_3nt28"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_h58xk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1467o"]
+atlas = ExtResource("2_h58xk")
+region = Rect2(32, 64, 32, 32)
+
+[resource]
+script = ExtResource("1_3nt28")
+texture = SubResource("AtlasTexture_1467o")
+name = "Small Talk for Dummies"
+description = ""
+behaviour_scene = "res://scenes/items/small_talk.tscn"
+cost = 0
+for_sale = false
+category = 0
+locked_notification_text = "missing"
+unlocked_notification_text = "you have it!"

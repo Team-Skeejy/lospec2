@@ -16,6 +16,9 @@ enum NPCType {
 @export var type : NPCType = NPCType.Jacket
 @export var navigation_agent: NavigationAgent2D
 @export var vision_container: Node2D
+@export var patrol_position1 : Node2D
+@export var patrol_position2 : Node2D
+
 
 @onready var company: String = company_resource.company_name
 var INTERACT_THRESHOLD_DISTANCE := 40.

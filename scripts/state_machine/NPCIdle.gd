@@ -15,7 +15,6 @@ func on_danger_zone(body: Node2D):
 		transitioned.emit(self, on_alert)
 
 func Enter() -> void:
-
 	# create a timer and wait for it to start wandering
 	timer = Timer.new()
 	timer.wait_time = IDLE_TIME

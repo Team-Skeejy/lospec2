@@ -1,13 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://15ei017vrpft"]
+[gd_scene load_steps=14 format=3 uid="uid://15ei017vrpft"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_ke51a"]
 [ext_resource type="Script" path="res://scripts/skyscraper.gd" id="1_ye060"]
 [ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="2_3m4kc"]
 [ext_resource type="Script" path="res://scripts/player_spawner.gd" id="2_xhf77"]
 [ext_resource type="Script" path="res://scripts/tutorial.gd" id="3_lumv6"]
-[ext_resource type="PackedScene" uid="uid://c7wqlhul1t4pg" path="res://scenes/ui/small_text_panel.tscn" id="4_aghfq"]
 [ext_resource type="PackedScene" uid="uid://pt22hmf0q1qw" path="res://scenes/map_objects/map_door.tscn" id="4_udmfk"]
-[ext_resource type="PackedScene" uid="uid://ba1kvwuvllyw6" path="res://scenes/map_objects/next_phase_water_cooler.tscn" id="5_6e2fr"]
 [ext_resource type="Script" path="res://scripts/interactables/lock.gd" id="5_us257"]
 [ext_resource type="Resource" uid="uid://cw1s1sycptn15" path="res://assets/items/visitor_pass.tres" id="6_sctf1"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="7_60eb8"]
@@ -35,29 +33,94 @@ layer_1/name = "Objects"
 layer_1/tile_data = PackedInt32Array(-131044, 589824, 3, -196579, 589824, 3, -262114, 589824, 3, -327649, 589824, 3, -393184, 589824, 3, -458719, 589824, 3, -524254, 589824, 3, -524255, 524288, 4, -524256, 524288, 4, -524257, 524288, 4, -524258, 524288, 4, -524259, 524288, 4, -524260, 524288, 4, -524253, 524288, 4, -917470, 589824, 3, -851935, 589824, 3, -786400, 589824, 3, -720865, 589824, 3, -655330, 589824, 3, -589795, 589824, 3, -917476, 524288, 4, -917475, 524288, 4, -917474, 524288, 4, -917473, 524288, 4, -917472, 524288, 4, -917471, 524288, 4, -917469, 524288, 4, -1572856, 720896, 3, -1507319, 720896, 3, -1441782, 720896, 3, -1376245, 720896, 3, -1310708, 720896, 3, -1900514, 524288, 4, -1900515, 524288, 4, -1900516, 524288, 4, -1900517, 524288, 4, -1900518, 524288, 4, -1900519, 720896, 3, -1900520, 524288, 4, -1900521, 524288, 4, -1900522, 524288, 4, -1900523, 524288, 4, -1900524, 524288, 4, -1900525, 524288, 4, -1900526, 524288, 4, -1900527, 524288, 4, -1900528, 524288, 4, -1900529, 524288, 4, -1900530, 524288, 4, -2228194, 524288, 4, -2228195, 524288, 4, -2228196, 524288, 4, -2228197, 524288, 4, -2228198, 524288, 4, -2228199, 524288, 4, -2228200, 524288, 4, -2228201, 524288, 4, -2228202, 524288, 4, -2228203, 524288, 4, -2228204, 524288, 4, -2228205, 524288, 4, -2228206, 524288, 4, -2228207, 524288, 4, -2228208, 524288, 4, -2228209, 524288, 4, -2228210, 524288, 4, -2228211, 524288, 4, -2228212, 524288, 4, -2228213, 524288, 4, -2228214, 524288, 4, -2228215, 524288, 4, -2228217, 524288, 4, -2555874, 524288, 4, -2555875, 524288, 4, -2555876, 524288, 4, -2555877, 524288, 4, -2555878, 524288, 4, -2555879, 524288, 4, -2555880, 720896, 3, -2555882, 524288, 4, -2555883, 524288, 4, -2555884, 524288, 4, -2555885, 524288, 4, -2555886, 524288, 4, -2555887, 524288, 4, -2555888, 524288, 4, -2555889, 524288, 4, -2555890, 524288, 4, -2555891, 524288, 4, -2555892, 524288, 4, -2555893, 524288, 4, -2555894, 524288, 4, -2555895, 524288, 4, -2555896, 524288, 4, -2555897, 524288, 4, -2883554, 524288, 4, -2883555, 524288, 4, -2883556, 524288, 4, -2883557, 524288, 4, -2883558, 524288, 4, -2883559, 524288, 4, -2883560, 524288, 4, -2883561, 524288, 4, -2883562, 589824, 3, -2883563, 524288, 4, -2883564, 524288, 4, -2883565, 524288, 4, -2883566, 524288, 4, -2883567, 524288, 4, -2883568, 524288, 4, -2883569, 524288, 4, -2883570, 524288, 4, -2883571, 524288, 4, -2883572, 524288, 4, -2883573, 524288, 4, -2883574, 524288, 4, -2883575, 524288, 4, -2883576, 524288, 4, -2883577, 524288, 4, -1638371, 720896, 3, -1703908, 720896, 3, -1769445, 720896, 3, -1834982, 720896, 3, -1572851, 524288, 4, -1572852, 524288, 4, -1572853, 524288, 4, -1572854, 524288, 4, -1572855, 524288, 4, -1572857, 524288, 4, -917446, 524288, 4, -917445, 524288, 4, -917444, 524288, 4, -917443, 524288, 4, -917442, 524288, 4, -917441, 524288, 4, -1245143, 720896, 3, -1179606, 720896, 3, -1114069, 720896, 3, -1048532, 720896, 3, -982995, 720896, 3, -1245142, 524288, 4, -1245141, 524288, 4, -1245140, 524288, 4, -1245139, 524288, 4, -1245138, 524288, 4, -1245137, 524288, 4, -1245136, 524288, 4, -1245135, 524288, 4, -1245134, 524288, 4, -1245133, 524288, 4, -1245132, 524288, 4, -2621422, 589824, 3, -2686957, 589824, 3, -2752492, 589824, 3, -2818027, 589824, 3, -2293732, 720896, 3, -2359269, 720896, 3, -2424806, 720896, 3, -2490343, 720896, 3, -2555881, 524288, 4, -2228216, 524288, 4, -1966066, 524288, 0, -1966069, 983040, 3, -1966071, 851968, 4, -1310685, 851968, 4, -1310683, 983040, 3, -1638383, 851968, 4, -1966060, 851968, 4, -2293747, 851968, 4, -2293740, 524288, 0, -2359277, 786432, 0, -1441777, 65536, 10, -1769463, 65536, 10, -2162660, 65536, 10, -2490359, 65536, 10, -2818039, 65536, 10, -2097141, 983040, 0, -2031602, 786432, 0, -589765, 851968, 4, -786368, 524288, 4, -786369, 524288, 4, -786370, 524288, 4, -786371, 524288, 4, -589770, 524288, 0, -655307, 786432, 0, -589775, 655360, 65537, -589751, 655360, 1, -589753, 851968, 3, -720828, 983040, 5, -589780, 786432, 1, -589800, 524288, 0, -589805, 524288, 0, -589810, 524288, 0, -983026, 524288, 0, -983021, 524288, 0, -983016, 524288, 0, -983031, 524288, 0, -589797, 851968, 1, -983013, 851968, 1, -655335, 851968, 9, -655342, 851968, 9, -1048563, 851968, 9, -1048558, 851968, 9, -1048551, 851968, 9, -1048553, 851968, 9, -655345, 983040, 9, -655347, 983040, 9, -655341, 983040, 9, -655337, 917504, 9, -1048552, 983040, 9, -1048566, 983040, 9, -1048568, 917504, 9, -1048562, 917504, 9, -589815, 589824, 5, -655349, 524288, 6, -655352, 524288, 6, -720888, 524288, 6, -720885, 524288, 6)
 
 [node name="PlayerSpawnPoint" type="Node2D" parent="."]
-position = Vector2(813, -134)
+position = Vector2(16, -22)
 script = ExtResource("2_xhf77")
 
 [node name="Tutorial" type="Node2D" parent="."]
 script = ExtResource("3_lumv6")
 
-[node name="SmallTextPanel" parent="Tutorial" instance=ExtResource("4_aghfq")]
-offset_left = 819.0
-offset_top = -198.0
-offset_right = 819.0
-offset_bottom = -198.0
-text = "This is the tutorial phase
-"
+[node name="NPCs" type="Node2D" parent="Tutorial"]
 
-[node name="SmallTextPanel2" parent="Tutorial" instance=ExtResource("4_aghfq")]
-offset_left = 981.0
-offset_top = -173.0
-offset_right = 981.0
-offset_bottom = -173.0
-text = "Next scene"
+[node name="NPC" parent="Tutorial/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
+position = Vector2(282, -20)
+patrol_position1 = NodePath("../../NavigationPoints/Tutorial1")
+patrol_position2 = NodePath("../../NavigationPoints/Tutorial2")
 
-[node name="NextPhaseWaterCooler" parent="Tutorial" instance=ExtResource("5_6e2fr")]
-position = Vector2(1008, -127)
+[node name="NPC2" parent="Tutorial/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
+position = Vector2(386, -129)
+patrol_position1 = NodePath("../../NavigationPoints/Tutorial3")
+patrol_position2 = NodePath("../../NavigationPoints/Tutorial4")
+
+[node name="NPC3" parent="Tutorial/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
+position = Vector2(591, -130)
+patrol_position1 = NodePath("../../NavigationPoints/Tutorial5")
+patrol_position2 = NodePath("../../NavigationPoints/Tutorial6")
+
+[node name="NPC4" parent="Tutorial/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
+position = Vector2(272, -226)
+patrol_position1 = NodePath("../../NavigationPoints/Tutorial7")
+patrol_position2 = NodePath("../../NavigationPoints/Tutorial8")
+
+[node name="NPC5" parent="Tutorial/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
+position = Vector2(235, -130)
+patrol_position1 = NodePath("../../NavigationPoints/Tutorial9")
+patrol_position2 = NodePath("../../NavigationPoints/Tutorial10")
+
+[node name="NPC6" parent="Tutorial/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
+position = Vector2(479, -226)
+patrol_position1 = NodePath("../../NavigationPoints/Tutorial11")
+patrol_position2 = NodePath("../../NavigationPoints/Tutorial12")
+
+[node name="NavigationPoints" type="Node2D" parent="Tutorial"]
+
+[node name="Tutorial1" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(311, -19)
+
+[node name="Tutorial2" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(253, -20)
+
+[node name="Tutorial3" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(417, -127)
+
+[node name="Tutorial4" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(358, -129)
+
+[node name="Tutorial5" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(573, -130)
+
+[node name="Tutorial6" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(634, -131)
+
+[node name="Tutorial7" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(247, -226)
+
+[node name="Tutorial8" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(320, -227)
+
+[node name="Tutorial9" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(212, -127)
+
+[node name="Tutorial10" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(266, -128)
+
+[node name="Tutorial11" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(455, -227)
+
+[node name="Tutorial12" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(358, -129)
+
+[node name="Tutorial13" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(573, -130)
+
+[node name="Tutorial14" type="Node2D" parent="Tutorial/NavigationPoints"]
+position = Vector2(634, -131)
+
+[node name="MapDoor" parent="Tutorial" instance=ExtResource("4_udmfk")]
+position = Vector2(648, -17)
+
+[node name="Lock" type="Node" parent="Tutorial/MapDoor"]
+script = ExtResource("5_us257")
+item_needed = ExtResource("6_sctf1")
 
 [node name="Cafeteria" type="Node2D" parent="."]
 
@@ -79,111 +142,65 @@ horizontal_alignment = 1
 
 [node name="NPCs" type="Node2D" parent="Cyan"]
 
-[node name="NPC" parent="Cyan/NPCs" instance=ExtResource("2_3m4kc")]
+[node name="NPC" parent="Cyan/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
 position = Vector2(705, -132)
+patrol_position1 = NodePath("../../NavigationPoints/Cyan1")
+patrol_position2 = NodePath("../../NavigationPoints/Cyan2")
 
-[node name="NPCPatrol" parent="Cyan/NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/1")
-position2 = NodePath("../../../../NavigationPoints/2")
-
-[node name="NPC2" parent="Cyan/NPCs" instance=ExtResource("2_3m4kc")]
+[node name="NPC2" parent="Cyan/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
 position = Vector2(1087, -130)
 type = 2
+patrol_position1 = NodePath("../../NavigationPoints/Cyan3")
+patrol_position2 = NodePath("../../NavigationPoints/Cyan4")
 
-[node name="NPCPatrol" parent="Cyan/NPCs/NPC2/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/3")
-position2 = NodePath("../../../../NavigationPoints/4")
-
-[node name="NPC3" parent="Cyan/NPCs" instance=ExtResource("2_3m4kc")]
+[node name="NPC3" parent="Cyan/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
 position = Vector2(474, -310)
 type = 1
+patrol_position1 = NodePath("../../NavigationPoints/Cyan5")
+patrol_position2 = NodePath("../../NavigationPoints/Cyan6")
 
-[node name="NPCPatrol" parent="Cyan/NPCs/NPC3/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/5")
-position2 = NodePath("../../../../NavigationPoints/6")
-
-[node name="NPC4" parent="Cyan/NPCs" instance=ExtResource("2_3m4kc")]
+[node name="NPC4" parent="Cyan/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
 position = Vector2(1139, -241)
 type = 1
+patrol_position1 = NodePath("../../NavigationPoints/Cyan7")
+patrol_position2 = NodePath("../../NavigationPoints/Cyan8")
 
-[node name="NPCPatrol" parent="Cyan/NPCs/NPC4/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/7")
-position2 = NodePath("../../../../NavigationPoints/8")
-
-[node name="NPC5" parent="Cyan/NPCs" instance=ExtResource("2_3m4kc")]
+[node name="NPC5" parent="Cyan/NPCs" node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("2_3m4kc")]
 position = Vector2(895, -223)
 type = 2
-
-[node name="NPCPatrol" parent="Cyan/NPCs/NPC5/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/9")
-position2 = NodePath("../../../../NavigationPoints/10")
-
-[node name="NPC6" parent="Cyan/NPCs" node_paths=PackedStringArray("navigation_agent", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator", "sprite") instance=ExtResource("2_3m4kc")]
-position = Vector2(532, -135)
-navigation_agent = NodePath("../NPC/NavigationAgent2D")
-sprite_animation_player = NodePath("../NPC/AnimationPlayer")
-interaction_area = NodePath("../NPC/InteractionArea2D")
-behaviour_node = NodePath("../NPC/Behaviours")
-dialogue_generator = NodePath("../NPC/DialogueGenerator")
-sprite = NodePath("../NPC/Sprite2D")
-
-[node name="StateMachine" parent="Cyan/NPCs/NPC6" index="5" node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("../../NPC/StateMachine/NPCIdle")
-
-[node name="NPCIdle" parent="Cyan/NPCs/NPC6/StateMachine" index="0" node_paths=PackedStringArray("npc")]
-npc = NodePath("../../../NPC")
-
-[node name="NPCWander" parent="Cyan/NPCs/NPC6/StateMachine" index="1" node_paths=PackedStringArray("npc")]
-npc = NodePath("../../../NPC")
-
-[node name="NPCPatrol" parent="Cyan/NPCs/NPC6/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2", "npc")]
-position1 = NodePath("../../../../NavigationPoints/1")
-position2 = NodePath("../../../../NavigationPoints/2")
-npc = NodePath("../../../NPC")
-
-[node name="NPCGuardIdle" parent="Cyan/NPCs/NPC6/StateMachine" index="3" node_paths=PackedStringArray("npc")]
-npc = NodePath("../../../NPC")
-
-[node name="NPCGuardPatrol" parent="Cyan/NPCs/NPC6/StateMachine" index="4" node_paths=PackedStringArray("npc")]
-npc = NodePath("../../../NPC")
-
-[node name="NPCGuardAlert" parent="Cyan/NPCs/NPC6/StateMachine" index="5" node_paths=PackedStringArray("npc")]
-npc = NodePath("../../../NPC")
-
-[node name="DialogueGenerator" parent="Cyan/NPCs/NPC6" index="7" node_paths=PackedStringArray("npc", "dialogue_area")]
-npc = NodePath("../../NPC")
-dialogue_area = NodePath("../../NPC/DialogueGenerator/DialogueArea")
+patrol_position1 = NodePath("../../NavigationPoints/Cyan9")
+patrol_position2 = NodePath("../../NavigationPoints/Cyan10")
 
 [node name="NavigationPoints" type="Node2D" parent="Cyan"]
 
-[node name="1" type="Node2D" parent="Cyan/NavigationPoints"]
-position = Vector2(682, -126)
+[node name="Cyan1" type="Node2D" parent="Cyan/NavigationPoints"]
+position = Vector2(681, -131)
 
-[node name="2" type="Node2D" parent="Cyan/NavigationPoints"]
-position = Vector2(741, -126)
+[node name="Cyan2" type="Node2D" parent="Cyan/NavigationPoints"]
+position = Vector2(776, -129)
 
-[node name="3" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan3" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(1167, -129)
 
-[node name="4" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan4" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(962, -129)
 
-[node name="5" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan5" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(452, -305)
 
-[node name="6" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan6" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(513, -307)
 
-[node name="7" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan7" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(1082, -225)
 
-[node name="8" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan8" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(1190, -230)
 
-[node name="9" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan9" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(1041, -228)
 
-[node name="10" type="Node2D" parent="Cyan/NavigationPoints"]
+[node name="Cyan10" type="Node2D" parent="Cyan/NavigationPoints"]
 position = Vector2(915, -229)
 
 [node name="MapDoor" parent="Cyan" node_paths=PackedStringArray("lock") instance=ExtResource("4_udmfk")]
@@ -195,6 +212,7 @@ script = ExtResource("5_us257")
 item_needed = ExtResource("6_sctf1")
 
 [node name="Grey" type="Node2D" parent="."]
+visible = false
 
 [node name="NavigationPoints" type="Node2D" parent="Grey"]
 
@@ -236,35 +254,20 @@ position = Vector2(315, -386)
 company_resource = ExtResource("12_x6j8n")
 type = 1
 
-[node name="NPCPatrol" parent="Grey/NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/1")
-position2 = NodePath("../../../../NavigationPoints/2")
-
 [node name="NPC2" parent="Grey/NPCs" instance=ExtResource("2_3m4kc")]
 position = Vector2(296, -465)
 company_resource = ExtResource("12_x6j8n")
 
-[node name="NPCPatrol" parent="Grey/NPCs/NPC2/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/3")
-position2 = NodePath("../../../../NavigationPoints/4")
-
 [node name="NPC3" parent="Grey/NPCs" instance=ExtResource("2_3m4kc")]
 position = Vector2(312, -550)
-
-[node name="NPCPatrol" parent="Grey/NPCs/NPC3/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../NavigationPoints/5")
-position2 = NodePath("../../../../NavigationPoints/6")
 
 [node name="MapItem" parent="." instance=ExtResource("10_jvtyc")]
 position = Vector2(784, -332)
 item_resource = ExtResource("12_57cr6")
 
-[editable path="Cyan/NPCs/NPC"]
-[editable path="Cyan/NPCs/NPC2"]
-[editable path="Cyan/NPCs/NPC3"]
-[editable path="Cyan/NPCs/NPC4"]
-[editable path="Cyan/NPCs/NPC5"]
-[editable path="Cyan/NPCs/NPC6"]
 [editable path="Grey/NPCs/NPC"]
+[editable path="Grey/NPCs/NPC/DialogueGenerator"]
 [editable path="Grey/NPCs/NPC2"]
+[editable path="Grey/NPCs/NPC2/DialogueGenerator"]
 [editable path="Grey/NPCs/NPC3"]
+[editable path="Grey/NPCs/NPC3/DialogueGenerator"]

@@ -216,8 +216,10 @@ func reset_timer():
 	prev_time_signal_at = TIME_DIVISIONS
 	time_changed.emit(TIME_DIVISIONS, TIME_DIVISIONS)
 
-func new_notification_no_texture(text: String):
-	player.ui.new_notification_no_texture(text)
+func new_notification_no_texture(text: String, length: float = Notification.DEFAULT_DESPAWN_TIME) -> Notification:
+	return player.ui.new_notification_no_texture(text, length)
 
-func new_notification_with_texture(text: String, texture: Texture, dark: bool):
-	player.ui.new_notification_with_texture(text, texture, dark)
+func new_notification_with_texture(text: String, texture: Texture, dark: bool, length: float = Notification.DEFAULT_DESPAWN_TIME) -> Notification:
+	return player.ui.new_notification_with_texture(text, texture, dark, length)
+
+

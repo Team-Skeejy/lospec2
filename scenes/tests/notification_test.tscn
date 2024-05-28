@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://caqtaslbm0hdp"]
+
+[ext_resource type="Script" path="res://scenes/tests/notification_test.gd" id="1_jtf1y"]
+[ext_resource type="PackedScene" uid="uid://bgmqtfse5886o" path="res://scenes/map_objects/player_spawner.tscn" id="2_koc0d"]
+
+[node name="NotificationTest" type="Node2D"]
+script = ExtResource("1_jtf1y")
+
+[node name="PlayerSpawner" parent="." instance=ExtResource("2_koc0d")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -28.5
+offset_right = 69.0
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Up to generate fast message
+Down to generate slow message
+Left to generate perpetual message
+Right to close perpetual message"

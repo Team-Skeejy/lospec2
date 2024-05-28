@@ -79,14 +79,16 @@ func _flip_paused():
 func update_items():
 	inventory.update_items()
 
-func new_notification_no_texture(text: String, length: float = Notification.DEFAULT_DESPAWN_TIME):
+func new_notification_no_texture(text: String, length: float = Notification.DEFAULT_DESPAWN_TIME) -> Notification:
 	var notif := notification_scene.instantiate()
 	notif.despawn_time = length
 	notification_holder.add_child(notif)
 	notif.start_no_texture(text)
+	return notif
 
-func new_notification_with_texture(text: String, texture: Texture, dark: bool, length: float = Notification.DEFAULT_DESPAWN_TIME):
+func new_notification_with_texture(text: String, texture: Texture, dark: bool, length: float = Notification.DEFAULT_DESPAWN_TIME) -> Notification:
 	var notif := notification_scene.instantiate()
 	notif.despawn_time = length
 	notification_holder.add_child(notif)
 	notif.start_with_texture(text, texture, dark)
+	return notif

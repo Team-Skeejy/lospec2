@@ -36,10 +36,13 @@ func start():
 	position.y = -despawn_distance
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "position:y", position.y + despawn_distance, tween_time)
-	tween.tween_callback(despawn_timer.start.bind(despawn_time))
+	if !despawn_time:
+		tween.tween_callback(despawn_timer.start.bind(despawn_time))
 
-func _on_timer_timeout():
-	print(123)
+func close():
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "position:y", position.y - despawn_distance, tween_time)
 	tween.tween_callback(queue_free)
+
+func _on_timer_timeout():
+	close()

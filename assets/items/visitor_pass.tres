@@ -16,5 +16,6 @@ behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 10
 for_sale = true
 category = 0
-locked_notification_text = "You'll need a visitor's pass to open this door."
+locked_notification_text = "You'll need a visitor's pass
+to open this door."
 unlocked_notification_text = ""

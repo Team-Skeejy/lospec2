@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://du7d3x6mae8wj"]
+[gd_scene load_steps=13 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="Script" path="res://scripts/test_level.gd" id="1_ovvlx"]
@@ -6,14 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://bwoobo3k2h8bm" path="res://scenes/map_objects/warp_door.tscn" id="5_pcnwj"]
 [ext_resource type="PackedScene" uid="uid://pt22hmf0q1qw" path="res://scenes/map_objects/map_door.tscn" id="6_lvxox"]
 [ext_resource type="Script" path="res://scripts/interactables/lock.gd" id="6_vxbyk"]
-[ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="7_4jeeo"]
 [ext_resource type="PackedScene" uid="uid://bgmqtfse5886o" path="res://scenes/map_objects/player_spawner.tscn" id="7_v50b3"]
 [ext_resource type="PackedScene" uid="uid://cecdbwt1q0fns" path="res://scenes/map_objects/scene_door.tscn" id="8_6fohb"]
 [ext_resource type="PackedScene" uid="uid://ba1kvwuvllyw6" path="res://scenes/map_objects/next_phase_water_cooler.tscn" id="10_4bo24"]
 [ext_resource type="PackedScene" uid="uid://b3cctlqah457r" path="res://scenes/map_objects/hide_door.tscn" id="11_0yare"]
 [ext_resource type="PackedScene" uid="uid://cukgcxvgbdga" path="res://scenes/npc_guard.tscn" id="11_dec8k"]
-[ext_resource type="Resource" uid="uid://m5iqwhu8wv11" path="res://assets/items/sticky_note.tres" id="12_6hrtu"]
-[ext_resource type="Resource" uid="uid://4gl8jyarpnch" path="res://assets/companies/dark_green.tres" id="13_jp4i5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8o1mx"]
 size = Vector2(224.902, 32)
@@ -114,26 +111,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="NPCs" type="Node2D" parent="."]
 
-[node name="NPC" parent="NPCs" instance=ExtResource("7_4jeeo")]
-position = Vector2(-370, -20)
-
-[node name="NPCPatrol" parent="NPCs/NPC/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../Node2D")
-position2 = NodePath("../../../Node2D2")
-
-[node name="NPC2" parent="NPCs" node_paths=PackedStringArray("lock") instance=ExtResource("7_4jeeo")]
-position = Vector2(346, -179)
-lock = NodePath("Lock")
-type = 1
-
-[node name="NPCPatrol" parent="NPCs/NPC2/StateMachine" index="2" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../../Objects/Sittable")
-position2 = NodePath("../../../Node2D3")
-
-[node name="Lock" type="Node" parent="NPCs/NPC2"]
-script = ExtResource("6_vxbyk")
-item_needed = ExtResource("12_6hrtu")
-
 [node name="Node2D" type="Node2D" parent="NPCs"]
 position = Vector2(-335, -17)
 
@@ -143,22 +120,11 @@ position = Vector2(-243, -82)
 [node name="Node2D3" type="Node2D" parent="NPCs"]
 position = Vector2(519, -116)
 
-[node name="NPC3" parent="NPCs" node_paths=PackedStringArray("lock") instance=ExtResource("7_4jeeo")]
-position = Vector2(301, -15)
-company_resource = ExtResource("13_jp4i5")
-lock = NodePath("Lock")
-type = 2
-
-[node name="NPCIdle" parent="NPCs/NPC3/StateMachine" index="0"]
-idle_to = "NPCIdle"
-
-[node name="Lock" type="Node" parent="NPCs/NPC3"]
-script = ExtResource("6_vxbyk")
-item_needed = ExtResource("12_6hrtu")
-
-[node name="NPC Guard" parent="." instance=ExtResource("11_dec8k")]
+[node name="NPC Guard" parent="." node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("11_dec8k")]
 position = Vector2(679, -116)
 collision_mask = 2
+patrol_position1 = NodePath("../Guard Patrol Point 1")
+patrol_position2 = NodePath("../Guard Patrol Point 2")
 
 [node name="CollisionPolygon2D" parent="NPC Guard/VisionContainer/Torch/DangerZone" index="2"]
 disabled = true
@@ -166,9 +132,8 @@ disabled = true
 [node name="NPCPatrol" parent="NPC Guard/StateMachine" index="2"]
 on_idle = ""
 
-[node name="NPCGuardPatrol" parent="NPC Guard/StateMachine" index="4" node_paths=PackedStringArray("position1", "position2")]
-position1 = NodePath("../../../Guard Patrol Point 1")
-position2 = NodePath("../../../Guard Patrol Point 2")
+[node name="DialogueArea" parent="NPC Guard/DialogueGenerator" index="0"]
+visible = false
 
 [node name="Guard Patrol Point 1" type="Node2D" parent="."]
 position = Vector2(598, -116)
@@ -176,11 +141,5 @@ position = Vector2(598, -116)
 [node name="Guard Patrol Point 2" type="Node2D" parent="."]
 position = Vector2(808, -116)
 
-[editable path="NPCs/NPC"]
-[editable path="NPCs/NPC/DialogueGenerator"]
-[editable path="NPCs/NPC2"]
-[editable path="NPCs/NPC2/DialogueGenerator"]
-[editable path="NPCs/NPC3"]
-[editable path="NPCs/NPC3/DialogueGenerator"]
 [editable path="NPC Guard"]
 [editable path="NPC Guard/DialogueGenerator"]

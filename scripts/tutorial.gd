@@ -33,14 +33,13 @@ func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("Down"):
 		player_pressed_down = true
 
-
-func door_interacted():
-	pass
+func door_interacted(interactor: Humanoid):
+	if interactor == Global.player:
+		player_has_interacted = true
 
 func item_added(item: ItemResource):
 	if item == tutorial_item:
 		player_has_got_item = true
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -48,6 +47,7 @@ func _ready():
 	await get_tree().process_frame
 
 	Global.player.item_added.connect(item_added)
+	tutorial_door.interacted.connect(door_interacted)
 
 	Global.instance.reset_timer()
 	await get_tree().create_timer(2.).timeout
@@ -77,7 +77,7 @@ func _ready():
 	set_time(3)
 
 	# press b to interact
-	await Global.instance.new_notification_no_texture('Press [B] on objects to interact').notification_ended
+	await Global.instance.new_notification_no_texture('Press [B] on objects to interact', 3).notification_ended
 	notif = Global.instance.new_notification_no_texture('Lets open that door by pressing [B]', 0)
 	while (!player_has_interacted): await get_tree().process_frame
 	notif.close()

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvbbvcb813s3a"]
+
+[ext_resource type="Script" path="res://scripts/items/small_talk_action.gd" id="1_4bqyh"]
+
+[node name="SmallTalk" type="Node"]
+script = ExtResource("1_4bqyh")

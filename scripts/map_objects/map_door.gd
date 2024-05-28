@@ -1,6 +1,8 @@
 class_name MapDoor
 extends Interactable
 
+
+
 var open: bool = false
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: StaticBody2D = $StaticBody2D

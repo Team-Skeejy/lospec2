@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://bgocvcrd7rod8"]
+[gd_scene load_steps=5 format=3 uid="uid://bgocvcrd7rod8"]
+
+[ext_resource type="Script" path="res://scripts/map_objects/cash.gd" id="1_vjgvp"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_8nqwp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hcqrg"]
+size = Vector2(89, 78)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2denl"]
+atlas = ExtResource("2_8nqwp")
+region = Rect2(32, 224, 32, 32)
 
 [node name="Cash" type="Area2D"]
+script = ExtResource("1_vjgvp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -25)
+shape = SubResource("RectangleShape2D_hcqrg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2denl")

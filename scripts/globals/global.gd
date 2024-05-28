@@ -58,11 +58,7 @@ func _ready():
 	setup_companies()
 	print_debug(companies)
 
-
-func _process(delta: float):
-	if !run_timer: return
-	time_limit_countdown = move_toward(time_limit_countdown, 0, delta)
-
+func try_emit_time_signal():
 	var parts: int = (time_limit_countdown / TIME_SEGMENT_LENGTH) + 1
 	if time_limit_countdown == 0 && prev_time_signal_at != 0:
 		prev_time_signal_at = 0
@@ -75,6 +71,10 @@ func _process(delta: float):
 			prev_time_signal_at = parts
 			time_changed.emit(parts, TIME_DIVISIONS)
 
+func _process(delta: float):
+	if !run_timer: return
+	time_limit_countdown = move_toward(time_limit_countdown, 0, delta)
+	try_emit_time_signal()
 
 func setup_items():
 	# yes this is the actual way you look for all files in a path
@@ -169,8 +169,10 @@ func go_to_phase(phase: GamePhase):
 			reset_timer()
 		GamePhase.tutorial_stock_market:
 			store_player_and_transition_to(tutorial_stockmarket_scene)
+			zero_timer()
 		GamePhase.tutorial_shop:
 			store_player_and_transition_to(tutorial_shop_scene)
+			zero_timer()
 
 		GamePhase.platformer:
 			store_player_and_transition_to(platformer_scene)
@@ -178,8 +180,10 @@ func go_to_phase(phase: GamePhase):
 			run_timer = true
 		GamePhase.stock_market:
 			store_player_and_transition_to(stock_market_scene)
+			zero_timer()
 		GamePhase.shop:
 			store_player_and_transition_to(shop_scene)
+			zero_timer()
 
 		GamePhase.test_platformer:
 			store_player_and_transition_to(test_game_scene)
@@ -187,8 +191,10 @@ func go_to_phase(phase: GamePhase):
 			run_timer = true
 		GamePhase.test_bet:
 			store_player_and_transition_to(test_bet_scene)
+			zero_timer()
 		GamePhase.test_shop:
 			store_player_and_transition_to(test_shop_scene)
+			zero_timer()
 
 func go_to_next_phase():
 	time_limit_countdown = 0
@@ -211,6 +217,11 @@ func go_to_next_phase():
 func update_money(change: int):
 	player_money += change
 
+func zero_timer():
+	time_limit_countdown = 0
+	prev_time_signal_at = 0
+	time_changed.emit(0, TIME_DIVISIONS)
+
 func reset_timer():
 	time_limit_countdown = TIME_LIMIT
 	prev_time_signal_at = TIME_DIVISIONS
@@ -222,4 +233,8 @@ func new_notification_no_texture(text: String, length: float = Notification.DEFA
 func new_notification_with_texture(text: String, texture: Texture, dark: bool, length: float = Notification.DEFAULT_DESPAWN_TIME) -> Notification:
 	return player.ui.new_notification_with_texture(text, texture, dark, length)
 
+static func is_tutorial() -> bool:
+	return instance.current_phase == GamePhase.tutorial_platformer \
+	|| instance.current_phase == GamePhase.tutorial_shop \
+	|| instance.current_phase == GamePhase.tutorial_stock_market
 

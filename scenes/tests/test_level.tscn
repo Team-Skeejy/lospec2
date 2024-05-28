@@ -177,6 +177,10 @@ position = Vector2(598, -116)
 position = Vector2(808, -116)
 
 [editable path="NPCs/NPC"]
+[editable path="NPCs/NPC/DialogueGenerator"]
 [editable path="NPCs/NPC2"]
+[editable path="NPCs/NPC2/DialogueGenerator"]
 [editable path="NPCs/NPC3"]
+[editable path="NPCs/NPC3/DialogueGenerator"]
 [editable path="NPC Guard"]
+[editable path="NPC Guard/DialogueGenerator"]

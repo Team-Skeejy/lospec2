@@ -1,6 +1,8 @@
 class_name Player
 extends Humanoid
 
+signal item_added(item: ItemResource)
+
 var inventory: Array[ItemResource] = []
 @export var ui: UI
 static var COYOTE_TIME := 0.1
@@ -102,6 +104,7 @@ func add_item(item: ItemResource):
 	add_behaviour(behaviour)
 	inventory.append(item)
 	ui.update_items()
+	item_added.emit(item)
 
 func has_item(i: ItemResource) -> bool:
 	return i in inventory

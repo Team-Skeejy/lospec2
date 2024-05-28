@@ -5,6 +5,8 @@ static var DESPAWN_TIME_LONG := 5.
 static var DESPAWN_TIME_SHORT := 1.
 static var DEFAULT_DESPAWN_TIME = DESPAWN_TIME_SHORT
 
+signal notification_ended
+
 @export var label: Label
 @export var despawn_timer: Timer
 @export var item_texture: TextureRect
@@ -14,6 +16,9 @@ var tween_time: float = 1.0
 var despawn_distance: float = 64
 
 var darken_texture: bool = false
+
+func _ready():
+	if Global.is_tutorial(): process_mode = Node.PROCESS_MODE_ALWAYS
 
 func start_no_texture(text: String):
 	item_texture.hide()
@@ -29,7 +34,6 @@ func start_with_texture(text: String, texture: Texture, dark: bool):
 	start()
 
 func start():
-	print_debug("lol")
 	position.y = -despawn_distance
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "position:y", position.y + despawn_distance, tween_time)
@@ -40,6 +44,7 @@ func close():
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "position:y", position.y - despawn_distance, tween_time)
 	tween.tween_callback(queue_free)
+	notification_ended.emit()
 
 func _on_timer_timeout():
 	close()

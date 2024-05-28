@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_8irv4")
-company_name = "Grey Inc."
+company_name = "Greylico"
 company_base_payout = 10
 jacket_spritesheet_path = "res://textures/characters/grey/jacket.png"
 tie_spritesheet_path = "res://textures/characters/grey/tie.png"

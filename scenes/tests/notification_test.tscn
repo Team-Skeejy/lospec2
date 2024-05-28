@@ -16,9 +16,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -69.0
+offset_left = -78.0
 offset_top = -28.5
-offset_right = 69.0
+offset_right = 78.0
 offset_bottom = 28.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -26,3 +26,5 @@ text = "Up to generate fast message
 Down to generate slow message
 Left to generate perpetual message
 Right to close perpetual message"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -15,10 +15,6 @@ var despawn_distance: float = 64
 
 var darken_texture: bool = false
 
-func _ready():
-	#start_with_texture("wow i ama so happy that \rthis text can be seen", Vector2(32, 0), true)
-	start_no_texture("Wowowowowowowowow")
-
 func start_no_texture(text: String):
 	item_texture.hide()
 	label.text = text
@@ -33,10 +29,11 @@ func start_with_texture(text: String, texture: Texture, dark: bool):
 	start()
 
 func start():
+	print_debug("lol")
 	position.y = -despawn_distance
 	var tween: Tween = get_tree().create_tween()
 	tween.tween_property(self, "position:y", position.y + despawn_distance, tween_time)
-	if !despawn_time:
+	if despawn_time > 0:
 		tween.tween_callback(despawn_timer.start.bind(despawn_time))
 
 func close():

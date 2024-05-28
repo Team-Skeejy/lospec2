@@ -3,8 +3,8 @@ extends Area2D
 
 var interaction_name: String = ""
 #var locked_by: Lock.Type = Lock.Type.none
-@export var lock: Lock
 @export var shader_sprite: Node2D
+var lock: Lock
 
 signal interacted(interactor: Humanoid)
 

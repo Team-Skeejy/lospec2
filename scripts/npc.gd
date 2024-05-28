@@ -12,12 +12,12 @@ enum NPCType {
 }
 
 @export var company_resource : CompanyResource
-@export var lock : Lock
 @export var type : NPCType = NPCType.Jacket
 @export var navigation_agent: NavigationAgent2D
 @export var vision_container: Node2D
 @export var patrol_position1 : Node2D
 @export var patrol_position2 : Node2D
+var lock : Lock
 
 
 @onready var company: String = company_resource.company_name

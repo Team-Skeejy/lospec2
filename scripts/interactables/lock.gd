@@ -3,6 +3,10 @@ extends Node
 
 @export var item_needed : ItemResource
 
+func _ready():
+	if not get_parent().lock:
+		get_parent().lock = self
+
 func can_be_opened() -> bool:
 	if not item_needed: 
 		return true

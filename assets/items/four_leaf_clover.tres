@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://bcsw3ficgs3e7"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_lwea2"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_ibirp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78avf"]
+atlas = ExtResource("2_ibirp")
+region = Rect2(96, 64, 32, 32)
+
+[resource]
+script = ExtResource("1_lwea2")
+texture = SubResource("AtlasTexture_78avf")
+name = "Four Leaf Clover"
+description = ""
+behaviour_scene = "res://scenes/items/more_luck.tscn"
+cost = 0
+for_sale = true
+category = 0
+locked_notification_text = "missing"
+unlocked_notification_text = "you have it!"

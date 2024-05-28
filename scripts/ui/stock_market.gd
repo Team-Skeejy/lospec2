@@ -37,9 +37,13 @@ var green_info_position := Vector2(48, 34)
 # I use ints for the chance to make sure what I'm showing is consistrnt
 var base_buy_chance: int
 var base_sell_chance: int
-
 var base_buy_payout: int
 var base_sell_payout: int
+
+var buy_chance: int
+var sell_chance: int
+var buy_payout: int
+var sell_payout: int
 
 enum ButtonType {
 	BUY,
@@ -55,14 +59,14 @@ var companies_left: Array
 signal animation_done
 
 func _ready():
-	#print_debug("It is I, the stock market, generating sample information")
-	#InformationManager.instance.generate_sample_info() # TODO REMOVE
+	print_debug("It is I, the stock market, generating sample information")
+	InformationManager.instance.generate_sample_info() # TODO REMOVE
 
 	flip_selected()
 	companies_left = InformationManager.instance.completed_companies
 	animation_done.connect(start_next_company)
 	if len(InformationManager.instance.completed_companies) > 0:
-		start_next_company()
+		start_next_company()		
 	else:
 		stock_market_ui.hide()
 		not_enough_info_label.show()
@@ -85,10 +89,10 @@ func select():
 		sell(Global.instance.current_phase == Global.GamePhase.tutorial_stock_market)
 
 func buy(guaranteed_win: bool = false):
-	if guaranteed_win || randf() < base_buy_chance / 100.:
+	if guaranteed_win || randf() < buy_chance / 100.:
 		graph_animation("up")
 		await animation_done
-		Global.instance.update_money(base_buy_payout)
+		Global.instance.update_money(buy_payout)
 		win()
 	else:
 		graph_animation("down")
@@ -96,10 +100,10 @@ func buy(guaranteed_win: bool = false):
 		lose()
 
 func sell(guaranteed_win: bool = false):
-	if guaranteed_win || randf() < base_sell_chance / 100.:
+	if guaranteed_win || randf() < sell_chance / 100.:
 		graph_animation("down")
 		await animation_done
-		Global.instance.update_money(base_sell_payout)
+		Global.instance.update_money(sell_payout)
 		win()
 	else:
 		graph_animation("up")
@@ -122,8 +126,8 @@ func flip_selected():
 		selected_button = ButtonType.BUY
 		sell_container.modulate = dark_red_color
 		buy_container.modulate = bright_green_color
-
-static var BASE_PAYOUT = 10  # TODO move to somewhere else, payout based on company/floor
+	update_odds_payout()
+	
 
 func start_next_company():
 	if len(companies_left) == 0:
@@ -149,30 +153,47 @@ func start_next_company():
 
 	var base_payout: int = Global.instance.companies[company].company_base_payout
 
+	base_buy_chance = n_buy * 100 / InformationManager.MAX_INFO_PER_COMPANY
+	base_sell_chance = 100 - base_buy_chance
+	
 	if n_buy == InformationManager.MAX_INFO_PER_COMPANY:
-		base_buy_chance = 99
-		base_sell_chance = 1
 		base_buy_payout = base_payout * 3
 		base_sell_payout = base_payout * 10
-	elif n_buy == InformationManager.MAX_INFO_PER_COMPANY:
-		base_buy_chance = 1
-		base_sell_chance = 99
+	elif n_sell == InformationManager.MAX_INFO_PER_COMPANY:
 		base_buy_payout = base_payout * 10
 		base_sell_payout = base_payout * 3
-	else:
-		base_buy_chance = n_buy * 100 / InformationManager.MAX_INFO_PER_COMPANY
-		base_sell_chance = 100 - base_buy_chance
+	else:	
 		base_buy_payout = n_sell * base_payout
-		base_sell_payout = n_buy * base_payout
-
-	set_odds_payout_labels(base_buy_chance, base_sell_chance, base_buy_payout, base_sell_payout)
+		base_sell_payout = n_buy * base_payout	
+	update_odds_payout()
 	await get_tree().create_timer(animation_step_duration * 10).timeout
 	InformationManager.instance.remove_company(company)
 	graph_line.clear_points()
 	allow_input = true
 
+func update_odds_payout():
+	
+	buy_chance = base_buy_chance
+	sell_chance = base_sell_chance 
+	
+	buy_payout = base_buy_payout + Modifiers.payout_bonus
+	sell_payout = base_sell_payout + Modifiers.payout_bonus
+	
+	if selected_button == ButtonType.BUY:
+		buy_chance += Modifiers.luck
+		sell_chance -= Modifiers.luck
+	else:	
+		sell_chance += Modifiers.luck
+		buy_chance -= Modifiers.luck
+	
+	buy_chance = clamp(buy_chance, 1, 99)
+	sell_chance = clamp(sell_chance, 1, 99)
+	
+	set_odds_payout_labels()
+	
 
-func set_odds_payout_labels(buy_chance: int, sell_chance: int, buy_payout: int, sell_payout: int):
+
+func set_odds_payout_labels():
 	var chance_template: String = "Chance: %d"
 	var payout_template: String = "Payout: $%d"
 

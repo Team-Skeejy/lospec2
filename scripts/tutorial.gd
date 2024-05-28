@@ -44,6 +44,7 @@ func item_added(item: ItemResource):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if Global.instance.current_phase != Global.GamePhase.tutorial_platformer: queue_free()
+	show()
 	await get_tree().process_frame
 
 	Global.player.item_added.connect(item_added)

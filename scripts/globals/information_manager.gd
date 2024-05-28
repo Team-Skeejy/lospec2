@@ -54,5 +54,6 @@ func generate_sample_info():
 		information_gathered[company] = []
 		for _j in MAX_INFO_PER_COMPANY:
 			add_info(company, [Type.BUY, Type.SELL].pick_random())
+			#add_info(company, Type.BUY)
 			#information_gathered[company].append([Type.BUY, Type.SELL].pick_random())
 			

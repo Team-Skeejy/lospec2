@@ -11,7 +11,8 @@ region = Rect2(32, 64, 32, 32)
 script = ExtResource("1_3nt28")
 texture = SubResource("AtlasTexture_1467o")
 name = "Small Talk for Dummies"
-description = ""
+description = "You'll need it to get 
+information out of the employees"
 behaviour_scene = "res://scenes/items/small_talk.tscn"
 cost = 0
 for_sale = false

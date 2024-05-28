@@ -15,6 +15,7 @@ func _init():
 
 func interact(_holder):
 	Global.player.add_item(item_resource)
+	Global.instance.new_notification_with_texture(item_resource.description, item_resource.texture, false)
 	queue_free()
 	
 func _ready():

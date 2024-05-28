@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt50dde5m8od0"]
+
+[ext_resource type="Script" path="res://scripts/items/more_luck.gd" id="1_y2vlg"]
+
+[node name="MoreLuck" type="Node"]
+script = ExtResource("1_y2vlg")

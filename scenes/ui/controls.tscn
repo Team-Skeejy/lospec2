@@ -47,6 +47,7 @@ Arrows"
 horizontal_alignment = 1
 
 [node name="A" type="Label" parent="PanelContainer/TextureRect"]
+layout_mode = 0
 offset_left = 53.0
 offset_top = 5.0
 offset_right = 101.0
@@ -55,6 +56,7 @@ theme_override_constants/line_spacing = 0
 text = "Space/Z"
 
 [node name="B" type="Label" parent="PanelContainer/TextureRect"]
+layout_mode = 0
 offset_left = 53.0
 offset_top = 21.0
 offset_right = 101.0

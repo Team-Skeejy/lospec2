@@ -16,5 +16,6 @@ behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 10
 for_sale = true
 category = 0
-locked_notification_text = "missing"
-unlocked_notification_text = "you have it!"
+locked_notification_text = "My business card is not tasteful enough for them"
+unlocked_notification_text = "Oh my god...
+It even has a watermark..."

@@ -6,6 +6,7 @@ extends Node2D
 @export var npc: NPC
 @export var dialogue_area : Area2D
 @export var info_icon : Sprite2D
+@export var icon_timer : Timer
 
 var speech_bubble_spacing: int = 16
 var speech_bubble_movement_speed: float = 0.1
@@ -15,11 +16,11 @@ var dialogue_time_interval: float = 3.
 var has_info_to_give : bool = false
 static var RESPONSE_TIME := 0.4
 
-func check_requirements() -> bool:
+func check_requirements(make_notification: bool = true) -> bool:
 	if npc.lock:
-		var can_be_opened : bool = npc.lock.can_be_opened()
+		var can_be_opened : bool = npc.lock.can_be_opened(make_notification)
 		return can_be_opened
-	else:
+	else:	
 		return true
 
 var completed : bool :
@@ -32,13 +33,14 @@ var completed : bool :
 func _ready():
 	Global.instance.new_speech_bubble.connect(_on_new_speech_bubble)
 	if npc and npc.company_resource.company_name != "GUARD":
-		has_info_to_give = true
-		info_icon.show()
+		has_info_to_give = true	
+	
+	_update_info_icon()
 
 func respond_to_small_talk():
 	if not npc:
 		return
-	if npc.company_resource.company_name == "GUARD":
+	if npc.company_resource.company_name == "GUARD":	
 		return
 		
 	await get_tree().create_timer(RESPONSE_TIME).timeout
@@ -46,7 +48,6 @@ func respond_to_small_talk():
 		var _t = [SpeechBubble.Type.SELL, SpeechBubble.Type.BUY].pick_random()
 		new_dialogue_speech_bubble(_t)
 		has_info_to_give = false
-		info_icon.hide()
 		
 		
 	else:  # if not, generate small talk
@@ -108,3 +109,23 @@ func _on_new_speech_bubble(pos: Vector2):
 							child.position.y - speech_bubble_spacing,
 							speech_bubble_movement_speed
 						)
+
+
+
+
+func _update_info_icon():
+	if not npc:
+		info_icon.hide()
+		icon_timer.stop()
+		return
+		
+	if has_info_to_give and not completed:
+		info_icon.show()	
+		if check_requirements(false):
+			info_icon.texture.region.position = Vector2(32, 112)
+		else:
+			info_icon.texture.region.position = Vector2(32, 128)
+	else:
+		info_icon.hide()
+	
+	

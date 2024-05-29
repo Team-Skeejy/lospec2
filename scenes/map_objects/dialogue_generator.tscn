@@ -8,15 +8,17 @@
 size = Vector2(72, 27.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sfu0e"]
+resource_local_to_scene = true
 atlas = ExtResource("3_h78vh")
 region = Rect2(32, 112, 16, 16)
 
-[node name="DialogueGenerator" type="Node2D" node_paths=PackedStringArray("dialogue_area", "info_icon")]
+[node name="DialogueGenerator" type="Node2D" node_paths=PackedStringArray("dialogue_area", "info_icon", "icon_timer")]
 z_index = 2
 script = ExtResource("1_mfdet")
 speech_bubble_scene = ExtResource("2_ryvse")
 dialogue_area = NodePath("DialogueArea")
 info_icon = NodePath("InfoIcon")
+icon_timer = NodePath("UpdateIconTimer")
 
 [node name="DialogueArea" type="Area2D" parent="."]
 collision_layer = 4
@@ -27,6 +29,11 @@ position = Vector2(0, 7.75)
 shape = SubResource("RectangleShape2D_s6u6j")
 
 [node name="InfoIcon" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(10, -6)
 texture = SubResource("AtlasTexture_sfu0e")
+
+[node name="UpdateIconTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="UpdateIconTimer" to="." method="_update_info_icon"]

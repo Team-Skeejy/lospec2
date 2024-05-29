@@ -352,7 +352,7 @@ position = Vector2(81, -19)
 destination = NodePath("../DebugDoorEnd")
 
 [node name="DebugDoorEnd" parent="Debug" node_paths=PackedStringArray("destination") instance=ExtResource("14_f2tow")]
-position = Vector2(1063, -436)
+position = Vector2(287, -459)
 destination = NodePath("../DebugDoorStart")
 
 [node name="NextPhaseWaterCooler" parent="Debug" instance=ExtResource("15_p1gcl")]

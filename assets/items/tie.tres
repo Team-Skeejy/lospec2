@@ -16,5 +16,6 @@ behaviour_scene = "res://scenes/items/walk_faster.tscn"
 cost = 30
 for_sale = true
 category = 0
-locked_notification_text = "I'm not elegant enough to talk to this person"
+locked_notification_text = "I'm not elegant enough 
+to talk to this person"
 unlocked_notification_text = "They love my tie!"

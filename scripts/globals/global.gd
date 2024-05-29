@@ -13,8 +13,20 @@ signal time_changed(part: int, of: int)
 signal time_out
 
 static var instance: Global
+@export_category("Audio")
+@export_file("*.wav") var menu_music: String
+@export_file("*.wav") var intro_music: String
+@export_file("*.wav") var game_music: String
+@export_file("*.wav") var stock_market_music: String
+@export_file("*.wav") var shop_music: String
+@export var audio_player: AudioStreamPlayer
+
+var current_track := menu_music
+var audio_stream: AudioStream = load(menu_music)
+
 @export_category("Items")
 @export var all_items: Array[ItemResource]
+
 @export_category("Nodes")
 @export var player_storage: Node
 @export var player_scene: PackedScene
@@ -155,44 +167,61 @@ func store_player_and_transition_to(next_scene: String):
 		player.physics_enabled = false
 	await FadeTransition.instance.transition_to(next_scene, store_player)
 
+func set_track(file: String):
+	if file == current_track: return
+	current_track = file
+	audio_stream = load(file)
+	audio_player.stream = audio_stream
+	audio_player.play()
+
 func go_to_phase(phase: GamePhase):
 	current_phase = phase
 	run_timer = false
 	match (phase):
 		GamePhase.menu:
+			set_track(menu_music)
 			FadeTransition.instance.transition_to(menu_scene)
 		GamePhase.intro:
+			set_track(intro_music)
 			store_player_and_transition_to(intro_scene)
-
 		GamePhase.tutorial_platformer:
+			set_track(game_music)
 			store_player_and_transition_to(tutorial_platformer_scene)
 			reset_timer()
 		GamePhase.tutorial_stock_market:
+			set_track(stock_market_music)
 			store_player_and_transition_to(tutorial_stockmarket_scene)
 			zero_timer()
 		GamePhase.tutorial_shop:
+			set_track(shop_music)
 			store_player_and_transition_to(tutorial_shop_scene)
 			zero_timer()
 
 		GamePhase.platformer:
+			set_track(game_music)
 			store_player_and_transition_to(platformer_scene)
 			reset_timer()
 			run_timer = true
 		GamePhase.stock_market:
+			set_track(stock_market_music)
 			store_player_and_transition_to(stock_market_scene)
 			zero_timer()
 		GamePhase.shop:
+			set_track(shop_music)
 			store_player_and_transition_to(shop_scene)
 			zero_timer()
 
 		GamePhase.test_platformer:
+			set_track(game_music)
 			store_player_and_transition_to(test_game_scene)
 			reset_timer()
 			run_timer = true
 		GamePhase.test_bet:
+			set_track(stock_market_music)
 			store_player_and_transition_to(test_bet_scene)
 			zero_timer()
 		GamePhase.test_shop:
+			set_track(shop_music)
 			store_player_and_transition_to(test_shop_scene)
 			zero_timer()
 

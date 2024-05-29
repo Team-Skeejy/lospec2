@@ -15,11 +15,7 @@ var player_has_got_item := false
 var player_has_opened_inventory := false
 var player_has_closed_inventory := false
 
-var player_has_talked_to_coworker_1 := false
-var player_has_talked_to_coworker_2 := false
-var player_has_talked_to_coworker_3 := false
-var player_has_talked_to_coworker_4 := false
-var player_has_talked_to_coworker_5 := false
+var talk_count := 0
 
 func set_time(part: int):
 	Global.instance.time_limit_countdown = (Global.TIME_LIMIT / PARTS) * (PARTS - part)
@@ -33,6 +29,11 @@ func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("Down"):
 		player_pressed_down = true
 
+	if Input.is_action_just_pressed("Start"):
+		player_has_opened_inventory = true
+	if player_has_opened_inventory && Input.is_action_just_pressed("Start"):
+		player_has_closed_inventory = true
+
 func door_interacted(interactor: Humanoid):
 	if interactor == Global.player:
 		player_has_interacted = true
@@ -40,6 +41,13 @@ func door_interacted(interactor: Humanoid):
 func item_added(item: ItemResource):
 	if item == tutorial_item:
 		player_has_got_item = true
+
+func info_added(_company: String, _type: InformationManager.Type):
+	talk_count += 1
+
+
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,6 +57,7 @@ func _ready():
 
 	Global.player.item_added.connect(item_added)
 	tutorial_door.interacted.connect(door_interacted)
+	InformationManager.instance.information_added.connect(info_added)
 
 	Global.instance.reset_timer()
 	await get_tree().create_timer(2.).timeout
@@ -89,6 +98,7 @@ func _ready():
 	while (!player_has_got_item): await get_tree().process_frame
 	notif.close()
 	set_time(5)
+	await get_tree().create_timer(Notification.DEFAULT_DESPAWN_TIME).timeout
 
 	# press start to open menu
 	notif = Global.instance.new_notification_no_texture('Nice, what did you get?\nPress [START] to open your inventory', 0)
@@ -105,32 +115,32 @@ func _ready():
 	# talk to coworkers
 	await Global.instance.new_notification_no_texture('Lets small talk to some "coworkers"', 3).notification_ended
 	notif = Global.instance.new_notification_no_texture('Press [^] to talk to coworkers', 0)
-	while (!player_has_talked_to_coworker_1): await get_tree().process_frame
+	while (talk_count < 1): await get_tree().process_frame
 	notif.close()
 	set_time(8)
 
 	notif = Global.instance.new_notification_no_texture('Talk to 4 more "coworkers"', 0)
-	while (!player_has_talked_to_coworker_2): await get_tree().process_frame
+	while (talk_count < 2): await get_tree().process_frame
 	notif.close()
 	set_time(9)
 
 	notif = Global.instance.new_notification_no_texture('Talk to 3 more "coworkers"', 0)
-	while (!player_has_talked_to_coworker_3): await get_tree().process_frame
+	while (talk_count < 3): await get_tree().process_frame
 	notif.close()
 	set_time(10)
 
 	notif = Global.instance.new_notification_no_texture('Talk to 2 more "coworkers"', 0)
-	while (!player_has_talked_to_coworker_4): await get_tree().process_frame
+	while (talk_count < 4): await get_tree().process_frame
 	notif.close()
 	set_time(11)
 
 	notif = Global.instance.new_notification_no_texture('Talk to 1 more "coworker"', 0)
-	while (!player_has_talked_to_coworker_5): await get_tree().process_frame
+	while (talk_count < 5): await get_tree().process_frame
 	notif.close()
 	set_time(12)
 
 	await Global.instance.new_notification_no_texture('Good Job!', 3).notification_ended
-	await Global.instance.new_notification_no_texture("There's a clock in the bottom left of your screen", 3).notification_ended
+	await Global.instance.new_notification_no_texture("There's a clock in the bottom right of your screen", 3).notification_ended
+	Global.instance.run_timer = true
 	await Global.instance.new_notification_no_texture("It shows how much time you have left", 3).notification_ended
 	await Global.instance.new_notification_no_texture("It looks like everyone's about to go home...", 3).notification_ended
-	Global.instance.run_timer = true

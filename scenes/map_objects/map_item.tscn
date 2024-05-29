@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://twygc5kdgifq"]
+[gd_scene load_steps=8 format=3 uid="uid://d0rpo0w17lnm7"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/map_item.gd" id="1_67ghv"]
 [ext_resource type="Material" uid="uid://c3rif323ip0cw" path="res://assets/outline_material.tres" id="3_15oyq"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="4_h5caw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_relxi"]
-size = Vector2(72, 39)
+size = Vector2(34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t2oyn"]
 atlas = ExtResource("3_dm2f3")
@@ -22,7 +22,6 @@ sprite = NodePath("ItemSprite")
 shader_sprite = NodePath("Back")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_relxi")
 
 [node name="Back" type="Sprite2D" parent="."]

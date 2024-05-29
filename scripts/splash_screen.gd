@@ -19,9 +19,12 @@ func _input(_ev: InputEvent) -> void:
 		Global.instance.go_to_phase(Global.GamePhase.platformer)
 		ignore_animation_end = true
 	elif Input.is_anything_pressed():
-		FadeTransition.instance.transition_to(FadeTransition.MAIN_MENU)
+		# FadeTransition.instance.transition_to(FadeTransition.MAIN_MENU)
+		Global.instance.go_to_phase(Global.GamePhase.menu)
 		ignore_animation_end = true
 
 func _on_animation_player_animation_finished(_animation: StringName) -> void:
 	if ignore_animation_end: return
-	FadeTransition.instance.transition_to(FadeTransition.MAIN_MENU)
+	# FadeTransition.instance.transition_to(FadeTransition.MAIN_MENU)
+	Global.instance.go_to_phase(Global.GamePhase.menu)
+

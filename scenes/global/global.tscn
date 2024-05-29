@@ -3,8 +3,14 @@
 [ext_resource type="Script" path="res://scripts/globals/global.gd" id="1_ov5qs"]
 [ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_farim"]
 
-[node name="Global" type="Node" node_paths=PackedStringArray("player_storage")]
+[node name="Global" type="Node" node_paths=PackedStringArray("audio_player", "player_storage")]
 script = ExtResource("1_ov5qs")
+menu_music = "res://audio/music/menu.wav"
+intro_music = "res://audio/music/menu.wav"
+game_music = "res://audio/music/elliestradingmusic.wav"
+stock_market_music = "res://audio/music/stock_market.wav"
+shop_music = "res://audio/music/stock_market.wav"
+audio_player = NodePath("Music")
 player_storage = NodePath("PlayerStorage")
 player_scene = ExtResource("2_farim")
 menu_scene = "res://scenes/ui/main_menu.tscn"
@@ -20,3 +26,7 @@ test_shop_scene = "res://scenes/tests/shop_test.tscn"
 test_bet_scene = "res://scenes/stock_market.tscn"
 
 [node name="PlayerStorage" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+autoplay = true
+bus = &"Music"

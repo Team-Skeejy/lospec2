@@ -26,9 +26,19 @@ func add_item(item: ItemResource):
 	item_container_array.append(item_container)
 	item_container.on_selected.connect(start_description)
 
+func tutorial():
+	var notif: Notification = Global.instance.new_notification_no_texture("Buy goods with your rightfully gotten gains", 0)
+	while (!bought): await get_tree().process_frame
+	notif.close()
+	await Global.instance.new_notification_no_texture("It's just that easy!", 2).notification_ended
+	await Global.instance.new_notification_no_texture("Now go forth, and find Isaia Panduri", 3).notification_ended
+	await Global.instance.new_notification_no_texture("Make him PAY!", 2).notification_ended
+
 func _ready():
-	if Global.instance.current_phase == Global.GamePhase.tutorial_shop:
+	if Global.is_tutorial():
+		tutorial()
 		for item in tutorial_items:
+			item.cost = Global.instance.player_money
 			add_item(item)
 	else:
 		for item in game_items:
@@ -39,7 +49,7 @@ func _ready():
 
 	item_container_array[selected_container_idx].select()
 
-func _process(delta):
+func _input(_inp: InputEvent):
 	if Input.is_action_just_pressed("Left"):
 		item_container_array[selected_container_idx].deselect()
 		selected_container_idx -= 1
@@ -77,7 +87,9 @@ func start_description(sic: ShopItemContainer):
 func get_currently_selected_container() -> ShopItemContainer:
 	return item_container_array[selected_container_idx]
 
+var bought: bool = false
 func buy():
+	bought = true
 	var selected_container: ShopItemContainer = get_currently_selected_container()
 	var item_cost = selected_container.item_resource.cost
 	if selected_container.sold_out or Global.instance.player_money < item_cost:

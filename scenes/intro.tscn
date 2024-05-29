@@ -1,21 +1,207 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwn8q2kc75dyh"]
+[gd_scene load_steps=12 format=3 uid="uid://bwn8q2kc75dyh"]
 
 [ext_resource type="Script" path="res://scripts/intro.gd" id="1_q06b2"]
 [ext_resource type="PackedScene" uid="uid://c7wqlhul1t4pg" path="res://scenes/ui/small_text_panel.tscn" id="1_r40li"]
+[ext_resource type="Texture2D" uid="uid://cv5bpq7noaoe8" path="res://textures/introduction/Intro panel 1.png" id="3_iqcqh"]
+[ext_resource type="Texture2D" uid="uid://btlgwssqckkx" path="res://textures/introduction/Intro panel 2.png" id="4_6xvyq"]
+[ext_resource type="Texture2D" uid="uid://b2fgvd3we1bpg" path="res://textures/introduction/Intro panel 3.png" id="5_ra71q"]
+[ext_resource type="Texture2D" uid="uid://bvse43xqbjib4" path="res://textures/introduction/Intro panel 4.png" id="6_y08ht"]
+[ext_resource type="Shader" path="res://scripts/shaders/dither_transition.gdshader" id="7_giam1"]
 
-[node name="Intro" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hugwn"]
+shader = ExtResource("7_giam1")
+shader_parameter/pixel_size = 3
+shader_parameter/threshold = 1.0
+
+[sub_resource type="Animation" id="Animation_b6h6m"]
+resource_name = "dither_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_vljov"]
+resource_name = "dither_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7ofi2"]
+_data = {
+"dither_in": SubResource("Animation_b6h6m"),
+"dither_out": SubResource("Animation_vljov")
+}
+
+[node name="Intro" type="Node2D" node_paths=PackedStringArray("panels", "animation")]
 script = ExtResource("1_q06b2")
+panels = [NodePath("CanvasLayer/Panel 1"), NodePath("CanvasLayer/Panel 2"), NodePath("CanvasLayer/Panel 3"), NodePath("CanvasLayer/Panel 4")]
+animation = NodePath("CanvasLayer/Cover/AnimationPlayer")
 
-[node name="SmallTextPanel" parent="." instance=ExtResource("1_r40li")]
-offset_left = 75.0
-offset_top = 75.0
-offset_right = 75.0
-offset_bottom = 75.0
-text = "This is the intro scene"
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-autostart = true
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Panel 1" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Panel 1"]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 93.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_iqcqh")
+
+[node name="SmallTextPanel" parent="CanvasLayer/Panel 1" instance=ExtResource("1_r40li")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -108.0
+offset_top = 173.0
+offset_right = -108.0
+offset_bottom = 173.0
+grow_vertical = 1
+text = "Megacorp Spire, home of the largest cooporations
+in the world."
+
+[node name="Panel 2" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Panel 2"]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 93.0
+scale = Vector2(2, 2)
+texture = ExtResource("4_6xvyq")
+
+[node name="SmallTextPanel2" parent="CanvasLayer/Panel 2" instance=ExtResource("1_r40li")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -108.0
+offset_top = 173.0
+offset_right = -108.0
+offset_bottom = 173.0
+grow_vertical = 1
+text = "We're sending you, our top journalist, after the 
+dirt on Isaia Panduri, CEO of Insurascam Corp."
+
+[node name="Panel 3" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Panel 3"]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 93.0
+scale = Vector2(2, 2)
+texture = ExtResource("5_ra71q")
+
+[node name="SmallTextPanel3" parent="CanvasLayer/Panel 3" instance=ExtResource("1_r40li")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -108.0
+offset_top = 173.0
+offset_right = -108.0
+offset_bottom = 173.0
+grow_vertical = 1
+text = "It won't be easy getting to the top. But things
+might be easier with the insider knowledge
+of the biggest corps in the world..."
+
+[node name="Panel 4" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Panel 4"]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 128.0
+offset_bottom = 93.0
+scale = Vector2(2, 2)
+texture = ExtResource("6_y08ht")
+
+[node name="SmallTextPanel4" parent="CanvasLayer/Panel 4" instance=ExtResource("1_r40li")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+offset_left = -108.0
+offset_top = 173.0
+offset_right = -108.0
+offset_bottom = 173.0
+grow_vertical = 1
+text = "I mean... what's a little insider trading gonna
+matter... Job's already pretty difficult as it is..."
+
+[node name="Cover" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_hugwn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Cover"]
+libraries = {
+"": SubResource("AnimationLibrary_7ofi2")
+}

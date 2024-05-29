@@ -54,26 +54,36 @@ var allow_input: bool = false
 var selected_button: ButtonType = ButtonType.SELL
 
 var companies_left: Array
+var selected: bool = false
 
 
 signal animation_done
 
+func tutorial():
+	await Global.instance.new_notification_no_texture("Now... with your new found knowledge", 3).notification_ended
+	var notif: Notification = Global.instance.new_notification_no_texture("Buy or sell your stocks", 0)
+	while (!selected): await get_tree().process_frame
+	notif.close()
+
 func _ready():
-	print_debug("It is I, the stock market, generating sample information")
-	InformationManager.instance.generate_sample_info() # TODO REMOVE
+	if Global.is_tutorial():
+		tutorial()
+
+	# print_debug("It is I, the stock market, generating sample information")
+	# InformationManager.instance.generate_sample_info() # TODO REMOVE
 
 	flip_selected()
 	companies_left = InformationManager.instance.completed_companies
 	animation_done.connect(start_next_company)
 	if len(InformationManager.instance.completed_companies) > 0:
-		start_next_company()		
+		start_next_company()
 	else:
 		stock_market_ui.hide()
 		not_enough_info_label.show()
 		await get_tree().create_timer(2.0).timeout
 		start_next_company()
 
-func _process(delta):
+func _process(_delta: float):
 	if not allow_input:
 		return
 
@@ -83,6 +93,7 @@ func _process(delta):
 		select()
 
 func select():
+	selected = true
 	if selected_button == ButtonType.BUY:
 		buy(Global.instance.current_phase == Global.GamePhase.tutorial_stock_market)
 	else:
@@ -127,7 +138,7 @@ func flip_selected():
 		sell_container.modulate = dark_red_color
 		buy_container.modulate = bright_green_color
 	update_odds_payout()
-	
+
 
 func start_next_company():
 	if len(companies_left) == 0:
@@ -155,16 +166,16 @@ func start_next_company():
 
 	base_buy_chance = n_buy * 100 / InformationManager.MAX_INFO_PER_COMPANY
 	base_sell_chance = 100 - base_buy_chance
-	
+
 	if n_buy == InformationManager.MAX_INFO_PER_COMPANY:
 		base_buy_payout = base_payout * 3
 		base_sell_payout = base_payout * 10
 	elif n_sell == InformationManager.MAX_INFO_PER_COMPANY:
 		base_buy_payout = base_payout * 10
 		base_sell_payout = base_payout * 3
-	else:	
+	else:
 		base_buy_payout = n_sell * base_payout
-		base_sell_payout = n_buy * base_payout	
+		base_sell_payout = n_buy * base_payout
 	update_odds_payout()
 	await get_tree().create_timer(animation_step_duration * 10).timeout
 	InformationManager.instance.remove_company(company)
@@ -172,25 +183,25 @@ func start_next_company():
 	allow_input = true
 
 func update_odds_payout():
-	
+
 	buy_chance = base_buy_chance
-	sell_chance = base_sell_chance 
-	
+	sell_chance = base_sell_chance
+
 	buy_payout = base_buy_payout + Modifiers.payout_bonus
 	sell_payout = base_sell_payout + Modifiers.payout_bonus
-	
+
 	if selected_button == ButtonType.BUY:
 		buy_chance += Modifiers.luck
 		sell_chance -= Modifiers.luck
-	else:	
+	else:
 		sell_chance += Modifiers.luck
 		buy_chance -= Modifiers.luck
-	
+
 	buy_chance = clamp(buy_chance, 1, 99)
 	sell_chance = clamp(sell_chance, 1, 99)
-	
+
 	set_odds_payout_labels()
-	
+
 
 
 func set_odds_payout_labels():

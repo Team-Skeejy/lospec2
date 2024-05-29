@@ -9,7 +9,6 @@ var m0_pos = Vector2(16, 64)
 static var HOURS_IN_DAY = 8
 
 func update_time(part: int, of: int):
-	print_debug(part, of)
 	var parts_per_hour := of / 8
 	var hrs := part / parts_per_hour
 	var mins_bit := part % parts_per_hour

@@ -10,14 +10,14 @@
 [ext_resource type="Script" path="res://scripts/interactables/lock.gd" id="5_us257"]
 [ext_resource type="Resource" uid="uid://cw1s1sycptn15" path="res://assets/items/visitor_pass.tres" id="6_sctf1"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="7_60eb8"]
-[ext_resource type="PackedScene" uid="uid://twygc5kdgifq" path="res://scenes/map_objects/map_item.tscn" id="10_jvtyc"]
+[ext_resource type="PackedScene" path="res://scenes/map_objects/map_item.tscn" id="10_jvtyc"]
 [ext_resource type="Resource" uid="uid://d53323wdlki5" path="res://assets/companies/grey.tres" id="12_yo4oi"]
 [ext_resource type="Resource" uid="uid://dwlt5r6qpndug" path="res://assets/items/tie.tres" id="13_gbr5n"]
 [ext_resource type="PackedScene" uid="uid://bwoobo3k2h8bm" path="res://scenes/map_objects/warp_door.tscn" id="14_f2tow"]
 [ext_resource type="PackedScene" uid="uid://ba1kvwuvllyw6" path="res://scenes/map_objects/next_phase_water_cooler.tscn" id="15_p1gcl"]
-[ext_resource type="Resource" uid="uid://c00apnphx2vn2" path="res://assets/items/keycard_green.tres" id="16_brk2u"]
-[ext_resource type="Resource" uid="uid://dhsrpuhb7a55q" path="res://assets/items/keycard_red.tres" id="16_s6v1f"]
-[ext_resource type="Resource" uid="uid://dri85hn6135hl" path="res://assets/items/keycard_blue.tres" id="18_iwgkr"]
+[ext_resource type="Resource" uid="uid://qi5g4pjma1cg" path="res://assets/items/keycard_green.tres" id="16_brk2u"]
+[ext_resource type="Resource" uid="uid://bdcvyado6u3mr" path="res://assets/items/keycard_red.tres" id="16_s6v1f"]
+[ext_resource type="Resource" uid="uid://bqm5a5iuall6f" path="res://assets/items/keycard_blue.tres" id="18_iwgkr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_th4br"]
 texture = ExtResource("7_60eb8")

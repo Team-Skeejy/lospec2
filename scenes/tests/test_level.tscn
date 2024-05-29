@@ -71,9 +71,8 @@ destination = NodePath("../WarpDoor3")
 position = Vector2(836, -18)
 destination = NodePath("../WarpDoor")
 
-[node name="MapDoor" parent="Objects" node_paths=PackedStringArray("lock") instance=ExtResource("6_lvxox")]
+[node name="MapDoor" parent="Objects" instance=ExtResource("6_lvxox")]
 position = Vector2(-39, -85)
-lock = NodePath("Lock")
 
 [node name="Lock" type="Node" parent="Objects/MapDoor"]
 script = ExtResource("6_vxbyk")

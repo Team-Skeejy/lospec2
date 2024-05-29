@@ -1,7 +1,7 @@
 class_name TalkFaster
 extends Behaviour
 
-static var TALK_SPEED_INCREMENT := 0.5
+static var TALK_SPEED_INCREMENT := 1.0
 
 func added(holder: Humanoid):
 	super.added(holder)

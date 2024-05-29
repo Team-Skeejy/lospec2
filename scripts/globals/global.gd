@@ -57,7 +57,7 @@ static var companies: Dictionary = {}
 
 signal new_speech_bubble(pos: Vector2)
 
-var volume: int = 80
+var volume: int = 50
 var crt_ghost_intensity: float = 0.3
 var scanline_intensity: float = 0.05
 

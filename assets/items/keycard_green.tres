@@ -16,6 +16,6 @@ behaviour_scene = "res://scenes/items/sample_item.tscn"
 cost = 0
 for_sale = true
 category = 0
-locked_notification_text = "You'll need a Green Keycard
+locked_notification_text = "I'll need a Green Keycard
 to ride this"
 unlocked_notification_text = "Used Green Keycard"

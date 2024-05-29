@@ -11,7 +11,8 @@ region = Rect2(0, 0, 32, 32)
 script = ExtResource("1_rkyaq")
 texture = SubResource("AtlasTexture_avyh5")
 name = "Sticky Note"
-description = "Lets you wall jump"
+description = "Lets you stick to walls 
+and wall jump"
 behaviour_scene = "res://scenes/items/wall_jump.tscn"
 cost = 10
 for_sale = true

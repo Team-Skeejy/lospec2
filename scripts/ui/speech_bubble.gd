@@ -90,6 +90,10 @@ func _process(delta: float):
 	elif curr_state == State.DESPAWNING:
 		_visible_characters -= delta * text_speed * 4. * Modifiers.talk_speed
 		if _visible_characters <= 0.:
+			# TODO 
+			# I give the player info even if the speech bubble is not on screen
+			# I don't like it but it avoids frustration
+			seen.emit()
 			queue_free()
 		label.visible_characters = int(_visible_characters)
 

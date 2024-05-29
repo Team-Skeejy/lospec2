@@ -5,16 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_288ve"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1atfl"]
-content_margin_left = 7.0
 content_margin_top = 7.0
-content_margin_right = 7.0
 content_margin_bottom = 7.0
 texture = ExtResource("1_mnsnp")
-texture_margin_left = 13.0
-texture_margin_top = 13.0
-texture_margin_right = 13.0
-texture_margin_bottom = 13.0
-region_rect = Rect2(176, 32, 32, 32)
+texture_margin_left = 12.0
+texture_margin_top = 14.0
+texture_margin_right = 2.0
+texture_margin_bottom = 15.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 32, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bnled"]
 atlas = ExtResource("2_288ve")
@@ -37,9 +37,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 40.0
+offset_left = -64.0
+offset_right = 65.0
+offset_bottom = 61.0
 grow_horizontal = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]

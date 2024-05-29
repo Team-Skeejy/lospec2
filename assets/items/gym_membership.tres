@@ -11,10 +11,11 @@ region = Rect2(0, 32, 32, 32)
 script = ExtResource("1_0du4p")
 texture = SubResource("AtlasTexture_tdpiy")
 name = "Gym Membership"
-description = "You need to get those leg days in"
+description = "You need to get those leg days in.
+(Jump height UP)"
 behaviour_scene = "res://scenes/items/more_jump_height.tscn"
 cost = 10
 for_sale = true
 category = 0
-locked_notification_text = "wq"
+locked_notification_text = ""
 unlocked_notification_text = ""

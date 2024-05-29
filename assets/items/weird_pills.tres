@@ -11,10 +11,11 @@ region = Rect2(32, 32, 32, 32)
 script = ExtResource("1_lpbf2")
 texture = SubResource("AtlasTexture_foeow")
 name = "Mysterious Pills"
-description = "Will let you reach greater heights "
+description = "Will let you reach greater heights.
+(Double Jump)"
 behaviour_scene = "res://scenes/items/double_jump.tscn"
 cost = 50
 for_sale = true
 category = 0
-locked_notification_text = "missing"
-unlocked_notification_text = "you have it!"
+locked_notification_text = ""
+unlocked_notification_text = ""

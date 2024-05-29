@@ -28,6 +28,7 @@ func setup_items():
 		item_container_array.append(item_container)
 		item_container.on_selected.connect(start_description)
 		item_container.darken()
+	update_items()
 
 func update_items():
 	#for i in range(len(Global.instance.all_items)):

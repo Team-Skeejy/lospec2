@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd1rea0dly8wo"]
+
+[ext_resource type="Script" path="res://scripts/items/slower_time.gd" id="1_pjuu5"]
+
+[node name="SlowerTime" type="Node"]
+script = ExtResource("1_pjuu5")

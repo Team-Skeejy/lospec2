@@ -10,6 +10,7 @@ var text_speed : int = 20 # in chars/second
 var despawn_time : float = 1. # how much time after showing all text will it despawn
 var _visible_characters : float = 0.0
 var _started : bool = true
+var has_been_seen : bool = false
 
 enum State {
 	GROWING, # when the label is becoming bigger
@@ -51,7 +52,6 @@ func init(text: String, type: Type, _readable:bool = true):
 	curr_type = type
 	readable = _readable
 	
-	
 
 func _process(delta: float): 
 	if not _started:
@@ -74,7 +74,7 @@ func _process(delta: float):
 	# when it's readable and on screen, read it
 	elif curr_state == State.READABLE and \
 		visible_notifier1.is_on_screen():
-		seen.emit(curr_type)
+		on_seen()
 		curr_state = State.READ
 		if curr_type == Type.SELL:
 			style_box.region_rect.position = Vector2(112, 32)
@@ -90,13 +90,11 @@ func _process(delta: float):
 	elif curr_state == State.DESPAWNING:
 		_visible_characters -= delta * text_speed * 4. * Modifiers.talk_speed
 		if _visible_characters <= 0.:
-			# TODO 
-			# I give the player info even if the speech bubble is not on screen
-			# I don't like it but it avoids frustration
-			seen.emit()
+			if not has_been_seen:
+				on_seen()
 			queue_free()
 		label.visible_characters = int(_visible_characters)
-
+	
 func set_completed():
 	style_box.region_rect.position = Vector2(112, 96)
 
@@ -104,4 +102,5 @@ func _on_despawn_timer_timeout():
 	curr_state = State.DESPAWNING
 
 func on_seen():
-	seen.emit()
+	has_been_seen = true
+	seen.emit(curr_type)

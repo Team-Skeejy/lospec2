@@ -21,8 +21,8 @@ static var instance: Global
 @export_file("*.wav") var shop_music: String
 @export var audio_player: AudioStreamPlayer
 
-var current_track := menu_music
-var audio_stream: AudioStream = load(menu_music)
+var current_track: String
+var audio_stream: AudioStreamWAV
 
 @export_category("Items")
 @export var all_items: Array[ItemResource]

@@ -10,7 +10,7 @@ content_margin_bottom = 7.0
 texture = ExtResource("1_mnsnp")
 texture_margin_left = 12.0
 texture_margin_top = 14.0
-texture_margin_right = 2.0
+texture_margin_right = 3.0
 texture_margin_bottom = 15.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
@@ -50,15 +50,16 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_1atfl")
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 texture = SubResource("AtlasTexture_bnled")
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 14)
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "One of the amazing 
-"
+things"
 horizontal_alignment = 1
 vertical_alignment = 1
 

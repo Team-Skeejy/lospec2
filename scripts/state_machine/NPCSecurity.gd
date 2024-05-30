@@ -56,7 +56,7 @@ func Update(delta: float) -> void:
 	if !cooling_down && countdown <= 0 && !done:
 		done = true
 		npc.dialogue_generator.new_custom_speech_bubble("Alright... You're coming with me", SpeechBubble.Type.SELL)
-		Global.instance.go_to_next_phase()
+		#Global.instance.go_to_next_phase()	
 		Global.instance.store_player_and_transition_to("res://scenes/ui/kicked_out.tscn")
 
 func Exit() -> void:

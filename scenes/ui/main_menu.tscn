@@ -29,11 +29,11 @@ region = Rect2(32, 0, 32, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x41rh"]
 shader = ExtResource("6_gcg6g")
-shader_parameter/crt_ghost = 1.0
+shader_parameter/crt_ghost = 0.0
 shader_parameter/darken = true
 shader_parameter/num_colors = null
 shader_parameter/precision = 1.0
-shader_parameter/scan_line_intensity = 1.0
+shader_parameter/scan_line_intensity = 0.0
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("settings_menu")]
 process_mode = 3

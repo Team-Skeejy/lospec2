@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkuioef3meg5d"]
+[gd_scene load_steps=16 format=3 uid="uid://bkuioef3meg5d"]
 
 [ext_resource type="Script" path="res://scripts/ui/SettingsMenu.gd" id="1_f0ega"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_v1ki7"]
@@ -15,12 +15,20 @@ texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(144, 32, 32, 32)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_or1u3"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ikx88"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wynj1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xitj7"]
 resource_local_to_scene = true
-atlas = SubResource("CompressedTexture2D_or1u3")
+atlas = SubResource("CompressedTexture2D_ikx88")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8xsnv"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsnnx"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_8xsnv")
 region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_na5dc"]
@@ -68,23 +76,47 @@ horizontal_alignment = 1
 [node name="SettingsContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VolumeSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
+[node name="MusicSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
 layout_mode = 2
 script = ExtResource("4_610yk")
 slider = NodePath("HSlider")
+bus = "Music"
 
-[node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
-texture = SubResource("AtlasTexture_wynj1")
+texture = SubResource("AtlasTexture_xitj7")
 
-[node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
-text = "Volume"
+text = "Music Volume"
 
-[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="HSlider" type="HSlider" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+step = 10.0
+
+[node name="SFXSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
+layout_mode = 2
+script = ExtResource("4_610yk")
+slider = NodePath("HSlider")
+bus = "SFX"
+
+[node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_hsnnx")
+
+[node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -136,6 +168,5 @@ size_flags_horizontal = 10
 max_value = 0.1
 step = 0.01
 
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting/HSlider" to="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/SettingsContainer/GhostSetting/HSlider" to="PanelContainer/VBoxContainer/SettingsContainer/GhostSetting" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/SettingsContainer/ScanLineSetting/HSlider" to="PanelContainer/VBoxContainer/SettingsContainer/ScanLineSetting" method="_on_h_slider_value_changed"]

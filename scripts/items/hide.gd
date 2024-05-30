@@ -22,6 +22,9 @@ func added(_holder: Humanoid):
 	animation = "none"
 
 func any_press(_button: String, _delta: float) -> void:
+	if not is_instance_valid(source):
+		holder.remove_behaviour(self)
+		return
 	source.leave(holder)
 	self.animation = "exit"
 	await holder.sprite_animation_player.animation_finished

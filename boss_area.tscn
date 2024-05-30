@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://dahdcmgbmseru"]
+
+[ext_resource type="PackedScene" uid="uid://cyie1qowb60eh" path="res://scenes/map_objects/sittable.tscn" id="1_qb415"]
+[ext_resource type="Shader" path="res://scripts/shaders/outline.gdshader" id="2_sqmk2"]
+[ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="3_0crv5"]
+[ext_resource type="Resource" uid="uid://b5kg0a7c88r0u" path="res://assets/companies/boss.tres" id="4_pfqpg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nw0g8"]
+size = Vector2(68, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gxty"]
+resource_local_to_scene = true
+shader = ExtResource("2_sqmk2")
+shader_parameter/active = false
+
+[node name="BossArea" type="Node2D"]
+position = Vector2(106, -98)
+
+[node name="BossRoom" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BossRoom"]
+position = Vector2(58, -32)
+shape = SubResource("RectangleShape2D_nw0g8")
+
+[node name="Sittable" parent="." instance=ExtResource("1_qb415")]
+position = Vector2(65, 0)
+
+[node name="Sprite2D" parent="Sittable" index="1"]
+material = SubResource("ShaderMaterial_3gxty")
+flip_h = true
+
+[node name="BossNPC" parent="." instance=ExtResource("3_0crv5")]
+position = Vector2(71, 0)
+company_resource = ExtResource("4_pfqpg")
+
+[editable path="Sittable"]
+[editable path="BossNPC"]

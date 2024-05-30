@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cyie1qowb60eh"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/sittable.gd" id="1_3xx43"]
-[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="1_elep0"]
+[ext_resource type="Material" uid="uid://c3rif323ip0cw" path="res://assets/outline_material.tres" id="1_elep0"]
 [ext_resource type="Texture2D" uid="uid://bwfxfnwff3p1l" path="res://textures/tilesets/tileset1.png" id="2_pnuj6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhcch"]

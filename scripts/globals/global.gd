@@ -174,8 +174,9 @@ func set_track(file: String):
 	if file == current_track: return
 	current_track = file
 	audio_stream = load(file)
+	var position := audio_player.get_playback_position()
 	audio_player.stream = audio_stream
-	audio_player.play()
+	audio_player.play(position)
 
 func go_to_phase(phase: GamePhase):
 	current_phase = phase

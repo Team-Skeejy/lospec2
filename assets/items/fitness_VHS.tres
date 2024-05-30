@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://muo8657f5lpu"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_ft2au"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_6nlyp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1uol"]
+atlas = ExtResource("2_6nlyp")
+region = Rect2(0, 64, 32, 32)
+
+[resource]
+script = ExtResource("1_ft2au")
+texture = SubResource("AtlasTexture_s1uol")
+name = "Isaia Panduri Fitness Regime"
+description = "He may be a perfidious, but he sure can make a great fitness routine"
+behaviour_scene = "res://scenes/items/walk_faster.tscn"
+cost = 150
+for_sale = true
+category = 0
+locked_notification_text = ""
+unlocked_notification_text = ""

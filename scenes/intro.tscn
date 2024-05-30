@@ -65,6 +65,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="SmallTextPanel2" parent="CanvasLayer" instance=ExtResource("1_r40li")]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -95,19 +96,21 @@ offset_bottom = 93.0
 scale = Vector2(2, 2)
 texture = ExtResource("3_iqcqh")
 
-[node name="SmallTextPanel" parent="CanvasLayer/Panel 1" instance=ExtResource("1_r40li")]
+[node name="Label" type="Label" parent="CanvasLayer/Panel 1"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -110.0
-offset_top = 168.0
-offset_right = -110.0
-offset_bottom = 168.0
-grow_vertical = 1
-text = "Megacorp Spire, home of the largest cooporations
-in the world."
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -54.0
+offset_right = 108.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Megacorp Spire, home of the 
+largest cooporations in the world."
+horizontal_alignment = 1
 
 [node name="Panel 2" type="Control" parent="CanvasLayer"]
 visible = false
@@ -127,19 +130,22 @@ offset_bottom = 93.0
 scale = Vector2(2, 2)
 texture = ExtResource("4_6xvyq")
 
-[node name="SmallTextPanel2" parent="CanvasLayer/Panel 2" instance=ExtResource("1_r40li")]
+[node name="Label" type="Label" parent="CanvasLayer/Panel 2"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -106.0
-offset_top = 169.0
-offset_right = -106.0
-offset_bottom = 169.0
-grow_vertical = 1
-text = "We're sending you, our top journalist, after the 
-dirt on Isaia Panduri, CEO of Insurascam Corp."
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -54.0
+offset_right = 108.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "We're sending you, our top investigative journalist, 
+to get some dirt on Isaia Panduri, 
+the CEO of GigaOil with a mysterious past..."
+horizontal_alignment = 1
 
 [node name="Panel 3" type="Control" parent="CanvasLayer"]
 visible = false
@@ -159,23 +165,24 @@ offset_bottom = 93.0
 scale = Vector2(2, 2)
 texture = ExtResource("5_ra71q")
 
-[node name="SmallTextPanel3" parent="CanvasLayer/Panel 3" instance=ExtResource("1_r40li")]
+[node name="Label" type="Label" parent="CanvasLayer/Panel 3"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -105.0
-offset_top = 162.0
-offset_right = -105.0
-offset_bottom = 162.0
-grow_vertical = 1
-text = "It won't be easy getting to the top. But things
-might be easier with the insider knowledge
-of the biggest corps in the world..."
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -54.0
+offset_right = 108.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "It won't be easy getting to Isaia's office at the top of 
+the Megacorp Spire, you'll need some good equipment, 
+and the money to buy it"
+horizontal_alignment = 1
 
 [node name="Panel 4" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -192,19 +199,24 @@ offset_bottom = 93.0
 scale = Vector2(2, 2)
 texture = ExtResource("6_y08ht")
 
-[node name="SmallTextPanel4" parent="CanvasLayer/Panel 4" instance=ExtResource("1_r40li")]
+[node name="Label" type="Label" parent="CanvasLayer/Panel 4"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -104.0
-offset_top = 168.0
-offset_right = -104.0
-offset_bottom = 168.0
-grow_vertical = 1
-text = "I mean... what's a little insider trading gonna
-matter... Job's already pretty difficult as it is..."
+anchor_bottom = 1.0
+offset_left = -107.0
+offset_top = -59.0
+offset_right = 108.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Luckily I know just the guy!
+He'll sell me what I need, plus if I give him stock
+tips he'll give me a cut of everything he wins.
+I'll shmooze the employees of Megacorp tower
+and get valuable insider information"
+horizontal_alignment = 1
 
 [node name="Cover" type="ColorRect" parent="CanvasLayer"]
 material = SubResource("ShaderMaterial_hugwn")

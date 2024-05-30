@@ -562,6 +562,7 @@ position = Vector2(0, -25)
 npc = NodePath("..")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+visible = false
 position = Vector2(2.00001, -9.5)
-scale = Vector2(17.1, 12.15)
+rect = Rect2(-500, -500, 1000, 1000)
 metadata/_edit_lock_ = true

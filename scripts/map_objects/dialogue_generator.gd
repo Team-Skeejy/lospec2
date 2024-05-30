@@ -33,7 +33,7 @@ var completed : bool :
 func _ready():
 	Global.instance.new_speech_bubble.connect(_on_new_speech_bubble)
 	if npc and npc.company_resource.company_name != "GUARD":
-		has_info_to_give = true	
+		has_info_to_give = true
 	
 	_update_info_icon()
 

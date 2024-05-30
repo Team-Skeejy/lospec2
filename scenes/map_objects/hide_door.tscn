@@ -65,7 +65,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ogwy8")
 }, {
-"duration": 2.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_3b8np")
 }, {
 "duration": 1.0,
@@ -98,6 +98,7 @@ sprite_frames = SubResource("SpriteFrames_b6cgn")
 animation = &"openclose"
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_left = -23.0
 offset_top = -54.0
 offset_right = 24.0

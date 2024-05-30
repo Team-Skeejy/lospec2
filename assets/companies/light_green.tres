@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_vfemo")
 company_name = "SubLime"
-company_base_payout = 10
+company_base_payout = 15
 jacket_spritesheet_path = "res://textures/characters/light_green/jacket.png"
 tie_spritesheet_path = "res://textures/characters/light_green/tie.png"
 woman_spritesheet_path = "res://textures/characters/light_green/woman.png"

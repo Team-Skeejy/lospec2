@@ -38,7 +38,7 @@ func _ready():
 	if Global.is_tutorial():
 		tutorial()
 		for item in tutorial_items:
-			item.cost = Global.instance.player_money
+			item.cost = Global.instance.player_money - 50
 			add_item(item)
 	else:
 		for item in game_items:
@@ -46,6 +46,11 @@ func _ready():
 				add_item(item)
 			if len(item_container_array) >= num_items_for_sale:
 				break
+		if len(item_container_array) == 0:
+			Global.instance.new_notification_no_texture("Out of stock!")
+			Global.instance.go_to_next_phase()
+			
+			
 
 	item_container_array[selected_container_idx].select()
 

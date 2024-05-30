@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://cdhh7nylscja2"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_ve11i"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_nvff0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hlgcc"]
+atlas = ExtResource("2_nvff0")
+region = Rect2(128, 96, 32, 32)
+
+[resource]
+script = ExtResource("1_ve11i")
+texture = SubResource("AtlasTexture_hlgcc")
+name = "LOCK"
+description = ""
+behaviour_scene = "res://scenes/items/sample_item.tscn"
+cost = 0
+for_sale = true
+category = 0
+locked_notification_text = "It's locked tight."
+unlocked_notification_text = "you have it?"

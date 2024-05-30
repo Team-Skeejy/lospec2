@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_wpgmi")
 company_name = "Ponks"
-company_base_payout = 10
+company_base_payout = 30
 jacket_spritesheet_path = "res://textures/characters/pink/jacket.png"
 tie_spritesheet_path = "res://textures/characters/pink/tie.png"
 woman_spritesheet_path = "res://textures/characters/pink/woman.png"

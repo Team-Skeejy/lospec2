@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://b758eg7iyh207"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_dwcpp"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_y2sb0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4btb"]
+atlas = ExtResource("2_y2sb0")
+region = Rect2(96, 96, 32, 32)
+
+[resource]
+script = ExtResource("1_dwcpp")
+texture = SubResource("AtlasTexture_t4btb")
+name = "Lucky Horseshoes"
+description = "Let's make this stock market even more rigged!"
+behaviour_scene = "res://scenes/items/more_luck.tscn"
+cost = 0
+for_sale = true
+category = 0
+locked_notification_text = ""
+unlocked_notification_text = ""

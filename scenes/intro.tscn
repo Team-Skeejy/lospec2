@@ -113,7 +113,6 @@ largest cooporations in the world."
 horizontal_alignment = 1
 
 [node name="Panel 2" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -142,7 +141,7 @@ offset_top = -54.0
 offset_right = 108.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "We're sending you, our top investigative journalist, 
+text = "I'm an investigative journalist, trying
 to get some dirt on Isaia Panduri, 
 the CEO of GigaOil with a mysterious past..."
 horizontal_alignment = 1
@@ -178,11 +177,12 @@ offset_right = 108.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "It won't be easy getting to Isaia's office at the top of 
-the Megacorp Spire, you'll need some good equipment, 
-and the money to buy it"
+the Megacorp Spire, I need some good equipment, 
+and the money to buy it."
 horizontal_alignment = 1
 
 [node name="Panel 4" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,11 +211,11 @@ offset_top = -59.0
 offset_right = 108.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Luckily I know just the guy!
+text = "Luckily, I know just the guy.
 He'll sell me what I need, plus if I give him stock
 tips he'll give me a cut of everything he wins.
 I'll shmooze the employees of Megacorp tower
-and get valuable insider information"
+to get valuable insider information."
 horizontal_alignment = 1
 
 [node name="Cover" type="ColorRect" parent="CanvasLayer"]

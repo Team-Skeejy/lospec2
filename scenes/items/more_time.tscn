@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn5vvq7q62kyg"]
+
+[sub_resource type="GDScript" id="GDScript_br5wn"]
+script/source = "class_name MoreTime
+extends Behaviour
+
+"
+
+[node name="MoreTime" type="Node"]
+script = SubResource("GDScript_br5wn")

@@ -37,6 +37,7 @@ func _init():
 	speed = 40.
 
 func _ready():
+	await get_tree().process_frame
 	destination = global_position
 	if type == NPCType.Jacket:
 		sprite.texture = load(company_resource.jacket_spritesheet_path)

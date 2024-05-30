@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgit7fyi6lxt6"]
+
+[ext_resource type="Script" path="res://scripts/items/walk_a_bit_faster.gd" id="1_43lwd"]
+
+[node name="WalkABitFaster" type="Node"]
+script = ExtResource("1_43lwd")

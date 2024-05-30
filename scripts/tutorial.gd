@@ -19,7 +19,7 @@ var player_has_closed_inventory := false
 var talk_count := 0
 
 func set_time(part: int):
-	Global.instance.time_limit_countdown = (Global.TIME_LIMIT / PARTS) * (PARTS - part)
+	Global.instance.time_limit_countdown = (Global.instance.time_limit / PARTS) * (PARTS - part)
 	Global.instance.try_emit_time_signal()
 
 func _input(_event: InputEvent):

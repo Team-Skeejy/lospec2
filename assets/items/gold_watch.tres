@@ -13,8 +13,8 @@ texture = SubResource("AtlasTexture_vkdon")
 name = "Gold Plated Watch"
 description = "This is guarateed to dazzle some employees.
 Plus, I'll get keep a better look at my time."
-behaviour_scene = "res://scenes/items/sample_item.tscn"
-cost = 100
+behaviour_scene = "res://scenes/items/slower_time.tscn"
+cost = 200
 for_sale = true
 category = 0
 locked_notification_text = "I'm not wearing a fancy enough

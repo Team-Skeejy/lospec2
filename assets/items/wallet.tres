@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://bm2g6xfpy8tfu"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_menuk"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_axlf2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8nm4"]
+atlas = ExtResource("2_axlf2")
+region = Rect2(32, 96, 32, 32)
+
+[resource]
+script = ExtResource("1_menuk")
+texture = SubResource("AtlasTexture_r8nm4")
+name = "Real Fake Leather Wallet"
+description = "This will help me keep better track of my money, giving a bonus to my payouts"
+behaviour_scene = "res://scenes/items/bonus_payout.tscn"
+cost = 50
+for_sale = true
+category = 0
+locked_notification_text = "This person thinks they know
+a lot about leatherworking"
+unlocked_notification_text = "The elegant stiching on my
+pleather wallet wooed them"

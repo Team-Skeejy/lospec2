@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://djqpyki30t10v"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_24vnx"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_37l20"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osvv2"]
+atlas = ExtResource("2_37l20")
+region = Rect2(0, 96, 32, 32)
+
+[resource]
+script = ExtResource("1_24vnx")
+texture = SubResource("AtlasTexture_osvv2")
+name = "Grip Strength Trainer"
+description = "Will help me shake hands more vigorously"
+behaviour_scene = "res://scenes/items/walk_a_bit_faster.tscn"
+cost = 80
+for_sale = true
+category = 0
+locked_notification_text = "My weak hand shake
+disappointed them"
+unlocked_notification_text = "I crushed their fingers
+with my commanding hand shake"

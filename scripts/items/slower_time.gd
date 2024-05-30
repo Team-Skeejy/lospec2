@@ -1,10 +1,8 @@
 class_name MoreTime
 extends Behaviour
 
-static var JUMP_DURATION_INCREMENT := 0.07
-static var JUMP_FORCE_INCREMENT := 30
+static var TIME_INCREMENT := 30
 
 func added(holder: Humanoid):
 	super.added(holder)
-	Modifiers.jump_duration += JUMP_DURATION_INCREMENT
-	Modifiers.jump_velocity += JUMP_FORCE_INCREMENT
+	Modifiers.time += TIME_INCREMENT

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://e0sktuuuxem5"]
+
+[ext_resource type="Script" path="res://scripts/items/bonus_payout.gd" id="1_5sxib"]
+
+[node name="BonusPayout" type="Node"]
+script = ExtResource("1_5sxib")

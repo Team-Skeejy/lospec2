@@ -22,6 +22,8 @@ func setup_items():
 		#texture_rect.texture = item.texture
 		#texture_rect.modulate = Color.hex(0x0000000FF)
 		#add_child(texture_rect)
+		if item.name == "LOCK":
+			continue
 		var item_container: ShopItemContainer = item_container_scene.instantiate()
 		item_container.item_resource = item
 		add_child(item_container)

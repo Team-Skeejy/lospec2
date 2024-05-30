@@ -19,5 +19,8 @@ func interact(_holder):
 	queue_free()
 	
 func _ready():
+	call_deferred("ready")
+
+func ready():
 	if Global.instance.player.has_item(item_resource):
 		queue_free()

@@ -3,11 +3,15 @@ extends Node
 
 static var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-static var TIME_LIMIT: float = 2 * 60  # 2 minute time limit
 static var TIME_DIVISIONS: int = 8 * 6  # 8 hr days, divided into 10 minute segments
-static var TIME_SEGMENT_LENGTH: float = TIME_LIMIT / TIME_DIVISIONS
+var time_limit: float = 2 * 60 : # 2 minute time limit
+	get:
+		return 2 * 60 + Modifiers.time 
+var time_segment_length: float :
+	get:
+		return time_limit / TIME_DIVISIONS
 var run_timer: bool = false
-var time_limit_countdown: float = TIME_LIMIT
+@onready var time_limit_countdown: float = time_limit
 var prev_time_signal_at: int = 0
 signal time_changed(part: int, of: int)
 signal time_out
@@ -74,7 +78,7 @@ func _ready():
 	print_debug(companies)
 
 func try_emit_time_signal():
-	var parts: int = (time_limit_countdown / TIME_SEGMENT_LENGTH) + 1
+	var parts: int = (time_limit_countdown / time_segment_length) + 1
 	if time_limit_countdown == 0 && prev_time_signal_at != 0:
 		prev_time_signal_at = 0
 		time_changed.emit(0, TIME_DIVISIONS)
@@ -256,7 +260,7 @@ func zero_timer():
 	time_changed.emit(0, TIME_DIVISIONS)
 
 func reset_timer():
-	time_limit_countdown = TIME_LIMIT
+	time_limit_countdown = time_limit
 	prev_time_signal_at = TIME_DIVISIONS
 	time_changed.emit(TIME_DIVISIONS, TIME_DIVISIONS)
 

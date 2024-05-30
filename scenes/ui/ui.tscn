@@ -41,8 +41,8 @@ shader = ExtResource("10_ffw14")
 shader_parameter/crt_ghost = 0.0
 shader_parameter/darken = false
 shader_parameter/num_colors = 16
-shader_parameter/precision = 0.135
-shader_parameter/scan_line_intensity = 0.056
+shader_parameter/precision = 1.0
+shader_parameter/scan_line_intensity = 0.0
 shader_parameter/palette_in = ExtResource("11_hv6us")
 shader_parameter/palette_out = ExtResource("12_378hj")
 

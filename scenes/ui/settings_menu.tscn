@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkuioef3meg5d"]
+[gd_scene load_steps=16 format=3 uid="uid://bkuioef3meg5d"]
 
 [ext_resource type="Script" path="res://scripts/ui/SettingsMenu.gd" id="1_f0ega"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_v1ki7"]
@@ -15,12 +15,20 @@ texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(144, 32, 32, 32)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_or1u3"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ikx88"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wynj1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_xitj7"]
 resource_local_to_scene = true
-atlas = SubResource("CompressedTexture2D_or1u3")
+atlas = SubResource("CompressedTexture2D_ikx88")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8xsnv"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hsnnx"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_8xsnv")
 region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_na5dc"]
@@ -76,11 +84,11 @@ bus = "Music"
 
 [node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
-texture = SubResource("AtlasTexture_wynj1")
+texture = SubResource("AtlasTexture_xitj7")
 
 [node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
-text = "Volume"
+text = "Music Volume"
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
@@ -94,16 +102,16 @@ step = 10.0
 [node name="SFXSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
 layout_mode = 2
 script = ExtResource("4_610yk")
-slider = NodePath("../MusicSetting/HSlider")
+slider = NodePath("HSlider")
 bus = "SFX"
 
 [node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
 layout_mode = 2
-texture = SubResource("AtlasTexture_wynj1")
+texture = SubResource("AtlasTexture_hsnnx")
 
 [node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
 layout_mode = 2
-text = "Volume"
+text = "SFX Volume"
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
 layout_mode = 2

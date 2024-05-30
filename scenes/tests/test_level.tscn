@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://du7d3x6mae8wj"]
+[gd_scene load_steps=18 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="Script" path="res://scripts/test_level.gd" id="1_ovvlx"]
+[ext_resource type="Resource" uid="uid://tsrlgdxrjjlt" path="res://assets/items/small_talk_manual.tres" id="2_3gkyj"]
 [ext_resource type="PackedScene" uid="uid://cyie1qowb60eh" path="res://scenes/map_objects/sittable.tscn" id="4_h0oka"]
 [ext_resource type="PackedScene" uid="uid://bwoobo3k2h8bm" path="res://scenes/map_objects/warp_door.tscn" id="5_pcnwj"]
 [ext_resource type="PackedScene" uid="uid://pt22hmf0q1qw" path="res://scenes/map_objects/map_door.tscn" id="6_lvxox"]
@@ -25,6 +26,7 @@ region = Rect2(32, 112, 16, 16)
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource("1_ovvlx")
+small_talk_manual = ExtResource("2_3gkyj")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(6, -2)
@@ -154,5 +156,6 @@ position = Vector2(808, -116)
 
 [node name="BossArea" parent="." instance=ExtResource("14_1h24b")]
 
+[editable path="PlayerSpawner"]
 [editable path="NPC Guard"]
 [editable path="NPC Guard/DialogueGenerator"]

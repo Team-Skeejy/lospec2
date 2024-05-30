@@ -61,6 +61,7 @@ func new_custom_speech_bubble(text: String, type: SpeechBubble.Type):
 	var speech_bubble: SpeechBubble = speech_bubble_scene.instantiate()
 	speech_bubble.init(text, type, false)  # Custom speech bubbles don't change colour when readq
 	add_speech_bubble(speech_bubble)
+	return speech_bubble
 
 func new_dialogue_speech_bubble(type: SpeechBubble.Type):
 	var speech_bubble: SpeechBubble = speech_bubble_scene.instantiate()

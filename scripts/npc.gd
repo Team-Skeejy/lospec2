@@ -11,13 +11,13 @@ enum NPCType {
 	Woman
 }
 
-@export var company_resource : CompanyResource
-@export var type : NPCType = NPCType.Jacket
+@export var company_resource: CompanyResource
+@export var type: NPCType = NPCType.Jacket
 @export var navigation_agent: NavigationAgent2D
 @export var vision_container: Node2D
-@export var patrol_position1 : Node2D
-@export var patrol_position2 : Node2D
-var lock : Lock
+@export var patrol_position1: Node2D
+@export var patrol_position2: Node2D
+var lock: Lock
 
 
 @onready var company: String = company_resource.company_name
@@ -35,8 +35,9 @@ var arrived := true
 
 func _init():
 	speed = 40.
-	
+
 func _ready():
+	destination = global_position
 	if type == NPCType.Jacket:
 		sprite.texture = load(company_resource.jacket_spritesheet_path)
 	elif type == NPCType.Tie:
@@ -49,7 +50,7 @@ func is_within_threshold() -> bool:
 
 func _process(delta):
 	if interact_target:  # If the NPC can interact and the next path position is far away, he wants the elevator,
-		if position.distance_to(navigation_agent.get_next_path_position()) > INTERACT_THRESHOLD_DISTANCE:
+		if global_position.distance_to(navigation_agent.get_next_path_position()) > INTERACT_THRESHOLD_DISTANCE:
 			interact_target.interact(self)
 	super._process(delta)
 	if vision_container:

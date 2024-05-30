@@ -7,6 +7,8 @@ var inventory: Array[ItemResource] = []
 @export var ui: UI
 static var COYOTE_TIME := 0.1
 
+@export var camera: Camera2D
+
 var coyote_timer := COYOTE_TIME
 var physics_enabled := true
 

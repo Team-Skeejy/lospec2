@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bcvk2nfue47o2"]
+[gd_scene load_steps=43 format=3 uid="uid://bcvk2nfue47o2"]
 
 [ext_resource type="Texture2D" uid="uid://b5k7j4ignx3kf" path="res://textures/characters/RedCharacter.png" id="1_ma7oy"]
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_qucbd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/state_machine/NPCPatrol.gd" id="6_kb2o8"]
 [ext_resource type="PackedScene" uid="uid://itbjvhraldeu" path="res://scenes/map_objects/dialogue_generator.tscn" id="6_t5wgk"]
 [ext_resource type="Script" path="res://scripts/state_machine/NPCSecurity.gd" id="7_h4ju1"]
+[ext_resource type="Script" path="res://scripts/state_machine/NPCBoss.gd" id="9_m8taw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyifl"]
 size = Vector2(11, 28)
@@ -131,6 +132,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_p0lb5"]
 resource_name = "idle_l"
 length = 0.10001
+step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -138,15 +140,16 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2i(0, 14)]
+"values": [Vector2i(0, 14), Vector2i(1, 14)]
 }
 
 [sub_resource type="Animation" id="Animation_h5v4y"]
 resource_name = "idle_r"
 length = 0.10001
+step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -154,10 +157,10 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2i(0, 15)]
+"values": [Vector2i(0, 15), Vector2i(1, 15)]
 }
 
 [sub_resource type="Animation" id="Animation_50vxk"]
@@ -286,6 +289,38 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2i(2, 11)]
+}
+
+[sub_resource type="Animation" id="Animation_sbs1g"]
+resource_name = "sit_l"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_dmpia"]
+resource_name = "sit_r"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 9)]
 }
 
 [sub_resource type="Animation" id="Animation_1umkq"]
@@ -473,6 +508,8 @@ _data = {
 "none_r": SubResource("Animation_6o7dq"),
 "rise_l": SubResource("Animation_qm45k"),
 "rise_r": SubResource("Animation_kmcq4"),
+"sit_l": SubResource("Animation_sbs1g"),
+"sit_r": SubResource("Animation_dmpia"),
 "walk_l": SubResource("Animation_1umkq"),
 "walk_r": SubResource("Animation_c41rg"),
 "wall_grab_l": SubResource("Animation_nd0p0"),
@@ -553,6 +590,11 @@ npc = NodePath("../..")
 
 [node name="NPCGuardAlert" type="Node" parent="StateMachine" node_paths=PackedStringArray("npc")]
 script = ExtResource("7_h4ju1")
+npc = NodePath("../..")
+
+[node name="NPCBoss" type="Node" parent="StateMachine" node_paths=PackedStringArray("talk_zone", "npc")]
+script = ExtResource("9_m8taw")
+talk_zone = NodePath("../../InteractionArea2D")
 npc = NodePath("../..")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

@@ -63,7 +63,7 @@ shader_sprite = NodePath("AnimatedSprite2D")
 material = ExtResource("1_a7jc4")
 position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_iquis")
-animation = &"openclose"
+animation = &"ajar"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -19)

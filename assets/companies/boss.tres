@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CompanyResource" load_steps=2 format=3 uid="uid://b5kg0a7c88r0u"]
+
+[ext_resource type="Script" path="res://scripts/company_resource.gd" id="1_wobkd"]
+
+[resource]
+script = ExtResource("1_wobkd")
+company_name = "BOSS"
+company_base_payout = 0
+jacket_spritesheet_path = "res://textures/characters/NPC boss.png"
+tie_spritesheet_path = "res://textures/characters/NPC boss.png"
+woman_spritesheet_path = "res://textures/characters/NPC boss.png"

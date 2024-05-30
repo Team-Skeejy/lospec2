@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://pt22hmf0q1qw"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/map_door.gd" id="1_iiewg"]
-[ext_resource type="Material" uid="uid://hw0emfgtj7dv" path="res://assets/outline_material.tres" id="2_5y0nl"]
+[ext_resource type="Material" uid="uid://c3rif323ip0cw" path="res://assets/outline_material.tres" id="2_5y0nl"]
 [ext_resource type="Texture2D" uid="uid://coompyfxhl1yu" path="res://textures/aseprite/doors.png" id="3_obvvm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27dnm"]

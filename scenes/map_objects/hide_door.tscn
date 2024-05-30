@@ -1,37 +1,33 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3cctlqah457r"]
+[gd_scene load_steps=10 format=3 uid="uid://b3cctlqah457r"]
 
 [ext_resource type="Script" path="res://scripts/map_objects/hide_door.gd" id="1_6er3i"]
 [ext_resource type="Material" uid="uid://c3rif323ip0cw" path="res://assets/outline_material.tres" id="2_5oer1"]
-[ext_resource type="Texture2D" uid="uid://bkldgnln5emkq" path="res://textures/elevator.png" id="2_lt1pr"]
+[ext_resource type="Texture2D" uid="uid://coompyfxhl1yu" path="res://textures/aseprite/doors.png" id="4_lrbog"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5opu5"]
 size = Vector2(19, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5n7kk"]
-atlas = ExtResource("2_lt1pr")
-region = Rect2(38, 0, 38, 38)
+[sub_resource type="AtlasTexture" id="AtlasTexture_yfcmm"]
+atlas = ExtResource("4_lrbog")
+region = Rect2(144, 96, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ly0kq"]
-atlas = ExtResource("2_lt1pr")
-region = Rect2(0, 0, 38, 38)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjtwp"]
+atlas = ExtResource("4_lrbog")
+region = Rect2(0, 96, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3dbay"]
-atlas = ExtResource("2_lt1pr")
-region = Rect2(76, 0, 38, 38)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogwy8"]
+atlas = ExtResource("4_lrbog")
+region = Rect2(48, 96, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ulnim"]
-atlas = ExtResource("2_lt1pr")
-region = Rect2(114, 0, 38, 38)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6nwlp"]
-atlas = ExtResource("2_lt1pr")
-region = Rect2(152, 0, 38, 38)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3b8np"]
+atlas = ExtResource("4_lrbog")
+region = Rect2(96, 96, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b6cgn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5n7kk")
+"texture": SubResource("AtlasTexture_yfcmm")
 }],
 "loop": true,
 "name": &"ajar",
@@ -39,7 +35,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ly0kq")
+"texture": SubResource("AtlasTexture_wjtwp")
 }],
 "loop": true,
 "name": &"closed",
@@ -47,16 +43,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5n7kk")
+"texture": SubResource("AtlasTexture_yfcmm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3dbay")
+"texture": SubResource("AtlasTexture_ogwy8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ulnim")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6nwlp")
+"texture": SubResource("AtlasTexture_3b8np")
 }],
 "loop": false,
 "name": &"open",
@@ -64,31 +57,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ly0kq")
+"texture": SubResource("AtlasTexture_wjtwp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5n7kk")
+"texture": SubResource("AtlasTexture_yfcmm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3dbay")
+"texture": SubResource("AtlasTexture_ogwy8")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_3b8np")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ulnim")
+"texture": SubResource("AtlasTexture_ogwy8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6nwlp")
+"texture": SubResource("AtlasTexture_yfcmm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ulnim")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3dbay")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5n7kk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ly0kq")
+"texture": SubResource("AtlasTexture_wjtwp")
 }],
 "loop": false,
 "name": &"openclose",
@@ -106,15 +93,16 @@ shape = SubResource("RectangleShape2D_5opu5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("2_5oer1")
-position = Vector2(3, -19)
+position = Vector2(1, -24)
 sprite_frames = SubResource("SpriteFrames_b6cgn")
 animation = &"openclose"
 
 [node name="Label" type="Label" parent="."]
-offset_left = -22.0
-offset_top = -49.0
-offset_right = 25.0
-offset_bottom = -41.0
+visible = false
+offset_left = -23.0
+offset_top = -54.0
+offset_right = 24.0
+offset_bottom = -46.0
 text = "Hiding Spot"
 horizontal_alignment = 1
 

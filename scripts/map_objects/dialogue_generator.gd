@@ -40,7 +40,7 @@ func _ready():
 func respond_to_small_talk():
 	if not npc:
 		return
-	if npc.company_resource.company_name == "GUARD":	
+	if npc.company_resource.company_name == "GUARD":
 		return
 		
 	await get_tree().create_timer(RESPONSE_TIME).timeout
@@ -86,7 +86,6 @@ func new_dialogue_speech_bubble(type: SpeechBubble.Type):
 func _on_seen(type: SpeechBubble.Type):
 	if not npc:
 		return
-		
 		
 	if type == SpeechBubble.Type.SMALL_TALK:
 		return

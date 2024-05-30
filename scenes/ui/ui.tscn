@@ -198,6 +198,7 @@ crt_texture = NodePath("../CrtEffect")
 
 [node name="CrtEffect" type="ColorRect" parent="."]
 top_level = true
+z_index = 22
 material = SubResource("ShaderMaterial_3hmtj")
 anchors_preset = 15
 anchor_right = 1.0

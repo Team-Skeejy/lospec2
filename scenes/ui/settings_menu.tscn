@@ -68,23 +68,47 @@ horizontal_alignment = 1
 [node name="SettingsContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VolumeSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
+[node name="MusicSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
 layout_mode = 2
 script = ExtResource("4_610yk")
 slider = NodePath("HSlider")
+bus = "Music"
 
-[node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
 texture = SubResource("AtlasTexture_wynj1")
 
-[node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
 text = "Volume"
 
-[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
 layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting"]
+[node name="HSlider" type="HSlider" parent="PanelContainer/VBoxContainer/SettingsContainer/MusicSetting"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+step = 10.0
+
+[node name="SFXSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
+layout_mode = 2
+script = ExtResource("4_610yk")
+slider = NodePath("../MusicSetting/HSlider")
+bus = "SFX"
+
+[node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_wynj1")
+
+[node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
+layout_mode = 2
+text = "Volume"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="PanelContainer/VBoxContainer/SettingsContainer/SFXSetting"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -136,6 +160,5 @@ size_flags_horizontal = 10
 max_value = 0.1
 step = 0.01
 
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting/HSlider" to="PanelContainer/VBoxContainer/SettingsContainer/VolumeSetting" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/SettingsContainer/GhostSetting/HSlider" to="PanelContainer/VBoxContainer/SettingsContainer/GhostSetting" method="_on_h_slider_value_changed"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/SettingsContainer/ScanLineSetting/HSlider" to="PanelContainer/VBoxContainer/SettingsContainer/ScanLineSetting" method="_on_h_slider_value_changed"]

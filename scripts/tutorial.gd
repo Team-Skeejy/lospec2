@@ -5,6 +5,7 @@ static var PARTS := 14
 
 @export var tutorial_item: ItemResource
 @export var tutorial_door: Interactable
+@export var drop_area: Area2D
 
 var player_pressed_left_right := false
 var player_pressed_a := false
@@ -26,8 +27,6 @@ func _input(_event: InputEvent):
 		player_pressed_left_right = true
 	if Input.is_action_just_pressed("A"):
 		player_pressed_a = true
-	if Input.is_action_just_pressed("Down"):
-		player_pressed_down = true
 
 	if Input.is_action_just_pressed("Start"):
 		player_has_opened_inventory = true
@@ -45,8 +44,9 @@ func item_added(item: ItemResource):
 func info_added(_company: String, _type: InformationManager.Type):
 	talk_count += 1
 
-
-
+func drop_area_entered(node: Node2D):
+	if node is Player:
+		player_pressed_down = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -57,6 +57,8 @@ func _ready():
 
 	Global.player.item_added.connect(item_added)
 	tutorial_door.interacted.connect(door_interacted)
+	drop_area.body_entered.connect(drop_area_entered)
+
 	InformationManager.instance.information_added.connect(info_added)
 
 	Global.instance.reset_timer()

@@ -12,7 +12,7 @@ func next():
 
 	if !animation.is_playing():
 		panel += 1
-		if panel > len(panels):
+		if panel >= len(panels):
 			Global.instance.go_to_next_phase()
 		else:
 			animation.play("dither_out")

@@ -28,5 +28,6 @@ test_bet_scene = "res://scenes/stock_market.tscn"
 [node name="PlayerStorage" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 autoplay = true
 bus = &"Music"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://15ei017vrpft"]
+[gd_scene load_steps=23 format=3 uid="uid://15ei017vrpft"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_ke51a"]
 [ext_resource type="Script" path="res://scripts/skyscraper.gd" id="1_ye060"]
@@ -20,6 +20,9 @@
 [ext_resource type="Resource" uid="uid://dri85hn6135hl" path="res://assets/items/keycard_blue.tres" id="18_iwgkr"]
 [ext_resource type="Resource" uid="uid://r8sl2uj8ec0n" path="res://assets/items/gym_membership.tres" id="19_vyldq"]
 [ext_resource type="PackedScene" uid="uid://c7wqlhul1t4pg" path="res://scenes/ui/small_text_panel.tscn" id="20_pjxyd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvsln"]
+size = Vector2(48, 57)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_th4br"]
 texture = ExtResource("7_60eb8")
@@ -46,10 +49,11 @@ layer_1/tile_data = PackedInt32Array(-131044, 589824, 3, -196579, 589824, 3, -26
 position = Vector2(36, -23)
 script = ExtResource("2_xhf77")
 
-[node name="Tutorial" type="Node2D" parent="." node_paths=PackedStringArray("tutorial_door")]
+[node name="Tutorial" type="Node2D" parent="." node_paths=PackedStringArray("tutorial_door", "drop_area")]
 script = ExtResource("3_lumv6")
 tutorial_item = ExtResource("5_jsiec")
 tutorial_door = NodePath("../Cafeteria/Tutorial Door")
+drop_area = NodePath("DropArea")
 
 [node name="TutorialSpawnPoint" type="Node2D" parent="Tutorial"]
 position = Vector2(-300, -80)
@@ -142,6 +146,12 @@ item_needed = ExtResource("6_sctf1")
 [node name="Tutorial Item" parent="Tutorial" instance=ExtResource("10_jvtyc")]
 position = Vector2(148, -35)
 item_resource = ExtResource("5_jsiec")
+
+[node name="DropArea" type="Area2D" parent="Tutorial"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tutorial/DropArea"]
+position = Vector2(-24, -44.5)
+shape = SubResource("RectangleShape2D_rvsln")
 
 [node name="Cafeteria" type="Node2D" parent="."]
 

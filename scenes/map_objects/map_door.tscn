@@ -15,6 +15,7 @@ size = Vector2(4, 54)
 size = Vector2(20, 47.5)
 
 [node name="MapDoor" type="Area2D" node_paths=PackedStringArray("shader_sprite")]
+z_index = -1
 script = ExtResource("1_iiewg")
 shader_sprite = NodePath("Sprite2D")
 

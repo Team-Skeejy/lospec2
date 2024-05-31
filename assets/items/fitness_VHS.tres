@@ -16,5 +16,6 @@ behaviour_scene = "res://scenes/items/walk_faster.tscn"
 cost = 200
 for_sale = true
 category = 0
-locked_notification_text = ""
-unlocked_notification_text = ""
+locked_notification_text = "I'm not in shape enough for this person"
+unlocked_notification_text = "My body is chiseled enough
+for this person to trust me"

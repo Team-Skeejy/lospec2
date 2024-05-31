@@ -49,19 +49,21 @@ func _ready():
 		if len(item_container_array) == 0:
 			Global.instance.new_notification_no_texture("Out of stock!")
 			Global.instance.go_to_next_phase()
-			
-			
+
+
 
 	item_container_array[selected_container_idx].select()
 
 func _input(_inp: InputEvent):
 	if Input.is_action_just_pressed("Left"):
+		Global.instance.positive_sfx.play()
 		item_container_array[selected_container_idx].deselect()
 		selected_container_idx -= 1
 		if selected_container_idx < 0:
 			selected_container_idx = len(item_container_array) - 1
 		item_container_array[selected_container_idx].select()
 	elif Input.is_action_just_pressed("Right"):
+		Global.instance.positive_sfx.play()
 		item_container_array[selected_container_idx].deselect()
 		selected_container_idx += 1
 		if selected_container_idx >= len(item_container_array):
@@ -73,8 +75,9 @@ func _input(_inp: InputEvent):
 		if Global.instance.current_phase == Global.GamePhase.tutorial_shop:
 			if item_container_array.any(func(item): return !item.sold_out):
 				# sad noise
-				print_debug("sad noise")
+				Global.instance.denied_sfx.play()
 				return
+		Global.instance.positive_sfx.play()
 		Global.instance.go_to_next_phase()
 
 func start_description(sic: ShopItemContainer):
@@ -98,8 +101,9 @@ func buy():
 	var selected_container: ShopItemContainer = get_currently_selected_container()
 	var item_cost = selected_container.item_resource.cost
 	if selected_container.sold_out or Global.instance.player_money < item_cost:
-		# TODO incredibly loud buzzer sound
+		Global.instance.denied_sfx.play()
 		return
+	Global.instance.pickup_sfx.play()
 	Global.instance.update_money(-item_cost)
 	var item: ItemResource = selected_container.buy()
 	Global.player.add_item(item)

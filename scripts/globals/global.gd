@@ -4,10 +4,10 @@ extends Node
 static var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 static var TIME_DIVISIONS: int = 8 * 6  # 8 hr days, divided into 10 minute segments
-var time_limit: float = 2 * 60 : # 2 minute time limit
+var time_limit: float = 2 * 60:  # 2 minute time limit
 	get:
-		return 2 * 60 + Modifiers.time 
-var time_segment_length: float :
+		return 2 * 60 + Modifiers.time
+var time_segment_length: float:
 	get:
 		return time_limit / TIME_DIVISIONS
 var run_timer: bool = false
@@ -24,6 +24,12 @@ static var instance: Global
 @export_file("*.wav") var stock_market_music: String
 @export_file("*.wav") var shop_music: String
 @export var audio_player: AudioStreamPlayer
+
+@export_category("SFX")
+@export var negative_sfx: AudioStreamPlayer
+@export var positive_sfx: AudioStreamPlayer
+@export var denied_sfx: AudioStreamPlayer
+@export var pickup_sfx: AudioStreamPlayer
 
 var current_track: String
 var audio_stream: AudioStreamWAV
@@ -64,7 +70,7 @@ signal new_speech_bubble(pos: Vector2)
 
 var volume: Dictionary = {
 	"Music": 50,
-	"SFX" : 50
+	"SFX": 50
 }
 var crt_ghost_intensity: float = 0.0
 var scanline_intensity: float = 0.0
@@ -119,88 +125,88 @@ func setup_dialogue():
 	#var sell_file_path = "res://assets/text/sell_dialogue.txt"
 	#var file_access: FileAccess = FileAccess.open(sell_file_path, FileAccess.READ)
 	#sell_dialogue = file_access.get_as_text().split("\n", false)
-	
+
 	sell_dialogue = ['At least only three of the factories burned down',
-		 "When this the press gets on this, we're screwed",
-		 'My mother will be so ashamed of us',
-		 "Sales haven't gone down, we're still at a steady 0",
-		 "We're going to have to fire so many people",
-		 "I'll have to sell my kid's bike",
-		 "I'm never going to be able to retire",
-		 'So all of the heads of all of the departments quit?',
-		 "Once this goes out, we're toast",
-		 "We won't be able to cover that stuff up much longer",
-		 "Say goodbye to your kids' college fund everybody!",
-		 'Things are looking really grim',
-		 'At this rate, the company will be lethal!',
-		 "They say he's like the new Elon Musk",
-		 "We told them it's not ready yet...",
-		 'My face is gonna be beet red for my family photos!',
-		 'The music dance experience is officially cancelled',
-		 'My boss is going to kill me',
-		 'They found out about the embezzling...',
-		 "Look at our lawyer dawg, we're going to jail...",
-		 "I'm shaking and crying",
-		 'The guy we lobbied for lost the election...']
-	
+			"When this the press gets on this, we're screwed",
+			'My mother will be so ashamed of us',
+			"Sales haven't gone down, we're still at a steady 0",
+			"We're going to have to fire so many people",
+			"I'll have to sell my kid's bike",
+			"I'm never going to be able to retire",
+			'So all of the heads of all of the departments quit?',
+			"Once this goes out, we're toast",
+			"We won't be able to cover that stuff up much longer",
+			"Say goodbye to your kids' college fund everybody!",
+			'Things are looking really grim',
+			'At this rate, the company will be lethal!',
+			"They say he's like the new Elon Musk",
+			"We told them it's not ready yet...",
+			'My face is gonna be beet red for my family photos!',
+			'The music dance experience is officially cancelled',
+			'My boss is going to kill me',
+			'They found out about the embezzling...',
+			"Look at our lawyer dawg, we're going to jail...",
+			"I'm shaking and crying",
+			'The guy we lobbied for lost the election...']
+
 	#var buy_file_path = "res://assets/text/buy_dialogue.txt"
 	#file_access = FileAccess.open(buy_file_path, FileAccess.READ)
 	#buy_dialogue = file_access.get_as_text().split("\n", false)
 	buy_dialogue = ["We're taking the nets off our factory windows!",
-		 "I'm sure the CEO is proud of us :)",
-		 'Razing that rainforest was a great investment!',
-		 "They say it couldn't be done",
-		 'Labor laws? More like labor suggestions!',
-		 'There were those who said it could not be done!',
-		 'All delivered, and ahead of shedule!',
-		 'The bonuses this year are going to be huge!',
-		 'A new photocopier? Christmas came early this year!',
-		 'Another senator on our dime!',
-		 'Overpromise, overdeliver!',
-		 'We successfully overthrew that foreign government!',
-		 'The CEO will be able to buy another boat!',
-		 "You didn't hear this from me, but invest in us NOW",
-		 'Just got that big new contract signed!',
-		 'The whole government is in our pocket!']
-	
+			"I'm sure the CEO is proud of us :)",
+			'Razing that rainforest was a great investment!',
+			"They say it couldn't be done",
+			'Labor laws? More like labor suggestions!',
+			'There were those who said it could not be done!',
+			'All delivered, and ahead of shedule!',
+			'The bonuses this year are going to be huge!',
+			'A new photocopier? Christmas came early this year!',
+			'Another senator on our dime!',
+			'Overpromise, overdeliver!',
+			'We successfully overthrew that foreign government!',
+			'The CEO will be able to buy another boat!',
+			"You didn't hear this from me, but invest in us NOW",
+			'Just got that big new contract signed!',
+			'The whole government is in our pocket!']
+
 	small_talk_dialogue = ['Hi!',
-		 'Hello!',
-		 "How's it going?",
-		 'Hot one today.',
-		 "It's been cold lately.",
-		 'Did you see the game last night?',
-		 'Traffic was crazy, right?',
-		 "How's the family?",
-		 'Haha, yes.',
-		 'Tubular!',
-		 'Radical!',
-		 'Cowabunga',
-		 'I have some video tapes to return',
-		 'I have some fax to send',
-		 'What will those crazy marketing kids think of next',
-		 '*cough*',
-		 'Hey there!',
-		 'Good morning!',
-		 'Working hard or hardly working?',
-		 'Working hard or hardly working?',
-		 "Can you believe this weather we're having?",
-		 'The coffee machine is acting up again',
-		 "Crazy weather we're having, eh",
-		 'Good evening!',
-		 'Another day, another dollar',
-		 'TGIF, am I right?',
-		 'Uhg, mondays...',
-		 'Gnarly!',
-		 "It's a scorcher out there!",
-		 'Brr.. cold one today...',
-		 "How's the old ball and chain?",
-		 'Did you watch the big game yesterday?',
-		 'Any plans for the weekend?',
-		 'High five!',
-		 "I can't believe it's still tuesday",
-		 'Yo!',
-		 '*cough* *cough*',
-		 'Hahaha',
+			'Hello!',
+			"How's it going?",
+			'Hot one today.',
+			"It's been cold lately.",
+			'Did you see the game last night?',
+			'Traffic was crazy, right?',
+			"How's the family?",
+			'Haha, yes.',
+			'Tubular!',
+			'Radical!',
+			'Cowabunga',
+			'I have some video tapes to return',
+			'I have some fax to send',
+			'What will those crazy marketing kids think of next',
+			'*cough*',
+			'Hey there!',
+			'Good morning!',
+			'Working hard or hardly working?',
+			'Working hard or hardly working?',
+			"Can you believe this weather we're having?",
+			'The coffee machine is acting up again',
+			"Crazy weather we're having, eh",
+			'Good evening!',
+			'Another day, another dollar',
+			'TGIF, am I right?',
+			'Uhg, mondays...',
+			'Gnarly!',
+			"It's a scorcher out there!",
+			'Brr.. cold one today...',
+			"How's the old ball and chain?",
+			'Did you watch the big game yesterday?',
+			'Any plans for the weekend?',
+			'High five!',
+			"I can't believe it's still tuesday",
+			'Yo!',
+			'*cough* *cough*',
+			'Hahaha',
 		'I got a bad case of the mondays',
 		'Hey there!',
 		'Nice to meet you!',

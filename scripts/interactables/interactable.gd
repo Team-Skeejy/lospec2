@@ -20,8 +20,10 @@ func interact(_interactor: Humanoid):
 func _interact(_interactor: Humanoid):
 	if check_lock():
 		interacted.emit(_interactor)
+		Global.instance.positive_sfx.play()
 		interact(_interactor)
-	pass
+	else:
+		Global.instance.denied_sfx.play()
 
 func check_lock() -> bool:
 	if lock:

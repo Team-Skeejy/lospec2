@@ -139,9 +139,6 @@ company_resource = ExtResource("12_iqf34")
 patrol_position1 = NodePath("../Guard Patrol Point 1")
 patrol_position2 = NodePath("../Guard Patrol Point 2")
 
-[node name="CollisionPolygon2D" parent="NPC Guard/VisionContainer/Torch/DangerZone" index="2"]
-disabled = true
-
 [node name="NPCPatrol" parent="NPC Guard/StateMachine" index="2"]
 on_idle = ""
 
@@ -167,6 +164,10 @@ item_resource = ExtResource("17_jkql1")
 [node name="MapItem2" parent="." instance=ExtResource("16_v0ys8")]
 position = Vector2(-194, -201)
 item_resource = ExtResource("18_x7ieq")
+
+[node name="Sittable" parent="." instance=ExtResource("4_h0oka")]
+position = Vector2(29, -18)
+flip = true
 
 [editable path="PlayerSpawner"]
 [editable path="NPC Guard"]

@@ -372,7 +372,6 @@ offset_bottom = -157.0
 text = "Ventilation"
 
 [node name="Debug" type="Node2D" parent="."]
-visible = false
 script = ExtResource("24_mwhal")
 active = true
 
@@ -381,7 +380,7 @@ position = Vector2(84, -16)
 destination = NodePath("../DebugDoorEnd")
 
 [node name="DebugDoorEnd" parent="Debug" node_paths=PackedStringArray("destination") instance=ExtResource("14_f2tow")]
-position = Vector2(1208, -1872)
+position = Vector2(774, -2848)
 destination = NodePath("../DebugDoorStart")
 
 [node name="NextPhaseWaterCooler" parent="Debug" instance=ExtResource("15_p1gcl")]
@@ -1790,8 +1789,7 @@ texture = SubResource("AtlasTexture_jq18l")
 position = Vector2(1348, -2816)
 
 [node name="CollisionShape2D" parent="BossRoom/BossArea/BossRoom" index="0"]
-visible = false
-position = Vector2(9, -47.5)
+position = Vector2(22.5, -47.5)
 
 [node name="HideDoor" parent="BossRoom/BossArea" index="1"]
 position = Vector2(-30, 0)

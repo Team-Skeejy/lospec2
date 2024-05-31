@@ -50,7 +50,7 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 8.0
 one_shot = true
 autostart = true
 

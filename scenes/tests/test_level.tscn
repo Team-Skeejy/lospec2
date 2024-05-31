@@ -153,7 +153,7 @@ position = Vector2(598, -116)
 position = Vector2(808, -116)
 
 [node name="BossArea" parent="." instance=ExtResource("14_1h24b")]
-ending = null
+ending = ""
 
 [node name="MapItem" parent="." instance=ExtResource("16_v0ys8")]
 position = Vector2(-145, -200)

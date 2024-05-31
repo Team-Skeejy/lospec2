@@ -10,9 +10,11 @@ extends Node2D
 var done := false
 
 var player_has_finished_game := false
+var entered_once := false
 
 func on_body_entered(node: Node2D):
-	if node is Player:
+	if node is Player && !entered_once:
+		entered_once = true
 		var player := node as Player
 		var sequence := BossSequence.new(self)
 		player.add_behaviour(sequence)
@@ -43,6 +45,7 @@ func _ready():
 
 func begin():
 	if done: return
+	Global.instance.run_timer = false
 	await Global.player.dialogue_generator.new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK).closed
 
 	var tween: Tween = create_tween()

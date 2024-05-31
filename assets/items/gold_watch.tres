@@ -11,10 +11,9 @@ region = Rect2(128, 32, 32, 32)
 script = ExtResource("1_5q0im")
 texture = SubResource("AtlasTexture_vkdon")
 name = "Gold Plated Watch"
-description = "This is guarateed to dazzle some employees.
-Plus, I'll get keep a better look at my time."
+description = "This is guarateed to dazzle some employees. Plus, I'll get keep a better look at my time."
 behaviour_scene = "res://scenes/items/slower_time.tscn"
-cost = 200
+cost = 150
 for_sale = true
 category = 0
 locked_notification_text = "I'm not wearing a fancy enough

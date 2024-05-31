@@ -13,8 +13,7 @@ var description_text_duration: float = 0.5
 var description_tween: Tween
 
 func _ready():
-	setup_items()
-	pass # Replace with function body.
+	call_deferred("setup_items")
 
 func setup_items():
 	for item in Global.instance.all_items:

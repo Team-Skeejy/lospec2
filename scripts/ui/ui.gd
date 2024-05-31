@@ -18,6 +18,8 @@ var tween: Tween
 @export var info_ui: InformationUI
 @export var inventory: Inventory
 @export var notification_holder: Control
+@export var close_map_label: Label
+
 func _ready():
 	info_ui.retract()
 	pass
@@ -30,21 +32,34 @@ func _process(_delta: float):
 
 	money_label.text = str(Global.instance.player_money) + "$"
 
-	if Input.is_action_just_pressed("Start"):
+	if Input.is_action_just_pressed("Start") and not Global.instance.player.zoomed_out:
 		if is_opened:
-			close()
+			close()	
 		else:
 			open()
 
 	# only check for other inputs if it's not opened
-	if not is_opened:
-		return
 
 	if Input.is_action_just_pressed("Select"):
-		settings_menu.visible = not settings_menu.visible
+		if is_opened:
+			settings_menu.visible = not settings_menu.visible
+		elif Global.instance.current_phase == Global.GamePhase.platformer or Global.instance.current_phase == Global.GamePhase.tutorial_platformer:
+			if Global.instance.player.zoomed_out:
+				Global.instance.player.camera.zoom = Vector2(1, 1)
+				Global.instance.player.camera.limit_bottom = 32
+				Global.instance.player.zoomed_out = false
+				_unpause()
+				close_map_label.hide()
+				
+			else:
+				Global.instance.player.camera.zoom = Vector2(0.25, 0.25)
+				Global.instance.player.camera.limit_bottom = 32*4
+				Global.instance.player.zoomed_out = true
+				_pause()
+				close_map_label.show()
+				
 
-
-	elif Input.is_action_just_pressed("A") and not settings_menu.visible:
+	elif is_opened and Input.is_action_just_pressed("A") and not settings_menu.visible:
 		info_ui.flip_expanded()
 
 func open():
@@ -56,7 +71,8 @@ func open():
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(menu, "position", open_menu_position, open_close_speed)
-	tween.tween_callback(_flip_is_opened)
+	tween.tween_callback(_is_opened_true)
+	tween.tween_callback(_pause)
 
 func close():
 	if tween and tween.is_running():
@@ -67,14 +83,26 @@ func close():
 	tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(menu, "position", closed_menu_position, open_close_speed)
-	tween.tween_callback(_flip_is_opened)
-	tween.tween_callback(_flip_paused)
+	tween.tween_callback(_is_opened_false)
+	tween.tween_callback(_unpause)
 
 func _flip_is_opened():
 	is_opened = not is_opened
 
+func _is_opened_true():
+	is_opened = true
+	
+func _is_opened_false():
+	is_opened = false
+
 func _flip_paused():
 	get_tree().paused = not get_tree().paused
+
+func _pause():
+	get_tree().paused = true
+	
+func _unpause():
+	get_tree().paused = false
 
 func update_items():
 	inventory.update_items()

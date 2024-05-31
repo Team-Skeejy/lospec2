@@ -13,7 +13,7 @@ atlas = ExtResource("3_h78vh")
 region = Rect2(32, 112, 16, 16)
 
 [node name="DialogueGenerator" type="Node2D" node_paths=PackedStringArray("dialogue_area", "info_icon", "icon_timer")]
-z_index = 2
+z_index = 3
 script = ExtResource("1_mfdet")
 speech_bubble_scene = ExtResource("2_ryvse")
 dialogue_area = NodePath("DialogueArea")

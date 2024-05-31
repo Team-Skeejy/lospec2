@@ -8,6 +8,7 @@ var inventory: Array[ItemResource] = []
 static var COYOTE_TIME := 0.1
 
 @export var camera: Camera2D
+var zoomed_out : bool = false
 
 var coyote_timer := COYOTE_TIME
 var physics_enabled := true
@@ -118,3 +119,5 @@ func _process(delta: float):
 
 	if Input.is_action_pressed("Down"): collision_mask = 1
 	else: collision_mask = 17
+	
+	

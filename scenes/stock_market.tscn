@@ -285,9 +285,12 @@ layout_mode = 2
 
 [node name="Animation" type="AudioStreamPlayer" parent="StockMarket/Audio"]
 stream = ExtResource("4_3nyoj")
+bus = &"SFX"
 
 [node name="Win" type="AudioStreamPlayer" parent="StockMarket/Audio"]
 stream = ExtResource("5_28gr6")
+bus = &"SFX"
 
 [node name="Lose" type="AudioStreamPlayer" parent="StockMarket/Audio"]
 stream = ExtResource("6_v0mra")
+bus = &"SFX"

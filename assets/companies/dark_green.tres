@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_mi7a2")
 company_name = "Midorin"
-company_base_payout = 10
+company_base_payout = 30
 jacket_spritesheet_path = "res://textures/characters/dark_green/jacket.png"
 tie_spritesheet_path = "res://textures/characters/dark_green/tie.png"
 woman_spritesheet_path = "res://textures/characters/dark_green/woman.png"

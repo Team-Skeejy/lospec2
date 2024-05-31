@@ -46,7 +46,7 @@ shader_parameter/scan_line_intensity = 0.0
 shader_parameter/palette_in = ExtResource("11_hv6us")
 shader_parameter/palette_out = ExtResource("12_378hj")
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui", "inventory", "notification_holder")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui", "inventory", "notification_holder", "close_map_label")]
 process_mode = 3
 script = ExtResource("1_u6oey")
 notification_scene = ExtResource("2_wciut")
@@ -58,6 +58,7 @@ crt_effects = NodePath("CrtEffect")
 info_ui = NodePath("PauseMenu/InformationUI")
 inventory = NodePath("PauseMenu/InvContainer/Inventory")
 notification_holder = NodePath("NotificationHolder")
+close_map_label = NodePath("MapLabel")
 
 [node name="NotificationHolder" type="Control" parent="."]
 layout_mode = 3
@@ -66,6 +67,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MapLabel" type="Label" parent="."]
+visible = false
+offset_left = 86.0
+offset_top = 181.0
+offset_right = 175.0
+offset_bottom = 189.0
+text = "[SELECT] to close map"
 
 [node name="PauseMenu" type="TextureRect" parent="."]
 show_behind_parent = true

@@ -30,6 +30,7 @@ var audio_stream: AudioStreamWAV
 
 @export_category("Items")
 @export var all_items: Array[ItemResource]
+@export var all_companies: Array[CompanyResource]
 
 @export_category("Nodes")
 @export var player_storage: Node
@@ -96,45 +97,119 @@ func _process(delta: float):
 	try_emit_time_signal()
 
 func setup_items():
-	# yes this is the actual way you look for all files in a path
-	var items_path := "res://assets/items/"
-	var dir = DirAccess.open(items_path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			all_items.append(ResourceLoader.load(items_path + file_name))
-			file_name = dir.get_next()
-		dir.list_dir_end()
-	else:
-		print("An error occurred when trying to access " + items_path)
+	pass
 
 func setup_companies():
-	var items_path := "res://assets/companies/"
-	var dir = DirAccess.open(items_path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			var resource = ResourceLoader.load(items_path + file_name)
-			companies[resource.company_name] = resource
-			file_name = dir.get_next()
-		dir.list_dir_end()
-	else:
-		print("An error occurred when trying to access " + items_path)
+	for c in all_companies:
+		companies[c.company_name] = c
+	#var items_path := "res://assets/companies/"
+	#var dir = DirAccess.open(items_path)
+	#if dir:
+		#dir.list_dir_begin()
+		#var file_name = dir.get_next()
+		#while file_name != "":
+			#var resource = load(items_path + file_name)
+			#companies[resource.company_name] = resource
+			#file_name = dir.get_next()
+		#dir.list_dir_end()
+	#else:
+		#print("An error occurred when trying to access " + items_path)
 
 func setup_dialogue():
-	var sell_file_path = "res://assets/text/sell_dialogue.txt"
-	var file_access: FileAccess = FileAccess.open(sell_file_path, FileAccess.READ)
-	sell_dialogue = file_access.get_as_text().split("\n", false)
-
-	var buy_file_path = "res://assets/text/buy_dialogue.txt"
-	file_access = FileAccess.open(buy_file_path, FileAccess.READ)
-	buy_dialogue = file_access.get_as_text().split("\n", false)
-
-	var small_talk_file_path = "res://assets/text/small_talk_dialogue.txt"
-	file_access = FileAccess.open(small_talk_file_path, FileAccess.READ)
-	small_talk_dialogue = file_access.get_as_text().split("\n", false)
+	#var sell_file_path = "res://assets/text/sell_dialogue.txt"
+	#var file_access: FileAccess = FileAccess.open(sell_file_path, FileAccess.READ)
+	#sell_dialogue = file_access.get_as_text().split("\n", false)
+	
+	sell_dialogue = ['At least only three of the factories burned down',
+		 "When this the press gets on this, we're screwed",
+		 'My mother will be so ashamed of us',
+		 "Sales haven't gone down, we're still at a steady 0",
+		 "We're going to have to fire so many people",
+		 "I'll have to sell my kid's bike",
+		 "I'm never going to be able to retire",
+		 'So all of the heads of all of the departments quit?',
+		 "Once this goes out, we're toast",
+		 "We won't be able to cover that stuff up much longer",
+		 "Say goodbye to your kids' college fund everybody!",
+		 'Things are looking really grim',
+		 'At this rate, the company will be lethal!',
+		 "They say he's like the new Elon Musk",
+		 "We told them it's not ready yet...",
+		 'My face is gonna be beet red for my family photos!',
+		 'The music dance experience is officially cancelled',
+		 'My boss is going to kill me',
+		 'They found out about the embezzling...',
+		 "Look at our lawyer dawg, we're going to jail...",
+		 "I'm shaking and crying",
+		 'The guy we lobbied for lost the election...']
+	
+	#var buy_file_path = "res://assets/text/buy_dialogue.txt"
+	#file_access = FileAccess.open(buy_file_path, FileAccess.READ)
+	#buy_dialogue = file_access.get_as_text().split("\n", false)
+	buy_dialogue = ["We're taking the nets off our factory windows!",
+		 "I'm sure the CEO is proud of us :)",
+		 'Razing that rainforest was a great investment!',
+		 "They say it couldn't be done",
+		 'Labor laws? More like labor suggestions!',
+		 'There were those who said it could not be done!',
+		 'All delivered, and ahead of shedule!',
+		 'The bonuses this year are going to be huge!',
+		 'A new photocopier? Christmas came early this year!',
+		 'Another senator on our dime!',
+		 'Overpromise, overdeliver!',
+		 'We successfully overthrew that foreign government!',
+		 'The CEO will be able to buy another boat!',
+		 "You didn't hear this from me, but invest in us NOW",
+		 'Just got that big new contract signed!',
+		 'The whole government is in our pocket!']
+	
+	small_talk_dialogue = ['Hi!',
+		 'Hello!',
+		 "How's it going?",
+		 'Hot one today.',
+		 "It's been cold lately.",
+		 'Did you see the game last night?',
+		 'Traffic was crazy, right?',
+		 "How's the family?",
+		 'Haha, yes.',
+		 'Tubular!',
+		 'Radical!',
+		 'Cowabunga',
+		 'I have some video tapes to return',
+		 'I have some fax to send',
+		 'What will those crazy marketing kids think of next',
+		 '*cough*',
+		 'Hey there!',
+		 'Good morning!',
+		 'Working hard or hardly working?',
+		 'Working hard or hardly working?',
+		 "Can you believe this weather we're having?",
+		 'The coffee machine is acting up again',
+		 "Crazy weather we're having, eh",
+		 'Good evening!',
+		 'Another day, another dollar',
+		 'TGIF, am I right?',
+		 'Uhg, mondays...',
+		 'Gnarly!',
+		 "It's a scorcher out there!",
+		 'Brr.. cold one today...',
+		 "How's the old ball and chain?",
+		 'Did you watch the big game yesterday?',
+		 'Any plans for the weekend?',
+		 'High five!',
+		 "I can't believe it's still tuesday",
+		 'Yo!',
+		 '*cough* *cough*',
+		 'Hahaha',
+		'I got a bad case of the mondays',
+		'Hey there!',
+		'Nice to meet you!',
+		'What a day, eh?',
+		'When will this rain stop?'
+		]
+	#var small_talk_file_path = "res://assets/text/small_talk_dialogue.txt"
+	#file_access = FileAccess.open(small_talk_file_path, FileAccess.READ)
+	#small_talk_dialogue = file_access.get_as_text().split("\n", false)
 
 func store_player():
 	if player:
@@ -193,6 +268,7 @@ func go_to_phase(phase: GamePhase):
 			set_track(intro_music)
 			store_player_and_transition_to(intro_scene)
 		GamePhase.tutorial_platformer:
+			#instance.player.ui.info_ui.day_start()
 			set_track(game_music)
 			store_player_and_transition_to(tutorial_platformer_scene)
 			reset_timer()
@@ -206,6 +282,8 @@ func go_to_phase(phase: GamePhase):
 			zero_timer()
 
 		GamePhase.platformer:
+			if instance.player:
+				instance.player.ui.info_ui.day_start()
 			set_track(game_music)
 			store_player_and_transition_to(platformer_scene)
 			reset_timer()

@@ -30,6 +30,8 @@ func get_selected_row():
 	return settings_container.get_children()[selected_row]
 
 func _process(delta):
+	if not visible:
+		return
 	if Input.is_action_just_pressed("Left"):
 		get_selected_row().left()
 	elif Input.is_action_just_pressed("Right"):

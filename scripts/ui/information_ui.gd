@@ -48,10 +48,11 @@ func on_info_added(company: String, type: InformationManager.Type):
 	row_container.move_child(row, 0)
 
 func on_company_removed(company: String):
-	var row = full_rows[company]
-	full_rows.erase(company)
-	row.reset()
-	row_container.move_child(row, max_rows - 1)
+	if company in full_rows.keys():
+		var row = full_rows[company]
+		full_rows.erase(company)
+		row.reset()
+		row_container.move_child(row, max_rows - 1)
 
 
 func flip_expanded():

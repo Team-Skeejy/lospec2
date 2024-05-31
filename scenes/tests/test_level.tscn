@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://du7d3x6mae8wj"]
+[gd_scene load_steps=20 format=3 uid="uid://du7d3x6mae8wj"]
 
 [ext_resource type="TileSet" uid="uid://dgxsm67qwkt2c" path="res://assets/tileset.tres" id="1_44mo6"]
 [ext_resource type="Script" path="res://scripts/test_level.gd" id="1_ovvlx"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://b3cctlqah457r" path="res://scenes/map_objects/hide_door.tscn" id="11_0yare"]
 [ext_resource type="PackedScene" uid="uid://cukgcxvgbdga" path="res://scenes/npc_guard.tscn" id="11_dec8k"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="12_e38fs"]
-[ext_resource type="Resource" uid="uid://b5kg0a7c88r0u" path="res://assets/companies/boss.tres" id="12_iqf34"]
 [ext_resource type="PackedScene" uid="uid://dahdcmgbmseru" path="res://boss_area.tscn" id="14_1h24b"]
 [ext_resource type="PackedScene" uid="uid://d0rpo0w17lnm7" path="res://scenes/map_objects/map_item.tscn" id="16_v0ys8"]
 [ext_resource type="Resource" uid="uid://m5iqwhu8wv11" path="res://assets/items/sticky_note.tres" id="17_jkql1"]
@@ -135,7 +134,6 @@ position = Vector2(519, -116)
 [node name="NPC Guard" parent="." node_paths=PackedStringArray("patrol_position1", "patrol_position2") instance=ExtResource("11_dec8k")]
 position = Vector2(679, -116)
 collision_mask = 2
-company_resource = ExtResource("12_iqf34")
 patrol_position1 = NodePath("../Guard Patrol Point 1")
 patrol_position2 = NodePath("../Guard Patrol Point 2")
 

@@ -11,8 +11,9 @@ size = Vector2(26, 24)
 atlas = ExtResource("2_pnuj6")
 region = Rect2(160, 16, 32, 32)
 
-[node name="Sittable" type="Area2D" node_paths=PackedStringArray("shader_sprite")]
+[node name="Sittable" type="Area2D" node_paths=PackedStringArray("sprite", "shader_sprite")]
 script = ExtResource("1_3xx43")
+sprite = NodePath("Sprite2D")
 shader_sprite = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

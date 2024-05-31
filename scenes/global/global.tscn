@@ -1,28 +1,28 @@
-[gd_scene load_steps=39 format=3 uid="uid://c2tdeb17l1bgf"]
+[gd_scene load_steps=42 format=3 uid="uid://c2tdeb17l1bgf"]
 
 [ext_resource type="Script" path="res://scripts/globals/global.gd" id="1_ov5qs"]
 [ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_farim"]
-[ext_resource type="Resource" uid="uid://cxm56m6w4fm5y" path="res://assets/items/boss_mug.tres" id="2_l4hug"]
+[ext_resource type="Resource" uid="uid://dlwrdkyujh2gt" path="res://assets/items/boss_mug.tres" id="2_l4hug"]
 [ext_resource type="Resource" uid="uid://bho0byvbf05tw" path="res://assets/items/business_card.tres" id="3_4m458"]
-[ext_resource type="Resource" uid="uid://muo8657f5lpu" path="res://assets/items/fitness_VHS.tres" id="4_smvmv"]
+[ext_resource type="Resource" uid="uid://lblnoq7ydyqw" path="res://assets/items/fitness_VHS.tres" id="4_smvmv"]
 [ext_resource type="Resource" uid="uid://bcsw3ficgs3e7" path="res://assets/items/four_leaf_clover.tres" id="5_j2mg8"]
-[ext_resource type="Resource" uid="uid://crtbslxow6ydn" path="res://assets/items/galvanized_steel.tres" id="6_gp1iv"]
-[ext_resource type="Resource" uid="uid://cxyvpydh5tith" path="res://assets/items/game_boy.tres" id="7_dqt6l"]
+[ext_resource type="Resource" uid="uid://cvw6x0hmkhad1" path="res://assets/items/galvanized_steel.tres" id="6_gp1iv"]
+[ext_resource type="Resource" uid="uid://dx1khaxlx41rl" path="res://assets/items/game_boy.tres" id="7_dqt6l"]
 [ext_resource type="Resource" uid="uid://ddm83h3udhh12" path="res://assets/items/gold_watch.tres" id="8_aib12"]
-[ext_resource type="Resource" uid="uid://djqpyki30t10v" path="res://assets/items/grip_strength_trainer.tres" id="9_hdhae"]
+[ext_resource type="Resource" uid="uid://cg44s13h2k3do" path="res://assets/items/grip_strength_trainer.tres" id="9_hdhae"]
 [ext_resource type="Resource" uid="uid://r8sl2uj8ec0n" path="res://assets/items/gym_membership.tres" id="10_e2j16"]
-[ext_resource type="Resource" uid="uid://b758eg7iyh207" path="res://assets/items/horseshoes.tres" id="11_n4wjn"]
+[ext_resource type="Resource" uid="uid://dcjd130db1qv3" path="res://assets/items/horseshoes.tres" id="11_n4wjn"]
 [ext_resource type="Resource" uid="uid://dri85hn6135hl" path="res://assets/items/keycard_blue.tres" id="12_k66f8"]
 [ext_resource type="Resource" uid="uid://c00apnphx2vn2" path="res://assets/items/keycard_green.tres" id="13_uc6o6"]
 [ext_resource type="Resource" uid="uid://dhsrpuhb7a55q" path="res://assets/items/keycard_red.tres" id="14_e46tq"]
-[ext_resource type="Resource" uid="uid://djy1u1htprain" path="res://assets/items/pager.tres" id="15_ypja7"]
+[ext_resource type="Resource" uid="uid://eeyu3lqrdqj0" path="res://assets/items/pager.tres" id="15_ypja7"]
 [ext_resource type="Resource" uid="uid://tsrlgdxrjjlt" path="res://assets/items/small_talk_manual.tres" id="16_5qg2e"]
 [ext_resource type="Resource" uid="uid://m5iqwhu8wv11" path="res://assets/items/sticky_note.tres" id="17_m1yui"]
-[ext_resource type="Resource" uid="uid://yg2xg5xfk5pv" path="res://assets/items/strong_coffee1.tres" id="18_gprxg"]
-[ext_resource type="Resource" uid="uid://by4l5bnnav88y" path="res://assets/items/strong_coffee2.tres" id="19_drm32"]
+[ext_resource type="Resource" uid="uid://djm4wi04evf38" path="res://assets/items/strong_coffee1.tres" id="18_gprxg"]
+[ext_resource type="Resource" uid="uid://dntxcxyahfdih" path="res://assets/items/strong_coffee2.tres" id="19_drm32"]
 [ext_resource type="Resource" uid="uid://dwlt5r6qpndug" path="res://assets/items/tie.tres" id="20_ri0ff"]
 [ext_resource type="Resource" uid="uid://cw1s1sycptn15" path="res://assets/items/visitor_pass.tres" id="21_vnhfg"]
-[ext_resource type="Resource" uid="uid://bm2g6xfpy8tfu" path="res://assets/items/wallet.tres" id="22_u601a"]
+[ext_resource type="Resource" uid="uid://dbfndy6c585cj" path="res://assets/items/wallet.tres" id="22_u601a"]
 [ext_resource type="Resource" uid="uid://caltdg5j655ji" path="res://assets/items/weird_pills.tres" id="23_v5dy0"]
 [ext_resource type="Resource" uid="uid://cl36vcnyre73r" path="res://assets/items/super_human_serum.tres" id="24_ups2j"]
 [ext_resource type="Resource" uid="uid://dlmgpv5xdf8ym" path="res://assets/companies/black.tres" id="24_w7xfx"]
@@ -38,8 +38,12 @@
 [ext_resource type="Resource" uid="uid://dp1jciifg6hfr" path="res://assets/companies/pink.tres" id="34_op0o1"]
 [ext_resource type="Resource" uid="uid://mwip0xsjrviu" path="res://assets/companies/red.tres" id="35_u82lk"]
 [ext_resource type="Resource" uid="uid://cgclcgq55l427" path="res://assets/companies/white.tres" id="36_1vjve"]
+[ext_resource type="AudioStream" uid="uid://d3meqtrc7uem" path="res://audio/negative.wav" id="38_64vcm"]
+[ext_resource type="AudioStream" uid="uid://ipp8wts403yb" path="res://audio/positive.wav" id="39_140dt"]
+[ext_resource type="AudioStream" uid="uid://jim34laxabw7" path="res://audio/denied.wav" id="40_8nmcu"]
+[ext_resource type="AudioStream" uid="uid://bsi0tta8wgj28" path="res://audio/woopwoop.wav" id="41_f1qx1"]
 
-[node name="Global" type="Node" node_paths=PackedStringArray("audio_player", "player_storage")]
+[node name="Global" type="Node" node_paths=PackedStringArray("audio_player", "negative_sfx", "positive_sfx", "denied_sfx", "pickup_sfx", "player_storage")]
 script = ExtResource("1_ov5qs")
 menu_music = "res://audio/music/menu.wav"
 intro_music = "res://audio/music/menu.wav"
@@ -48,6 +52,11 @@ stock_market_music = "res://audio/music/stock_market.wav"
 shop_music = "res://audio/music/stock_market.wav"
 audio_player = NodePath("Music")
 all_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("2_l4hug"), ExtResource("3_4m458"), ExtResource("4_smvmv"), ExtResource("5_j2mg8"), ExtResource("6_gp1iv"), ExtResource("7_dqt6l"), ExtResource("8_aib12"), ExtResource("9_hdhae"), ExtResource("10_e2j16"), ExtResource("11_n4wjn"), ExtResource("12_k66f8"), ExtResource("13_uc6o6"), ExtResource("14_e46tq"), ExtResource("15_ypja7"), ExtResource("16_5qg2e"), ExtResource("17_m1yui"), ExtResource("18_gprxg"), ExtResource("19_drm32"), ExtResource("20_ri0ff"), ExtResource("21_vnhfg"), ExtResource("22_u601a"), ExtResource("23_v5dy0"), ExtResource("24_ups2j")])
+negative_sfx = NodePath("Audio/Negative")
+positive_sfx = NodePath("Audio/Positive")
+denied_sfx = NodePath("Audio/Denied")
+pickup_sfx = NodePath("Audio/Pickup")
+all_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("2_l4hug"), ExtResource("3_4m458"), ExtResource("4_smvmv"), ExtResource("5_j2mg8"), ExtResource("6_gp1iv"), ExtResource("7_dqt6l"), ExtResource("8_aib12"), ExtResource("9_hdhae"), ExtResource("10_e2j16"), ExtResource("11_n4wjn"), ExtResource("12_k66f8"), ExtResource("13_uc6o6"), ExtResource("14_e46tq"), ExtResource("15_ypja7"), ExtResource("16_5qg2e"), ExtResource("17_m1yui"), ExtResource("18_gprxg"), ExtResource("19_drm32"), ExtResource("20_ri0ff"), ExtResource("21_vnhfg"), ExtResource("22_u601a"), ExtResource("23_v5dy0")])
 all_companies = Array[Resource("res://scripts/company_resource.gd")]([ExtResource("24_w7xfx"), ExtResource("25_e2lhj"), ExtResource("26_hx3df"), ExtResource("27_peony"), ExtResource("28_ghyse"), ExtResource("29_1qr47"), ExtResource("30_2nwmn"), ExtResource("31_kg23s"), ExtResource("32_vfv5e"), ExtResource("33_876vi"), ExtResource("34_op0o1"), ExtResource("35_u82lk"), ExtResource("36_1vjve")])
 player_storage = NodePath("PlayerStorage")
 player_scene = ExtResource("2_farim")
@@ -69,3 +78,21 @@ test_bet_scene = "res://scenes/stock_market.tscn"
 process_mode = 3
 autoplay = true
 bus = &"Music"
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Negative" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("38_64vcm")
+bus = &"SFX"
+
+[node name="Positive" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("39_140dt")
+bus = &"SFX"
+
+[node name="Denied" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("40_8nmcu")
+bus = &"SFX"
+
+[node name="Pickup" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("41_f1qx1")
+bus = &"SFX"

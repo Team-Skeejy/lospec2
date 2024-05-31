@@ -1,8 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://bt1fj4qvrccb"]
+[gd_scene load_steps=37 format=3 uid="uid://bt1fj4qvrccb"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_8kpki"]
 [ext_resource type="PackedScene" uid="uid://g7ix8xbxhriq" path="res://scenes/ui/ui.tscn" id="3_5oucy"]
 [ext_resource type="PackedScene" uid="uid://itbjvhraldeu" path="res://scenes/map_objects/dialogue_generator.tscn" id="4_5mmsc"]
+[ext_resource type="AudioStream" uid="uid://nxodqjiigsxy" path="res://audio/woop.wav" id="5_0rq6e"]
 [ext_resource type="Texture2D" uid="uid://dvuebpah0o2ys" path="res://textures/characters/player/Sprite 1.png" id="21_tx0hg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y0xy1"]
@@ -518,12 +519,13 @@ _data = {
 "wall_slide_r": SubResource("Animation_bhuei")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ui", "camera", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator", "sprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("ui", "camera", "jump_audio", "sprite_animation_player", "interaction_area", "behaviour_node", "dialogue_generator", "sprite")]
 z_index = 1
 collision_mask = 17
 script = ExtResource("1_8kpki")
 ui = NodePath("UI")
 camera = NodePath("Camera2D")
+jump_audio = NodePath("Audio/Jump")
 sprite_animation_player = NodePath("AnimationPlayer")
 interaction_area = NodePath("InteractionArea2D")
 behaviour_node = NodePath("Behaviours")
@@ -565,3 +567,9 @@ libraries = {
 
 [node name="DialogueGenerator" parent="." instance=ExtResource("4_5mmsc")]
 position = Vector2(0, -25)
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Jump" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("5_0rq6e")
+bus = &"SFX"

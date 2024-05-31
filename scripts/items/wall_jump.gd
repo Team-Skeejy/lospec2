@@ -23,6 +23,7 @@ func jump(_delta: float):
 				flip_direction = true
 			elif coyote_timer:
 				flip_direction = false
+			if holder is Player: (holder as Player).jump_audio.play()
 			jumping = true
 			wall_jumping = true
 			coyote_timer = 0

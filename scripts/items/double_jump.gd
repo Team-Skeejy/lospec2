@@ -16,6 +16,7 @@ func reset_animation():
 
 func jump(_delta: float) -> bool:
 	if !jumping && jumps_remaining > 0:
+		if holder is Player: (holder as Player).jump_audio.play()
 		jumps_remaining -= 1
 		jumping = true
 

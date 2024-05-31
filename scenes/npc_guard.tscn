@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dht8ce2g5igq2" path="res://textures/aseprite/torch.png" id="2_q78co"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rg0v1"]
-radius = 19.0263
+radius = 16.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_we2c3"]
 size = Vector2(105, 36)
@@ -25,7 +25,7 @@ position = Vector2(-56, 16)
 scale = Vector2(1, 0.5)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="VisionContainer/Torch/DangerZone" index="0"]
-position = Vector2(0, -22)
+position = Vector2(3, -22)
 scale = Vector2(1, 2)
 shape = SubResource("CircleShape2D_rg0v1")
 
@@ -33,11 +33,6 @@ shape = SubResource("CircleShape2D_rg0v1")
 position = Vector2(52.5, -24)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_we2c3")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionContainer/Torch/DangerZone" index="2"]
-visible = false
-position = Vector2(7, -24)
-polygon = PackedVector2Array(0, 0, 96, -36, 98, -16, 98, 2, 96, 20)
 
 [node name="StateMachine" parent="." index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("NPCGuardPatrol")
@@ -54,7 +49,8 @@ danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
 danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
 on_idle = "NPCGuardIdle"
 
-[node name="Label" type="Label" parent="." index="10"]
+[node name="Label" type="Label" parent="." index="9"]
+visible = false
 offset_left = -20.0
 offset_right = 20.0
 offset_bottom = 8.0

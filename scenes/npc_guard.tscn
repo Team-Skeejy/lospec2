@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cukgcxvgbdga"]
+[gd_scene load_steps=7 format=3 uid="uid://cukgcxvgbdga"]
 
 [ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="1_jo0f2"]
 [ext_resource type="Resource" uid="uid://damjqcn35kpt0" path="res://assets/companies/guard.tres" id="2_f7ayh"]
 [ext_resource type="Texture2D" uid="uid://dht8ce2g5igq2" path="res://textures/aseprite/torch.png" id="2_q78co"]
+[ext_resource type="PackedScene" uid="uid://c5k0aw1wvm0lx" path="res://scenes/alert.tscn" id="4_m3nyo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rg0v1"]
 radius = 16.0
@@ -34,6 +35,10 @@ position = Vector2(52.5, -24)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_we2c3")
 
+[node name="Alert" parent="VisionContainer" index="1" instance=ExtResource("4_m3nyo")]
+visible = false
+position = Vector2(17, -16)
+
 [node name="StateMachine" parent="." index="6" node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("NPCGuardPatrol")
 
@@ -45,9 +50,10 @@ on_alert = "NPCGuardAlert"
 on_idle = "NPCGuardIdle"
 danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
 
-[node name="NPCGuardAlert" parent="StateMachine" index="5" node_paths=PackedStringArray("danger_zone")]
+[node name="NPCGuardAlert" parent="StateMachine" index="5" node_paths=PackedStringArray("danger_zone", "alert")]
 danger_zone = NodePath("../../VisionContainer/Torch/DangerZone")
 on_idle = "NPCGuardIdle"
+alert = NodePath("../../VisionContainer/Alert")
 
 [node name="Label" type="Label" parent="." index="9"]
 visible = false

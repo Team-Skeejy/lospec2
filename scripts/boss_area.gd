@@ -5,7 +5,11 @@ extends Node2D
 @export var boss: NPC
 @export var ending_door: HideDoor
 
+@export_file("*.tscn") var ending: String
+
 var done := false
+
+var player_has_finished_game := false
 
 func on_body_entered(node: Node2D):
 	if node is Player:
@@ -18,32 +22,43 @@ func on_body_entered(node: Node2D):
 		else:
 			sequence.is_ready.connect(begin)
 
+func on_interacted(body: Node2D):
+	if body is Player:
+		await Global.player.sprite_animation_player.animation_finished
+		Global.player.physics_enabled = false
+		player_has_finished_game = true
+		await get_tree().create_timer(1.).timeout
+		await boss.dialogue_generator.new_custom_speech_bubble("...", SpeechBubble.Type.SMALL_TALK).closed
+		await get_tree().create_timer(1.).timeout
+		await boss.dialogue_generator.new_custom_speech_bubble("this is awkward...", SpeechBubble.Type.SMALL_TALK).closed
+		await get_tree().create_timer(1.).timeout
+		await boss.dialogue_generator.new_custom_speech_bubble("can you leave?", SpeechBubble.Type.SMALL_TALK).closed
+		await get_tree().create_timer(1.).timeout
+		FadeTransition.instance.transition_to(ending)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	talk_zone.body_entered.connect(on_body_entered)
-
-# func _process(delta):
-# 	if turn_left && !turned_left:
-
+	ending_door.interacted.connect(on_interacted)
 
 func begin():
 	if done: return
-	Global.player.up_press(0)
-	await get_tree().create_timer(4.).timeout
+	await Global.player.dialogue_generator.new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK).closed
 
 	var tween: Tween = create_tween()
 	tween.tween_property(Global.player.camera, "global_position", boss.global_position, 1.)
 	await tween.finished
+	await get_tree().create_timer(.5).timeout
 
 	boss.dialogue_generator.has_info_to_give = false
 
 	await boss.dialogue_generator.new_custom_speech_bubble("I've been expecting you...", SpeechBubble.Type.SMALL_TALK).closed
+
+	for behaviour in boss.behaviours.filter(func(behaviour): return behaviour is Sit): boss.remove_behaviour(behaviour)
+
 	await get_tree().create_timer(1.).timeout
 	await boss.dialogue_generator.new_custom_speech_bubble("Mr Journalist...", SpeechBubble.Type.SMALL_TALK).closed
 
-	var remove = boss.behaviours.filter(func(behaviour): return behaviour is Sit)
-	for behaviour in remove:
-		boss.remove_behaviour(behaviour)
 
 	await get_tree().create_timer(1.).timeout
 
@@ -57,7 +72,7 @@ func begin():
 	boss.destination = turn
 	await boss.dialogue_generator.new_custom_speech_bubble("the hunted!", SpeechBubble.Type.SMALL_TALK).closed
 
-	await get_tree().create_timer(3.).timeout
+	await get_tree().create_timer(1.).timeout
 
 	await boss.dialogue_generator.new_custom_speech_bubble("You have lost your way Mr Journalist", SpeechBubble.Type.SMALL_TALK).closed
 
@@ -81,15 +96,14 @@ func begin():
 	tween = create_tween()
 	tween.tween_property(Global.player.camera, "position", Vector2.ZERO, 0.5)
 	await tween.finished
-	await get_tree().create_timer(1.).timeout
+	await get_tree().create_timer(.5).timeout
 
-	Global.player.up_press(0)
-	await get_tree().create_timer(4.).timeout
+	await Global.player.dialogue_generator.new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK).closed
 
 	tween = create_tween()
 	tween.tween_property(Global.player.camera, "global_position", boss.global_position, 0.5)
 	await tween.finished
-	await get_tree().create_timer(1.).timeout
+	await get_tree().create_timer(.5).timeout
 
 	await boss.dialogue_generator.new_custom_speech_bubble("...", SpeechBubble.Type.SMALL_TALK).closed
 
@@ -100,13 +114,14 @@ func begin():
 	tween = create_tween()
 	tween.tween_property(Global.player.camera, "position", Vector2.ZERO, 0.5)
 	await tween.finished
-	await get_tree().create_timer(1.).timeout
-	Global.player.up_press(0)
-	await get_tree().create_timer(4.).timeout
+	await get_tree().create_timer(.5).timeout
+
+	await Global.player.dialogue_generator.new_dialogue_speech_bubble(SpeechBubble.Type.SMALL_TALK).closed
+
 	tween = create_tween()
 	tween.tween_property(Global.player.camera, "global_position", boss.global_position, 0.5)
 	await tween.finished
-	await get_tree().create_timer(1.).timeout
+	await get_tree().create_timer(.5).timeout
 
 	await boss.dialogue_generator.new_custom_speech_bubble("Wow...", SpeechBubble.Type.SMALL_TALK).closed
 
@@ -130,14 +145,17 @@ func begin():
 	tween = create_tween()
 	tween.tween_property(Global.player.camera, "position", Vector2.ZERO, 1.)
 	await tween.finished
+	await get_tree().create_timer(.5).timeout
 
 	done = true
 
-	remove = Global.player.behaviours.filter(func(behaviour): return behaviour is BossSequence)
-	for behaviour in remove:
-		Global.player.remove_behaviour(behaviour)
+	for behaviour in Global.player.behaviours.filter(func(behaviour): return behaviour is BossSequence): Global.player.remove_behaviour(behaviour)
 
-	await get_tree().create_timer(15.).timeout
+	while true:
+		await get_tree().create_timer(10.).timeout
 
+		if player_has_finished_game:
+			return
 
-	await boss.dialogue_generator.new_custom_speech_bubble("...", SpeechBubble.Type.SMALL_TALK).closed
+		await boss.dialogue_generator.new_custom_speech_bubble("...", SpeechBubble.Type.SMALL_TALK).closed
+

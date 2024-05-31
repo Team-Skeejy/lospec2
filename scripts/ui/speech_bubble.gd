@@ -20,6 +20,7 @@ enum State {
 	READABLE,  # when info can be gained
 	READ,  # when info has already been obtained
 	DESPAWNING,
+	DESPAWNED
 }
 var curr_state: SpeechBubble.State
 
@@ -96,6 +97,7 @@ func _process(delta: float):
 				on_seen()
 			closed.emit()
 			queue_free()
+			curr_state = State.DESPAWNED
 		label.visible_characters = int(_visible_characters)
 
 func set_completed():

@@ -21,6 +21,7 @@ script = ExtResource("1_y3vya")
 talk_zone = NodePath("BossRoom")
 boss = NodePath("BossNPC")
 ending_door = NodePath("HideDoor")
+ending = "res://scenes/ui/ending/epilogue.tscn"
 
 [node name="BossRoom" type="Area2D" parent="."]
 

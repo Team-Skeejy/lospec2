@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1gy6ga0my88v"]
+
+[ext_resource type="Script" path="res://scripts/items/super_human_serum.gd" id="1_2a0b4"]
+
+[node name="SuperHumanSerum" type="Node"]
+script = ExtResource("1_2a0b4")

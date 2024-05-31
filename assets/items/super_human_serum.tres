@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=4 format=3 uid="uid://cl36vcnyre73r"]
+
+[ext_resource type="Script" path="res://scripts/item_resource.gd" id="1_1bsvx"]
+[ext_resource type="Texture2D" uid="uid://vyqh6ya7dr41" path="res://textures/aseprite/items.png" id="2_umury"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7clrf"]
+atlas = ExtResource("2_umury")
+region = Rect2(160, 96, 32, 32)
+
+[resource]
+script = ExtResource("1_1bsvx")
+texture = SubResource("AtlasTexture_7clrf")
+name = "Super Human Serum"
+description = "I asked for this!"
+behaviour_scene = "res://scenes/items/sample_item.tscn"
+cost = 999
+for_sale = true
+category = 0
+locked_notification_text = ""
+unlocked_notification_text = ""

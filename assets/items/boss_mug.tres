@@ -13,10 +13,10 @@ texture = SubResource("AtlasTexture_3ugo1")
 name = "#1 Boss Mug"
 description = "This will convince everybody I'm a big shot!"
 behaviour_scene = "res://scenes/items/sample_item.tscn"
-cost = 500
+cost = 300
 for_sale = true
 category = 0
-locked_notification_text = "Ah, this person thinks
-I'm a bigwig!"
-unlocked_notification_text = "They don't open up
-with subordinates"
+locked_notification_text = "This room is for 
+high level executives only"
+unlocked_notification_text = "I want that report
+on my desk now!"

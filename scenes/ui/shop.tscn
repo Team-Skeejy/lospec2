@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5hif2fst0d2w"]
+[gd_scene load_steps=26 format=3 uid="uid://b5hif2fst0d2w"]
 
 [ext_resource type="Theme" uid="uid://my27t5dp6cqn" path="res://assets/default_theme.tres" id="1_g877e"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_ikuha"]
@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://by4l5bnnav88y" path="res://assets/items/strong_coffee2.tres" id="16_ernur"]
 [ext_resource type="Resource" uid="uid://djy1u1htprain" path="res://assets/items/pager.tres" id="17_vm8l4"]
 [ext_resource type="Resource" uid="uid://cxm56m6w4fm5y" path="res://assets/items/boss_mug.tres" id="18_oljmc"]
+[ext_resource type="Resource" uid="uid://cl36vcnyre73r" path="res://assets/items/super_human_serum.tres" id="19_t4lon"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mtbk5"]
 texture = ExtResource("2_ikuha")
@@ -57,7 +58,7 @@ name_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/ItemNameLabel
 description_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer/DescriptionLabel")
 cost_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer/CostLabel")
 tutorial_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("4_w441j")])
-game_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("5_4luop"), ExtResource("13_hq8fd"), ExtResource("8_m6ii0"), ExtResource("8_kcoyc"), ExtResource("9_b67s6"), ExtResource("10_18yft"), ExtResource("11_dmla8"), ExtResource("11_4gva8"), ExtResource("5_56k74"), ExtResource("10_dd7pf"), ExtResource("12_mxe46"), ExtResource("16_ernur"), ExtResource("17_vm8l4"), ExtResource("18_oljmc")])
+game_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("5_4luop"), ExtResource("13_hq8fd"), ExtResource("8_m6ii0"), ExtResource("8_kcoyc"), ExtResource("9_b67s6"), ExtResource("10_18yft"), ExtResource("11_dmla8"), ExtResource("11_4gva8"), ExtResource("5_56k74"), ExtResource("10_dd7pf"), ExtResource("12_mxe46"), ExtResource("16_ernur"), ExtResource("17_vm8l4"), ExtResource("18_oljmc"), ExtResource("19_t4lon")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Shop"]
 layout_mode = 1

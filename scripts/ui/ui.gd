@@ -12,6 +12,7 @@ var tween: Tween
 @export var notification_scene: PackedScene
 @export var menu: TextureRect
 @export var interaction_name: Label
+@export var interaction_texture: TextureRect
 @export var money_label: Label
 @export var settings_menu: SettingsMenu
 @export var crt_effects: ColorRect
@@ -26,9 +27,11 @@ func _ready():
 
 func _process(_delta: float):
 	if Global.player.interact_target && is_instance_valid(Global.player.interact_target):
-		interaction_name.text = Global.player.interact_target.interaction_name
+		interaction_name.text = Global.instance.player.interact_target.interaction_name
+		interaction_texture.show()
 	elif interaction_name:
 		interaction_name.text = ""
+		interaction_texture.hide()
 
 	money_label.text = str(Global.instance.player_money) + "$"
 

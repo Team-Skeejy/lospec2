@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c2tdeb17l1bgf"]
+[gd_scene load_steps=43 format=3 uid="uid://c2tdeb17l1bgf"]
 
 [ext_resource type="Script" path="res://scripts/globals/global.gd" id="1_ov5qs"]
 [ext_resource type="PackedScene" uid="uid://bt1fj4qvrccb" path="res://scenes/player.tscn" id="2_farim"]
@@ -51,12 +51,11 @@ game_music = "res://audio/music/elliestradingmusic.wav"
 stock_market_music = "res://audio/music/stock_market.wav"
 shop_music = "res://audio/music/stock_market.wav"
 audio_player = NodePath("Music")
-all_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("2_l4hug"), ExtResource("3_4m458"), ExtResource("4_smvmv"), ExtResource("5_j2mg8"), ExtResource("6_gp1iv"), ExtResource("7_dqt6l"), ExtResource("8_aib12"), ExtResource("9_hdhae"), ExtResource("10_e2j16"), ExtResource("11_n4wjn"), ExtResource("12_k66f8"), ExtResource("13_uc6o6"), ExtResource("14_e46tq"), ExtResource("15_ypja7"), ExtResource("16_5qg2e"), ExtResource("17_m1yui"), ExtResource("18_gprxg"), ExtResource("19_drm32"), ExtResource("20_ri0ff"), ExtResource("21_vnhfg"), ExtResource("22_u601a"), ExtResource("23_v5dy0"), ExtResource("24_ups2j")])
 negative_sfx = NodePath("Audio/Negative")
 positive_sfx = NodePath("Audio/Positive")
 denied_sfx = NodePath("Audio/Denied")
 pickup_sfx = NodePath("Audio/Pickup")
-all_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("2_l4hug"), ExtResource("3_4m458"), ExtResource("4_smvmv"), ExtResource("5_j2mg8"), ExtResource("6_gp1iv"), ExtResource("7_dqt6l"), ExtResource("8_aib12"), ExtResource("9_hdhae"), ExtResource("10_e2j16"), ExtResource("11_n4wjn"), ExtResource("12_k66f8"), ExtResource("13_uc6o6"), ExtResource("14_e46tq"), ExtResource("15_ypja7"), ExtResource("16_5qg2e"), ExtResource("17_m1yui"), ExtResource("18_gprxg"), ExtResource("19_drm32"), ExtResource("20_ri0ff"), ExtResource("21_vnhfg"), ExtResource("22_u601a"), ExtResource("23_v5dy0")])
+all_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("2_l4hug"), ExtResource("3_4m458"), ExtResource("4_smvmv"), ExtResource("5_j2mg8"), ExtResource("6_gp1iv"), ExtResource("7_dqt6l"), ExtResource("8_aib12"), ExtResource("9_hdhae"), ExtResource("10_e2j16"), ExtResource("12_k66f8"), ExtResource("13_uc6o6"), ExtResource("14_e46tq"), ExtResource("11_n4wjn"), ExtResource("15_ypja7"), ExtResource("16_5qg2e"), ExtResource("17_m1yui"), ExtResource("18_gprxg"), ExtResource("19_drm32"), ExtResource("20_ri0ff"), ExtResource("21_vnhfg"), ExtResource("22_u601a"), ExtResource("23_v5dy0"), ExtResource("24_ups2j")])
 all_companies = Array[Resource("res://scripts/company_resource.gd")]([ExtResource("24_w7xfx"), ExtResource("25_e2lhj"), ExtResource("26_hx3df"), ExtResource("27_peony"), ExtResource("28_ghyse"), ExtResource("29_1qr47"), ExtResource("30_2nwmn"), ExtResource("31_kg23s"), ExtResource("32_vfv5e"), ExtResource("33_876vi"), ExtResource("34_op0o1"), ExtResource("35_u82lk"), ExtResource("36_1vjve")])
 player_storage = NodePath("PlayerStorage")
 player_scene = ExtResource("2_farim")

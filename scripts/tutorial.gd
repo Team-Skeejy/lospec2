@@ -65,8 +65,7 @@ func _ready():
 	await get_tree().create_timer(2.).timeout
 
 	# salutations
-	await Global.instance.new_notification_no_texture("Hello!", 2).notification_ended
-	await Global.instance.new_notification_no_texture("Lets get you started", 3).notification_ended
+	await Global.instance.new_notification_no_texture("Lets get started", 3).notification_ended
 	set_time(1)
 
 
@@ -115,28 +114,28 @@ func _ready():
 	set_time(7)
 
 	# talk to coworkers
-	await Global.instance.new_notification_no_texture('Lets small talk to some "coworkers"', 3).notification_ended
-	notif = Global.instance.new_notification_no_texture('Press [^] to talk to coworkers', 0)
+	await Global.instance.new_notification_no_texture('Lets small talk to some employees', 3).notification_ended
+	notif = Global.instance.new_notification_no_texture('Press [^] to talk to employees', 0)
 	while (talk_count < 1): await get_tree().process_frame
 	notif.close()
 	set_time(8)
 
-	notif = Global.instance.new_notification_no_texture('Talk to 4 more "coworkers"', 0)
+	notif = Global.instance.new_notification_no_texture('Talk to 4 more employees', 0)
 	while (talk_count < 2): await get_tree().process_frame
 	notif.close()
 	set_time(9)
 
-	notif = Global.instance.new_notification_no_texture('Talk to 3 more "coworkers"', 0)
+	notif = Global.instance.new_notification_no_texture('Talk to 3 more employees', 0)
 	while (talk_count < 3): await get_tree().process_frame
 	notif.close()
 	set_time(10)
 
-	notif = Global.instance.new_notification_no_texture('Talk to 2 more "coworkers"', 0)
+	notif = Global.instance.new_notification_no_texture('Talk to 2 more employees', 0)
 	while (talk_count < 4): await get_tree().process_frame
 	notif.close()
 	set_time(11)
 
-	notif = Global.instance.new_notification_no_texture('Talk to 1 more "coworker"', 0)
+	notif = Global.instance.new_notification_no_texture('Talk to 1 more employees', 0)
 	while (talk_count < 5): await get_tree().process_frame
 	notif.close()
 	set_time(12)

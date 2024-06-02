@@ -58,7 +58,7 @@ name_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/ItemNameLabel
 description_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/DescriptionContainer/DescriptionLabel")
 cost_label = NodePath("VBoxContainer/CenterContainer/ShopPanel/VBC/BottomContainer/CostLabel")
 tutorial_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("4_w441j")])
-game_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("5_4luop"), ExtResource("13_hq8fd"), ExtResource("8_m6ii0"), ExtResource("8_kcoyc"), ExtResource("9_b67s6"), ExtResource("10_18yft"), ExtResource("11_dmla8"), ExtResource("11_4gva8"), ExtResource("5_56k74"), ExtResource("10_dd7pf"), ExtResource("12_mxe46"), ExtResource("16_ernur"), ExtResource("17_vm8l4"), ExtResource("18_oljmc"), ExtResource("19_t4lon")])
+game_items = Array[Resource("res://scripts/item_resource.gd")]([ExtResource("5_4luop"), ExtResource("13_hq8fd"), ExtResource("8_m6ii0"), ExtResource("8_kcoyc"), ExtResource("9_b67s6"), ExtResource("11_dmla8"), ExtResource("10_18yft"), ExtResource("18_oljmc"), ExtResource("11_4gva8"), ExtResource("5_56k74"), ExtResource("10_dd7pf"), ExtResource("12_mxe46"), ExtResource("16_ernur"), ExtResource("17_vm8l4"), ExtResource("19_t4lon")])
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Shop"]
 layout_mode = 1

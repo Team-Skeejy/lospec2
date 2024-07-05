@@ -9,9 +9,11 @@ var wall_grab_timer := WALL_GRAB_GRACE_PERIOD  # timer for how long the player c
 var wall_grab_degradation_timer := WALL_GRAB_DEGRADATION_PERIOD  # timer to ease back into using full gravity
 var jumping := false  # whether or not to process using walljump logic
 var wall_jumping := false  # whether or not to continue processing jump like a wall jump
-var flip_direction := true  # on lift off, the player needs to go opposite direction, this flips after the user lifts their direction keys
+# var flip_direction := true  # on lift off, the player needs to go opposite direction, this flips after the user lifts their direction keys
 var coyote_timer := Player.COYOTE_TIME  # used to give lenience for when to walljump
 var was_on_wall := false  # used to initialise coyote timer
+
+var direction: Humanoid.EDirection = Humanoid.EDirection.right
 
 func _init():
 	priority = 1
@@ -20,9 +22,9 @@ func jump(_delta: float):
 	if !jumping:
 		if holder.input_direction && (coyote_timer || holder.is_on_wall_only()):
 			if holder.is_on_wall_only():
-				flip_direction = true
-			elif coyote_timer:
-				flip_direction = false
+				direction = holder.which_wall()
+			# elif coyote_timer:
+			# 	flip_direction = false
 			if holder is Player: (holder as Player).jump_audio.play()
 			jumping = true
 			wall_jumping = true
@@ -32,11 +34,11 @@ func jump(_delta: float):
 
 
 	if jumping:
-		if Input.is_action_just_released("Left") || Input.is_action_just_released("Right"):
-			flip_direction = false
+		# if Input.is_action_just_released("Left") || Input.is_action_just_released("Right"):
+		# 	flip_direction = false
 
 		holder.velocity.y = Player.JUMP_VELOCITY
-		holder.velocity.x = holder.input_direction * holder.speed * (-1 if flip_direction else 1)
+		holder.velocity.x = holder.speed * (-1 if direction == Humanoid.EDirection.left else 1)  #holder.input_direction * holder.speed #* (-1 if flip_direction else 1)
 		return true
 	return false
 

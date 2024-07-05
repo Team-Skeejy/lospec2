@@ -24,7 +24,7 @@ var direction := 0.
 @export var sprite: Sprite2D
 
 enum EDirection {
-	left, right
+	left, right, none
 }
 
 # logical behaviours
@@ -188,3 +188,13 @@ func _process(_delta: float):
 		_prev_interact_target.exited_interact_area()
 
 	handle_animation()
+
+
+func which_wall() -> EDirection:
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if collision.normal.x > 0:
+			return EDirection.left
+		elif collision.normal.x < 0:
+			return EDirection.right
+	return EDirection.none

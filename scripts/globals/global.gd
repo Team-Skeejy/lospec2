@@ -219,11 +219,11 @@ func setup_dialogue():
 	#small_talk_dialogue = file_access.get_as_text().split("\n", false)
 
 func store_player():
-	if player:
+	if player && is_instance_valid(player):
 		player.reparent(player_storage)
 
 func spawn_player(parent: Node2D, spawn_point: Node2D):
-	if !player:
+	if !player || !is_instance_valid(player):
 		player = player_scene.instantiate()
 		parent.add_child.call_deferred(player)
 	else:
@@ -252,7 +252,7 @@ enum GamePhase {
 var current_phase: GamePhase = GamePhase.intro
 
 func store_player_and_transition_to(next_scene: String):
-	if player:
+	if player && is_instance_valid(player):
 		player.physics_enabled = false
 	await FadeTransition.instance.transition_to(next_scene, store_player)
 

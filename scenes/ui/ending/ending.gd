@@ -3,6 +3,10 @@ extends CanvasLayer
 @export_file("*.tscn") var next_scene: String
 var next_triggered = false
 
+func _ready():
+	if is_instance_valid(Global.instance.player):
+		Global.instance.player.queue_free()
+
 func _process(_delta: float):
 	if Input.get_axis("A", "B") && !next_triggered:
 		if next_scene: FadeTransition.instance.transition_to(next_scene)

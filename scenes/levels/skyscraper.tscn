@@ -364,7 +364,6 @@ Splendido"
 horizontal_alignment = 1
 
 [node name="Debug" type="Node2D" parent="."]
-visible = false
 script = ExtResource("24_mwhal")
 
 [node name="DebugDoorStart" parent="Debug" node_paths=PackedStringArray("destination") instance=ExtResource("14_f2tow")]
@@ -372,7 +371,7 @@ position = Vector2(84, -16)
 destination = NodePath("../DebugDoorEnd")
 
 [node name="DebugDoorEnd" parent="Debug" node_paths=PackedStringArray("destination") instance=ExtResource("14_f2tow")]
-position = Vector2(744, -2432)
+position = Vector2(814, -2848)
 destination = NodePath("../DebugDoorStart")
 
 [node name="NextPhaseWaterCooler" parent="Debug" instance=ExtResource("15_p1gcl")]
@@ -397,6 +396,24 @@ item_resource = ExtResource("28_lku4q")
 [node name="MapItem5" parent="Debug" instance=ExtResource("10_jvtyc")]
 position = Vector2(320, -32)
 item_resource = ExtResource("13_gbr5n")
+
+[node name="MapItem6" parent="Debug" node_paths=PackedStringArray("sprite", "shader_sprite") instance=ExtResource("10_jvtyc")]
+position = Vector2(320, -32)
+sprite = NodePath("../MapItem5/ItemSprite")
+item_resource = ExtResource("13_gbr5n")
+shader_sprite = NodePath("../MapItem5/Back")
+
+[node name="MapItem7" parent="Debug" instance=ExtResource("10_jvtyc")]
+position = Vector2(416, -33)
+item_resource = ExtResource("16_s6v1f")
+
+[node name="MapItem8" parent="Debug" instance=ExtResource("10_jvtyc")]
+position = Vector2(456, -59)
+item_resource = ExtResource("15_tkned")
+
+[node name="NextPhaseWaterCooler2" parent="Debug" node_paths=PackedStringArray("shader_sprite") instance=ExtResource("15_p1gcl")]
+position = Vector2(509, -16)
+shader_sprite = NodePath("")
 
 [node name="Guards" type="Node2D" parent="."]
 
@@ -1783,8 +1800,9 @@ texture = SubResource("AtlasTexture_jq18l")
 position = Vector2(1216, -2936)
 texture = SubResource("AtlasTexture_jq18l")
 
-[node name="BossArea" parent="BossRoom" instance=ExtResource("46_1ihv5")]
+[node name="BossArea" parent="BossRoom" node_paths=PackedStringArray("office_door") instance=ExtResource("46_1ihv5")]
 position = Vector2(1348, -2816)
+office_door = NodePath("../../MapDoor")
 
 [node name="CollisionShape2D" parent="BossRoom/BossArea/BossRoom" index="0"]
 position = Vector2(22.5, -47.5)

@@ -12,7 +12,8 @@ func entered_interact_area():
 	pass
 
 func exited_interact_area():
-	shader_sprite.material.set_shader_parameter("active", false)
+	if is_instance_valid(shader_sprite) && is_instance_valid(shader_sprite.material):
+		shader_sprite.material.set_shader_parameter("active", false)
 
 func interact(_interactor: Humanoid):
 	pass

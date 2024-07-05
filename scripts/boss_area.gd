@@ -4,6 +4,7 @@ extends Node2D
 @export var talk_zone: Area2D
 @export var boss: NPC
 @export var ending_door: HideDoor
+@export var office_door: MapDoor
 
 @export_file("*.tscn") var ending: String
 
@@ -14,6 +15,7 @@ var entered_once := false
 
 func on_body_entered(node: Node2D):
 	if node is Player && !entered_once:
+		office_door.enlock()
 		entered_once = true
 		var player := node as Player
 		var sequence := BossSequence.new(self)

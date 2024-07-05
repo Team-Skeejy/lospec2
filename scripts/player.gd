@@ -118,7 +118,7 @@ func has_item(i: ItemResource) -> bool:
 
 func _process(delta: float):
 	super._process(delta)
-	if interact_target:
+	if is_instance_valid(interact_target) && is_instance_valid(interact_target.shader_sprite) && is_instance_valid(interact_target.shader_sprite.material):
 		interact_target.shader_sprite.material.set_shader_parameter("active", true)
 
 	if Input.is_action_pressed("Down"): collision_mask = 1

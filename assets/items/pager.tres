@@ -14,7 +14,7 @@ name = "Brand New Pager"
 description = "This will impress technology lovers.
 Plus, I won't be so worried about being late anymore"
 behaviour_scene = "res://scenes/items/sample_item.tscn"
-cost = 400
+cost = 200
 for_sale = true
 category = 0
 locked_notification_text = "This person only opens up

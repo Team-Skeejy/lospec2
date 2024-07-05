@@ -106,7 +106,6 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 
 func add_item(item: ItemResource):
-	print_debug(item.description)
 	var behaviour_scene: PackedScene = load(item.behaviour_scene)
 	var behaviour = behaviour_scene.instantiate()
 	add_behaviour(behaviour)

@@ -84,7 +84,6 @@ func _ready():
 	setup_dialogue()
 	setup_items()
 	setup_companies()
-	print_debug(companies)
 
 func try_emit_time_signal():
 	var parts: int = (time_limit_countdown / time_segment_length) + 1

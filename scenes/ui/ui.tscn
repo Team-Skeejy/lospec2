@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://g7ix8xbxhriq"]
+[gd_scene load_steps=20 format=3 uid="uid://g7ix8xbxhriq"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui.gd" id="1_u6oey"]
 [ext_resource type="Texture2D" uid="uid://dvwmrm386lhtk" path="res://textures/aseprite/in_game_menu.png" id="2_fmcbu"]
@@ -11,6 +11,10 @@
 [ext_resource type="Shader" path="res://scripts/shaders/crt.gdshader" id="10_ffw14"]
 [ext_resource type="Texture2D" uid="uid://b4i7msur382jl" path="res://textures/palette-bright.png" id="11_hv6us"]
 [ext_resource type="Texture2D" uid="uid://bflniuulbyoiv" path="res://textures/palette-dark.png" id="12_378hj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5ad1"]
+atlas = ExtResource("4_tpqrp")
+region = Rect2(64, 16, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qqmsx"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
@@ -46,12 +50,13 @@ shader_parameter/scan_line_intensity = 0.0
 shader_parameter/palette_in = ExtResource("11_hv6us")
 shader_parameter/palette_out = ExtResource("12_378hj")
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "money_label", "settings_menu", "crt_effects", "info_ui", "inventory", "notification_holder", "close_map_label")]
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("menu", "interaction_name", "interaction_texture", "money_label", "settings_menu", "crt_effects", "info_ui", "inventory", "notification_holder", "close_map_label")]
 process_mode = 3
 script = ExtResource("1_u6oey")
 notification_scene = ExtResource("2_wciut")
 menu = NodePath("PauseMenu")
-interaction_name = NodePath("PauseMenu/InteractionLabel")
+interaction_name = NodePath("PauseMenu/Interaction/InteractionLabel")
+interaction_texture = NodePath("PauseMenu/Interaction/TextureRect")
 money_label = NodePath("PauseMenu/MoneyLabel")
 settings_menu = NodePath("SettingsMenu")
 crt_effects = NodePath("CrtEffect")
@@ -85,12 +90,20 @@ texture = ExtResource("2_fmcbu")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="InteractionLabel" type="Label" parent="PauseMenu"]
+[node name="Interaction" type="HBoxContainer" parent="PauseMenu"]
 layout_mode = 0
-offset_left = 2.0
+offset_left = -3.0
 offset_top = 1.0
-offset_right = 44.0
+offset_right = 37.0
 offset_bottom = 17.0
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu/Interaction"]
+modulate = Color(1, 0.0117647, 0.168627, 1)
+layout_mode = 2
+texture = SubResource("AtlasTexture_d5ad1")
+
+[node name="InteractionLabel" type="Label" parent="PauseMenu/Interaction"]
+layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.0117647, 0.168627, 1)
 theme_override_colors/font_shadow_color = Color(0.501961, 0, 0.203922, 1)
 theme_override_constants/shadow_outline_size = 0

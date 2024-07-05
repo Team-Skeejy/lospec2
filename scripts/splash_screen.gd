@@ -14,11 +14,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(_ev: InputEvent) -> void:
-	if Input.is_action_just_pressed("Select"):
-		print_debug("REMOVE ME REMOVE ME")
-		Global.instance.go_to_phase(Global.GamePhase.platformer)
-		ignore_animation_end = true
-	elif Input.is_anything_pressed():
+	#if Input.is_action_just_pressed("Select"):
+		#print_debug("REMOVE ME REMOVE ME")
+		#Global.instance.go_to_phase(Global.GamePhase.platformer)
+		#ignore_animation_end = true
+	if Input.is_anything_pressed():
 		# FadeTransition.instance.transition_to(FadeTransition.MAIN_MENU)
 		Global.instance.go_to_phase(Global.GamePhase.menu)
 		ignore_animation_end = true

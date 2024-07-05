@@ -63,13 +63,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -71.0
+offset_top = 7.0
+offset_bottom = -98.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Title" type="Label" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 6
+size_flags_vertical = 3
+theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("2_h38ja")
 theme_override_font_sizes/font_size = 36
 text = "TRADER
@@ -106,20 +108,22 @@ texture = SubResource("AtlasTexture_vl55w")
 layout_mode = 2
 text = ": Settings"
 
+[node name="Controls" parent="MainMenu" instance=ExtResource("7_w4xae")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -87.0
+offset_top = -89.0
+offset_right = 87.0
+offset_bottom = -7.0
+grow_vertical = 0
+
 [node name="SettingsMenu" parent="MainMenu" node_paths=PackedStringArray("crt_texture") instance=ExtResource("5_2jw2j")]
 visible = false
 layout_mode = 1
 crt_texture = NodePath("../ColorRect")
-
-[node name="Controls" parent="MainMenu" instance=ExtResource("7_w4xae")]
-layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 1.0
-offset_top = 159.0
-offset_right = 257.0
-offset_bottom = 159.0
 
 [node name="ColorRect" type="ColorRect" parent="MainMenu"]
 material = SubResource("ShaderMaterial_x41rh")
@@ -129,18 +133,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -19.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "A game by Team Skeejy
-For Lospec Jam 2"
-horizontal_alignment = 2

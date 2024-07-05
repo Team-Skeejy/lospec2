@@ -10,5 +10,3 @@ func _ready():
 	if !Global.is_tutorial() && !Global.player.has_item(small_talk_manual):
 		Global.player.add_item(small_talk_manual)
 
-func _process(delta):
-	pass

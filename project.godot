@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Lospec2"
+config/name="Trader Inside"
 run/main_scene="res://scenes/splash_screen.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://textures/icon.png"
 
 [autoload]
 

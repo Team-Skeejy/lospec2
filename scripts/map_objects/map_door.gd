@@ -4,7 +4,7 @@ extends Interactable
 
 
 var open: bool = false
-var locked: bool = false
+var boss_locked: bool = false
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: StaticBody2D = $StaticBody2D
 
@@ -13,11 +13,11 @@ func _init():
 	interaction_name = "Open"
 
 func interact(_interactor: Humanoid):
-	if !locked:
-		if open:
-			_close()
-		else:
-			_open()
+	#if !boss_locked:
+	if open:
+		_close()
+	else:
+		_open()
 
 func _open():
 	sprite.frame = 1
@@ -38,9 +38,13 @@ func _close():
 func enlock():
 	sprite.frame = 0
 	open = false
-	locked = true
+	#boss_locked = true
 	collision.collision_layer = 1
 	interaction_name = "Locked..."
+	lock = Lock.new()
+	lock.item_needed = load("res://assets/items/lock.tres")
+	add_child(lock)
+	
 
 
 

@@ -38,7 +38,7 @@ region = Rect2(32, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ktqkj"]
 atlas = ExtResource("4_tpqrp")
-region = Rect2(64, 0, 16, 16)
+region = Rect2(80, 112, 32, 16)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3hmtj"]
 shader = ExtResource("10_ffw14")
@@ -92,9 +92,9 @@ stretch_mode = 1
 
 [node name="Interaction" type="HBoxContainer" parent="PauseMenu"]
 layout_mode = 0
-offset_left = -3.0
+offset_left = 2.0
 offset_top = 1.0
-offset_right = 37.0
+offset_right = 42.0
 offset_bottom = 17.0
 
 [node name="TextureRect" type="TextureRect" parent="PauseMenu/Interaction"]
@@ -107,7 +107,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.0117647, 0.168627, 1)
 theme_override_colors/font_shadow_color = Color(0.501961, 0, 0.203922, 1)
 theme_override_constants/shadow_outline_size = 0
-text = "Jump"
 vertical_alignment = 1
 
 [node name="MoneyLabel" type="Label" parent="PauseMenu"]

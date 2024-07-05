@@ -39,8 +39,6 @@ func update_items():
 		if Global.player.has_item(item_container.item_resource):
 			item_container.brighten()
 
-func _process(delta):
-	pass
 
 func start_description(sic: ShopItemContainer):
 	name_label.text = sic.item_resource.name

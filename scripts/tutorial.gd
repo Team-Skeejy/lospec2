@@ -70,52 +70,52 @@ func _ready():
 
 
 	# movement
-	var notif: Notification = Global.instance.new_notification_no_texture("Press [<] and [>] to move", 0)
+	var notif: Notification = Global.instance.new_notification_no_texture("Press [A] and [D] to move", 0)
 	while (!player_pressed_left_right): await get_tree().process_frame
 	notif.close()
 	set_time(2)
 
 	# a to jump
-	notif = Global.instance.new_notification_no_texture('Press [A] to jump', 0)
+	notif = Global.instance.new_notification_no_texture('Press [Space] to jump', 0)
 	while (!player_pressed_a): await get_tree().process_frame
 	notif.close()
 	set_time(3)
 
 	# down to drop down
-	notif = Global.instance.new_notification_no_texture('Press [v] to drop down platforms', 0)
+	notif = Global.instance.new_notification_no_texture('Press [S] to drop down platforms', 0)
 	while (!player_pressed_down): await get_tree().process_frame
 	notif.close()
 	set_time(3)
 
 	# press b to interact
-	await Global.instance.new_notification_no_texture('Press [B] on objects to interact', 3).notification_ended
-	notif = Global.instance.new_notification_no_texture('Lets open that door by pressing [B]', 0)
+	await Global.instance.new_notification_no_texture('Press [Alt] on objects to interact', 3).notification_ended
+	notif = Global.instance.new_notification_no_texture('Lets open that door by pressing [Alt]', 0)
 	while (!player_has_interacted): await get_tree().process_frame
 	notif.close()
 	set_time(4)
 
 	# press b to pick up item
-	notif = Global.instance.new_notification_no_texture('Press [B] over that book to pick it up', 0)
+	notif = Global.instance.new_notification_no_texture('Press [Alt] over that book to pick it up', 0)
 	while (!player_has_got_item): await get_tree().process_frame
 	notif.close()
 	set_time(5)
 	await get_tree().create_timer(Notification.DEFAULT_DESPAWN_TIME).timeout
 
 	# press start to open menu
-	notif = Global.instance.new_notification_no_texture('Nice, what did you get?\nPress [START] to open your inventory', 0)
+	notif = Global.instance.new_notification_no_texture('Nice, what did you get?\nPress [Enter] to open your inventory', 0)
 	while (!player_has_opened_inventory): await get_tree().process_frame
 	notif.close()
 	set_time(6)
 
 	# press start to close menu
-	notif = Global.instance.new_notification_no_texture('Nice, a book on small talk!\nPress [START] again to close your inventory', 0)
+	notif = Global.instance.new_notification_no_texture('Nice, a book on small talk!\nPress [Enter] again to close your inventory', 0)
 	while (!player_has_closed_inventory): await get_tree().process_frame
 	notif.close()
 	set_time(7)
 
 	# talk to coworkers
 	await Global.instance.new_notification_no_texture('Lets small talk to some employees', 3).notification_ended
-	notif = Global.instance.new_notification_no_texture('Press [^] to talk to employees', 0)
+	notif = Global.instance.new_notification_no_texture('Press [W] to talk to employees', 0)
 	while (talk_count < 1): await get_tree().process_frame
 	notif.close()
 	set_time(8)

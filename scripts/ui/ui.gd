@@ -37,7 +37,7 @@ func _process(_delta: float):
 
 	if Input.is_action_just_pressed("Start") and not Global.instance.player.zoomed_out:
 		if is_opened:
-			close()	
+			close()
 		else:
 			open()
 
@@ -53,14 +53,14 @@ func _process(_delta: float):
 				Global.instance.player.zoomed_out = false
 				_unpause()
 				close_map_label.hide()
-				
+
 			else:
 				Global.instance.player.camera.zoom = Vector2(0.25, 0.25)
-				Global.instance.player.camera.limit_bottom = 32*4
+				Global.instance.player.camera.limit_bottom = 32 * 4
 				Global.instance.player.zoomed_out = true
 				_pause()
 				close_map_label.show()
-				
+
 
 	elif is_opened and Input.is_action_just_pressed("A") and not settings_menu.visible:
 		info_ui.flip_expanded()
@@ -78,6 +78,7 @@ func open():
 	tween.tween_callback(_pause)
 
 func close():
+	print_debug("closing time")
 	if tween and tween.is_running():
 		return
 
@@ -88,13 +89,14 @@ func close():
 	tween.tween_property(menu, "position", closed_menu_position, open_close_speed)
 	tween.tween_callback(_is_opened_false)
 	tween.tween_callback(_unpause)
+	return tween.tween_callback
 
 func _flip_is_opened():
 	is_opened = not is_opened
 
 func _is_opened_true():
 	is_opened = true
-	
+
 func _is_opened_false():
 	is_opened = false
 
@@ -103,7 +105,7 @@ func _flip_paused():
 
 func _pause():
 	get_tree().paused = true
-	
+
 func _unpause():
 	get_tree().paused = false
 

@@ -1,14 +1,12 @@
 class_name SettingsMenu
 extends CenterContainer
 
-
 @export var settings_container: VBoxContainer
 @export var ghost_setting: GhostSetting
 @export var scan_line_setting: ScanLineSetting
 @export var crt_texture: ColorRect
 
 var selected_row: int = 0
-
 
 func _ready():
 	select(selected_row)
@@ -32,6 +30,9 @@ func get_selected_row():
 func _process(delta):
 	if not visible:
 		return
+	if Input.is_action_just_pressed("A"):
+		Global.instance.positive_sfx.play()
+		get_selected_row().a()
 	if Input.is_action_just_pressed("Left"):
 		Global.instance.positive_sfx.play()
 		get_selected_row().left()
@@ -40,10 +41,14 @@ func _process(delta):
 		get_selected_row().right()
 	elif Input.is_action_just_pressed("Up"):
 		Global.instance.positive_sfx.play()
-		select(selected_row -1)
+		select(selected_row - 1)
+		while !get_selected_row().visible:
+			select(selected_row - 1)
 	elif Input.is_action_just_pressed("Down"):
 		Global.instance.positive_sfx.play()
 		select(selected_row + 1)
+		while !get_selected_row().visible:
+			select(selected_row + 1)
 	elif Input.is_action_just_pressed("B"):
 		Global.instance.positive_sfx.play()
 		hide()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://bkuioef3meg5d"]
+[gd_scene load_steps=19 format=3 uid="uid://bkuioef3meg5d"]
 
 [ext_resource type="Script" path="res://scripts/ui/SettingsMenu.gd" id="1_f0ega"]
 [ext_resource type="Texture2D" uid="uid://dbrcb5w1mhni4" path="res://textures/tilesets/UI.png" id="2_v1ki7"]
 [ext_resource type="FontFile" uid="uid://cck2jg6pl042w" path="res://assets/bm-japan.ttf" id="3_ri6wc"]
 [ext_resource type="Script" path="res://scripts/ui/volume_setting.gd" id="4_610yk"]
+[ext_resource type="Script" path="res://scenes/ui/skip_day.gd" id="4_vwbyn"]
 [ext_resource type="Script" path="res://scripts/ui/ghost_setting.gd" id="5_hcvse"]
 [ext_resource type="Script" path="res://scripts/ui/scan_line_setting.gd" id="6_ptacn"]
 
@@ -14,6 +15,14 @@ texture_margin_top = 6.0
 texture_margin_right = 6.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(144, 32, 32, 32)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nbmx8"]
+load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76sti"]
+resource_local_to_scene = true
+atlas = SubResource("CompressedTexture2D_nbmx8")
+region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ikx88"]
 load_path = "res://.godot/imported/UI.png-0aebc67c96cdfeeba9d88d18dee6e847.ctex"
@@ -75,6 +84,20 @@ horizontal_alignment = 1
 
 [node name="SettingsContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="SkipDay" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("settings_menu")]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("4_vwbyn")
+settings_menu = NodePath("../../../..")
+
+[node name="Indicator" type="TextureRect" parent="PanelContainer/VBoxContainer/SettingsContainer/SkipDay"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_76sti")
+
+[node name="SettingName" type="Label" parent="PanelContainer/VBoxContainer/SettingsContainer/SkipDay"]
+layout_mode = 2
+text = "[A] Skip to next Day"
 
 [node name="MusicSetting" type="HBoxContainer" parent="PanelContainer/VBoxContainer/SettingsContainer" node_paths=PackedStringArray("slider")]
 layout_mode = 2

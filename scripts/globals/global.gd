@@ -74,8 +74,8 @@ var volume: Dictionary = {
 	"Music": 50,
 	"SFX": 50
 }
-var crt_ghost_intensity: float = 0.0
-var scanline_intensity: float = 0.0
+var crt_ghost_intensity: float = 0.5
+var scanline_intensity: float = 0.5
 
 func _ready():
 	Global.instance = self

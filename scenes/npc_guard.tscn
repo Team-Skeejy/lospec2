@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bcvk2nfue47o2" path="res://scenes/npc.tscn" id="1_jo0f2"]
 [ext_resource type="Resource" uid="uid://damjqcn35kpt0" path="res://assets/companies/guard.tres" id="2_f7ayh"]
 [ext_resource type="Texture2D" uid="uid://dht8ce2g5igq2" path="res://textures/aseprite/torch.png" id="2_q78co"]
-[ext_resource type="PackedScene" path="res://scenes/alert.tscn" id="4_m3nyo"]
+[ext_resource type="PackedScene" uid="uid://c5k0aw1wvm0lx" path="res://scenes/alert.tscn" id="4_m3nyo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rg0v1"]
 radius = 16.0

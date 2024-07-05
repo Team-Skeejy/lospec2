@@ -4,10 +4,15 @@ extends Behaviour
 var target: WarpDoor
 var source: WarpDoor
 
+func phase_transition(_phase: Global.GamePhase) -> void:
+	if not is_instance_valid(source):
+		holder.remove_behaviour(self)
+
 func _init(src: WarpDoor, tgt: WarpDoor):
 	source = src
 	target = tgt
 	self.animation = "enter"
+	Global.instance.phase_transition.connect(phase_transition)
 
 func added(_holder: Humanoid):
 	super.added(_holder)
@@ -31,12 +36,14 @@ func added(_holder: Humanoid):
 	tween.tween_property(holder, "global_position", target.global_position, WarpDoor.TRAVEL_SPEED)
 	await tween.finished
 
-	target.arrive(holder)
+	if is_instance_valid(holder):
+		if is_instance_valid(target):
+			target.arrive(holder)
 
-	animation = "exit"
-	await holder.sprite_animation_player.animation_finished
-	for shape in collision_shapes: shape.disabled = false
-	holder.remove_behaviour(self)
+		animation = "exit"
+		await holder.sprite_animation_player.animation_finished
+		for shape in collision_shapes: shape.disabled = false
+		holder.remove_behaviour(self)
 
 func physics_process(_delta: float):
 	holder.velocity = Vector2.ZERO

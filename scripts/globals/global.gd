@@ -13,6 +13,8 @@ var time_segment_length: float:
 var run_timer: bool = false
 @onready var time_limit_countdown: float = time_limit
 var prev_time_signal_at: int = 0
+
+signal phase_transition(phase: GamePhase)
 signal time_changed(part: int, of: int)
 signal time_out
 
@@ -266,6 +268,7 @@ func set_track(file: String):
 func go_to_phase(phase: GamePhase):
 	current_phase = phase
 	run_timer = false
+	phase_transition.emit(phase);
 	match (phase):
 		GamePhase.menu:
 			set_track(menu_music)

@@ -3,10 +3,15 @@ extends Behaviour
 
 var source: HideDoor
 
+func phase_transition(_phase: Global.GamePhase) -> void:
+	if not is_instance_valid(source):
+		holder.remove_behaviour(self)
+
 func _init(src: HideDoor):
 	source = src
 	self.animation = "enter"
 	name = "Hide"
+	Global.instance.phase_transition.connect(phase_transition)
 
 func added(_holder: Humanoid):
 	super.added(_holder)
